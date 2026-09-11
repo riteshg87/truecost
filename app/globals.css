@@ -1,26 +1,123 @@
 @import "tailwindcss";
 
+/* ---------------------------------------------------------------------------
+   Tokens. Light is the base definition; dark redefines only what changes, so
+   no colour exists solely inside a media query.
+   ------------------------------------------------------------------------ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  --bg: #f7f7f4;
+  --surface: #ffffff;
+  --surface-2: #f2f2ee;
+  --surface-inset: #ebebe6;
+  --ink: #15181c;
+  --ink-2: #4b5158;
+  --ink-3: #7b828b;
+  --line: #e2e2dc;
+  --line-strong: #cfcfc7;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --accent: #0c6b62;
+  --accent-ink: #ffffff;
+  --accent-soft: #dff0ed;
+  --accent-line: #9fcdc6;
+
+  --warn: #9a5b06;
+  --warn-soft: #fdf0dd;
+  --warn-line: #e8c795;
+
+  --danger: #a52a3a;
+  --danger-soft: #fbe9eb;
+
+  --shadow-card: 0 1px 2px rgba(20, 24, 28, 0.05), 0 8px 24px -12px rgba(20, 24, 28, 0.14);
+  --shadow-lift: 0 2px 6px rgba(20, 24, 28, 0.07), 0 18px 40px -18px rgba(20, 24, 28, 0.25);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not([data-theme="light"]) {
+    --bg: #0d0f12;
+    --surface: #16191e;
+    --surface-2: #1d2128;
+    --surface-inset: #23272f;
+    --ink: #eceef1;
+    --ink-2: #a5adb8;
+    --ink-3: #79828e;
+    --line: #262b33;
+    --line-strong: #363d47;
+
+    --accent: #3ec5b3;
+    --accent-ink: #06211e;
+    --accent-soft: #11312d;
+    --accent-line: #1f5952;
+
+    --warn: #e0a355;
+    --warn-soft: #30240f;
+    --warn-line: #5c4419;
+
+    --danger: #ef8a96;
+    --danger-soft: #341a1f;
+
+    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px -12px rgba(0, 0, 0, 0.6);
+    --shadow-lift: 0 2px 6px rgba(0, 0, 0, 0.45), 0 18px 40px -18px rgba(0, 0, 0, 0.8);
   }
 }
 
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-inset: var(--surface-inset);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-line: var(--accent-line);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-warn-line: var(--warn-line);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+html {
+  background: var(--bg);
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  /* Money reads wrong in proportional figures. */
+  font-variant-numeric: tabular-nums;
+  overscroll-behavior-y: none;
+}
+
+/* Numbers that sit in columns must never jitter as they change. */
+.tnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Native inputs: kill the spinners, they are a liability on mobile. */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
 }

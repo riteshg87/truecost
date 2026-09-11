@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TrueCost
 
-## Getting Started
+A personal finance app for working out what a financial product actually costs
+you. Mobile-first PWA, everything computed and stored on the device.
 
-First, run the development server:
+**Flow 1 — True cost comparison** is built. Flow 2 (insurance) is not started.
+
+## Why it isn't a calculator
+
+An EMI calculator answers "what is my instalment". This answers "which of these
+offers is cheaper", which is a different and much easier question to get wrong:
+
+- **Effective APR** is the IRR of the real cash flows — the money that reaches
+  you at disbursal, then every EMI out. Fees and GST cut what you receive
+  without cutting what you repay, so they raise the true rate above the quoted
+  one. Solved with Newton-Raphson and a bisection fallback.
+- **Flat rates are converted** to the reducing rate that produces the same EMI,
+  by root-finding (no closed form exists). `8% flat` over 4 years is worse than
+  `13.5% reducing` — the app shows that, a rate table does not.
+- **Ranking refuses total interest** when amounts or tenures differ. A 20-year
+  loan always shows more interest than a 10-year one even when it is the
+  cheaper money, so those comparisons fall back to APR and cost per lakh.
+- **Financed premiums accrue interest** for the full tenure and are priced that
+  way, separately from premiums paid upfront.
+
+## Running it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm run build && npm run start
+npm test           # 32 tests over the finance layer
+npm run typecheck
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Layout
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+lib/finance/
+  core.ts         EMI, amortisation, flat -> reducing root-find
+  xirr.ts         IRR solver, nominal and compounded annualisation
+  compute.ts      Offer -> derived figures, per-offer warnings
+  comparison.ts   Ranking and the common-basis rule
+  validate.ts     Blocking errors vs non-blocking nudges
+  loanTypes.ts    Per-product defaults, prepay and tax notes
+  format.ts       Indian digit grouping, lakh/crore
+  __tests__/      Unit tests + end-to-end scenarios
+components/       Input primitives, offer card, results table, breakdown
+app/              Landing, /compare, /compare/results
+lib/store.tsx     State + localStorage persistence
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The finance layer is pure and framework-free. Every claim the UI makes is
+covered by a test in `__tests__/scenarios.test.ts`; run with
+`npx vitest run --reporter=verbose --disable-console-intercept` to see the
+worked examples printed.
 
-## Learn More
+## Deliberate limits
 
-To learn more about Next.js, take a look at the following resources:
+- **No prepayment modelling.** Marked optional in the spec and deferred. The
+  types carry no prepay field yet; adding one means a second cash-flow builder,
+  not a change to the solver.
+- **Fixed rates assumed.** No floating-rate reset is modelled, so a repo-linked
+  home loan is priced at today's rate for the whole tenure.
+- **Product type is per offer** (in each card's extras drawer) with a top-level
+  picker that bulk-sets it, so comparing a gold loan against a personal loan
+  works but is not the default path.
+- **Regulatory and tax notes are general**, phrased to prompt a check against
+  the sanction letter rather than to be relied on.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Not financial advice. No product recommendations, no commissions, nothing
+leaves the device.
