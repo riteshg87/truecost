@@ -6,7 +6,8 @@ import { OfferBreakdown } from "@/components/OfferBreakdown";
 import { ResultsTable } from "@/components/ResultsTable";
 import { Notice } from "@/components/inputs";
 import { compareOffers, labelFor, monthsLabel } from "@/lib/finance/comparison";
-import { formatINR, formatPct } from "@/lib/finance/format";
+import { formatCompactINR, formatINR, formatPct } from "@/lib/finance/format";
+import { recommend } from "@/lib/finance/insight";
 import { allOffersReady } from "@/lib/finance/validate";
 import { useCompare } from "@/lib/store";
 
@@ -86,71 +87,189 @@ function Verdict({
 }: {
   comparison: NonNullable<ReturnType<typeof compareOffers>>;
 }) {
-  const best = comparison.best;
-  const runnerUp = comparison.rows[1];
-  if (!best || !runnerUp) return null;
+  const rec = recommend(comparison);
+  if (!rec) return null;
 
-  const aprGap = runnerUp.aprGapVsBest ?? 0;
-  const tooClose = Math.abs(aprGap) < 0.05;
-  const bestName = labelFor(best.offer, 0);
+  const bestName = labelFor(rec.best.offer, 0);
+  const runnerName = labelFor(rec.runnerUp.offer, 1);
+
+  if (rec.tooClose) {
+    return (
+      <section className="rounded-2xl border border-accent-line bg-accent-soft px-5 py-5">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">
+          Recommendation
+        </p>
+        <h2 className="mt-1.5 text-[21px] font-semibold leading-tight tracking-tight text-ink">
+          These cost you effectively the same.
+        </h2>
+        <p className="mt-2 text-[13.5px] leading-relaxed text-ink-2">
+          The gap is under 0.05 percentage points of APR — smaller than the
+          rounding on a single EMI. Decide on service, prepayment terms and how
+          quickly each lender can disburse, not on price.
+        </p>
+      </section>
+    );
+  }
+
+  const savings = comparison.basis.strict ? (
+    <>
+      Because the offers differ in size or length, the fair measure is per lakh
+      borrowed:{" "}
+      <span className="tnum font-semibold text-ink">
+        {formatINR(Math.abs(rec.runnerUp.perLakhGapVsBest))}
+      </span>{" "}
+      less for every lakh.
+    </>
+  ) : (
+    <>
+      Over {monthsLabel(rec.best.derived.tenureMonths)} that is{" "}
+      <span className="tnum font-semibold text-ink">
+        {formatCompactINR(Math.abs(rec.runnerUp.costGapVsBest))}
+      </span>{" "}
+      you keep.
+    </>
+  );
 
   return (
     <section className="rounded-2xl border border-accent-line bg-accent-soft px-5 py-5">
       <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">
-        {tooClose ? "Too close to call" : "Cheapest money"}
+        Recommendation
       </p>
 
-      {tooClose ? (
-        <>
-          <h2 className="mt-1.5 text-[21px] font-semibold leading-tight tracking-tight text-ink">
-            These cost you effectively the same.
-          </h2>
-          <p className="mt-2 text-[13.5px] leading-relaxed text-ink-2">
-            The gap is under 0.05 percentage points of APR. Decide on service,
-            prepayment terms and how quickly each lender can disburse — not on
-            price.
-          </p>
-        </>
-      ) : (
-        <>
-          <h2 className="mt-1.5 text-[21px] font-semibold leading-tight tracking-tight text-ink">
-            {bestName} is the cheaper borrowing.
-          </h2>
-          <p className="mt-2 text-[13.5px] leading-relaxed text-ink-2">
-            <span className="tnum font-semibold text-ink">
-              {formatPct(best.derived.effectiveAprPct)}
+      <h2 className="mt-1.5 text-[21px] font-semibold leading-tight tracking-tight text-ink">
+        {bestName} is the cheaper borrowing.
+      </h2>
+
+      <p className="mt-2 text-[13.5px] leading-relaxed text-ink-2">
+        <span className="tnum font-semibold text-ink">
+          {formatPct(rec.best.derived.effectiveAprPct)}
+        </span>{" "}
+        effective APR against{" "}
+        <span className="tnum font-semibold text-ink">
+          {formatPct(rec.runnerUp.derived.effectiveAprPct)}
+        </span>{" "}
+        — a gap of {rec.aprGap.toFixed(2)} percentage points once fees, GST and any
+        bundled premium are counted.
+      </p>
+
+      <p className="mt-2.5 rounded-xl bg-surface/70 px-3 py-2.5 text-[13px] leading-relaxed text-ink-2">
+        {savings}
+      </p>
+
+      {/* ---- What is actually driving it, and what would change it -------- */}
+      <div className="mt-4 border-t border-accent-line/70 pt-4">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">
+          What is driving the gap
+        </p>
+
+        {rec.headlineMisleads ? (
+          <p className="mt-2 text-[13px] leading-relaxed text-ink-2">
+            <span className="font-semibold text-ink">
+              The lowest advertised rate is not the cheapest loan here.
             </span>{" "}
-            effective APR against{" "}
+            {runnerName} quotes{" "}
             <span className="tnum font-semibold text-ink">
-              {formatPct(runnerUp.derived.effectiveAprPct)}
+              {formatPct(rec.runnerUp.derived.effectiveReducingRatePct)}
             </span>{" "}
-            — a gap of {aprGap.toFixed(2)} percentage points once fees, GST and
-            any bundled premium are counted.
+            against {bestName}&apos;s{" "}
+            <span className="tnum font-semibold text-ink">
+              {formatPct(rec.best.derived.effectiveReducingRatePct)}
+            </span>
+            , and still costs more once its charges are counted. That inversion is
+            the entire reason to compute an APR rather than read a brochure.
           </p>
-          <p className="mt-2.5 rounded-xl bg-surface/70 px-3 py-2.5 text-[13px] leading-relaxed text-ink-2">
-            {comparison.basis.strict ? (
-              <>
-                Because the offers differ in size or length, the fair measure is
-                per lakh borrowed:{" "}
-                <span className="tnum font-semibold text-ink">
-                  {formatINR(Math.abs(runnerUp.perLakhGapVsBest))}
-                </span>{" "}
-                less for every lakh.
-              </>
-            ) : (
-              <>
-                Over{" "}
-                {monthsLabel(best.derived.tenureMonths)} that is{" "}
-                <span className="tnum font-semibold text-ink">
-                  {formatINR(Math.abs(runnerUp.costGapVsBest))}
-                </span>{" "}
-                you keep.
-              </>
-            )}
-          </p>
-        </>
-      )}
+        ) : null}
+
+        <p className="mt-2 text-[13px] leading-relaxed text-ink-2">
+          <Split rec={rec} />
+        </p>
+
+        <Lever rec={rec} bestName={bestName} runnerName={runnerName} />
+      </div>
     </section>
+  );
+}
+
+/** The gap, split into the part the rate causes and the part the charges cause. */
+function Split({ rec }: { rec: NonNullable<ReturnType<typeof recommend>> }) {
+  const charges = rec.chargesEffect;
+  const rate = rec.rateEffect;
+
+  if (rec.driver === "charges") {
+    return (
+      <>
+        Almost all of it is upfront money, not interest:{" "}
+        <span className="tnum font-semibold text-ink">{charges.toFixed(2)}</span> of
+        the {rec.aprGap.toFixed(2)} points comes from fees, GST and any premium
+        deducted at disbursal. The rates themselves are close to level.
+      </>
+    );
+  }
+  if (rec.driver === "rate") {
+    return (
+      <>
+        This one is the rate itself:{" "}
+        <span className="tnum font-semibold text-ink">{rate.toFixed(2)}</span> of the{" "}
+        {rec.aprGap.toFixed(2)} points is interest, and charges barely move it.
+        Fee-haggling will not rescue the more expensive offer.
+      </>
+    );
+  }
+  return (
+    <>
+      It splits:{" "}
+      <span className="tnum font-semibold text-ink">{rate.toFixed(2)}</span> points
+      from the rate and{" "}
+      <span className="tnum font-semibold text-ink">{charges.toFixed(2)}</span> from
+      upfront charges. Both would have to move to change the answer.
+    </>
+  );
+}
+
+/** The negotiating number: what has to change for the ranking to flip. */
+function Lever({
+  rec,
+  bestName,
+  runnerName,
+}: {
+  rec: NonNullable<ReturnType<typeof recommend>>;
+  bestName: string;
+  runnerName: string;
+}) {
+  if (rec.feeWaiverToMatch !== null) {
+    return (
+      <p className="mt-3 rounded-xl border border-accent-line bg-surface/70 px-3 py-2.5 text-[13px] leading-relaxed text-ink-2">
+        <span className="font-semibold text-ink">What to ask for.</span> A waiver of{" "}
+        <span className="tnum font-semibold text-ink">
+          {formatINR(rec.feeWaiverToMatch)}
+        </span>{" "}
+        on {runnerName}&apos;s upfront charges draws them exactly level with{" "}
+        {bestName}. Anything beyond that and they are the cheaper loan — and a
+        processing fee is the most negotiable figure on a sanction letter.
+      </p>
+    );
+  }
+
+  if (rec.rateCutToMatch !== null) {
+    return (
+      <p className="mt-3 rounded-xl border border-accent-line bg-surface/70 px-3 py-2.5 text-[13px] leading-relaxed text-ink-2">
+        <span className="font-semibold text-ink">What to ask for.</span> Charges
+        alone cannot close this — {runnerName} would need{" "}
+        <span className="tnum font-semibold text-ink">
+          {rec.rateCutToMatch.toFixed(2)}
+        </span>{" "}
+        percentage points off the rate to match {bestName}. That is a repricing,
+        not a discount, so it is the harder ask.
+      </p>
+    );
+  }
+
+  return (
+    <p className="mt-3 rounded-xl border border-accent-line bg-surface/70 px-3 py-2.5 text-[13px] leading-relaxed text-ink-2">
+      <span className="font-semibold text-ink">What to ask for.</span> Nothing{" "}
+      {runnerName} can waive closes this gap. {bestName} is the cheaper money on
+      the terms as quoted.
+    </p>
   );
 }
 
