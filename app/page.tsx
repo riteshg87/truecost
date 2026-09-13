@@ -21,7 +21,7 @@ export default function Home() {
           href="/compare"
           eyebrow="Flow 1"
           title="True cost comparison"
-          body="Put two or three loan offers side by side and rank them on effective APR and cost per lakh — the only measures that survive different amounts and tenures."
+          body="Put two or three home loan offers side by side and rank them on effective APR and cost per lakh — the only measures that survive different amounts and tenures."
           points={[
             "Converts flat rates to their reducing equivalent",
             "Counts processing fees, GST, insurance and legal charges",
@@ -29,10 +29,43 @@ export default function Home() {
           ]}
         />
 
+        <Link
+          href="/prepay"
+          className="group rounded-2xl border border-line bg-surface px-5 py-5 shadow-[var(--shadow-card)] transition hover:border-accent-line hover:shadow-[var(--shadow-lift)]"
+        >
+          <p className="text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-3">
+            Flow 2
+          </p>
+          <h2 className="mt-2 flex items-center gap-2 text-[19px] font-semibold tracking-tight text-ink">
+            Prepay or invest
+            <span className="text-accent transition group-hover:translate-x-0.5">→</span>
+          </h2>
+          <p className="mt-1.5 text-[14px] leading-relaxed text-ink-2">
+            You have a lump sum and a home loan. Put it into the loan, or into the
+            market? The answer turns on post-tax numbers on both sides, which is
+            not what the headline rate and the expected return tell you.
+          </p>
+          <ul className="mt-3.5 flex flex-col gap-1.5">
+            {[
+              "Four scenarios measured to the same date",
+              "Post-tax loan cost against post-tax return",
+              "Checks your emergency buffer before it recommends anything",
+            ].map((point) => (
+              <li
+                key={point}
+                className="flex gap-2 text-[13px] leading-snug text-ink-2"
+              >
+                <span aria-hidden className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-accent" />
+                {point}
+              </li>
+            ))}
+          </ul>
+        </Link>
+
         <div className="rounded-2xl border border-dashed border-line bg-surface-2 px-5 py-5">
           <div className="flex items-center justify-between gap-3">
             <p className="text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-3">
-              Flow 2
+              Flow 3
             </p>
             <span className="rounded-full bg-surface-inset px-2.5 py-1 text-[11px] font-medium text-ink-3">
               Next up
