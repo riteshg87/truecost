@@ -82,7 +82,7 @@ export default function PrepayPage() {
   const path = rec?.scenarios.path ?? null;
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-xl flex-col">
+    <div className="mx-auto flex min-h-dvh w-full max-w-xl flex-col lg:max-w-[1180px]">
       <header className="sticky top-0 z-20 border-b border-line bg-bg/85 px-5 py-3 backdrop-blur-md">
         <div className="flex items-center justify-between gap-3">
           <Link
@@ -104,310 +104,313 @@ export default function PrepayPage() {
         </div>
       </header>
 
-      <main className="flex flex-1 flex-col gap-5 px-5 pb-16 pt-5">
-        {/* ---- The loan ------------------------------------------------- */}
-        <Section
-          title="The loan you have"
-          sub={LOAN_TYPES[input.loanType].label}
-        >
-          <Field label="Outstanding balance" required htmlFor="outstanding">
-            <MoneyInput
-              id="outstanding"
-              value={input.outstanding}
-              onChange={(outstanding) => set({ outstanding })}
-              placeholder="0"
-            />
-          </Field>
+      {/* Two tracks on a wide screen: the figures you change on the left, the
+          answer pinned on the right. The whole point of this screen is watching
+          one move the other, which a single column an arm's length long hides. */}
+      <main className="flex-1 px-5 pb-16 pt-4">
+        <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:gap-6">
+          {/* ---- Inputs ------------------------------------------------- */}
+          <div className="flex flex-col gap-4">
+            <Section title="The loan you have" sub={LOAN_TYPES[input.loanType].label}>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <Field label="Outstanding balance" required htmlFor="outstanding">
+                  <MoneyInput
+                    id="outstanding"
+                    value={input.outstanding}
+                    onChange={(outstanding) => set({ outstanding })}
+                    placeholder="0"
+                  />
+                </Field>
+                <Field label="Current EMI" htmlFor="emi" hint="Optional — checks the figures against your statement.">
+                  <MoneyInput
+                    id="emi"
+                    value={input.currentEmi ?? 0}
+                    onChange={(v) => set({ currentEmi: v > 0 ? v : null })}
+                    placeholder="Derived if blank"
+                  />
+                </Field>
+              </div>
 
-          <div className="grid grid-cols-2 gap-3">
-            <Field label="Interest rate" required htmlFor="rate">
-              <DecimalInput
-                id="rate"
-                suffix="%"
-                value={input.ratePct}
-                onChange={(ratePct) => set({ ratePct })}
-                placeholder="8.5"
-              />
-            </Field>
-            <Field label="Months remaining" required htmlFor="months">
-              <DecimalInput
-                id="months"
-                maxDecimals={0}
-                value={input.remainingMonths}
-                onChange={(remainingMonths) => set({ remainingMonths })}
-                placeholder="180"
-              />
-            </Field>
-          </div>
+              <div className="grid gap-3 sm:grid-cols-3">
+                <Field label="Interest rate" required htmlFor="rate">
+                  <DecimalInput
+                    id="rate"
+                    suffix="%"
+                    value={input.ratePct}
+                    onChange={(ratePct) => set({ ratePct })}
+                    placeholder="8.5"
+                  />
+                </Field>
+                <Field label="Months left" required htmlFor="months">
+                  <DecimalInput
+                    id="months"
+                    maxDecimals={0}
+                    value={input.remainingMonths}
+                    onChange={(remainingMonths) => set({ remainingMonths })}
+                    placeholder="180"
+                  />
+                </Field>
+                <Field
+                  label="Rate basis"
+                  hint={feeWaived ? "Prepay free" : "Exit charges apply"}
+                >
+                  <Segmented
+                    size="sm"
+                    ariaLabel="Fixed or floating"
+                    value={input.rateStructure}
+                    onChange={(rateStructure) => set({ rateStructure })}
+                    options={[
+                      { value: "floating", label: "Floating" },
+                      { value: "fixed", label: "Fixed" },
+                    ]}
+                  />
+                </Field>
+              </div>
 
-          <Field
-            label="Rate basis"
-            hint={
-              feeWaived
-                ? "Floating: prepayment is free by regulation."
-                : "Fixed: an exit charge usually applies."
-            }
-          >
-            <Segmented
-              ariaLabel="Fixed or floating"
-              value={input.rateStructure}
-              onChange={(rateStructure) => set({ rateStructure })}
-              options={[
-                { value: "floating", label: "Floating" },
-                { value: "fixed", label: "Fixed" },
-              ]}
-            />
-          </Field>
+              {rec && rec.scenarios.emiMismatch !== null &&
+              Math.abs(rec.scenarios.emiMismatch) > 100 ? (
+                <Notice level="caution">
+                  Your stated EMI differs from the one these figures imply by{" "}
+                  <strong>{formatINR(Math.abs(rec.scenarios.emiMismatch))}</strong> a
+                  month. The balance, rate or remaining term is probably not quite
+                  what was entered — everything below rests on it.
+                </Notice>
+              ) : null}
+            </Section>
 
-          <Field
-            label="Current EMI"
-            hint="Optional. Used only to check the figures above against your statement."
-            htmlFor="emi"
-          >
-            <MoneyInput
-              id="emi"
-              value={input.currentEmi ?? 0}
-              onChange={(v) => set({ currentEmi: v > 0 ? v : null })}
-              placeholder="Derived if left blank"
-            />
-          </Field>
-
-          {rec && rec.scenarios.emiMismatch !== null &&
-          Math.abs(rec.scenarios.emiMismatch) > 100 ? (
-            <Notice level="caution">
-              Your stated EMI differs from the one these figures imply by{" "}
-              <strong>{formatINR(Math.abs(rec.scenarios.emiMismatch))}</strong> a
-              month. The balance, rate or remaining term is probably not quite
-              what was entered — worth checking against the statement, because
-              everything below rests on it.
-            </Notice>
-          ) : null}
-        </Section>
-
-        {/* ---- The surplus ----------------------------------------------- */}
-        <Section
-          title="The money you have spare"
-          sub="The one figure this whole question turns on."
-        >
-          <Field label="Surplus amount" required htmlFor="surplus">
-            <MoneyInput
-              id="surplus"
-              value={input.surplus}
-              onChange={(surplus) => set({ surplus })}
-              placeholder="0"
-            />
-          </Field>
-
-          {path ? (
-            <p className="rounded-xl bg-surface-2 px-3.5 py-2.5 text-[12.5px] leading-relaxed text-ink-2">
-              {path === "foreclosure" ? (
-                <>
-                  <strong className="text-ink">Foreclosure.</strong> This covers the
-                  whole balance, so the loan closes outright and there is no
-                  tenure-or-EMI choice left to make.
-                </>
-              ) : (
-                <>
-                  <strong className="text-ink">Part payment.</strong> This is{" "}
-                  {formatPct((input.surplus / input.outstanding) * 100, 0)} of the
-                  balance, so the loan continues — shorter, or lighter.
-                </>
-              )}
-            </p>
-          ) : null}
-
-          {feeWaived ? (
-            <Notice level="info">
-              No prepayment charge applies. RBI bars foreclosure and part-payment
-              fees on floating-rate home loans to individual borrowers, so anything
-              a lender quotes here is worth challenging in writing.
-            </Notice>
-          ) : (
-            <div className="grid grid-cols-2 gap-3">
-              <Field label="Prepayment fee" htmlFor="fee">
-                <DecimalInput
-                  id="fee"
-                  suffix="%"
-                  value={input.prepayFeePct}
-                  onChange={(prepayFeePct) => set({ prepayFeePct })}
-                  placeholder="2"
-                />
-              </Field>
-              <Field label="Other charges" htmlFor="other">
-                <MoneyInput
-                  id="other"
-                  value={input.otherFees}
-                  onChange={(otherFees) => set({ otherFees })}
-                  placeholder="0"
-                />
-              </Field>
-            </div>
-          )}
-
-          {path === "part-payment" ? (
-            <Field
-              label="If you prepay"
-              hint="Cutting the tenure kills more interest. Cutting the EMI frees cash sooner."
+            <Section
+              title="The money you have spare"
+              sub="The one figure this whole question turns on."
             >
-              <Segmented
-                ariaLabel="Prepayment mode"
-                value={input.prepayMode}
-                onChange={(prepayMode) => set({ prepayMode })}
-                options={[
-                  { value: "tenure", label: "Cut tenure" },
-                  { value: "emi", label: "Cut EMI" },
-                ]}
-              />
-            </Field>
-          ) : null}
-        </Section>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <Field label="Surplus amount" required htmlFor="surplus">
+                  <MoneyInput
+                    id="surplus"
+                    value={input.surplus}
+                    onChange={(surplus) => set({ surplus })}
+                    placeholder="0"
+                  />
+                </Field>
 
-        {/* ---- The alternative -------------------------------------------- */}
-        <Section
-          title="Where else it could go"
-          sub="Prepaying has to beat this to be worth doing."
-        >
-          <div className="flex flex-wrap gap-2">
-            {(Object.keys(ASSET_PRESETS) as AssetClass[]).map((id) => {
-              const preset = ASSET_PRESETS[id];
-              const selected = id === input.assetClass;
-              return (
-                <button
-                  key={id}
-                  type="button"
-                  aria-pressed={selected}
-                  onClick={() =>
-                    set({ assetClass: id, expectedReturnPct: preset.returnPct })
-                  }
-                  className={`rounded-full border px-3.5 py-2 text-[13px] font-medium transition ${
-                    selected
-                      ? "border-accent bg-accent text-accent-ink"
-                      : "border-line bg-surface text-ink-2 hover:border-line-strong"
-                  }`}
+                {path === "part-payment" ? (
+                  <Field
+                    label="If you prepay"
+                    hint="Tenure kills more interest. EMI frees cash sooner."
+                  >
+                    <Segmented
+                      size="sm"
+                      ariaLabel="Prepayment mode"
+                      value={input.prepayMode}
+                      onChange={(prepayMode) => set({ prepayMode })}
+                      options={[
+                        { value: "tenure", label: "Cut tenure" },
+                        { value: "emi", label: "Cut EMI" },
+                      ]}
+                    />
+                  </Field>
+                ) : null}
+              </div>
+
+              {path ? (
+                <p className="rounded-xl bg-surface-2 px-3.5 py-2.5 text-[12.5px] leading-relaxed text-ink-2">
+                  {path === "foreclosure" ? (
+                    <>
+                      <strong className="text-ink">Foreclosure.</strong> This covers
+                      the whole balance, so the loan closes outright and there is no
+                      tenure-or-EMI choice left to make.
+                    </>
+                  ) : (
+                    <>
+                      <strong className="text-ink">Part payment.</strong> This is{" "}
+                      {formatPct((input.surplus / input.outstanding) * 100, 0)} of the
+                      balance, so the loan continues — shorter, or lighter.
+                    </>
+                  )}
+                </p>
+              ) : null}
+
+              {feeWaived ? (
+                <Notice level="info">
+                  No prepayment charge applies. RBI bars foreclosure and part-payment
+                  fees on floating-rate home loans to individual borrowers, so
+                  anything a lender quotes here is worth challenging in writing.
+                </Notice>
+              ) : (
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <Field label="Prepayment fee" htmlFor="fee">
+                    <DecimalInput
+                      id="fee"
+                      suffix="%"
+                      value={input.prepayFeePct}
+                      onChange={(prepayFeePct) => set({ prepayFeePct })}
+                      placeholder="2"
+                    />
+                  </Field>
+                  <Field label="Other charges" htmlFor="other">
+                    <MoneyInput
+                      id="other"
+                      value={input.otherFees}
+                      onChange={(otherFees) => set({ otherFees })}
+                      placeholder="0"
+                    />
+                  </Field>
+                </div>
+              )}
+            </Section>
+
+            <Section
+              title="Where else it could go"
+              sub="Prepaying has to beat this to be worth doing."
+            >
+              <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_140px] sm:items-end">
+                <div className="flex flex-wrap gap-2">
+                  {(Object.keys(ASSET_PRESETS) as AssetClass[]).map((id) => {
+                    const preset = ASSET_PRESETS[id];
+                    const selected = id === input.assetClass;
+                    return (
+                      <button
+                        key={id}
+                        type="button"
+                        aria-pressed={selected}
+                        onClick={() =>
+                          set({ assetClass: id, expectedReturnPct: preset.returnPct })
+                        }
+                        className={`rounded-full border px-3.5 py-2 text-[13px] font-medium transition ${
+                          selected
+                            ? "border-accent bg-accent text-accent-ink"
+                            : "border-line bg-surface text-ink-2 hover:border-line-strong"
+                        }`}
+                      >
+                        {preset.label}
+                      </button>
+                    );
+                  })}
+                </div>
+                <Field label="Expected return" htmlFor="ret">
+                  <DecimalInput
+                    id="ret"
+                    suffix="%"
+                    value={input.expectedReturnPct}
+                    onChange={(expectedReturnPct) => set({ expectedReturnPct })}
+                  />
+                </Field>
+              </div>
+              <p className="text-[12px] leading-snug text-ink-3">
+                {ASSET_PRESETS[input.assetClass].note}
+              </p>
+            </Section>
+
+            {/* Tax and the buffer are both short — they pair up rather than
+                each taking a full row to themselves. */}
+            <div className="grid gap-4 sm:grid-cols-2">
+              <Section title="Your tax" sub="It changes both sides of the answer.">
+                <Field label="Regime">
+                  <Segmented
+                    size="sm"
+                    ariaLabel="Tax regime"
+                    value={input.regime}
+                    onChange={(regime) =>
+                      set({
+                        regime,
+                        claims24b: regime === "old" ? input.claims24b : false,
+                        claims80c: regime === "old" ? input.claims80c : false,
+                      })
+                    }
+                    options={[
+                      { value: "new", label: "New" },
+                      { value: "old", label: "Old" },
+                    ]}
+                  />
+                </Field>
+
+                <Field label="Slab" hint="Cess on top — 30% is really 31.2%.">
+                  <div className="flex flex-wrap gap-1.5">
+                    {SLAB_OPTIONS.map((slab) => (
+                      <button
+                        key={slab}
+                        type="button"
+                        aria-pressed={slab === input.taxSlabPct}
+                        onClick={() => set({ taxSlabPct: slab })}
+                        className={`tnum rounded-full border px-2.5 py-1.5 text-[12.5px] font-medium transition ${
+                          slab === input.taxSlabPct
+                            ? "border-accent bg-accent text-accent-ink"
+                            : "border-line bg-surface text-ink-2 hover:border-line-strong"
+                        }`}
+                      >
+                        {slab}%
+                      </button>
+                    ))}
+                  </div>
+                </Field>
+
+                {oldRegime ? (
+                  <div className="flex flex-col gap-2">
+                    <Check
+                      checked={input.claims24b}
+                      onChange={(claims24b) => set({ claims24b })}
+                      label="I claim interest under 24(b)"
+                      hint="Up to ₹2L a year, self-occupied."
+                    />
+                    <Check
+                      checked={input.claims80c}
+                      onChange={(claims80c) => set({ claims80c })}
+                      label="80C has room for the principal"
+                      hint="Usually full from EPF and insurance."
+                    />
+                  </div>
+                ) : (
+                  <p className="rounded-xl border border-warn-line bg-warn-soft px-3 py-2.5 text-[12.5px] leading-relaxed text-warn">
+                    The new regime removes 24(b) and 80C for most borrowers. Your
+                    loan costs exactly what it says, which makes prepaying more
+                    attractive, not less.
+                  </p>
+                )}
+              </Section>
+
+              <Section
+                title="What you would have left"
+                sub="Checked before anything else, and it can overrule the arithmetic."
+              >
+                <Field
+                  label="Months of expenses still covered"
+                  hint={`Below ${MIN_BUFFER_MONTHS} months neither route is right yet. Blank to skip.`}
+                  htmlFor="liq"
                 >
-                  {preset.label}
-                </button>
-              );
-            })}
+                  <DecimalInput
+                    id="liq"
+                    maxDecimals={0}
+                    value={input.liquidityMonthsAfter ?? 0}
+                    onChange={(v) => set({ liquidityMonthsAfter: v > 0 ? v : null })}
+                    placeholder="e.g. 8"
+                  />
+                </Field>
+              </Section>
+            </div>
           </div>
 
-          <Field label="Expected return" htmlFor="ret" hint={ASSET_PRESETS[input.assetClass].note}>
-            <DecimalInput
-              id="ret"
-              suffix="%"
-              value={input.expectedReturnPct}
-              onChange={(expectedReturnPct) => set({ expectedReturnPct })}
-            />
-          </Field>
-        </Section>
+          {/* ---- Answer, pinned ------------------------------------------ */}
+          <div className="flex flex-col gap-4 lg:sticky lg:top-[68px]">
+            {rec ? (
+              <Results rec={rec} input={input} />
+            ) : (
+              <div className="rounded-2xl border border-dashed border-line bg-surface-2 px-5 py-10 text-center">
+                <p className="text-[14px] font-medium text-ink-2">
+                  Four scenarios appear here
+                </p>
+                <p className="mx-auto mt-1.5 max-w-xs text-[13px] leading-relaxed text-ink-3">
+                  A balance, a rate, a remaining term and the surplus you are
+                  thinking of deploying. Nothing leaves this device.
+                </p>
+              </div>
+            )}
 
-        {/* ---- Tax --------------------------------------------------------- */}
-        <Section
-          title="Your tax"
-          sub="It changes both sides of the answer, usually by more than people expect."
-        >
-          <Field label="Regime">
-            <Segmented
-              ariaLabel="Tax regime"
-              value={input.regime}
-              onChange={(regime) =>
-                set({
-                  regime,
-                  claims24b: regime === "old" ? input.claims24b : false,
-                  claims80c: regime === "old" ? input.claims80c : false,
-                })
-              }
-              options={[
-                { value: "new", label: "New" },
-                { value: "old", label: "Old" },
-              ]}
-            />
-          </Field>
-
-          <Field label="Slab" hint="Cess is added on top — a 30% slab is really 31.2%.">
-            <div className="flex flex-wrap gap-2">
-              {SLAB_OPTIONS.map((slab) => (
-                <button
-                  key={slab}
-                  type="button"
-                  aria-pressed={slab === input.taxSlabPct}
-                  onClick={() => set({ taxSlabPct: slab })}
-                  className={`tnum rounded-full border px-3 py-1.5 text-[13px] font-medium transition ${
-                    slab === input.taxSlabPct
-                      ? "border-accent bg-accent text-accent-ink"
-                      : "border-line bg-surface text-ink-2 hover:border-line-strong"
-                  }`}
-                >
-                  {slab}%
-                </button>
-              ))}
-            </div>
-          </Field>
-
-          {oldRegime ? (
-            <div className="flex flex-col gap-2">
-              <Check
-                checked={input.claims24b}
-                onChange={(claims24b) => set({ claims24b })}
-                label="I claim interest under 24(b)"
-                hint="Up to ₹2L a year on a self-occupied property."
-              />
-              <Check
-                checked={input.claims80c}
-                onChange={(claims80c) => set({ claims80c })}
-                label="My 80C has room for the principal"
-                hint="Usually already full from EPF, PPF and insurance — leave this off if so."
-              />
-            </div>
-          ) : (
-            <Notice level="caution">
-              The new regime removes both the 24(b) interest deduction and the 80C
-              principal deduction for most borrowers. Your loan costs exactly what
-              it says, which makes prepaying more attractive, not less.
-            </Notice>
-          )}
-        </Section>
-
-        {/* ---- Safety ------------------------------------------------------ */}
-        <Section
-          title="What you would have left"
-          sub="This is checked before anything else, and it can overrule the arithmetic."
-        >
-          <Field
-            label="Months of expenses still covered after this"
-            hint={`Below ${MIN_BUFFER_MONTHS} months, neither route is the right answer yet. Leave blank to skip.`}
-            htmlFor="liq"
-          >
-            <DecimalInput
-              id="liq"
-              maxDecimals={0}
-              value={input.liquidityMonthsAfter ?? 0}
-              onChange={(v) => set({ liquidityMonthsAfter: v > 0 ? v : null })}
-              placeholder="e.g. 8"
-            />
-          </Field>
-        </Section>
-
-        {/* ---- Results ----------------------------------------------------- */}
-        {rec ? (
-          <Results rec={rec} input={input} />
-        ) : (
-          <div className="rounded-2xl border border-dashed border-line bg-surface-2 px-5 py-8 text-center">
-            <p className="text-[14px] font-medium text-ink-2">
-              Four scenarios appear here
-            </p>
-            <p className="mx-auto mt-1.5 max-w-xs text-[13px] leading-relaxed text-ink-3">
-              A balance, a rate, a remaining term and the surplus you are thinking
-              of deploying. Nothing leaves this device.
+            <p className="text-[11.5px] leading-relaxed text-ink-3">
+              Projections assume the return is earned steadily and the freed cash is
+              actually invested every month. Real markets do neither. This is a
+              calculation tool, not financial advice.
             </p>
           </div>
-        )}
-
-        <p className="text-[11.5px] leading-relaxed text-ink-3">
-          Projections assume the return is earned steadily and the freed cash is
-          actually invested every month. Real markets do neither. This is a
-          calculation tool, not financial advice.
-        </p>
+        </div>
       </main>
     </div>
   );
@@ -433,10 +436,11 @@ function Results({
 
       {/* Four scenarios, all measured to the same date. */}
       <div>
-        <h2 className="mb-2 px-1 text-[13px] font-medium text-ink-2">
-          Four ways this plays out, all to {monthsLabel(s.horizonMonths)} from now
+        <h2 className="mb-1.5 px-1 text-[12.5px] font-medium text-ink-2">
+          Four ways this plays out, all measured to {monthsLabel(s.horizonMonths)}
+          from now
         </h2>
-        <div className="grid grid-cols-2 gap-2.5">
+        <div className="grid grid-cols-2 items-stretch gap-2">
           <Scenario
             label="Do nothing"
             headline={formatCompactINR(s.noPrepay.totalPayable)}
@@ -444,6 +448,9 @@ function Results({
             lines={[
               [`${formatCompactINR(s.noPrepay.totalInterest)}`, "of it interest"],
               [monthsLabel(s.noPrepay.months), "left to run"],
+              // Cash that is neither deployed nor invested simply sits, which is
+              // what makes this the baseline the other three are measured against.
+              [formatCompactINR(input.surplus), "surplus still idle"],
             ]}
           />
 
@@ -698,10 +705,10 @@ function Section({
   children: ReactNode;
 }) {
   return (
-    <section className="rounded-2xl border border-line bg-surface px-4 py-4 shadow-[var(--shadow-card)]">
-      <h2 className="text-[14.5px] font-semibold tracking-tight text-ink">{title}</h2>
-      {sub ? <p className="mt-0.5 text-[12.5px] leading-relaxed text-ink-3">{sub}</p> : null}
-      <div className="mt-3.5 flex flex-col gap-3.5">{children}</div>
+    <section className="flex h-full flex-col rounded-2xl border border-line bg-surface px-4 py-3.5 shadow-[var(--shadow-card)]">
+      <h2 className="text-[14px] font-semibold tracking-tight text-ink">{title}</h2>
+      {sub ? <p className="mt-0.5 text-[12px] leading-snug text-ink-3">{sub}</p> : null}
+      <div className="mt-3 flex flex-col gap-3">{children}</div>
     </section>
   );
 }
@@ -723,7 +730,7 @@ function Scenario({
 }) {
   return (
     <div
-      className={`flex flex-col rounded-2xl border px-3.5 py-3.5 ${
+      className={`flex h-full flex-col rounded-2xl border px-3 py-3 ${
         disabled
           ? "border-dashed border-line bg-surface-2 opacity-70"
           : highlight
@@ -741,13 +748,13 @@ function Scenario({
       </div>
 
       <p
-        className={`tnum mt-2 text-[19px] font-semibold leading-none tracking-tight ${
+        className={`tnum mt-1.5 text-[18px] font-semibold leading-none tracking-tight ${
           highlight ? "text-accent" : "text-ink"
         }`}
       >
         {headline}
       </p>
-      <p className="mt-1 text-[10.5px] leading-tight text-ink-3">{caption}</p>
+      <p className="mt-1 text-[10px] leading-tight text-ink-3">{caption}</p>
 
       <dl className="mt-2.5 flex flex-col gap-1 border-t border-line pt-2">
         {lines.map(([value, note]) => (
