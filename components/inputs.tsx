@@ -55,9 +55,17 @@ export function Field({
 }
 
 const inputBase =
-  "w-full rounded-xl border bg-surface-2 px-3.5 py-3 text-[16px] font-medium text-ink " +
+  "w-full rounded-xl border bg-surface-2 text-[16px] font-medium text-ink " +
   "placeholder:font-normal placeholder:text-ink-3 outline-none transition " +
   "focus:border-accent focus:ring-2 focus:ring-accent/25";
+
+/*
+ * Padding is the only thing that shrinks in a grid cell. The 16px type stays:
+ * iOS Safari zooms the viewport whenever a focused input is smaller than that,
+ * and a comparison that jumps on every tap is worse than a slightly wide cell.
+ */
+const PAD = { md: "px-3.5 py-3", sm: "px-2.5 py-2" } as const;
+type Density = keyof typeof PAD;
 
 function borderFor(invalid?: boolean) {
   return invalid ? "border-danger/60" : "border-line";
@@ -74,6 +82,7 @@ export function MoneyInput({
   id,
   invalid,
   ariaLabel,
+  density = "md",
 }: {
   value: number;
   onChange: (next: number) => void;
@@ -81,6 +90,7 @@ export function MoneyInput({
   id?: string;
   invalid?: boolean;
   ariaLabel?: string;
+  density?: Density;
 }) {
   const [text, setText] = useState(() => (value ? groupDigits(String(value)) : ""));
   const [focused, setFocused] = useState(false);
@@ -93,7 +103,11 @@ export function MoneyInput({
 
   return (
     <div className="relative">
-      <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-[16px] font-medium text-ink-3">
+      <span
+        className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-[16px] font-medium text-ink-3 ${
+          density === "sm" ? "left-2.5" : "left-3.5"
+        }`}
+      >
         ₹
       </span>
       <input
@@ -101,7 +115,9 @@ export function MoneyInput({
         aria-label={ariaLabel}
         inputMode="numeric"
         autoComplete="off"
-        className={`${inputBase} ${borderFor(invalid)} pl-8 tnum`}
+        className={`${inputBase} ${PAD[density]} ${borderFor(invalid)} ${
+          density === "sm" ? "pl-6" : "pl-8"
+        } tnum`}
         placeholder={placeholder}
         value={text}
         onFocus={() => setFocused(true)}
@@ -132,6 +148,7 @@ export function DecimalInput({
   invalid,
   ariaLabel,
   maxDecimals = 2,
+  density = "md",
 }: {
   value: number;
   onChange: (next: number) => void;
@@ -141,6 +158,7 @@ export function DecimalInput({
   invalid?: boolean;
   ariaLabel?: string;
   maxDecimals?: number;
+  density?: Density;
 }) {
   const [text, setText] = useState(() => (value ? String(value) : ""));
   const [focused, setFocused] = useState(false);
@@ -156,7 +174,9 @@ export function DecimalInput({
         aria-label={ariaLabel}
         inputMode="decimal"
         autoComplete="off"
-        className={`${inputBase} ${borderFor(invalid)} ${suffix ? "pr-12" : ""} tnum`}
+        className={`${inputBase} ${PAD[density]} ${borderFor(invalid)} ${
+          suffix ? (density === "sm" ? "pr-7" : "pr-12") : ""
+        } tnum`}
         placeholder={placeholder}
         value={text}
         onFocus={() => setFocused(true)}
@@ -178,7 +198,11 @@ export function DecimalInput({
         }}
       />
       {suffix ? (
-        <span className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-[15px] font-medium text-ink-3">
+        <span
+          className={`pointer-events-none absolute top-1/2 -translate-y-1/2 font-medium text-ink-3 ${
+            density === "sm" ? "right-2 text-[13px]" : "right-3.5 text-[15px]"
+          }`}
+        >
           {suffix}
         </span>
       ) : null}
@@ -205,7 +229,7 @@ export function TextInput({
       aria-label={ariaLabel}
       type="text"
       autoComplete="off"
-      className={`${inputBase} ${borderFor(false)}`}
+      className={`${inputBase} ${PAD.md} ${borderFor(false)}`}
       placeholder={placeholder}
       value={value}
       onChange={(event) => onChange(event.target.value)}

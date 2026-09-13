@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { OfferCard } from "@/components/OfferCard";
+import { OfferGrid } from "@/components/OfferGrid";
 import { LOAN_TYPES, LOAN_TYPE_ORDER } from "@/lib/finance/loanTypes";
 import { allOffersReady, errorsFor } from "@/lib/finance/validate";
 import { useCompare } from "@/lib/store";
@@ -71,19 +71,17 @@ export default function ComparePage() {
           </p>
         </section>
 
-        {/* Offers -------------------------------------------------------- */}
-        {hydrated
-          ? offers.map((offer, index) => (
-              <OfferCard key={offer.id} offer={offer} index={index} />
-            ))
-          : offers.map((offer, index) => (
-              <div
-                key={offer.id}
-                aria-hidden
-                className="h-[420px] animate-pulse rounded-2xl border border-line bg-surface-2"
-                data-placeholder={index}
-              />
-            ))}
+        {/* Offers ---------------------------------------------------------
+            One grid rather than a card each: fields down the left, offers
+            across the top, so two rates can be read on one line. */}
+        {hydrated ? (
+          <OfferGrid />
+        ) : (
+          <div
+            aria-hidden
+            className="h-[460px] animate-pulse rounded-2xl border border-line bg-surface-2"
+          />
+        )}
 
         {canAdd ? (
           <button
@@ -109,10 +107,12 @@ export default function ComparePage() {
             onClick={() => router.push("/compare/results")}
             className="w-full rounded-xl bg-accent px-4 py-3.5 text-[15px] font-semibold text-accent-ink transition disabled:cursor-not-allowed disabled:bg-surface-inset disabled:text-ink-3"
           >
-            {ready ? "Compare offers" : `${missing} field${missing === 1 ? "" : "s"} still needed`}
+            {ready ? "See the full breakdown" : `${missing} field${missing === 1 ? "" : "s"} still needed`}
           </button>
           <p className="mt-2 text-center text-[11px] text-ink-3">
-            Ranked on effective APR, not the headline rate.
+            {ready
+              ? "Schedule, fee split and what to negotiate."
+              : "Ranked on effective APR, not the headline rate."}
           </p>
         </div>
       </div>
