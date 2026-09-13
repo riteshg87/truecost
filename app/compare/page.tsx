@@ -46,19 +46,31 @@ export default function ComparePage() {
           <h2 className="mb-2.5 text-[13px] font-medium text-ink-2">
             What are you borrowing for?
           </h2>
+          {/* Products that are not built yet stay on screen and grey out. A
+              missing chip reads as an oversight; a disabled one reads as a
+              roadmap, and says plainly what this tool does and does not cover. */}
           <div className="flex flex-wrap gap-2">
             {LOAN_TYPE_ORDER.map((id) => {
               const selected = id === loanType;
+              const available = LOAN_TYPES[id].enabled;
               return (
                 <button
                   key={id}
                   type="button"
+                  disabled={!available}
                   onClick={() => setLoanType(id)}
                   aria-pressed={selected}
+                  title={
+                    available
+                      ? undefined
+                      : `${LOAN_TYPES[id].label}s are not covered yet`
+                  }
                   className={`rounded-full border px-3.5 py-2 text-[13px] font-medium transition ${
-                    selected
-                      ? "border-accent bg-accent text-accent-ink"
-                      : "border-line bg-surface text-ink-2 hover:border-line-strong"
+                    !available
+                      ? "cursor-not-allowed border-dashed border-line bg-transparent text-ink-3 opacity-60"
+                      : selected
+                        ? "border-accent bg-accent text-accent-ink"
+                        : "border-line bg-surface text-ink-2 hover:border-line-strong"
                   }`}
                 >
                   {LOAN_TYPES[id].short}
@@ -67,6 +79,7 @@ export default function ComparePage() {
             })}
           </div>
           <p className="mt-2.5 text-[12px] leading-relaxed text-ink-3">
+            Home loans only for now — the greyed products are next.{" "}
             {config.prepayNote}
           </p>
         </section>

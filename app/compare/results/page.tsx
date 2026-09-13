@@ -195,6 +195,23 @@ function Split({ rec }: { rec: NonNullable<ReturnType<typeof recommend>> }) {
   const charges = rec.chargesEffect;
   const rate = rec.rateEffect;
 
+  // The runner-up holds the better rate and still loses. Saying "charges cost
+  // them X of Y points" would understate it — charges cost them more than the
+  // whole gap, and their rate handed some of it back.
+  if (rate < -0.005) {
+    return (
+      <>
+        Their rate is the better of the two — worth{" "}
+        <span className="tnum font-semibold text-ink">
+          {Math.abs(rate).toFixed(2)}
+        </span>{" "}
+        points in their favour — but upfront charges add{" "}
+        <span className="tnum font-semibold text-ink">{charges.toFixed(2)}</span>{" "}
+        and swallow it whole. The cheaper-looking loan is the dearer one.
+      </>
+    );
+  }
+
   if (rec.driver === "charges") {
     return (
       <>
@@ -307,6 +324,14 @@ function Methodology() {
           , total interest is set aside entirely. A longer loan always shows a
           bigger interest figure even when it is the cheaper money, so ranking
           falls to effective APR and cost per lakh.
+        </p>
+        <p>
+          <span className="font-medium text-ink-2">Fixed or floating</span> changes
+          nothing in the arithmetic here and everything about leaving early. A
+          floating home loan to an individual carries no foreclosure charge by
+          regulation; a fixed one typically costs 2-4% of the outstanding to close.
+          An APR computed over a full schedule cannot show that, which is why it is
+          asked for separately.
         </p>
         <p className="border-t border-line pt-2.5">
           Figures assume EMIs are paid on schedule with no prepayment, and

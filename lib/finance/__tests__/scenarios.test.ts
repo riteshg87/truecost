@@ -15,6 +15,7 @@ function offer(partial: Partial<Offer> & Pick<Offer, "id" | "lender">): Offer {
     amount: 5000000,
     ratePct: 8.5,
     rateType: "reducing",
+    rateStructure: "floating",
     tenureValue: 20,
     tenureUnit: "years",
     processingFee: { mode: "percent", value: 0 },

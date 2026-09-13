@@ -15,6 +15,17 @@ export type LoanTypeId =
   | "education";
 
 export type RateType = "reducing" | "flat";
+
+/**
+ * Whether the rate can move during the loan.
+ *
+ * Distinct from RateType, which is about how interest is charged. This is about
+ * whether it resets — and on a home loan it is the field that decides what
+ * prepaying costs. RBI bars foreclosure charges on floating-rate home loans to
+ * individual borrowers; fixed-rate loans routinely charge 2-4% of the
+ * outstanding to close early.
+ */
+export type RateStructure = "floating" | "fixed";
 export type FeeMode = "percent" | "flat";
 export type TenureUnit = "months" | "years";
 export type InsuranceFunding = "financed" | "upfront";
@@ -39,6 +50,8 @@ export interface Offer {
   amount: number;
   ratePct: number;
   rateType: RateType;
+  /** Fixed or floating. Decides the foreclosure cost, not the EMI. */
+  rateStructure: RateStructure;
   tenureValue: number;
   tenureUnit: TenureUnit;
   processingFee: FeeInput;

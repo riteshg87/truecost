@@ -9,7 +9,12 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { DEFAULT_GST_PCT, LOAN_TYPES } from "./finance/loanTypes";
+import {
+  DEFAULT_GST_PCT,
+  ENABLED_LOAN_TYPES,
+  LOAN_TYPES,
+  isLoanTypeEnabled,
+} from "./finance/loanTypes";
 import type { LoanTypeId, Offer } from "./finance/types";
 
 const STORAGE_KEY = "truecost.compare.v1";
@@ -36,6 +41,7 @@ export function makeOffer(loanType: LoanTypeId): Offer {
     amount: 0,
     ratePct: 0,
     rateType: config.defaultRateType,
+    rateStructure: config.defaultRateStructure,
     tenureValue: config.typicalTenureYears,
     tenureUnit: "years",
     processingFee: { mode: "percent", value: 0 },
@@ -52,7 +58,7 @@ interface CompareState {
 }
 
 function initialState(): CompareState {
-  const loanType: LoanTypeId = "home";
+  const loanType: LoanTypeId = ENABLED_LOAN_TYPES[0] ?? "home";
   return { loanType, offers: [makeOffer(loanType), makeOffer(loanType)] };
 }
 
@@ -82,6 +88,30 @@ function isOffer(value: unknown): value is Offer {
   );
 }
 
+/**
+ * Bring an offer written by an older build up to the current shape.
+ *
+ * Storage is a year of someone's saved comparisons, so the key is not bumped
+ * on every field. Two things need repairing: rateStructure did not exist
+ * before fixed-versus-floating was collected, and a product that has since
+ * been switched off has to fall back to one that is on.
+ */
+function migrateOffer(offer: Offer): Offer {
+  const loanType = isLoanTypeEnabled(offer.loanType)
+    ? offer.loanType
+    : (ENABLED_LOAN_TYPES[0] ?? "home");
+  const config = LOAN_TYPES[loanType];
+  return {
+    ...offer,
+    loanType,
+    rateStructure:
+      offer.rateStructure === "fixed" || offer.rateStructure === "floating"
+        ? offer.rateStructure
+        : config.defaultRateStructure,
+    rateType: config.rateTypeLocked ? config.defaultRateType : offer.rateType,
+  };
+}
+
 /** Tolerate anything in storage — a stale or hand-edited blob must not white-screen the app. */
 function parseStored(raw: string | null): CompareState | null {
   if (!raw) return null;
@@ -89,14 +119,16 @@ function parseStored(raw: string | null): CompareState | null {
     const parsed = JSON.parse(raw) as unknown;
     if (!parsed || typeof parsed !== "object") return null;
     const candidate = parsed as Record<string, unknown>;
-    const offers = Array.isArray(candidate.offers)
+    const offers = (Array.isArray(candidate.offers)
       ? candidate.offers.filter(isOffer)
-      : [];
+      : []
+    ).map(migrateOffer);
     if (offers.length < 2) return null;
-    const loanType =
+    const stored =
       typeof candidate.loanType === "string" && candidate.loanType in LOAN_TYPES
         ? (candidate.loanType as LoanTypeId)
         : offers[0].loanType;
+    const loanType = isLoanTypeEnabled(stored) ? stored : offers[0].loanType;
     return { loanType, offers: offers.slice(0, MAX_OFFERS) };
   } catch {
     return null;
@@ -128,7 +160,8 @@ export function CompareProvider({ children }: { children: ReactNode }) {
 
   const setLoanType = useCallback((loanType: LoanTypeId) => {
     setState((prev) => {
-      if (prev.loanType === loanType) return prev;
+      // A disabled product is on screen to show what is coming, not to be picked.
+      if (prev.loanType === loanType || !isLoanTypeEnabled(loanType)) return prev;
       const config = LOAN_TYPES[loanType];
       return {
         loanType,
@@ -137,6 +170,7 @@ export function CompareProvider({ children }: { children: ReactNode }) {
           loanType,
           // A locked product cannot stay on a flat rate the user picked earlier.
           rateType: config.rateTypeLocked ? config.defaultRateType : offer.rateType,
+          rateStructure: config.defaultRateStructure,
           tenureValue:
             offer.tenureUnit === "years" &&
             offer.tenureValue === LOAN_TYPES[prev.loanType].typicalTenureYears

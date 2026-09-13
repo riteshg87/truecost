@@ -1,9 +1,19 @@
-import type { LoanTypeId, RateType } from "./types";
+import type { LoanTypeId, RateStructure, RateType } from "./types";
 
 export interface LoanTypeConfig {
   id: LoanTypeId;
   label: string;
   short: string;
+  /**
+   * Whether this product is actually built yet.
+   *
+   * Disabled products stay on screen rather than being deleted: the shape of
+   * what is coming is worth showing, and a chip that greys out reads as a
+   * roadmap where a missing chip reads as an oversight.
+   */
+  enabled: boolean;
+  /** Home loans are floating by default in India; most other retail lending is fixed. */
+  defaultRateStructure: RateStructure;
   /** Rate type we assume before the user says otherwise. */
   defaultRateType: RateType;
   /**
@@ -28,6 +38,8 @@ export const LOAN_TYPES: Record<LoanTypeId, LoanTypeConfig> = {
     id: "home",
     label: "Home loan",
     short: "Home",
+    enabled: true,
+    defaultRateStructure: "floating",
     defaultRateType: "reducing",
     rateTypeLocked: true,
     typicalTenureYears: 20,
@@ -44,6 +56,8 @@ export const LOAN_TYPES: Record<LoanTypeId, LoanTypeConfig> = {
     id: "auto",
     label: "Car / vehicle loan",
     short: "Auto",
+    enabled: false,
+    defaultRateStructure: "fixed",
     defaultRateType: "reducing",
     rateTypeLocked: false,
     flatWarning:
@@ -62,6 +76,8 @@ export const LOAN_TYPES: Record<LoanTypeId, LoanTypeConfig> = {
     id: "personal",
     label: "Personal loan",
     short: "Personal",
+    enabled: false,
+    defaultRateStructure: "fixed",
     defaultRateType: "reducing",
     rateTypeLocked: false,
     flatWarning:
@@ -80,6 +96,8 @@ export const LOAN_TYPES: Record<LoanTypeId, LoanTypeConfig> = {
     id: "gold",
     label: "Gold loan",
     short: "Gold",
+    enabled: false,
+    defaultRateStructure: "fixed",
     defaultRateType: "reducing",
     rateTypeLocked: false,
     flatWarning:
@@ -98,6 +116,8 @@ export const LOAN_TYPES: Record<LoanTypeId, LoanTypeConfig> = {
     id: "business",
     label: "Business loan",
     short: "Business",
+    enabled: false,
+    defaultRateStructure: "floating",
     defaultRateType: "reducing",
     rateTypeLocked: false,
     flatWarning:
@@ -116,6 +136,8 @@ export const LOAN_TYPES: Record<LoanTypeId, LoanTypeConfig> = {
     id: "education",
     label: "Education loan",
     short: "Education",
+    enabled: false,
+    defaultRateStructure: "floating",
     defaultRateType: "reducing",
     rateTypeLocked: true,
     typicalTenureYears: 10,
@@ -140,3 +162,23 @@ export const LOAN_TYPE_ORDER: LoanTypeId[] = [
 ];
 
 export const DEFAULT_GST_PCT = 18;
+
+/** The products that can actually be selected today. */
+export const ENABLED_LOAN_TYPES = LOAN_TYPE_ORDER.filter(
+  (id) => LOAN_TYPES[id].enabled,
+);
+
+export function isLoanTypeEnabled(id: LoanTypeId): boolean {
+  return LOAN_TYPES[id].enabled;
+}
+
+/**
+ * What prepaying early actually costs, which is the whole reason the fixed or
+ * floating answer is worth collecting.
+ */
+export const FORECLOSURE_NOTE: Record<RateStructure, string> = {
+  floating:
+    "RBI bars foreclosure and prepayment charges on floating-rate home loans to individual borrowers, so you can prepay any amount for free. The rate can reset, though — every figure here assumes it never does.",
+  fixed:
+    "Fixed-rate home loans are outside that protection and typically charge 2-4% of the outstanding to close early, often with a lock-in. Your EMI is certain; your exit is not free.",
+};

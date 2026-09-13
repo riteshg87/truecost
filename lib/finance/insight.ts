@@ -29,7 +29,13 @@ export interface Recommendation {
   aprGap: number;
   tooClose: boolean;
 
-  /** Points of the gap traceable to the quoted rate. */
+  /**
+   * Points of the gap traceable to the quoted rate.
+   *
+   * Signed, and negative in the case worth catching: the runner-up holds the
+   * better rate, loses on charges anyway, and its rate hands a little back.
+   * rateEffect + chargesEffect always equals aprGap.
+   */
   rateEffect: number;
   /** Points of the gap traceable to upfront charges. */
   chargesEffect: number;
@@ -131,7 +137,9 @@ export function recommend(comparison: Comparison): Recommendation | null {
   if (aprIfChargesMatched !== null) {
     chargesEffect = Math.max(0, runnerApr - aprIfChargesMatched);
   }
-  const rateEffect = Math.max(0, aprGap - chargesEffect);
+  // Defined as the residual rather than clamped, so the two always reconcile to
+  // the gap even when the rate is pulling the other way.
+  const rateEffect = aprGap - chargesEffect;
 
   let driver: GapDriver = "unclear";
   if (aprGap > 0) {

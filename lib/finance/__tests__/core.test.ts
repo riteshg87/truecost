@@ -17,6 +17,7 @@ const baseOffer = (overrides: Partial<Offer> = {}): Offer => ({
   amount: 1000000,
   ratePct: 10,
   rateType: "reducing",
+  rateStructure: "floating",
   tenureValue: 10,
   tenureUnit: "years",
   processingFee: { mode: "flat", value: 0 },

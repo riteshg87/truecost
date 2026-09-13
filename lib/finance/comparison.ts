@@ -1,11 +1,13 @@
 import { computeOffer } from "./compute";
-import { LOAN_TYPES } from "./loanTypes";
+import { FORECLOSURE_NOTE, LOAN_TYPES } from "./loanTypes";
 import type { Derived, Offer, Warning } from "./types";
 
 export interface ComparisonBasis {
   amountsDiffer: boolean;
   tenuresDiffer: boolean;
   rateTypesDiffer: boolean;
+  /** One fixed, one floating. Materially different products, not a detail. */
+  rateStructuresDiffer: boolean;
   loanTypesDiffer: boolean;
   /**
    * True when the offers are not like-for-like, so raw total interest must not
@@ -52,6 +54,7 @@ export function compareOffers(offers: Offer[]): Comparison {
     amountsDiffer: !allSame(priced.map((p) => p.offer.amount)),
     tenuresDiffer: !allSame(priced.map((p) => p.derived.tenureMonths)),
     rateTypesDiffer: !allSame(priced.map((p) => p.offer.rateType)),
+    rateStructuresDiffer: !allSame(priced.map((p) => p.offer.rateStructure)),
     loanTypesDiffer: !allSame(priced.map((p) => p.offer.loanType)),
     strict: false,
   };
@@ -123,6 +126,23 @@ export function compareOffers(offers: Offer[]): Comparison {
       code: "rate-types-differ",
       message:
         "One of these is quoted on a flat rate. It has been converted to its reducing-balance equivalent so the comparison is like-for-like.",
+    });
+  }
+
+  // --- Fixed against floating is not a pricing detail. It decides whether the
+  // borrower can leave, which no APR computed on a full schedule can show.
+  if (basis.rateStructuresDiffer) {
+    notices.push({
+      level: "caution",
+      code: "rate-structures-differ",
+      message:
+        "One of these is fixed and one is floating. The APRs below assume both run to term, so they say nothing about the difference that matters most: a floating home loan can be prepaid or closed for free, and a fixed one usually cannot.",
+    });
+  } else if (priced.length > 0 && priced[0].offer.loanType === "home") {
+    notices.push({
+      level: priced[0].offer.rateStructure === "fixed" ? "caution" : "info",
+      code: `foreclosure-${priced[0].offer.rateStructure}`,
+      message: FORECLOSURE_NOTE[priced[0].offer.rateStructure],
     });
   }
 

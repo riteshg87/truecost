@@ -285,6 +285,26 @@ export function OfferGrid() {
           )}
         </Row>
 
+        {/* Fixed or floating decides what leaving early costs, which no APR
+            computed over a full schedule can express. Collected here so the
+            prepay-versus-invest flow has it. */}
+        <Row label="Rate basis" columns={columns} hint={(c) =>
+          c.offer.rateStructure === "floating" ? "prepay free" : "exit charges"
+        }>
+          {(c) => (
+            <Segmented
+              size="sm"
+              ariaLabel={`Fixed or floating for offer ${c.index + 1}`}
+              value={c.offer.rateStructure}
+              onChange={(rateStructure) => c.set({ rateStructure })}
+              options={[
+                { value: "floating", label: "Float" },
+                { value: "fixed", label: "Fixed" },
+              ]}
+            />
+          )}
+        </Row>
+
         {anyRateTypeOpen ? (
           <Row label="Rate type" columns={columns}>
             {(c) =>
