@@ -432,13 +432,11 @@ function Results({
 
   return (
     <div className="flex flex-col gap-4">
-      <Verdict rec={rec} input={input} />
-
       {/* Four scenarios, all measured to the same date. */}
       <div>
         <h2 className="mb-1.5 px-1 text-[12.5px] font-medium text-ink-2">
-          Four ways this plays out, all measured to {monthsLabel(s.horizonMonths)}
-          from now
+          Four ways this plays out, all measured to{" "}
+          {monthsLabel(s.horizonMonths)} from now
         </h2>
         <div className="grid grid-cols-2 items-stretch gap-2">
           <Scenario
@@ -496,6 +494,8 @@ function Results({
           />
         </div>
       </div>
+
+      <Verdict rec={rec} input={input} />
 
       {s.fee > 0 ? (
         <Notice level="caution">
