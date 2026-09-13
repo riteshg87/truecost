@@ -20,7 +20,7 @@ export default function ResultsPage() {
   );
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-xl flex-col">
+    <div className="mx-auto flex min-h-dvh w-full max-w-xl flex-col lg:max-w-[1180px]">
       <header className="sticky top-0 z-20 border-b border-line bg-bg/85 px-5 py-3 backdrop-blur-md">
         <div className="flex items-center justify-between gap-3">
           <Link
@@ -34,7 +34,7 @@ export default function ResultsPage() {
         </div>
       </header>
 
-      <main className="flex flex-1 flex-col gap-4 px-5 pb-14 pt-5">
+      <main className="flex flex-1 flex-col gap-4 px-5 pb-14 pt-5 lg:block">
         {!hydrated ? (
           <div className="h-64 animate-pulse rounded-2xl border border-line bg-surface-2" />
         ) : !comparison ? (
@@ -52,30 +52,38 @@ export default function ResultsPage() {
             </Link>
           </div>
         ) : (
-          <>
-            <Verdict comparison={comparison} />
+          /* Two tracks on a wide screen, matching the surplus flow: the working
+             on the left, the answer pinned on the right. Source order keeps the
+             verdict first on a phone, where there is no second column to pin it
+             to and burying it under a table would help nobody. */
+          <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,400px)] lg:gap-6">
+            <div className="flex flex-col gap-3 lg:order-2 lg:sticky lg:top-[68px]">
+              <Verdict comparison={comparison} />
 
-            {comparison.notices.map((notice) => (
-              <Notice key={notice.code} level={notice.level}>
-                {notice.message}
-              </Notice>
-            ))}
-
-            <ResultsTable comparison={comparison} />
-
-            <div className="mt-1">
-              <h2 className="mb-2 px-1 text-[13px] font-medium text-ink-2">
-                Offer by offer
-              </h2>
-              <div className="flex flex-col gap-2.5">
-                {comparison.rows.map((row, index) => (
-                  <OfferBreakdown key={row.offer.id} row={row} index={index} />
-                ))}
-              </div>
+              {comparison.notices.map((notice) => (
+                <Notice key={notice.code} level={notice.level}>
+                  {notice.message}
+                </Notice>
+              ))}
             </div>
 
-            <Methodology />
-          </>
+            <div className="flex flex-col gap-4 lg:order-1">
+              <ResultsTable comparison={comparison} />
+
+              <div>
+                <h2 className="mb-2 px-1 text-[13px] font-medium text-ink-2">
+                  Offer by offer
+                </h2>
+                <div className="flex flex-col gap-2.5">
+                  {comparison.rows.map((row, index) => (
+                    <OfferBreakdown key={row.offer.id} row={row} index={index} />
+                  ))}
+                </div>
+              </div>
+
+              <Methodology />
+            </div>
+          </div>
         )}
       </main>
     </div>

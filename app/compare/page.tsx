@@ -17,7 +17,7 @@ export default function ComparePage() {
   const config = LOAN_TYPES[loanType];
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-xl flex-col">
+    <div className="mx-auto flex min-h-dvh w-full max-w-xl flex-col lg:max-w-3xl">
       {/* Header ------------------------------------------------------------ */}
       <header className="sticky top-0 z-20 border-b border-line bg-bg/85 px-5 py-3 backdrop-blur-md">
         <div className="flex items-center justify-between gap-3">
@@ -113,7 +113,7 @@ export default function ComparePage() {
 
       {/* CTA ---------------------------------------------------------------- */}
       <div className="fixed inset-x-0 bottom-0 z-20 border-t border-line bg-bg/90 backdrop-blur-md">
-        <div className="mx-auto w-full max-w-xl px-5 pb-[max(1rem,env(safe-area-inset-bottom))] pt-3">
+        <div className="mx-auto w-full max-w-xl px-5 pb-[max(1rem,env(safe-area-inset-bottom))] pt-3 lg:max-w-3xl">
           <button
             type="button"
             disabled={!ready}
