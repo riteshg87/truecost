@@ -61,7 +61,7 @@ export default function LoanSetupPage() {
     <Screen back={{ href: "/loan", label: "Loan health" }} title="Your loan">
       <PageHead
         title="Your loan"
-        sub="Set this once. It stays on this device and greets you next time with a verdict rather than a blank form."
+        sub="Set this once. It is saved to your account, so the next phone greets you with a verdict rather than a blank form."
       />
 
       <div className="grid gap-3.5 sm:grid-cols-2">
@@ -230,9 +230,8 @@ export default function LoanSetupPage() {
       </button>
 
       <p className="mt-3 text-[11.5px] leading-relaxed text-ink-3">
-        Stored in this browser only. Clearing your browser data removes it, and
-        there is no copy anywhere else — that is the trade for never sending your
-        loan to a server.
+        Stored on this device and against your account. Deleting it below removes
+        both copies — there is no third one, and we keep nothing after it.
       </p>
 
       {loan ? (

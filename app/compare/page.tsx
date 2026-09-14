@@ -23,7 +23,7 @@ export default function ComparePage() {
       <header className="sticky top-0 z-20 border-b border-line bg-bg/85 px-5 py-3 backdrop-blur-md">
         <div className="flex items-center justify-between gap-3">
           <Link
-            href="/"
+            href="/home"
             className="-ml-1 rounded-lg px-1 py-1 text-[14px] font-medium text-ink-3 transition hover:text-ink"
           >
             ← Back

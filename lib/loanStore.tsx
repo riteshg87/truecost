@@ -10,6 +10,8 @@ import {
   type ReactNode,
 } from "react";
 import type { LoanRecord, TransferQuote } from "./health/types";
+import { useAuth } from "./auth/provider";
+import { deleteLoan, newer, pullLoan, pushLoan, stamp, worthSyncing, type SyncedLoan } from "./sync/loanSync";
 
 /**
  * The loan record, held on the device.
@@ -19,8 +21,10 @@ import type { LoanRecord, TransferQuote } from "./health/types";
  * on a verdict rather than an empty form, and the reason the prepay screen
  * already knows the balance, rate and term.
  *
- * Deliberately localStorage and nothing else. The moment this needs a server to
- * be useful, the promise on the front page stops being true.
+ * Local-first, and for a member also synced. The device copy is what every
+ * screen reads, so the app works offline and never renders behind a request;
+ * the server copy exists so a new phone is not a blank form. A guest keeps the
+ * device copy only, and nothing about them is stored anywhere else.
  */
 
 const STORAGE_KEY = "truecost.loan.v1";
@@ -104,6 +108,8 @@ function parseStored(raw: string | null): LoanState | null {
 export function LoanProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<LoanState>(initialState);
   const [hydrated, setHydrated] = useState(false);
+  const [updatedAt, setUpdatedAt] = useState<string | null>(null);
+  const { viewer, account } = useAuth();
 
   // Read after mount so the server and first client render always agree.
   useEffect(() => {
@@ -123,10 +129,75 @@ export function LoanProvider({ children }: { children: ReactNode }) {
     }
   }, [state, hydrated]);
 
-  const saveLoan = useCallback((loan: LoanRecord) => {
-    // Any edit to the loan invalidates a previous "my statement is fine".
-    setState((prev) => ({ ...prev, loan, rateResolvedAt: null }));
-  }, []);
+  /* --- Sync ---------------------------------------------------------------
+     Local first: the device copy is what the screens read, so nothing renders
+     behind a network call. The server copy is reconciled once, on sign-in, and
+     pushed after edits. */
+  useEffect(() => {
+    if (!hydrated || viewer !== "member" || !account) return;
+    let alive = true;
+
+    const local: SyncedLoan | null =
+      state.loan && updatedAt
+        ? {
+            loan: state.loan,
+            quote: state.quote,
+            surplus: state.surplus,
+            bufferMonths: state.bufferMonths,
+            rateResolvedAt: state.rateResolvedAt,
+            updatedAt,
+          }
+        : null;
+
+    void pullLoan(account.id).then((out) => {
+      if (!alive) return;
+      const remote = out.status === "pulled" ? out.payload : null;
+      const winner = newer(local, remote);
+
+      if (winner === "remote" && remote) {
+        setState({
+          loan: remote.loan,
+          quote: remote.quote,
+          surplus: remote.surplus,
+          bufferMonths: remote.bufferMonths,
+          rateResolvedAt: remote.rateResolvedAt,
+        });
+        setUpdatedAt(remote.updatedAt);
+      } else if (winner === "local" && worthSyncing(local)) {
+        void pushLoan(account.id, local as SyncedLoan);
+      }
+    });
+
+    return () => {
+      alive = false;
+    };
+    // Reconcile on sign-in, not on every keystroke that touches the record.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hydrated, viewer, account?.id]);
+
+  const saveLoan = useCallback(
+    (loan: LoanRecord) => {
+      // Any edit to the loan invalidates a previous "my statement is fine".
+      setState((prev) => {
+        const next = { ...prev, loan, rateResolvedAt: null };
+        if (viewer === "member" && account) {
+          const payload = stamp({
+            loan: next.loan as LoanRecord,
+            quote: next.quote,
+            surplus: next.surplus,
+            bufferMonths: next.bufferMonths,
+            rateResolvedAt: next.rateResolvedAt,
+          });
+          setUpdatedAt(payload.updatedAt);
+          if (worthSyncing(payload)) void pushLoan(account.id, payload);
+        } else {
+          setUpdatedAt(new Date().toISOString());
+        }
+        return next;
+      });
+    },
+    [viewer, account],
+  );
 
   const setQuote = useCallback((patch: Partial<TransferQuote>) => {
     setState((prev) => ({ ...prev, quote: { ...prev.quote, ...patch } }));
@@ -147,12 +218,16 @@ export function LoanProvider({ children }: { children: ReactNode }) {
 
   const clearAll = useCallback(() => {
     setState(initialState());
+    setUpdatedAt(null);
     try {
       window.localStorage.removeItem(STORAGE_KEY);
     } catch {
       // Nothing to do; the in-memory reset has already happened.
     }
-  }, []);
+    // Deleting locally while the server copy survives would resurrect the loan
+    // on the next sign-in, which is not what "delete" means to anyone.
+    if (viewer === "member" && account) void deleteLoan(account.id);
+  }, [viewer, account]);
 
   const value = useMemo<LoanContextValue>(
     () => ({

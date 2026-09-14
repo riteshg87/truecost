@@ -54,7 +54,7 @@ export default function LoanHealthPage() {
   const paidPct = loan.original > 0 ? (paid / loan.original) * 100 : 0;
 
   return (
-    <Screen title="Loan health" eyebrow="On device">
+    <Screen title="Loan health" eyebrow="Synced">
       {/* The loan itself, so every figure below has its source in view. */}
       <section className="mb-4 rounded-2xl border border-line bg-surface px-4 py-3.5 shadow-[var(--shadow-card)]">
         <div className="flex items-center justify-between gap-3">
@@ -173,8 +173,9 @@ export default function LoanHealthPage() {
       </div>
 
       <p className="mt-5 text-[11.5px] leading-relaxed text-ink-3">
-        Held in this browser and nowhere else — no account, no lender connection,
-        nothing sent anywhere.{" "}
+        Kept on this device and against your account, so it survives a new phone.
+        Balance, rate and term only — no lender connection, no statements, nothing
+        we could read about who you bank with.{" "}
         <Link href="/loan/setup" className="text-accent hover:underline">
           Edit or clear it
         </Link>

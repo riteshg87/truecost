@@ -109,7 +109,7 @@ export default function PrepayPage() {
       <header className="sticky top-0 z-20 border-b border-line bg-bg/85 px-5 py-3 backdrop-blur-md">
         <div className="flex items-center justify-between gap-3">
           <Link
-            href={loan ? "/loan" : "/"}
+            href={loan ? "/loan" : "/home"}
             className="-ml-1 rounded-lg px-1 py-1 text-[14px] font-medium text-ink-3 transition hover:text-ink"
           >
             ← {loan ? "Loan health" : "Back"}
@@ -425,7 +425,7 @@ export default function PrepayPage() {
                 </p>
                 <p className="mx-auto mt-1.5 max-w-xs text-[13px] leading-relaxed text-ink-3">
                   A balance, a rate, a remaining term and the surplus you are
-                  thinking of deploying. Nothing leaves this device.
+                  thinking of deploying. Worked out on this device.
                 </p>
               </div>
             )}

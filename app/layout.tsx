@@ -4,6 +4,8 @@ import { ServiceWorker } from "@/components/ServiceWorker";
 import { CompareProvider } from "@/lib/store";
 import { LoanProvider } from "@/lib/loanStore";
 import { THEME_INIT_SCRIPT } from "@/lib/theme";
+import { AuthProvider } from "@/lib/auth/provider";
+import { RouteGuard } from "@/components/RouteGuard";
 import "./globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -43,9 +45,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
       </head>
       <body className="min-h-full">
-        <CompareProvider>
-          <LoanProvider>{children}</LoanProvider>
-        </CompareProvider>
+        <AuthProvider>
+          <CompareProvider>
+            <LoanProvider>
+              <RouteGuard>{children}</RouteGuard>
+            </LoanProvider>
+          </CompareProvider>
+        </AuthProvider>
         <ServiceWorker />
       </body>
     </html>
