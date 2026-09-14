@@ -6,6 +6,7 @@ import { OfferGrid } from "@/components/OfferGrid";
 import { LOAN_TYPES, LOAN_TYPE_ORDER } from "@/lib/finance/loanTypes";
 import { allOffersReady, errorsFor } from "@/lib/finance/validate";
 import { useCompare } from "@/lib/store";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function ComparePage() {
   const router = useRouter();
@@ -30,13 +31,16 @@ export default function ComparePage() {
           <h1 className="text-[15px] font-semibold tracking-tight text-ink">
             True cost comparison
           </h1>
-          <button
-            type="button"
-            onClick={reset}
-            className="-mr-1 rounded-lg px-1 py-1 text-[14px] font-medium text-ink-3 transition hover:text-ink"
-          >
-            Reset
-          </button>
+          <div className="-mr-1 flex items-center gap-1">
+            <button
+              type="button"
+              onClick={reset}
+              className="rounded-lg px-1 py-1 text-[14px] font-medium text-ink-3 transition hover:text-ink"
+            >
+              Reset
+            </button>
+            <ThemeToggle />
+          </div>
         </div>
       </header>
 

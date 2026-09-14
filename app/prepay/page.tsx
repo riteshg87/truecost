@@ -10,6 +10,7 @@ import { ASSET_PRESETS, SLAB_OPTIONS, deductionsAvailable } from "@/lib/prepay/t
 import { MIN_BUFFER_MONTHS, recommendPrepay } from "@/lib/prepay/recommend";
 import type { AssetClass, PrepayInput } from "@/lib/prepay/types";
 import { useLoan } from "@/lib/loanStore";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const STORAGE_KEY = "truecost.prepay.v1";
 
@@ -116,13 +117,16 @@ export default function PrepayPage() {
           <h1 className="text-[15px] font-semibold tracking-tight text-ink">
             Prepay or invest
           </h1>
-          <button
-            type="button"
-            onClick={() => setInput(blank())}
-            className="-mr-1 rounded-lg px-1 py-1 text-[14px] font-medium text-ink-3 transition hover:text-ink"
-          >
-            Reset
-          </button>
+          <div className="-mr-1 flex items-center gap-1">
+            <button
+              type="button"
+              onClick={() => setInput(blank())}
+              className="rounded-lg px-1 py-1 text-[14px] font-medium text-ink-3 transition hover:text-ink"
+            >
+              Reset
+            </button>
+            <ThemeToggle />
+          </div>
         </div>
       </header>
 

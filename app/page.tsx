@@ -1,12 +1,16 @@
 import Link from "next/link";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function Home() {
   return (
     <main className="mx-auto flex min-h-dvh w-full max-w-xl flex-col px-5 pb-12 pt-14">
       <header className="mb-10">
-        <p className="text-[13px] font-semibold uppercase tracking-[0.14em] text-accent">
-          TrueCost
-        </p>
+        <div className="flex items-start justify-between gap-4">
+          <p className="text-[13px] font-semibold uppercase tracking-[0.14em] text-accent">
+            TrueCost
+          </p>
+          <ThemeToggle className="-mr-1.5 -mt-1" />
+        </div>
         <h1 className="mt-2 text-[30px] font-semibold leading-[1.15] tracking-tight text-ink">
           Know what a financial product actually costs you.
         </h1>

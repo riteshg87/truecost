@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ServiceWorker } from "@/components/ServiceWorker";
 import { CompareProvider } from "@/lib/store";
 import { LoanProvider } from "@/lib/loanStore";
+import { THEME_INIT_SCRIPT } from "@/lib/theme";
 import "./globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -23,6 +24,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   viewportFit: "cover",
   themeColor: [
+    // Unmediated first, so an explicit choice has one meta to rewrite.
+    { color: "#f7f7f4" },
     { media: "(prefers-color-scheme: light)", color: "#f7f7f4" },
     { media: "(prefers-color-scheme: dark)", color: "#0d0f12" },
   ],
@@ -34,6 +37,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        {/* Runs before first paint. An effect would run after the browser has
+            already painted, which is the flash this exists to avoid. */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+      </head>
       <body className="min-h-full">
         <CompareProvider>
           <LoanProvider>{children}</LoanProvider>

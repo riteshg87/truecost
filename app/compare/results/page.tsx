@@ -10,6 +10,7 @@ import { formatCompactINR, formatINR, formatPct } from "@/lib/finance/format";
 import { recommend } from "@/lib/finance/insight";
 import { allOffersReady } from "@/lib/finance/validate";
 import { useCompare } from "@/lib/store";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function ResultsPage() {
   const { offers, hydrated } = useCompare();
@@ -30,7 +31,7 @@ export default function ResultsPage() {
             ← Edit offers
           </Link>
           <h1 className="text-[15px] font-semibold tracking-tight text-ink">Results</h1>
-          <span className="w-[70px]" />
+          <div className="flex w-[70px] justify-end"><ThemeToggle /></div>
         </div>
       </header>
 

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 /**
  * Shared furniture for the loan health screens.
@@ -34,7 +35,10 @@ export function Screen({
             ← {back?.label ?? "Home"}
           </Link>
           <h1 className="text-[15px] font-semibold tracking-tight text-ink">{title}</h1>
-          <span className="w-[64px] text-right text-[12px] text-ink-3">{eyebrow}</span>
+          <div className="flex items-center justify-end gap-1">
+            {eyebrow ? <span className="hidden text-[12px] text-ink-3 sm:inline">{eyebrow}</span> : null}
+            <ThemeToggle />
+          </div>
         </div>
       </header>
       <main className="flex-1 px-5 pb-16 pt-4">{children}</main>

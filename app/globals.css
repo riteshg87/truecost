@@ -60,6 +60,41 @@
   }
 }
 
+/*
+ * An explicit dark choice, for someone on a light OS who wants the dark app.
+ *
+ * The declarations are the same set the media query above carries, repeated
+ * because a media query and an attribute selector cannot share one rule in
+ * plain CSS. Change one and you must change the other — there is no third
+ * place to put them.
+ */
+:root[data-theme="dark"] {
+  --bg: #0d0f12;
+  --surface: #16191e;
+  --surface-2: #1d2128;
+  --surface-inset: #23272f;
+  --ink: #eceef1;
+  --ink-2: #a5adb8;
+  --ink-3: #79828e;
+  --line: #262b33;
+  --line-strong: #363d47;
+
+  --accent: #3ec5b3;
+  --accent-ink: #06211e;
+  --accent-soft: #11312d;
+  --accent-line: #1f5952;
+
+  --warn: #e0a355;
+  --warn-soft: #30240f;
+  --warn-line: #5c4419;
+
+  --danger: #ef8a96;
+  --danger-soft: #341a1f;
+
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px -12px rgba(0, 0, 0, 0.6);
+  --shadow-lift: 0 2px 6px rgba(0, 0, 0, 0.45), 0 18px 40px -18px rgba(0, 0, 0, 0.8);
+}
+
 @theme inline {
   --color-bg: var(--bg);
   --color-surface: var(--surface);
@@ -82,6 +117,12 @@
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
+
+/* Native UI — scrollbars, date pickers, form controls — has to follow the
+   choice too, or it stays on the OS default and looks pasted in. */
+html { color-scheme: light dark; }
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] { color-scheme: dark; }
 
 html {
   background: var(--bg);
