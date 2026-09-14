@@ -30,26 +30,26 @@ export default function Home() {
         />
 
         <Link
-          href="/prepay"
+          href="/loan"
           className="group rounded-2xl border border-line bg-surface px-5 py-5 shadow-[var(--shadow-card)] transition hover:border-accent-line hover:shadow-[var(--shadow-lift)]"
         >
           <p className="text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-3">
             Flow 2
           </p>
           <h2 className="mt-2 flex items-center gap-2 text-[19px] font-semibold tracking-tight text-ink">
-            Prepay or invest
+            Loan health monitor
             <span className="text-accent transition group-hover:translate-x-0.5">→</span>
           </h2>
           <p className="mt-1.5 text-[14px] leading-relaxed text-ink-2">
-            You have a lump sum and a home loan. Put it into the loan, or into the
-            market? The answer turns on post-tax numbers on both sides, which is
-            not what the headline rate and the expected return tell you.
+            Keep the loan you already have on file. We re-read it against the published
+            repo rate every time you return — so a reset your lender quietly skipped
+            has somewhere to show up, and the prepay maths is never stale.
           </p>
           <ul className="mt-3.5 flex flex-col gap-1.5">
             {[
-              "Four scenarios measured to the same date",
-              "Post-tax loan cost against post-tax return",
-              "Checks your emergency buffer before it recommends anything",
+              "Catches a rate the benchmark has left behind",
+              "Prepay or invest, post-tax on both sides",
+              "Prices a balance transfer — no referrals, no commission",
             ].map((point) => (
               <li
                 key={point}

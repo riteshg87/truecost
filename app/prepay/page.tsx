@@ -9,6 +9,7 @@ import { LOAN_TYPES } from "@/lib/finance/loanTypes";
 import { ASSET_PRESETS, SLAB_OPTIONS, deductionsAvailable } from "@/lib/prepay/tax";
 import { MIN_BUFFER_MONTHS, recommendPrepay } from "@/lib/prepay/recommend";
 import type { AssetClass, PrepayInput } from "@/lib/prepay/types";
+import { useLoan } from "@/lib/loanStore";
 
 const STORAGE_KEY = "truecost.prepay.v1";
 
@@ -47,16 +48,37 @@ function ready(input: PrepayInput): boolean {
 export default function PrepayPage() {
   const [input, setInput] = useState<PrepayInput>(blank);
   const [hydrated, setHydrated] = useState(false);
+  const { loan, surplus, bufferMonths, hydrated: loanReady } = useLoan();
 
   useEffect(() => {
+    if (!loanReady) return;
+    let stored: PrepayInput | null = null;
     try {
       const raw = window.localStorage.getItem(STORAGE_KEY);
-      if (raw) setInput({ ...blank(), ...(JSON.parse(raw) as PrepayInput) });
+      if (raw) stored = { ...blank(), ...(JSON.parse(raw) as PrepayInput) };
     } catch {
       // A stale or unreadable blob is not worth a white screen.
     }
+
+    // The loan record is the source of truth for the loan itself. Someone who
+    // has already told us their balance and rate once should not be asked for
+    // it again on the way to a decision about it.
+    if (loan && loan.outstanding > 0) {
+      setInput({
+        ...(stored ?? blank()),
+        outstanding: loan.outstanding,
+        ratePct: loan.ratePct,
+        rateStructure: loan.basis === "fixed" ? "fixed" : "floating",
+        remainingMonths: loan.monthsLeft,
+        surplus: stored?.surplus || surplus,
+        liquidityMonthsAfter:
+          stored?.liquidityMonthsAfter ?? (bufferMonths > 0 ? bufferMonths : null),
+      });
+    } else if (stored) {
+      setInput(stored);
+    }
     setHydrated(true);
-  }, []);
+  }, [loanReady, loan, surplus, bufferMonths]);
 
   useEffect(() => {
     if (!hydrated) return;
@@ -86,10 +108,10 @@ export default function PrepayPage() {
       <header className="sticky top-0 z-20 border-b border-line bg-bg/85 px-5 py-3 backdrop-blur-md">
         <div className="flex items-center justify-between gap-3">
           <Link
-            href="/"
+            href={loan ? "/loan" : "/"}
             className="-ml-1 rounded-lg px-1 py-1 text-[14px] font-medium text-ink-3 transition hover:text-ink"
           >
-            ← Back
+            ← {loan ? "Loan health" : "Back"}
           </Link>
           <h1 className="text-[15px] font-semibold tracking-tight text-ink">
             Prepay or invest

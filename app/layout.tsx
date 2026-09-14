@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ServiceWorker } from "@/components/ServiceWorker";
 import { CompareProvider } from "@/lib/store";
+import { LoanProvider } from "@/lib/loanStore";
 import "./globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -34,7 +35,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full">
-        <CompareProvider>{children}</CompareProvider>
+        <CompareProvider>
+          <LoanProvider>{children}</LoanProvider>
+        </CompareProvider>
         <ServiceWorker />
       </body>
     </html>
