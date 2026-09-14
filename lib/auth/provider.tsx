@@ -11,7 +11,7 @@ import {
 } from "react";
 import { authConfigured, readableAuthError, supabase } from "./client";
 import type { ParsedIdentifier } from "./identifier";
-import type { Viewer } from "./access";
+import type { Gating, Viewer } from "./access";
 
 /**
  * Session state for the whole app.
@@ -36,6 +36,8 @@ interface AuthValue {
   ready: boolean;
   /** False when no provider keys are configured — the UI says so rather than failing. */
   configured: boolean;
+  /** Sign-in requirements only bite once there is somewhere to sign in to. */
+  gating: Gating;
   sendCode: (id: ParsedIdentifier) => Promise<{ ok: boolean; error?: string }>;
   verifyCode: (
     id: ParsedIdentifier,
@@ -157,6 +159,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       account,
       ready,
       configured,
+      gating: configured ? "enforced" : "open",
       sendCode,
       verifyCode,
       continueAsGuest,

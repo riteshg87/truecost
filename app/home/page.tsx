@@ -16,7 +16,7 @@ import { useAuth } from "@/lib/auth/provider";
  */
 export default function HomePage() {
   const router = useRouter();
-  const { viewer, ready, account } = useAuth();
+  const { viewer, ready, account, gating } = useAuth();
 
   useEffect(() => {
     if (ready && viewer === "anonymous") router.replace("/");
@@ -35,6 +35,7 @@ export default function HomePage() {
 
   const who =
     viewer === "member" ? account?.phone ?? account?.email ?? "Signed in" : "Guest";
+  const optionalSignIn = gating === "open";
 
   return (
     <Screen>
@@ -57,8 +58,8 @@ export default function HomePage() {
 
         <div className="mt-6 grid gap-3 lg:grid-cols-3">
           {FEATURES.map((feature) => {
-            const open = canOpen(viewer, feature);
-            const reason = lockReason(viewer, feature);
+            const open = canOpen(viewer, feature, gating);
+            const reason = lockReason(viewer, feature, gating);
             const href = open
               ? feature.href
               : feature.available
@@ -114,7 +115,7 @@ export default function HomePage() {
           })}
         </div>
 
-        {viewer === "guest" ? (
+        {viewer === "guest" && !optionalSignIn ? (
           <div className="mt-6 rounded-2xl border border-accent-line bg-accent-soft px-5 py-4">
             <p className="text-[13.5px] font-semibold text-ink">Saving a loan needs an account</p>
             <p className="mt-1 text-[13px] leading-relaxed text-ink-2">
@@ -128,6 +129,13 @@ export default function HomePage() {
               Create one <span aria-hidden>→</span>
             </Link>
           </div>
+        ) : null}
+
+        {optionalSignIn ? (
+          <p className="mt-6 text-[11.5px] leading-relaxed text-ink-3">
+            Everything is open while this is in testing. Your loan is saved on this
+            device — accounts, and carrying it to a new phone, come later.
+          </p>
         ) : null}
       </Page>
     </Screen>

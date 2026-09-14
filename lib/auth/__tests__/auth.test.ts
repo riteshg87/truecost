@@ -43,6 +43,39 @@ describe("feature access", () => {
   });
 });
 
+describe("gating is off until there is somewhere to sign in", () => {
+  it("opens every built feature to a guest while sign-in is unconfigured", () => {
+    FEATURES.filter((f) => f.available).forEach((f) => {
+      expect(canOpen("guest", f, "open"), f.id).toBe(true);
+      expect(lockReason("guest", f, "open")).toBeNull();
+    });
+  });
+
+  it("still refuses a feature that does not exist yet", () => {
+    const insurance = featureById("insurance")!;
+    expect(canOpen("member", insurance, "open")).toBe(false);
+    expect(lockReason("member", insurance, "open")).toBe("Coming soon");
+  });
+
+  it("still keeps a stranger at the door — guest is a choice, not a default", () => {
+    FEATURES.forEach((f) => expect(canOpen("anonymous", f, "open")).toBe(false));
+    expect(canVisit("anonymous", "/loan", "open")).toBe(false);
+    expect(redirectFor("anonymous", "/loan", "open")).toBe("/");
+  });
+
+  it("lets a guest reach the loan screens it would otherwise bounce them from", () => {
+    ["/loan", "/loan/setup", "/prepay"].forEach((p) => {
+      expect(canVisit("guest", p, "open"), p).toBe(true);
+      expect(redirectFor("guest", p, "open")).toBeNull();
+    });
+  });
+
+  it("puts the locks back the moment gating is enforced", () => {
+    expect(canVisit("guest", "/loan", "enforced")).toBe(false);
+    expect(canOpen("guest", featureById("loan")!, "enforced")).toBe(false);
+  });
+});
+
 describe("route guards", () => {
   it("lets a guest into the comparison and its results", () => {
     expect(canVisit("guest", "/compare")).toBe(true);

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { AppBar, Page } from "@/components/mobile";
 
 /**
  * Shared furniture for the loan health screens.
@@ -25,23 +25,17 @@ export function Screen({
   children: ReactNode;
 }) {
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-xl flex-col lg:max-w-[1080px]">
-      <header className="sticky top-0 z-20 border-b border-line bg-bg/85 px-5 py-3 backdrop-blur-md">
-        <div className="flex items-center justify-between gap-3">
-          <Link
-            href={back?.href ?? "/home"}
-            className="-ml-1 rounded-lg px-1 py-1 text-[14px] font-medium text-ink-3 transition hover:text-ink"
-          >
-            ← {back?.label ?? "Home"}
-          </Link>
-          <h1 className="text-[15px] font-semibold tracking-tight text-ink">{title}</h1>
-          <div className="flex items-center justify-end gap-1">
-            {eyebrow ? <span className="hidden text-[12px] text-ink-3 sm:inline">{eyebrow}</span> : null}
-            <ThemeToggle />
-          </div>
-        </div>
-      </header>
-      <main className="flex-1 px-5 pb-16 pt-4">{children}</main>
+    <div className="flex min-h-dvh flex-col">
+      <AppBar
+        back={{ href: back?.href ?? "/home", label: back?.label ?? "Back" }}
+        title={title}
+        action={
+          eyebrow ? (
+            <span className="hidden text-[12px] text-ink-3 sm:inline">{eyebrow}</span>
+          ) : undefined
+        }
+      />
+      <Page wide>{children}</Page>
     </div>
   );
 }

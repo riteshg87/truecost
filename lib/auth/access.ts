@@ -57,19 +57,38 @@ export function featureById(id: FeatureId): FeatureDef | undefined {
   return FEATURES.find((f) => f.id === id);
 }
 
+/**
+ * Whether sign-in requirements are being enforced at all.
+ *
+ * They are not, until there is somewhere to sign in to. Locking a feature
+ * behind a door that has not been built yet is a dead end: the person taps
+ * "Sign in to use", reaches a screen that says sign-in is not connected, and
+ * has learned only that the app is broken. So the gate turns itself on when
+ * the provider is configured, and until then everything that is built is open.
+ */
+export type Gating = "enforced" | "open";
+
 /** Does this viewer clear the bar a feature sets? */
-export function canOpen(viewer: Viewer, feature: FeatureDef): boolean {
+export function canOpen(
+  viewer: Viewer,
+  feature: FeatureDef,
+  gating: Gating = "enforced",
+): boolean {
   if (!feature.available) return false;
-  if (feature.requires === "anyone") return viewer !== "anonymous";
-  if (feature.requires === "guest") return viewer === "guest" || viewer === "member";
+  if (viewer === "anonymous") return false;
+  if (gating === "open") return true;
+  if (feature.requires === "anyone" || feature.requires === "guest") return true;
   return viewer === "member";
 }
 
 /** Why a feature is shut, in the words shown on the card. */
-export function lockReason(viewer: Viewer, feature: FeatureDef): string | null {
+export function lockReason(
+  viewer: Viewer,
+  feature: FeatureDef,
+  gating: Gating = "enforced",
+): string | null {
   if (!feature.available) return "Coming soon";
-  if (canOpen(viewer, feature)) return null;
-  if (feature.requires === "member") return "Sign in to use";
+  if (canOpen(viewer, feature, gating)) return null;
   return "Sign in to use";
 }
 
@@ -82,17 +101,25 @@ const GUEST_ROUTES = ["/home", "/compare", "/account"];
  * Prefix matching, so /compare/results follows /compare without being listed
  * twice and drifting out of step with it.
  */
-export function canVisit(viewer: Viewer, pathname: string): boolean {
-  if (viewer === "member") return true;
+export function canVisit(
+  viewer: Viewer,
+  pathname: string,
+  gating: Gating = "enforced",
+): boolean {
   if (viewer === "anonymous") return false;
+  if (viewer === "member" || gating === "open") return true;
   return GUEST_ROUTES.some(
     (route) => pathname === route || pathname.startsWith(`${route}/`),
   );
 }
 
 /** Where to send someone who cannot be where they are. */
-export function redirectFor(viewer: Viewer, pathname: string): string | null {
-  if (canVisit(viewer, pathname)) return null;
+export function redirectFor(
+  viewer: Viewer,
+  pathname: string,
+  gating: Gating = "enforced",
+): string | null {
+  if (canVisit(viewer, pathname, gating)) return null;
   if (viewer === "anonymous") return "/";
   return `/signin?next=${encodeURIComponent(pathname)}`;
 }

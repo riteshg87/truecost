@@ -18,10 +18,10 @@ const OPEN_PATHS = ["/", "/signin", "/verify"];
 export function RouteGuard({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const { viewer, ready } = useAuth();
+  const { viewer, ready, gating } = useAuth();
 
   const open = OPEN_PATHS.includes(pathname);
-  const target = ready && !open ? redirectFor(viewer, pathname) : null;
+  const target = ready && !open ? redirectFor(viewer, pathname, gating) : null;
 
   useEffect(() => {
     if (target) router.replace(target);
