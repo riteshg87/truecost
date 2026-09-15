@@ -12,6 +12,7 @@ import {
 import { authConfigured, readableAuthError, supabase } from "./client";
 import type { ParsedIdentifier } from "./identifier";
 import type { Gating, Viewer } from "./access";
+import * as demo from "./demo";
 
 /**
  * Session state for the whole app.
@@ -36,8 +37,12 @@ interface AuthValue {
   ready: boolean;
   /** False when no provider keys are configured — the UI says so rather than failing. */
   configured: boolean;
-  /** Sign-in requirements only bite once there is somewhere to sign in to. */
+  /** Always enforced now: there is always a way in, real or stand-in. */
   gating: Gating;
+  /** True while the stand-in is doing the work, so screens can say so. */
+  demoMode: boolean;
+  /** The code the stand-in invented, for the screen to display. Null for real auth. */
+  peekCode: (email: string) => string | null;
   sendCode: (id: ParsedIdentifier) => Promise<{ ok: boolean; error?: string }>;
   verifyCode: (
     id: ParsedIdentifier,
@@ -66,6 +71,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const client = supabase();
     if (!client) {
+      // No provider: fall back to the on-device stand-in.
+      const session = demo.readSession();
+      if (session) setAccount({ id: session.id, email: session.email, phone: null });
       setReady(true);
       return;
     }
@@ -89,7 +97,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const sendCode = useCallback(async (id: ParsedIdentifier) => {
     const client = supabase();
-    if (!client) return { ok: false, error: "Sign-in is not configured yet." };
+    if (!client) {
+      demo.issueCode(id.value);
+      return { ok: true };
+    }
 
     const { error } =
       id.kind === "email"
@@ -109,7 +120,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const verifyCode = useCallback(async (id: ParsedIdentifier, code: string) => {
     const client = supabase();
-    if (!client) return { ok: false, error: "Sign-in is not configured yet." };
+    if (!client) {
+      const result = demo.verifyCode(id.value, code);
+      if (!result.ok) return { ok: false, error: result.error };
+      setAccount({ id: result.session.id, email: result.session.email, phone: null });
+      setGuest(false);
+      try {
+        window.localStorage.removeItem(GUEST_KEY);
+      } catch {
+        // Nothing to clear.
+      }
+      return { ok: true };
+    }
 
     const { data, error } = await client.auth.verifyOtp(
       id.kind === "email"
@@ -142,6 +164,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signOut = useCallback(async () => {
     const client = supabase();
     if (client) await client.auth.signOut();
+    else demo.clearSession();
     setAccount(null);
     setGuest(false);
     try {
@@ -159,7 +182,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       account,
       ready,
       configured,
-      gating: configured ? "enforced" : "open",
+      // Enforced either way now. The stand-in means there is always a door,
+      // so a locked feature is never a dead end.
+      gating: "enforced",
+      demoMode: !configured,
+      peekCode: (email: string) => (configured ? null : demo.pendingCode(email)),
       sendCode,
       verifyCode,
       continueAsGuest,

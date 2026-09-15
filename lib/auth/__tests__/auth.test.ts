@@ -108,35 +108,31 @@ describe("route guards", () => {
   });
 });
 
-describe("identifier", () => {
-  it("reads an email", () => {
+describe("identifier — email only", () => {
+  it("reads an email, trimmed and lowercased", () => {
     const r = parseIdentifier("  Ritesh@Example.COM ");
     expect(r.ok && r.id.kind).toBe("email");
     expect(r.ok && r.id.value).toBe("ritesh@example.com");
   });
 
-  it("reads a mobile number however it is typed", () => {
-    for (const input of ["9876543210", "+91 98765 43210", "09876543210", "919876543210"]) {
+  it("tells someone typing a number that mobile is not available yet", () => {
+    // A regex failure here reads as "you mistyped", which sends people back to
+    // correct a number that was never going to work.
+    for (const input of ["9876543210", "+91 98765 43210", "098-765-4321"]) {
       const r = parseIdentifier(input);
-      expect(r.ok, input).toBe(true);
-      if (r.ok) {
-        expect(r.id.kind).toBe("phone");
-        expect(r.id.value).toBe("+919876543210");
-      }
+      expect(r.ok, input).toBe(false);
+      if (!r.ok) expect(r.reason).toContain("Mobile sign-in isn't available");
     }
   });
 
-  it("refuses what cannot be an Indian mobile before spending an SMS on it", () => {
-    expect(parseIdentifier("1234567890").ok).toBe(false);
-    expect(parseIdentifier("98765").ok).toBe(false);
+  it("refuses what is not an address", () => {
     expect(parseIdentifier("").ok).toBe(false);
     expect(parseIdentifier("not@an").ok).toBe(false);
+    expect(parseIdentifier("no-at-sign.com").ok).toBe(false);
   });
 
-  it("masks the destination it shows back", () => {
-    const phone = parseIdentifier("9876543210");
+  it("masks the address it shows back", () => {
     const email = parseIdentifier("ritesh@example.com");
-    expect(phone.ok && maskedDestination(phone.id)).toBe("●●●●● 43210");
     expect(email.ok && maskedDestination(email.id)).toBe("ri●●●●@example.com");
   });
 

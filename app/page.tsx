@@ -16,7 +16,7 @@ import { useAuth } from "@/lib/auth/provider";
  */
 export default function Welcome() {
   const router = useRouter();
-  const { viewer, ready, continueAsGuest, configured } = useAuth();
+  const { viewer, ready, continueAsGuest } = useAuth();
 
   useEffect(() => {
     if (ready && viewer !== "anonymous") router.replace("/home");
@@ -61,33 +61,27 @@ export default function Welcome() {
           </div>
 
           <div className="mt-10 flex flex-col gap-2.5">
-            {/* While sign-in is optional the working path leads, and the account
-                is the quiet option. Putting a half-built door first would make
-                the app look shut. */}
+            <Link
+              href="/signin"
+              className="block w-full rounded-2xl bg-accent px-4 py-4 text-center text-[15px] font-semibold text-accent-ink transition active:scale-[0.99]"
+            >
+              Continue with email
+            </Link>
+
             <button
               type="button"
               onClick={() => {
                 continueAsGuest();
                 router.push("/home");
               }}
-              className="w-full rounded-2xl bg-accent px-4 py-4 text-[15px] font-semibold text-accent-ink transition active:scale-[0.99]"
+              className="w-full rounded-2xl border border-line px-4 py-3.5 text-[14.5px] font-medium text-ink transition hover:border-line-strong active:scale-[0.99]"
             >
-              {configured ? "Look around as a guest" : "Start"}
+              Try it as a guest
             </button>
 
-            {configured ? (
-              <Link
-                href="/signin"
-                className="block w-full rounded-2xl border border-line px-4 py-3.5 text-center text-[14.5px] font-medium text-ink transition hover:border-line-strong active:scale-[0.99]"
-              >
-                Continue with mobile or email
-              </Link>
-            ) : null}
-
             <p className="px-2 pt-1 text-center text-[11.5px] leading-relaxed text-ink-3">
-              {configured
-                ? "Guests get the comparison. Saving a loan needs an account, so it can follow you to your next phone."
-                : "No sign-up needed. Everything runs on this device."}
+              Guests get the loan comparison. Saving a loan needs an account, so
+              it is still there next time.
             </p>
           </div>
         </div>

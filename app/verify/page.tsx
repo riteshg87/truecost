@@ -18,7 +18,7 @@ const RESEND_SECONDS = 30;
 function VerifyForm() {
   const router = useRouter();
   const params = useSearchParams();
-  const { verifyCode, sendCode } = useAuth();
+  const { verifyCode, sendCode, demoMode, peekCode } = useAuth();
 
   const [code, setCode] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -28,10 +28,9 @@ function VerifyForm() {
 
   const next = safeNext(params.get("next"));
   const id = useMemo<ParsedIdentifier | null>(() => {
-    const kind = params.get("kind");
     const value = params.get("value");
-    if ((kind !== "email" && kind !== "phone") || !value) return null;
-    return { kind, value, display: value };
+    if (!value) return null;
+    return { kind: "email", value, display: value };
   }, [params]);
 
   useEffect(() => {
@@ -74,8 +73,27 @@ function VerifyForm() {
           Six digits
         </h2>
         <p className="mt-2 text-[14px] leading-relaxed text-ink-2">
-          Sent to <span className="tnum font-medium text-ink">{maskedDestination(id)}</span>
+          {demoMode ? (
+            <>For <span className="font-medium text-ink">{maskedDestination(id)}</span></>
+          ) : (
+            <>Sent to <span className="font-medium text-ink">{maskedDestination(id)}</span></>
+          )}
         </p>
+
+        {demoMode ? (
+          <div className="mt-4 rounded-xl border border-warn-line bg-warn-soft px-4 py-3">
+            <p className="text-[11.5px] font-semibold uppercase tracking-[0.1em] text-warn">
+              Demo — no email sent
+            </p>
+            <p className="tnum mt-1.5 text-[28px] font-semibold tracking-[0.25em] text-ink">
+              {peekCode(id.value) ?? "······"}
+            </p>
+            <p className="mt-1 text-[12px] leading-relaxed text-warn">
+              Generated on this device because sign-in isn&apos;t connected yet.
+              Real codes arrive by email once it is.
+            </p>
+          </div>
+        ) : null}
 
         <form
           className="mt-7 flex flex-col gap-3"

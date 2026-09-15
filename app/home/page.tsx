@@ -16,7 +16,7 @@ import { useAuth } from "@/lib/auth/provider";
  */
 export default function HomePage() {
   const router = useRouter();
-  const { viewer, ready, account, gating } = useAuth();
+  const { viewer, ready, account, gating, demoMode } = useAuth();
 
   useEffect(() => {
     if (ready && viewer === "anonymous") router.replace("/");
@@ -35,7 +35,7 @@ export default function HomePage() {
 
   const who =
     viewer === "member" ? account?.phone ?? account?.email ?? "Signed in" : "Guest";
-  const optionalSignIn = gating === "open";
+
 
   return (
     <Screen>
@@ -115,12 +115,12 @@ export default function HomePage() {
           })}
         </div>
 
-        {viewer === "guest" && !optionalSignIn ? (
+        {viewer === "guest" ? (
           <div className="mt-6 rounded-2xl border border-accent-line bg-accent-soft px-5 py-4">
             <p className="text-[13.5px] font-semibold text-ink">Saving a loan needs an account</p>
             <p className="mt-1 text-[13px] leading-relaxed text-ink-2">
-              So it is still there on your next phone, and so we can tell you when
-              your rate should have moved.
+              So it is still there next time, and so we can tell you when your rate
+              should have moved.
             </p>
             <Link
               href="/signin"
@@ -131,10 +131,10 @@ export default function HomePage() {
           </div>
         ) : null}
 
-        {optionalSignIn ? (
+        {demoMode ? (
           <p className="mt-6 text-[11.5px] leading-relaxed text-ink-3">
-            Everything is open while this is in testing. Your loan is saved on this
-            device — accounts, and carrying it to a new phone, come later.
+            Sign-in is running on a demo stand-in — the code appears on screen and
+            no email is sent. It becomes real the moment the provider is connected.
           </p>
         ) : null}
       </Page>

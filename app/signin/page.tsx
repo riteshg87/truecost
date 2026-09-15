@@ -24,7 +24,7 @@ import { parseIdentifier } from "@/lib/auth/identifier";
 function SignInForm() {
   const router = useRouter();
   const params = useSearchParams();
-  const { sendCode, configured, viewer, ready } = useAuth();
+  const { sendCode, demoMode, viewer, ready } = useAuth();
 
   const [raw, setRaw] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -52,11 +52,7 @@ function SignInForm() {
       setError(result.error ?? "Could not send the code.");
       return;
     }
-    const q = new URLSearchParams({
-      kind: parsed.id.kind,
-      value: parsed.id.value,
-      next,
-    });
+    const q = new URLSearchParams({ value: parsed.id.value, next });
     router.push(`/verify?${q.toString()}`);
   };
 
@@ -65,10 +61,10 @@ function SignInForm() {
       <AppBar back={{ href: "/" }} title="Sign in" />
       <Page>
         <h2 className="mt-4 text-[26px] font-semibold leading-tight tracking-[-0.015em] text-ink">
-          Your mobile or email
+          Your email
         </h2>
         <p className="mt-2 text-[14px] leading-relaxed text-ink-2">
-          We send a six-digit code. No password to remember.
+          A six-digit code, no password to remember.
         </p>
 
         <form
@@ -80,10 +76,11 @@ function SignInForm() {
         >
           <input
             autoFocus
+            type="email"
             inputMode="email"
-            autoComplete="username"
-            aria-label="Mobile number or email"
-            placeholder="98765 43210"
+            autoComplete="email"
+            aria-label="Email address"
+            placeholder="you@example.com"
             value={raw}
             onChange={(e) => {
               setRaw(e.target.value);
@@ -94,25 +91,26 @@ function SignInForm() {
 
           <FormError>{error}</FormError>
 
-          {!configured ? (
+          {demoMode ? (
             <div className="rounded-xl border border-warn-line bg-warn-soft px-3.5 py-3 text-[12.5px] leading-relaxed text-warn">
-              Sign-in isn&apos;t connected yet. The comparison still works —
-              <a href="/home" className="ml-1 underline">
-                carry on as a guest
-              </a>
-              .
+              <span className="font-semibold">Demo sign-in.</span> No email is sent
+              yet — the code appears on the next screen. Any address works.
             </div>
           ) : null}
 
-          <PrimaryButton type="submit" busy={busy} disabled={!configured}>
-            Send code
+          <PrimaryButton type="submit" busy={busy}>
+            {demoMode ? "Get a code" : "Send code"}
           </PrimaryButton>
         </form>
 
         <div className="mt-5">
           <Hint>
-            An account exists so your loan can follow you to a new phone. We keep
-            your balance and rate, and nothing else.
+            An account is what lets the Loan Health Monitor save your loan. The
+            comparison needs no account —{" "}
+            <a href="/home" className="underline">
+              carry on as a guest
+            </a>{" "}
+            for that.
           </Hint>
         </div>
       </Page>
