@@ -53,7 +53,7 @@ export default function HomePage() {
       <Page wide>
         <p className="text-[12.5px] text-ink-3">{who}</p>
         <h2 className="mt-1 text-[26px] font-semibold leading-tight tracking-[-0.015em] text-ink">
-          What do you need?
+          What are you looking for?
         </h2>
 
         <div className="mt-6 grid gap-3 lg:grid-cols-3">

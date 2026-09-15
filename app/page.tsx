@@ -42,7 +42,7 @@ export default function Welcome() {
 
             <ul className="mt-8 flex flex-col gap-3.5">
               {[
-                ["Compare offers", "Rank two or three lenders honestly"],
+                ["Compare loan offers", "Rank two or three lenders honestly"],
                 ["Watch your rate", "Catch a reset your bank skipped"],
                 ["Prepay or invest", "Post-tax, on both sides"],
               ].map(([k, v]) => (

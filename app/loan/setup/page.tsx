@@ -58,7 +58,7 @@ export default function LoanSetupPage() {
   };
 
   return (
-    <Screen back={{ href: "/loan", label: "Loan health" }} title="Your loan">
+    <Screen back={{ href: "/loan", label: "Loan Health Monitor" }} title="Your loan">
       <PageHead
         title="Your loan"
         sub="Set this once. It is saved to your account, so the next phone greets you with a verdict rather than a blank form."

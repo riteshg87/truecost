@@ -112,7 +112,7 @@ export default function PrepayPage() {
             href={loan ? "/loan" : "/home"}
             className="-ml-1 rounded-lg px-1 py-1 text-[14px] font-medium text-ink-3 transition hover:text-ink"
           >
-            ← {loan ? "Loan health" : "Back"}
+            ← {loan ? "Loan Health Monitor" : "Back"}
           </Link>
           <h1 className="text-[15px] font-semibold tracking-tight text-ink">
             Prepay or invest

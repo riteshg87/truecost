@@ -35,7 +35,7 @@ export default function LoanHealthPage() {
 
   if (!hydrated) {
     return (
-      <Screen title="Loan health">
+      <Screen title="Loan Health Monitor">
         <div className="h-72 animate-pulse rounded-2xl border border-line bg-surface-2" />
       </Screen>
     );
@@ -43,7 +43,7 @@ export default function LoanHealthPage() {
 
   if (!loan || !verdict || !prepay) {
     return (
-      <Screen title="Loan health">
+      <Screen title="Loan Health Monitor">
         <NoLoan />
       </Screen>
     );
@@ -54,7 +54,7 @@ export default function LoanHealthPage() {
   const paidPct = loan.original > 0 ? (paid / loan.original) * 100 : 0;
 
   return (
-    <Screen title="Loan health" eyebrow="Synced">
+    <Screen title="Loan Health Monitor" eyebrow="Synced">
       {/* The loan itself, so every figure below has its source in view. */}
       <section className="mb-4 rounded-2xl border border-line bg-surface px-4 py-3.5 shadow-[var(--shadow-card)]">
         <div className="flex items-center justify-between gap-3">

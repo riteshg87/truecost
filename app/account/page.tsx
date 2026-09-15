@@ -23,7 +23,7 @@ export default function AccountPage() {
         ]
       : [
           ["Standing", "Guest"],
-          ["Available", "Compare offers only"],
+          ["Available", "Compare Loan Offers only"],
         ];
 
   return (

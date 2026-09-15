@@ -33,21 +33,21 @@ export default function TransferPage() {
 
   if (!hydrated) {
     return (
-      <Screen back={{ href: "/loan", label: "Loan health" }} title="Transfer">
+      <Screen back={{ href: "/loan", label: "Loan Health Monitor" }} title="Transfer">
         <div className="h-64 animate-pulse rounded-2xl border border-line bg-surface-2" />
       </Screen>
     );
   }
   if (!loan) {
     return (
-      <Screen back={{ href: "/loan", label: "Loan health" }} title="Transfer">
+      <Screen back={{ href: "/loan", label: "Loan Health Monitor" }} title="Transfer">
         <NoLoan />
       </Screen>
     );
   }
 
   return (
-    <Screen back={{ href: "/loan", label: "Loan health" }} title="Transfer">
+    <Screen back={{ href: "/loan", label: "Loan Health Monitor" }} title="Transfer">
       <PageHead
         title="Is a transfer worth it?"
         sub="Enter another lender's offer. We do the arithmetic — we don't send you to anyone."

@@ -29,7 +29,7 @@ export const FEATURES: FeatureDef[] = [
   {
     id: "compare",
     href: "/compare",
-    name: "Compare offers",
+    name: "Compare Loan Offers",
     tagline: "Rank home loan offers on what they really cost",
     requires: "anyone",
     available: true,
@@ -37,7 +37,7 @@ export const FEATURES: FeatureDef[] = [
   {
     id: "loan",
     href: "/loan",
-    name: "Loan health",
+    name: "Loan Health Monitor",
     // Sign-in is what lets the record follow you, so the reason is the label.
     tagline: "Track your rate, prepay, or move lender",
     requires: "member",
@@ -46,7 +46,7 @@ export const FEATURES: FeatureDef[] = [
   {
     id: "insurance",
     href: "/insurance",
-    name: "Term cover",
+    name: "Understand Your Policy",
     tagline: "Check what you hold is enough",
     requires: "member",
     available: false,

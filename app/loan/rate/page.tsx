@@ -35,14 +35,14 @@ export default function RateResetPage() {
 
   if (!hydrated) {
     return (
-      <Screen back={{ href: "/loan", label: "Loan health" }} title="Rate check">
+      <Screen back={{ href: "/loan", label: "Loan Health Monitor" }} title="Rate check">
         <div className="h-64 animate-pulse rounded-2xl border border-line bg-surface-2" />
       </Screen>
     );
   }
   if (!loan || !verdict) {
     return (
-      <Screen back={{ href: "/loan", label: "Loan health" }} title="Rate check">
+      <Screen back={{ href: "/loan", label: "Loan Health Monitor" }} title="Rate check">
         <NoLoan />
       </Screen>
     );
@@ -51,7 +51,7 @@ export default function RateResetPage() {
   /* ---- MCLR: a conversion, not a reset ---------------------------------- */
   if (verdict.kind === "mclr") {
     return (
-      <Screen back={{ href: "/loan", label: "Loan health" }} title="Rate basis">
+      <Screen back={{ href: "/loan", label: "Loan Health Monitor" }} title="Rate basis">
         <PageHead
           title="Moving off MCLR"
           sub="A conversion inside your own bank, not a transfer to another one."
@@ -87,7 +87,7 @@ export default function RateResetPage() {
   /* ---- Fixed: nothing to reset ------------------------------------------ */
   if (verdict.kind === "fixed" || verdict.kind === "unknown") {
     return (
-      <Screen back={{ href: "/loan", label: "Loan health" }} title="Rate check">
+      <Screen back={{ href: "/loan", label: "Loan Health Monitor" }} title="Rate check">
         <PageHead
           title={verdict.kind === "fixed" ? "Fixed rate" : "Benchmark not tracked"}
           sub={
@@ -128,7 +128,7 @@ export default function RateResetPage() {
   ];
 
   return (
-    <Screen back={{ href: "/loan", label: "Loan health" }} title="Rate check">
+    <Screen back={{ href: "/loan", label: "Loan Health Monitor" }} title="Rate check">
       <PageHead
         title={stale ? "Getting your rate reset" : "Your rate, checked"}
         sub="Every figure comes from what you entered and the published repo history — nothing hidden, nothing fetched."
