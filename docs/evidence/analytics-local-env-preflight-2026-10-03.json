@@ -1,0 +1,19 @@
+{
+  "checkedAt": "2026-10-03T00:13:26.8250643Z",
+  "source": ".env.local",
+  "variableNames": [
+    "NEXT_PUBLIC_ANALYTICS_ENVIRONMENT",
+    "NEXT_PUBLIC_ANALYTICS_ENABLED",
+    "NEXT_PUBLIC_MIXPANEL_TOKEN"
+  ],
+  "valuesRead": false,
+  "processEnvironmentNamesPresent": [],
+  "networkContacted": false,
+  "status": "local-names-present-live-verification-open",
+  "open": [
+    "Confirm production project, region and dashboard owner",
+    "Run consented synthetic ingestion and reconcile dashboard counts",
+    "Verify provider retention and deletion"
+  ],
+  "externalActions": false
+}

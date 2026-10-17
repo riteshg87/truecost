@@ -1,0 +1,4 @@
+1
+00:00:00,000 --> 00:00:05,000
+On the detail page, recorded APR, fees, and warnings stay visible.
+I generate the PDF, wait for the ready state, then download it.

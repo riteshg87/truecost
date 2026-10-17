@@ -1,0 +1,674 @@
+{
+  "checkedAt": "2026-10-02T21:59:56.805Z",
+  "status": "passed",
+  "mode": "intercept",
+  "scenario": "same-browser-account-switch",
+  "navigation": {
+    "hardNavigation": true,
+    "settleMs": 0
+  },
+  "baseUrl": "http://localhost:3479",
+  "buildId": "zXmb7WujtdoPzCdjgq39W",
+  "issuer": "live-tarpon-2666.clerk.accounts.dev",
+  "convexTarget": "https://dutiful-fly-37.convex.cloud",
+  "mixpanelToken": "matched-approved-sha256",
+  "harnessSourceSha256": "180ce856ca6a11ae9aca7053c10ffcb209149e50a65edf9db40d2e72ab438181",
+  "timing": {
+    "clock": "node-date-ms",
+    "startedAt": 1790978396806,
+    "markers": [
+      {
+        "name": "account_a_accept_click",
+        "phase": "account A analytics consent",
+        "elapsedMs": 13258
+      },
+      {
+        "name": "analytics_preference_query_started",
+        "phase": "account A analytics consent",
+        "elapsedMs": 15482
+      },
+      {
+        "name": "analytics_preference_query_completed",
+        "phase": "account A analytics consent",
+        "elapsedMs": 15869,
+        "requestDurationMs": 388
+      },
+      {
+        "name": "analytics_preference_query_started",
+        "phase": "account A analytics consent",
+        "elapsedMs": 16477
+      },
+      {
+        "name": "account_a_analytics_on_observed",
+        "phase": "account A analytics consent",
+        "elapsedMs": 16603
+      },
+      {
+        "name": "account_a_hard_navigation_start",
+        "phase": "account A comparison",
+        "elapsedMs": 16603,
+        "settleMs": 0
+      },
+      {
+        "name": "analytics_preference_query_completed",
+        "phase": "account A comparison",
+        "elapsedMs": 16634,
+        "requestDurationMs": 157
+      },
+      {
+        "name": "account_a_domcontentloaded",
+        "phase": "account A comparison",
+        "elapsedMs": 16849
+      },
+      {
+        "name": "account_a_settle_complete",
+        "phase": "account A comparison",
+        "elapsedMs": 16892,
+        "settleMs": 0
+      },
+      {
+        "name": "analytics_preference_query_started",
+        "phase": "account A comparison",
+        "elapsedMs": 19215
+      },
+      {
+        "name": "analytics_preference_query_completed",
+        "phase": "account A comparison",
+        "elapsedMs": 19362,
+        "requestDurationMs": 147
+      },
+      {
+        "name": "account_a_inputs_filled",
+        "phase": "account A comparison",
+        "elapsedMs": 20167
+      },
+      {
+        "name": "account_a_click_attempt",
+        "phase": "account A comparison",
+        "elapsedMs": 20171
+      },
+      {
+        "name": "account_a_calculation_click",
+        "phase": "account A comparison",
+        "elapsedMs": 20530
+      },
+      {
+        "name": "analytics_preference_query_started",
+        "phase": "account A confirmed sign out",
+        "elapsedMs": 25186
+      },
+      {
+        "name": "analytics_preference_query_completed",
+        "phase": "account A confirmed sign out",
+        "elapsedMs": 25350,
+        "requestDurationMs": 164
+      },
+      {
+        "name": "analytics_preference_query_started",
+        "phase": "account B authentication",
+        "elapsedMs": 39619
+      },
+      {
+        "name": "analytics_preference_query_completed",
+        "phase": "account B authentication",
+        "elapsedMs": 39747,
+        "requestDurationMs": 128
+      },
+      {
+        "name": "analytics_preference_query_started",
+        "phase": "account B unknown comparison",
+        "elapsedMs": 43141
+      },
+      {
+        "name": "analytics_preference_query_completed",
+        "phase": "account B unknown comparison",
+        "elapsedMs": 43448,
+        "requestDurationMs": 307
+      },
+      {
+        "name": "account_b_accept_click",
+        "phase": "account B analytics consent",
+        "elapsedMs": 45069
+      },
+      {
+        "name": "analytics_preference_query_started",
+        "phase": "account B analytics consent",
+        "elapsedMs": 48275
+      },
+      {
+        "name": "analytics_preference_query_completed",
+        "phase": "account B analytics consent",
+        "elapsedMs": 48451,
+        "requestDurationMs": 176
+      },
+      {
+        "name": "analytics_preference_query_started",
+        "phase": "account B analytics consent",
+        "elapsedMs": 48924
+      },
+      {
+        "name": "account_b_analytics_on_observed",
+        "phase": "account B analytics consent",
+        "elapsedMs": 48987
+      },
+      {
+        "name": "account_b_hard_navigation_start",
+        "phase": "account B accepted comparison",
+        "elapsedMs": 48987,
+        "settleMs": 0
+      },
+      {
+        "name": "analytics_preference_query_completed",
+        "phase": "account B accepted comparison",
+        "elapsedMs": 49084,
+        "requestDurationMs": 160
+      },
+      {
+        "name": "account_b_domcontentloaded",
+        "phase": "account B accepted comparison",
+        "elapsedMs": 49265
+      },
+      {
+        "name": "account_b_settle_complete",
+        "phase": "account B accepted comparison",
+        "elapsedMs": 49273,
+        "settleMs": 0
+      },
+      {
+        "name": "analytics_preference_query_started",
+        "phase": "account B accepted comparison",
+        "elapsedMs": 52034
+      },
+      {
+        "name": "analytics_preference_query_completed",
+        "phase": "account B accepted comparison",
+        "elapsedMs": 52234,
+        "requestDurationMs": 200
+      },
+      {
+        "name": "account_b_inputs_filled",
+        "phase": "account B accepted comparison",
+        "elapsedMs": 53064
+      },
+      {
+        "name": "account_b_click_attempt",
+        "phase": "account B accepted comparison",
+        "elapsedMs": 53066
+      },
+      {
+        "name": "account_b_calculation_click",
+        "phase": "account B accepted comparison",
+        "elapsedMs": 53243
+      },
+      {
+        "name": "analytics_preference_query_started",
+        "phase": "account B confirmed sign out",
+        "elapsedMs": 57878
+      },
+      {
+        "name": "analytics_preference_query_completed",
+        "phase": "account B confirmed sign out",
+        "elapsedMs": 58075,
+        "requestDurationMs": 198
+      }
+    ],
+    "events": [
+      {
+        "event": "comparison_started",
+        "phase": "account A comparison",
+        "elapsedMs": 19862
+      },
+      {
+        "event": "comparison_completed",
+        "phase": "account A comparison",
+        "elapsedMs": 20521
+      },
+      {
+        "event": "comparison_started",
+        "phase": "account B accepted comparison",
+        "elapsedMs": 53146
+      },
+      {
+        "event": "comparison_completed",
+        "phase": "account B accepted comparison",
+        "elapsedMs": 53230
+      }
+    ],
+    "consentQueries": [
+      {
+        "status": "started",
+        "elapsedMs": 15481
+      },
+      {
+        "status": "completed",
+        "elapsedMs": 15869,
+        "requestDurationMs": 388
+      },
+      {
+        "status": "started",
+        "elapsedMs": 16477
+      },
+      {
+        "status": "completed",
+        "elapsedMs": 16634,
+        "requestDurationMs": 157
+      },
+      {
+        "status": "started",
+        "elapsedMs": 19215
+      },
+      {
+        "status": "completed",
+        "elapsedMs": 19362,
+        "requestDurationMs": 147
+      },
+      {
+        "status": "started",
+        "elapsedMs": 25186
+      },
+      {
+        "status": "completed",
+        "elapsedMs": 25350,
+        "requestDurationMs": 164
+      },
+      {
+        "status": "started",
+        "elapsedMs": 39619
+      },
+      {
+        "status": "completed",
+        "elapsedMs": 39747,
+        "requestDurationMs": 128
+      },
+      {
+        "status": "started",
+        "elapsedMs": 43141
+      },
+      {
+        "status": "completed",
+        "elapsedMs": 43448,
+        "requestDurationMs": 307
+      },
+      {
+        "status": "started",
+        "elapsedMs": 48275
+      },
+      {
+        "status": "completed",
+        "elapsedMs": 48451,
+        "requestDurationMs": 176
+      },
+      {
+        "status": "started",
+        "elapsedMs": 48924
+      },
+      {
+        "status": "completed",
+        "elapsedMs": 49084,
+        "requestDurationMs": 160
+      },
+      {
+        "status": "started",
+        "elapsedMs": 52034
+      },
+      {
+        "status": "completed",
+        "elapsedMs": 52234,
+        "requestDurationMs": 200
+      },
+      {
+        "status": "started",
+        "elapsedMs": 57877
+      },
+      {
+        "status": "completed",
+        "elapsedMs": 58075,
+        "requestDurationMs": 198
+      }
+    ],
+    "providerMarks": [
+      {
+        "label": "account_a_before_inputs",
+        "marks": []
+      },
+      {
+        "label": "account_a_after_calculation_click",
+        "marks": [
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 2908
+          },
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 3047
+          },
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 3113
+          },
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 3287
+          },
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 3341
+          },
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 3386
+          },
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 3467
+          },
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 3538
+          },
+          {
+            "name": "truecost.harness.account_a_inputs_filled",
+            "documentElapsedMs": 3553
+          },
+          {
+            "name": "truecost.harness.calculation_click",
+            "documentElapsedMs": 3817
+          }
+        ]
+      },
+      {
+        "label": "account_b_before_inputs",
+        "marks": []
+      },
+      {
+        "label": "account_b_after_calculation_click",
+        "marks": [
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 3375
+          },
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 3449
+          },
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 3520
+          },
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 3560
+          },
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 3756
+          },
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 3903
+          },
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 3965
+          },
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 4040
+          },
+          {
+            "name": "truecost.harness.account_b_inputs_filled",
+            "documentElapsedMs": 4068
+          },
+          {
+            "name": "truecost.harness.calculation_click",
+            "documentElapsedMs": 4181
+          }
+        ]
+      }
+    ]
+  },
+  "events": [
+    {
+      "event": "comparison_started",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "$user_id",
+        "auth_state",
+        "distinct_id",
+        "draft_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "release",
+        "route_name",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "local-1",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": true,
+        "deviceIdPresent": true
+      },
+      "auth_state": "member"
+    },
+    {
+      "event": "comparison_completed",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "$user_id",
+        "auth_state",
+        "calculation_version",
+        "distinct_id",
+        "draft_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "offer_count",
+        "release",
+        "result_id",
+        "route_name",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "local-1",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": true,
+        "deviceIdPresent": true
+      },
+      "auth_state": "member"
+    },
+    {
+      "event": "comparison_started",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "$user_id",
+        "auth_state",
+        "distinct_id",
+        "draft_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "release",
+        "route_name",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "local-1",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": true,
+        "deviceIdPresent": true
+      },
+      "auth_state": "member"
+    },
+    {
+      "event": "comparison_completed",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "$user_id",
+        "auth_state",
+        "calculation_version",
+        "distinct_id",
+        "draft_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "offer_count",
+        "release",
+        "result_id",
+        "route_name",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "local-1",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": true,
+        "deviceIdPresent": true
+      },
+      "auth_state": "member"
+    }
+  ],
+  "checks": [
+    {
+      "name": "account A disposable member reached the authenticated route",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "account A was created from a verified synthetic baseline and its cleanup client was captured",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "account A explicitly accepted analytics",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "account A emitted acknowledged member comparison events",
+      "passed": true,
+      "details": {
+        "eventCount": 2,
+        "blockedAttempts": 0,
+        "userIdentityStable": true,
+        "deviceIdentityStable": true
+      }
+    },
+    {
+      "name": "confirmed account A sign out emitted no analytics",
+      "passed": true,
+      "details": {
+        "secondTab": false
+      }
+    },
+    {
+      "name": "account B disposable member reached the authenticated route",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "account B reached the same browser with a fresh verified identity and cleanup client",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "account B began with unknown analytics consent after account A sign out",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "account B unknown preference kept the comparison usable and analytics-silent",
+      "passed": true,
+      "details": {
+        "eventsBeforeOptIn": 0
+      }
+    },
+    {
+      "name": "account B explicitly opted in after the unknown comparison",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "same-browser account switch isolated B identities and emitted no A replay",
+      "passed": true,
+      "details": {
+        "accountAEvents": 2,
+        "accountBEvents": 2,
+        "distinctUserIds": true,
+        "distinctDeviceIds": true,
+        "disjointInsertIds": true,
+        "pendingAccountAEventsCleared": false
+      }
+    },
+    {
+      "name": "run-owned comparison records were deleted before account B sign out",
+      "passed": true,
+      "details": {
+        "accountA": 0,
+        "accountB": 0
+      }
+    },
+    {
+      "name": "account B confirmed sign out emitted no analytics and total event count stayed isolated",
+      "passed": true,
+      "details": {
+        "totalEvents": 4,
+        "blockedAccountAEvents": 0,
+        "transportOffline": false
+      }
+    }
+  ],
+  "errors": [],
+  "cleanupErrors": [],
+  "preservedIdentities": [],
+  "cleanup": {
+    "status": "run-owned comparisons checked; disposable Clerk cleanup completed",
+    "feedbackResidual": "No feedback is submitted in the account-switch scenario.",
+    "analyticsResidual": "Convex profiles and analytics preferences remain; Mixpanel events were intercepted locally and not ingested.",
+    "accounts": [
+      {
+        "label": "account A",
+        "comparisonsDeleted": 0,
+        "remaining": 0
+      },
+      {
+        "label": "account B",
+        "comparisonsDeleted": 0,
+        "remaining": 0
+      }
+    ],
+    "clerkUsers": [
+      {
+        "label": "account A",
+        "revoked": 0,
+        "deleted": true
+      },
+      {
+        "label": "account B",
+        "revoked": 0,
+        "deleted": true
+      }
+    ]
+  },
+  "browser": {
+    "name": "Chrome",
+    "playwright": "1.62.1",
+    "engine": "154.0.8037.59"
+  },
+  "output": "C:\\Users\\RajeshShinde\\OneDrive - Electracom Projects (UK) Ltd\\Documents\\ChatGPT\\truecost\\docs\\evidence\\member-analytics-browser-2026-10-02T21-59-56-805Z.json"
+}

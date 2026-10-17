@@ -8,16 +8,18 @@ import { Notice } from "@/components/inputs";
 import { compareOffers, labelFor, monthsLabel } from "@/lib/finance/comparison";
 import { formatCompactINR, formatINR, formatPct } from "@/lib/finance/format";
 import { recommend } from "@/lib/finance/insight";
-import { allOffersReady } from "@/lib/finance/validate";
+import { materializeComparison } from "@/lib/contracts/snapshot";
+import { ComparisonStatus } from "@/components/ComparisonStatus";
+import { ComparisonReportActions } from "@/components/ComparisonReportActions";
+import { MemberComparisonFeedback } from "@/components/MemberComparisonFeedback";
 import { useCompare } from "@/lib/store";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function ResultsPage() {
-  const { offers, hydrated } = useCompare();
-  const ready = hydrated && allOffersReady(offers);
+  const { snapshot, hydrated, member } = useCompare();
   const comparison = useMemo(
-    () => (ready ? compareOffers(offers) : null),
-    [ready, offers],
+    () => (hydrated && snapshot ? materializeComparison(snapshot) : null),
+    [hydrated, snapshot],
   );
 
   return (
@@ -36,8 +38,9 @@ export default function ResultsPage() {
       </header>
 
       <main className="flex flex-1 flex-col gap-4 px-5 pb-14 pt-5 lg:block">
+        <ComparisonStatus />
         {!hydrated ? (
-          <div className="h-64 animate-pulse rounded-2xl border border-line bg-surface-2" />
+          <p role="status" className="py-6 text-sm text-ink-2">Opening your comparison…</p>
         ) : !comparison ? (
           <div className="rounded-2xl border border-line bg-surface px-5 py-8 text-center">
             <p className="text-[15px] font-semibold text-ink">Nothing to compare yet</p>
@@ -57,9 +60,12 @@ export default function ResultsPage() {
              on the left, the answer pinned on the right. Source order keeps the
              verdict first on a phone, where there is no second column to pin it
              to and burying it under a table would help nobody. */
-          <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,400px)] lg:gap-6">
-            <div className="flex flex-col gap-3 lg:order-2 lg:sticky lg:top-[68px]">
+          <div className="grid min-w-0 w-full items-start gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,400px)] lg:gap-6">
+            <div className="min-w-0 flex flex-col gap-3 lg:order-2 lg:sticky lg:top-[68px]">
               <Verdict comparison={comparison} />
+              <ComparisonStatus actions resume={false} />
+              {member && snapshot ? <ComparisonReportActions snapshot={snapshot} source="current" /> : null}
+              {member && snapshot ? <MemberComparisonFeedback resultId={snapshot.resultId} routeName="compare_results" /> : null}
 
               {comparison.notices.map((notice) => (
                 <Notice key={notice.code} level={notice.level}>
@@ -68,7 +74,7 @@ export default function ResultsPage() {
               ))}
             </div>
 
-            <div className="flex flex-col gap-4 lg:order-1">
+            <div className="min-w-0 flex flex-col gap-4 lg:order-1">
               <ResultsTable comparison={comparison} />
 
               <div>
@@ -109,12 +115,12 @@ function Verdict({
           Recommendation
         </p>
         <h2 className="mt-1.5 text-[21px] font-semibold leading-tight tracking-tight text-ink">
-          These cost you effectively the same.
+          The two leading offers have similar APRs.
         </h2>
         <p className="mt-2 text-[13.5px] leading-relaxed text-ink-2">
-          The gap is under 0.05 percentage points of APR — smaller than the
-          rounding on a single EMI. Decide on service, prepayment terms and how
-          quickly each lender can disburse, not on price.
+          Their APR gap is under 0.05 percentage points. Compare total borrowing
+          costs and fees alongside service, prepayment terms and disbursement
+          timing.
         </p>
       </section>
     );

@@ -1,0 +1,250 @@
+{
+  "checkedAt": "2026-09-18T10:31:39.861Z",
+  "status": "passed",
+  "mode": "intercept",
+  "scenario": "same-browser-account-switch",
+  "baseUrl": "http://localhost:3341",
+  "buildId": "YUTiMWy4Ojk-b0MObnXpI",
+  "issuer": "live-tarpon-2666.clerk.accounts.dev",
+  "convexTarget": "https://dutiful-fly-37.convex.cloud",
+  "mixpanelToken": "matched-approved-sha256",
+  "harnessSourceSha256": "de14dbdbb72e7dc32093373f0e150e649aba1fce27ce5a7010babbfcb4182021",
+  "events": [
+    {
+      "event": "comparison_started",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "$user_id",
+        "auth_state",
+        "distinct_id",
+        "draft_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "release",
+        "route_name",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "local-1",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": true,
+        "deviceIdPresent": true
+      },
+      "auth_state": "member"
+    },
+    {
+      "event": "comparison_completed",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "$user_id",
+        "auth_state",
+        "calculation_version",
+        "distinct_id",
+        "draft_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "offer_count",
+        "release",
+        "result_id",
+        "route_name",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "local-1",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": true,
+        "deviceIdPresent": true
+      },
+      "auth_state": "member"
+    },
+    {
+      "event": "comparison_started",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "$user_id",
+        "auth_state",
+        "distinct_id",
+        "draft_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "release",
+        "route_name",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "local-1",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": true,
+        "deviceIdPresent": true
+      },
+      "auth_state": "member"
+    },
+    {
+      "event": "comparison_completed",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "$user_id",
+        "auth_state",
+        "calculation_version",
+        "distinct_id",
+        "draft_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "offer_count",
+        "release",
+        "result_id",
+        "route_name",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "local-1",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": true,
+        "deviceIdPresent": true
+      },
+      "auth_state": "member"
+    }
+  ],
+  "checks": [
+    {
+      "name": "account A disposable member reached the authenticated route",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "account A was created from a verified synthetic baseline and its cleanup client was captured",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "account A explicitly accepted analytics",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "account A emitted acknowledged member comparison events",
+      "passed": true,
+      "details": {
+        "eventCount": 2,
+        "userIdentityStable": true,
+        "deviceIdentityStable": true
+      }
+    },
+    {
+      "name": "confirmed account A sign out emitted no analytics",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "account B disposable member reached the authenticated route",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "account B reached the same browser with a fresh verified identity and cleanup client",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "account B began with unknown analytics consent after account A sign out",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "account B unknown preference kept the comparison usable and analytics-silent",
+      "passed": true,
+      "details": {
+        "eventsBeforeOptIn": 0
+      }
+    },
+    {
+      "name": "account B explicitly opted in after the unknown comparison",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "same-browser account switch isolated B identities and emitted no A replay",
+      "passed": true,
+      "details": {
+        "accountAEvents": 2,
+        "accountBEvents": 2,
+        "distinctUserIds": true,
+        "distinctDeviceIds": true,
+        "disjointInsertIds": true
+      }
+    },
+    {
+      "name": "run-owned comparison records were deleted before account B sign out",
+      "passed": true,
+      "details": {
+        "accountA": 0,
+        "accountB": 0
+      }
+    },
+    {
+      "name": "account B confirmed sign out emitted no analytics and total event count stayed isolated",
+      "passed": true,
+      "details": {
+        "totalEvents": 4
+      }
+    }
+  ],
+  "errors": [],
+  "cleanupErrors": [],
+  "preservedIdentities": [],
+  "cleanup": {
+    "status": "run-owned comparisons checked; disposable Clerk cleanup completed",
+    "feedbackResidual": "No feedback is submitted in the account-switch scenario.",
+    "analyticsResidual": "Convex profiles and analytics preferences remain; Mixpanel events were intercepted locally and not ingested.",
+    "accounts": [
+      {
+        "label": "account A",
+        "comparisonsDeleted": 0,
+        "remaining": 0
+      },
+      {
+        "label": "account B",
+        "comparisonsDeleted": 0,
+        "remaining": 0
+      }
+    ],
+    "clerkUsers": [
+      {
+        "label": "account A",
+        "revoked": 0,
+        "deleted": true
+      },
+      {
+        "label": "account B",
+        "revoked": 0,
+        "deleted": true
+      }
+    ]
+  },
+  "browser": {
+    "name": "Chrome",
+    "playwright": "1.62.1",
+    "engine": "153.0.8010.47"
+  },
+  "output": "C:\\Users\\RajeshShinde\\OneDrive - Electracom Projects (UK) Ltd\\Documents\\ChatGPT\\truecost\\docs\\evidence\\member-analytics-browser-2026-09-18T10-31-39-861Z.json"
+}

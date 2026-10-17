@@ -1,0 +1,154 @@
+{
+  "checkedAt": "2026-09-16T13:42:59.635Z",
+  "mode": "intercept",
+  "baseUrl": "http://localhost:3223",
+  "buildId": "Cdz2kcm1ZyavMSJ_0JpMe",
+  "browser": {
+    "name": "Chrome",
+    "playwright": "1.62.1",
+    "engine": "152.0.7977.83"
+  },
+  "checks": [
+    {
+      "name": "approved localhost candidate responded before browser checks",
+      "passed": true,
+      "details": {
+        "status": 200,
+        "buildId": "Cdz2kcm1ZyavMSJ_0JpMe"
+      }
+    },
+    {
+      "name": "no-consent calculation remained usable with analytics off",
+      "passed": true,
+      "details": {
+        "screenshot": "C:\\Users\\RajeshShinde\\OneDrive - Electracom Projects (UK) Ltd\\Documents\\ChatGPT\\truecost\\docs\\evidence\\mixpanel-browser-2026-09-16T13-42-59-635Z\\no-consent.png"
+      }
+    },
+    {
+      "name": "declined calculation remained usable with analytics off",
+      "passed": true,
+      "details": {
+        "screenshot": "C:\\Users\\RajeshShinde\\OneDrive - Electracom Projects (UK) Ltd\\Documents\\ChatGPT\\truecost\\docs\\evidence\\mixpanel-browser-2026-09-16T13-42-59-635Z\\declined.png"
+      }
+    },
+    {
+      "name": "withdrawn calculation remained usable with analytics off",
+      "passed": true,
+      "details": {
+        "screenshot": "C:\\Users\\RajeshShinde\\OneDrive - Electracom Projects (UK) Ltd\\Documents\\ChatGPT\\truecost\\docs\\evidence\\mixpanel-browser-2026-09-16T13-42-59-635Z\\withdrawn.png"
+      }
+    },
+    {
+      "name": "accepted produced only the expected comparison event sequence",
+      "passed": true,
+      "details": {
+        "events": [
+          "comparison_started",
+          "comparison_completed"
+        ],
+        "screenshot": "C:\\Users\\RajeshShinde\\OneDrive - Electracom Projects (UK) Ltd\\Documents\\ChatGPT\\truecost\\docs\\evidence\\mixpanel-browser-2026-09-16T13-42-59-635Z\\accepted.png"
+      }
+    },
+    {
+      "name": "source hashes remained unchanged for the whole browser run",
+      "passed": true,
+      "details": {}
+    }
+  ],
+  "errors": [],
+  "diagnostics": [],
+  "mixpanelRequests": [
+    {
+      "method": "POST",
+      "path": "/track/",
+      "contentType": "application/x-www-form-urlencoded",
+      "bodyBytes": 670,
+      "event": "comparison_started",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "auth_state",
+        "distinct_id",
+        "draft_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "release",
+        "route_name",
+        "time",
+        "token"
+      ],
+      "valid": true
+    },
+    {
+      "method": "POST",
+      "path": "/track/",
+      "contentType": "application/x-www-form-urlencoded",
+      "bodyBytes": 821,
+      "event": "comparison_completed",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "auth_state",
+        "calculation_version",
+        "distinct_id",
+        "draft_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "offer_count",
+        "release",
+        "result_id",
+        "route_name",
+        "time",
+        "token"
+      ],
+      "valid": true
+    }
+  ],
+  "interceptedResponses": [
+    {
+      "path": "/track/",
+      "status": 200
+    },
+    {
+      "path": "/track/",
+      "status": 200
+    }
+  ],
+  "cleanup": "guest-only; no identities or product records created; intercepted requests never reached Mixpanel",
+  "provider": {
+    "projectId": "4064154",
+    "storageRegion": "US",
+    "tokenFingerprintVerified": true
+  },
+  "candidateConfig": {
+    "analyticsEnabled": true,
+    "environment": "development",
+    "localEnvFileEnabled": false
+  },
+  "sourceHashes": {
+    "lib/analytics/config.ts": "64c83dd427c5f6773f9b461e82aa7c2c52425c623d8f115d281dc8ed008add13",
+    "lib/analytics/events.ts": "60c55282e0af0fe400829d5065eb5432a48289ddc759726105150d0a43152d54",
+    "lib/analytics/mixpanel-adapter.ts": "a8a5025e43bf533fda94c6cc0c1da0068ca2ee3bbca02c55dde3ad01f699d93e",
+    "lib/analytics/provider.tsx": "88886f89a3b7ec64c4d148caee0e34b8c69855a906ea38f8886ad2ead2788f7d",
+    "components/AnalyticsConsent.tsx": "82ea8a6ce34b5b033c304cb74bb21db4e1fc4288a43f16f206b221f135452248",
+    "lib/store.tsx": "c1316496ee14f9474c2b25b6d69debf18113cdecaa9fbcff79ca01158fd849d9",
+    "app/compare/page.tsx": "623f674e9354aa11937a224c11b75ba9d3054a5183c09a35ed3b960811fe29b5",
+    ".next/BUILD_ID": "09f685f0515ca76c01d23f7bfabd276a101bd612d1625ab83fa0a4a74d5650bb"
+  },
+  "sourceHashesAfterRun": {
+    "lib/analytics/config.ts": "64c83dd427c5f6773f9b461e82aa7c2c52425c623d8f115d281dc8ed008add13",
+    "lib/analytics/events.ts": "60c55282e0af0fe400829d5065eb5432a48289ddc759726105150d0a43152d54",
+    "lib/analytics/mixpanel-adapter.ts": "a8a5025e43bf533fda94c6cc0c1da0068ca2ee3bbca02c55dde3ad01f699d93e",
+    "lib/analytics/provider.tsx": "88886f89a3b7ec64c4d148caee0e34b8c69855a906ea38f8886ad2ead2788f7d",
+    "components/AnalyticsConsent.tsx": "82ea8a6ce34b5b033c304cb74bb21db4e1fc4288a43f16f206b221f135452248",
+    "lib/store.tsx": "c1316496ee14f9474c2b25b6d69debf18113cdecaa9fbcff79ca01158fd849d9",
+    "app/compare/page.tsx": "623f674e9354aa11937a224c11b75ba9d3054a5183c09a35ed3b960811fe29b5",
+    ".next/BUILD_ID": "09f685f0515ca76c01d23f7bfabd276a101bd612d1625ab83fa0a4a74d5650bb"
+  },
+  "status": "passed",
+  "scriptSha256": "5178599c9fb85e0389be9dd0a044583b5cd08c508aee00ffe6e7e6c2031ffbbf"
+}

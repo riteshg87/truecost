@@ -1,0 +1,34 @@
+{
+  "kind": "landing-browser-failed-attempts",
+  "note": "Sanitized records retained for audit. No credentials, member identities or private data were used.",
+  "attempts": [
+    {
+      "checkedAt": "2026-09-16T12:42:04.626Z",
+      "buildId": "CPCrxu3BQKPu1A-UpNtov",
+      "port": 3219,
+      "passedChecks": 4,
+      "failure": "Playwright strict locator matched both the header Sign in link and footer Sign in to your account link."
+    },
+    {
+      "checkedAt": "2026-09-16T12:42:35.884Z",
+      "buildId": "CPCrxu3BQKPu1A-UpNtov",
+      "port": 3219,
+      "passedChecks": 6,
+      "failure": "Keyboard comparison assertion waited for a pathname that did not change because the landing button was still disabled; the harness had not waited for readiness."
+    },
+    {
+      "checkedAt": "2026-09-16T12:44:27.167Z",
+      "buildId": "CPCrxu3BQKPu1A-UpNtov",
+      "port": 3219,
+      "passedChecks": 6,
+      "failure": "Reduced-motion computed transition was browser-normalized to 1e-06s; this is now accepted as effectively zero (<=1ms).",
+      "diagnostics": {
+        "url": "http://localhost:3219/",
+        "pathname": "/",
+        "compareEnabled": false,
+        "heading": "Compare the loanbehind the rate.",
+        "activeLabel": "mobile-320-reduced"
+      }
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "checkedAt": "2026-10-02T14:02:00.000Z",
+  "status": "passed",
+  "url": "https://app.chroniclehq.com/share/2e1eec2b-7e34-4ba3-9b57-e5e7331314dd/38f0dc2a-0578-4fc3-a8a9-a7f2900d2bcd/0b10ce59-e0d6-412d-bc8c-8d1d3bafd853",
+  "browser": "Chrome 154.0.8037.59",
+  "checks": [
+    {
+      "name": "signed-out share opens",
+      "observed": "TrueCost · Why this problem"
+    },
+    {
+      "name": "one-page canvas renders",
+      "observed": "Page canvas visible with the TrueCost rationale, borrower actions and measurement copy"
+    }
+  ],
+  "limits": [
+    "The share view proves reviewer-facing access to the current page only.",
+    "Chronicle PDF export retrieval, editor permissions and submission approval remain open.",
+    "No login, sharing change, upload, export click or submission occurred."
+  ]
+}

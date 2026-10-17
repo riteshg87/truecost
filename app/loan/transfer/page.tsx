@@ -1,6 +1,9 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import { FormError, PrimaryButton } from "@/components/mobile";
+import { LoanSyncStatus } from "@/components/LoanSyncStatus";
+import { privateWriteError } from "@/lib/private-storage/messages";
 import {
   Callout,
   Ledger,
@@ -24,7 +27,9 @@ import { useLoan } from "@/lib/loanStore";
  * true and keeps this out of lead-generation territory entirely.
  */
 export default function TransferPage() {
-  const { loan, quote, hydrated, setQuote } = useLoan();
+  const { loan, quote, hydrated, setQuote, saveDraft, draftDirty } = useLoan();
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
 
   const result = useMemo(
     () => (loan && quote.newRatePct > 0 ? transferResult(loan, quote) : null),
@@ -52,6 +57,7 @@ export default function TransferPage() {
         title="Is a transfer worth it?"
         sub="Enter another lender's offer. We do the arithmetic — we don't send you to anyone."
       />
+      <LoanSyncStatus />
 
       <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:gap-6">
         {/* ---- the offer ---- */}
@@ -106,10 +112,18 @@ export default function TransferPage() {
           <div className="rounded-xl border border-line bg-surface-2 px-3.5 py-3">
             <p className="text-[12px] leading-relaxed text-ink-3">
               Your loan today: {formatCompactINR(loan.outstanding)} at{" "}
-              {formatPct(loan.ratePct)} over {monthsLabel(loan.monthsLeft)}. Pulled from
-              your saved record — nothing to re-enter.
+              {formatPct(loan.ratePct)} over {monthsLabel(loan.monthsLeft)}. Uses
+              the current loan shown in this browser.
             </p>
           </div>
+          <PrimaryButton disabled={!draftDirty} busy={saving} onClick={async () => {
+            setSaving(true);
+            setSaveError(null);
+            try { setSaveError(privateWriteError(await saveDraft())); }
+            catch { setSaveError("Your quote could not be saved. Keep this page open and try again."); }
+            finally { setSaving(false); }
+          }}>Save quote</PrimaryButton>
+          <FormError>{saveError}</FormError>
         </div>
 
         {/* ---- the answer ---- */}
@@ -119,7 +133,7 @@ export default function TransferPage() {
               <p className="text-[14px] font-medium text-ink-2">Enter their rate</p>
               <p className="mx-auto mt-1.5 max-w-xs text-[13px] leading-relaxed text-ink-3">
                 Fees, GST, break-even and the net over your remaining term — worked out
-                here, sent nowhere.
+                here. Save quote only when you want to keep this offer.
               </p>
             </div>
           )}

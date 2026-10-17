@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-02T22:11:32.7144894Z",
+  "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+  "diagnosticBuildId": "zXmb7WujtdoPzCdjgq39W",
+  "normalCandidateBuildId": "ZJQv_k9n1bWVBKPw5W-oR",
+  "harness": "scripts/check-member-analytics.mjs",
+  "harnessSha256": "180ce856ca6a11ae9aca7053c10ffcb209149e50a65edf9db40d2e72ab438181",
+  "mode": "intercept",
+  "runs": [
+    {
+      "label": "zero-settle",
+      "evidence": "docs/evidence/member-analytics-browser-2026-10-02T21-59-56-805Z.json",
+      "settleMs": 0,
+      "status": "passed",
+      "checks": 13,
+      "eventCount": 4,
+      "accountA": {
+        "postNavigationPreferenceCompletedElapsedMs": 19362,
+        "inputsFilledElapsedMs": 20167,
+        "calculationClickElapsedMs": 20530,
+        "events": ["comparison_started", "comparison_completed"]
+      },
+      "accountB": {
+        "events": ["comparison_started", "comparison_completed"]
+      }
+    },
+    {
+      "label": "two-second-first",
+      "evidence": "docs/evidence/member-analytics-browser-2026-10-02T22-01-46-766Z.json",
+      "settleMs": 2000,
+      "status": "failed-readiness-timing",
+      "checks": 3,
+      "eventCount": 0,
+      "accountA": {
+        "postNavigationPreferenceStartedElapsedMs": 24247,
+        "calculationClickElapsedMs": 24248,
+        "postNavigationPreferenceCompletedElapsedMs": 24566,
+        "error": "account A comparison events timed out"
+      }
+    },
+    {
+      "label": "two-second-repeat",
+      "evidence": "docs/evidence/member-analytics-browser-2026-10-02T22-03-30-709Z.json",
+      "settleMs": 2000,
+      "status": "passed",
+      "checks": 13,
+      "eventCount": 4,
+      "accountA": {
+        "postNavigationPreferenceCompletedElapsedMs": 15199,
+        "inputsFilledElapsedMs": 17950,
+        "calculationClickElapsedMs": 18117,
+        "events": ["comparison_started", "comparison_completed"]
+      },
+      "accountB": {
+        "events": ["comparison_started", "comparison_completed"]
+      }
+    }
+  ],
+  "interpretation": "The runs correlate event delivery with provider preference readiness at input and calculation time. The two-second settle is not a reliable remedy, and the observations do not prove the cause.",
+  "constraintsHonored": [
+    "No unconsented event was buffered",
+    "No calculation was delayed",
+    "No navigation workaround was introduced",
+    "Mixpanel transport was intercepted locally"
+  ],
+  "openGates": [
+    "Hard-navigation acceptance and root-cause decision",
+    "Live Mixpanel ingestion and dashboard reconciliation",
+    "Production provider configuration and release approval"
+  ],
+  "externalAction": false
+}

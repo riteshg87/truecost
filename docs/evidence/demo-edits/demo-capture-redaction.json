@@ -1,0 +1,61 @@
+{
+  "kind": "local-redacted-rehearsal",
+  "source": "C:\\Users\\RajeshShinde\\OneDrive - Electracom Projects (UK) Ltd\\Documents\\ChatGPT\\truecost\\docs\\evidence\\demo-raw\\2026-09-16T11-57-00-971Z\\page@4e428793d9c42ab1c86919805f629d9b.webm",
+  "sourceSha256": "0cb6d5833d6a5043894618823ce2dc14a1417f9df32cc5dc82ada9bdbd79a302",
+  "durationSeconds": 18.08,
+  "fps": 25.0,
+  "sourceResolution": [
+    1280,
+    900
+  ],
+  "frameCount": 452,
+  "redaction": {
+    "method": "opaque local masks over auth screens only",
+    "intervalsSeconds": [
+      [
+        0,
+        1.4
+      ],
+      [
+        3.15,
+        5.3
+      ],
+      [
+        14.0,
+        16.8
+      ]
+    ],
+    "purpose": "hide synthetic email and OTP; result/detail frames are unchanged",
+    "portraitCanvas": [
+      1280,
+      2276
+    ]
+  },
+  "outputs": [
+    {
+      "path": "C:\\Users\\RajeshShinde\\OneDrive - Electracom Projects (UK) Ltd\\Documents\\ChatGPT\\truecost\\docs\\evidence\\demo-edits\\demo-capture-rehearsal-redacted-base.webm",
+      "sha256": "630a8f8e83d970da3bd9c7dda766c84954cf0b50c0c97b37b7bfd6cc99f5a94a",
+      "label": "base rehearsal"
+    },
+    {
+      "path": "C:\\Users\\RajeshShinde\\OneDrive - Electracom Projects (UK) Ltd\\Documents\\ChatGPT\\truecost\\docs\\evidence\\demo-edits\\demo-capture-rehearsal-redacted-16x9.webm",
+      "sha256": "8af28d9ec89a37dee6bf5a5fb30932ede5c08233ef8b18fed588d016459a43b0",
+      "label": "16:9 letterboxed rehearsal"
+    },
+    {
+      "path": "C:\\Users\\RajeshShinde\\OneDrive - Electracom Projects (UK) Ltd\\Documents\\ChatGPT\\truecost\\docs\\evidence\\demo-edits\\demo-capture-rehearsal-redacted-9x16.webm",
+      "sha256": "4db67d069ae4eab0fe848076762d460bcf8b4a1af9506ad2b759a4310f24fb09",
+      "label": "9:16 letterboxed rehearsal",
+      "dimensions": [
+        1280,
+        2276
+      ]
+    }
+  ],
+  "review": {
+    "raw": false,
+    "shareable": "review-required",
+    "note": "Local rehearsal cuts. Inspect all frames before sharing; no finance values were changed.",
+    "maskedFrameCount": 161
+  }
+}

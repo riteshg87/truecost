@@ -1,0 +1,283 @@
+{
+  "checkedAt": "2026-10-03T23:27:33.106Z",
+  "status": "passed",
+  "browser": {
+    "name": "Chrome",
+    "engine": "154.0.8037.59"
+  },
+  "initialVersion": "8ecaf70f4be9b1ec",
+  "upgradedVersion": "8ecaf70f4be9b1ec-upgrade",
+  "checks": [
+    {
+      "name": "initial worker owns the generated asset cache and removes legacy private cache",
+      "passed": true,
+      "details": {
+        "fixture-unrelated": [
+          "/unrelated-canary"
+        ],
+        "truecost-offline-8ecaf70f4be9b1ec": [
+          "/offline/assets/calculator.d82f6c7ca2a2fd6c.css",
+          "/offline/assets/calculator.d93d123080e80ddb.js",
+          "/offline/index.html",
+          "/offline/manifest.json"
+        ]
+      }
+    },
+    {
+      "name": "open tab activates N+1 with complete assets and preserves unrelated cache",
+      "passed": true,
+      "details": {
+        "fixture-unrelated": [
+          "/unrelated-canary"
+        ],
+        "truecost-offline-8ecaf70f4be9b1ec-upgrade": [
+          "/offline/assets/calculator.d82f6c7ca2a2fd6c.css",
+          "/offline/assets/calculator.d93d123080e80ddb.js",
+          "/offline/index.html",
+          "/offline/manifest.json"
+        ]
+      }
+    },
+    {
+      "name": "open tab reload remains usable after worker upgrade",
+      "passed": true,
+      "details": {
+        "controller": "Controller: http://127.0.0.1:49671/sw.js"
+      }
+    },
+    {
+      "name": "open tab rolls back to N with complete assets and preserves unrelated cache",
+      "passed": true,
+      "details": {
+        "fixture-unrelated": [
+          "/unrelated-canary"
+        ],
+        "truecost-offline-8ecaf70f4be9b1ec": [
+          "/offline/assets/calculator.d82f6c7ca2a2fd6c.css",
+          "/offline/assets/calculator.d93d123080e80ddb.js",
+          "/offline/index.html",
+          "/offline/manifest.json"
+        ]
+      }
+    },
+    {
+      "name": "open tab reload remains usable after rollback",
+      "passed": true,
+      "details": {
+        "controller": "Controller: http://127.0.0.1:49671/sw.js"
+      }
+    }
+  ],
+  "errors": [],
+  "limits": [
+    "This check exercises an open browser tab with a local service worker; installed-app upgrade and rollback remain unverified.",
+    "The fixture workers keep the generated asset list unchanged and change only their version/cache identity."
+  ],
+  "activeStatus": {
+    "version": "8ecaf70f4be9b1ec-upgrade",
+    "cacheKeys": [
+      "fixture-unrelated",
+      "truecost-offline-8ecaf70f4be9b1ec",
+      "truecost-offline-8ecaf70f4be9b1ec-upgrade"
+    ]
+  },
+  "cachePoll": [
+    {
+      "attempt": 0,
+      "names": [
+        "fixture-unrelated",
+        "truecost-offline-8ecaf70f4be9b1ec",
+        "truecost-offline-8ecaf70f4be9b1ec-upgrade"
+      ]
+    },
+    {
+      "attempt": 1,
+      "names": [
+        "fixture-unrelated",
+        "truecost-offline-8ecaf70f4be9b1ec",
+        "truecost-offline-8ecaf70f4be9b1ec-upgrade"
+      ]
+    },
+    {
+      "attempt": 2,
+      "names": [
+        "fixture-unrelated",
+        "truecost-offline-8ecaf70f4be9b1ec",
+        "truecost-offline-8ecaf70f4be9b1ec-upgrade"
+      ]
+    },
+    {
+      "attempt": 3,
+      "names": [
+        "fixture-unrelated",
+        "truecost-offline-8ecaf70f4be9b1ec",
+        "truecost-offline-8ecaf70f4be9b1ec-upgrade"
+      ]
+    },
+    {
+      "attempt": 4,
+      "names": [
+        "fixture-unrelated",
+        "truecost-offline-8ecaf70f4be9b1ec",
+        "truecost-offline-8ecaf70f4be9b1ec-upgrade"
+      ]
+    },
+    {
+      "attempt": 5,
+      "names": [
+        "fixture-unrelated",
+        "truecost-offline-8ecaf70f4be9b1ec",
+        "truecost-offline-8ecaf70f4be9b1ec-upgrade"
+      ]
+    },
+    {
+      "attempt": 6,
+      "names": [
+        "fixture-unrelated",
+        "truecost-offline-8ecaf70f4be9b1ec",
+        "truecost-offline-8ecaf70f4be9b1ec-upgrade"
+      ]
+    },
+    {
+      "attempt": 7,
+      "names": [
+        "fixture-unrelated",
+        "truecost-offline-8ecaf70f4be9b1ec",
+        "truecost-offline-8ecaf70f4be9b1ec-upgrade"
+      ]
+    },
+    {
+      "attempt": 8,
+      "names": [
+        "fixture-unrelated",
+        "truecost-offline-8ecaf70f4be9b1ec",
+        "truecost-offline-8ecaf70f4be9b1ec-upgrade"
+      ]
+    },
+    {
+      "attempt": 9,
+      "names": [
+        "fixture-unrelated",
+        "truecost-offline-8ecaf70f4be9b1ec-upgrade"
+      ]
+    }
+  ],
+  "after": {
+    "fixture-unrelated": [
+      "/unrelated-canary"
+    ],
+    "truecost-offline-8ecaf70f4be9b1ec-upgrade": [
+      "/offline/assets/calculator.d82f6c7ca2a2fd6c.css",
+      "/offline/assets/calculator.d93d123080e80ddb.js",
+      "/offline/index.html",
+      "/offline/manifest.json"
+    ]
+  },
+  "rollbackStatus": {
+    "version": "8ecaf70f4be9b1ec",
+    "cache": "truecost-offline-8ecaf70f4be9b1ec"
+  },
+  "rollbackPoll": [
+    {
+      "attempt": 0,
+      "names": [
+        "fixture-unrelated",
+        "truecost-offline-8ecaf70f4be9b1ec-upgrade",
+        "truecost-offline-8ecaf70f4be9b1ec"
+      ]
+    },
+    {
+      "attempt": 1,
+      "names": [
+        "fixture-unrelated",
+        "truecost-offline-8ecaf70f4be9b1ec-upgrade",
+        "truecost-offline-8ecaf70f4be9b1ec"
+      ]
+    },
+    {
+      "attempt": 2,
+      "names": [
+        "fixture-unrelated",
+        "truecost-offline-8ecaf70f4be9b1ec-upgrade",
+        "truecost-offline-8ecaf70f4be9b1ec"
+      ]
+    },
+    {
+      "attempt": 3,
+      "names": [
+        "fixture-unrelated",
+        "truecost-offline-8ecaf70f4be9b1ec-upgrade",
+        "truecost-offline-8ecaf70f4be9b1ec"
+      ]
+    },
+    {
+      "attempt": 4,
+      "names": [
+        "fixture-unrelated",
+        "truecost-offline-8ecaf70f4be9b1ec-upgrade",
+        "truecost-offline-8ecaf70f4be9b1ec"
+      ]
+    },
+    {
+      "attempt": 5,
+      "names": [
+        "fixture-unrelated",
+        "truecost-offline-8ecaf70f4be9b1ec-upgrade",
+        "truecost-offline-8ecaf70f4be9b1ec"
+      ]
+    },
+    {
+      "attempt": 6,
+      "names": [
+        "fixture-unrelated",
+        "truecost-offline-8ecaf70f4be9b1ec-upgrade",
+        "truecost-offline-8ecaf70f4be9b1ec"
+      ]
+    },
+    {
+      "attempt": 7,
+      "names": [
+        "fixture-unrelated",
+        "truecost-offline-8ecaf70f4be9b1ec-upgrade",
+        "truecost-offline-8ecaf70f4be9b1ec"
+      ]
+    },
+    {
+      "attempt": 8,
+      "names": [
+        "fixture-unrelated",
+        "truecost-offline-8ecaf70f4be9b1ec-upgrade",
+        "truecost-offline-8ecaf70f4be9b1ec"
+      ]
+    },
+    {
+      "attempt": 9,
+      "names": [
+        "fixture-unrelated",
+        "truecost-offline-8ecaf70f4be9b1ec"
+      ]
+    }
+  ],
+  "rolledBack": {
+    "fixture-unrelated": [
+      "/unrelated-canary"
+    ],
+    "truecost-offline-8ecaf70f4be9b1ec": [
+      "/offline/assets/calculator.d82f6c7ca2a2fd6c.css",
+      "/offline/assets/calculator.d93d123080e80ddb.js",
+      "/offline/index.html",
+      "/offline/manifest.json"
+    ]
+  },
+  "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+  "candidateBuildId": "ydMzVTyEiY_q6uNn7FXx1",
+  "evidenceBoundary": "Fresh local open-tab service-worker upgrade and rollback evidence; installed-app, device, provider and release gates remain open.",
+  "externalActions": {
+    "commit": false,
+    "providerMutation": false,
+    "networkContacted": false,
+    "externalSubmission": false,
+    "deployment": false,
+    "push": false
+  }
+}

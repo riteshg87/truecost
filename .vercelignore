@@ -1,0 +1,37 @@
+# Secrets and local environment files
+.env*
+!.env.example
+
+# Local checkouts, build output, caches, and generated tooling state
+.agents/
+.git/
+.vercel/
+.next/
+node_modules/
+out/
+build/
+coverage/
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# Review evidence and recorded media are not runtime inputs
+docs/
+*.log
+scripts/*
+**/*.webm
+**/*.mp4
+**/*.mov
+**/*.mkv
+
+# Test-only files. Keep application source and the offline build inputs.
+tests/
+**/__tests__/
+**/*.test.*
+**/*.spec.*
+vitest.config.*
+playwright.config.*
+
+# Keep these build inputs explicit if ignore rules are broadened later.
+!scripts/build-offline.mjs
+!offline/
+!offline/**

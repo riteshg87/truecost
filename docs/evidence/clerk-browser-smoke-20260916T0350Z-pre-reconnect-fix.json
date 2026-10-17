@@ -1,0 +1,237 @@
+{
+  "checkedAt": "2026-09-16T02:45:07.849Z",
+  "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+  "browser": {
+    "name": "Chrome",
+    "playwright": "1.62.1",
+    "engine": "152.0.7977.83"
+  },
+  "baseUrl": "http://localhost:4370",
+  "checks": [
+    {
+      "name": "development Clerk key configuration is present and environment-matched",
+      "passed": true,
+      "details": {
+        "environment": "test",
+        "issuer": "live-tarpon-2666.clerk.accounts.dev",
+        "convexTarget": "https://dutiful-fly-37.convex.cloud"
+      }
+    },
+    {
+      "name": "short-lived Clerk testing token obtained without recording its value",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "a Clerk SDK loaded before user interaction",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "a invalid OTP stays on verification with a safe error",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "a test OTP activates the development session and reaches home",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "a account page is bound to the current synthetic identity",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "a sign out requires explicit confirmation",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "a sign out returns to an unauthenticated route",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "a cleanup revoked only newly-created sessions",
+      "passed": true,
+      "details": {
+        "count": 0
+      }
+    },
+    {
+      "name": "b Clerk SDK loaded before user interaction",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "b invalid OTP stays on verification with a safe error",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "b test OTP activates the development session and reaches home",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "b account page is bound to the current synthetic identity",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "b sign out requires explicit confirmation",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "b sign out returns to an unauthenticated route",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "b cleanup revoked only newly-created sessions",
+      "passed": true,
+      "details": {
+        "count": 0
+      }
+    },
+    {
+      "name": "A and B use fresh browser contexts with isolated account pages",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup signup Clerk SDK loaded before user interaction",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup invalid signup OTP stays on verification with a safe error",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup signUpIfMissing transfer and test OTP reach home",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup newly created account is visible after backend provisioning",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup confirms the loan is saved to the account",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup saved the fixed-basis synthetic loan inputs",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup after loan reload confirms the loan is saved to the account",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup reload preserves the saved loan record",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup after quote save confirms the loan is saved to the account",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup after quote reload confirms the loan is saved to the account",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup explicit transfer quote save survives reload",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup offline quote edit queues without claiming an account acknowledgement",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup recovery cleanup deleted the synthetic loan through the account UI",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup cleanup revoked only newly-created sessions",
+      "passed": true,
+      "details": {
+        "count": 1
+      }
+    },
+    {
+      "name": "new-signup cleanup handled only the disposable signup identity",
+      "passed": true,
+      "details": {
+        "deleted": true,
+        "convexProfile": "may remain; Clerk deletion does not remove Convex profiles, and this harness has no Convex deletion or tombstone operation"
+      }
+    }
+  ],
+  "errors": [
+    "new-signup phase loan-check failed at /account: new-signup phase warm-offline-reconnect failed: locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('status').filter({ hasText: 'Loan saved to your account.' }).first() to be visible\u001b[22m\n"
+  ],
+  "cleanupErrors": [],
+  "diagnostics": [
+    {
+      "label": "new-signup",
+      "phase": "loan-check",
+      "pathname": "/account",
+      "pageErrors": [],
+      "responses": [
+        "POST /v1/client/sign_ups 200",
+        "POST /v1/client/sessions/sess_3JOKaSovn6w1vv7JiQ9VWQ5PVN9/touch 200",
+        "POST /v1/environment 200",
+        "GET /v1/client 200",
+        "POST /v1/client/sessions/sess_3JOKaSovn6w1vv7JiQ9VWQ5PVN9/tokens 200",
+        "POST /v1/environment 200",
+        "GET /v1/client 200",
+        "POST /v1/client/sessions/sess_3JOKaSovn6w1vv7JiQ9VWQ5PVN9/tokens 200",
+        "POST /v1/environment 200",
+        "GET /v1/client 200",
+        "POST /v1/client/sessions/sess_3JOKaSovn6w1vv7JiQ9VWQ5PVN9/tokens 200",
+        "POST /v1/environment 200",
+        "GET /v1/client 200",
+        "POST /v1/client/sessions/sess_3JOKaSovn6w1vv7JiQ9VWQ5PVN9/tokens 200",
+        "POST /v1/environment 200",
+        "GET /v1/client 200",
+        "POST /v1/client/sessions/sess_3JOKaSovn6w1vv7JiQ9VWQ5PVN9/tokens 200",
+        "POST /v1/environment 200",
+        "GET /v1/client 200",
+        "POST /v1/client/sessions/sess_3JOKaSovn6w1vv7JiQ9VWQ5PVN9/tokens 200"
+      ],
+      "requestFailures": []
+    }
+  ],
+  "suppressedWarnings": 0,
+  "cleanup": "browser contexts closed and only the owned Next process was stopped",
+  "options": {
+    "loanCheckEnabled": true
+  },
+  "sourceHashes": {
+    "lib/auth/provider.tsx": "8818a52e96a4304b1132f150ec7c9d0f502e3570edff9bdb5299ad4c0dc0e26d",
+    "lib/auth/config.ts": "792adc4a78d5aabd90ff45b90a0279ed58848c5c6e15faa64e56540f1a065d4a",
+    "lib/auth/server-config.ts": "412485734d7ebb133f45633e1f935eb356559c4c6d835a55e078ebad11157337",
+    "lib/auth/requests.ts": "eea6a3f12b36ee3ac654a316e434cfd89b6afe640bc1f76ef25c06989cd2edf1",
+    "app/signin/page.tsx": "25e7ff7cca06cd7dbad259ca4743b23a8ef292f9961d7ce1342ced372cff36a6",
+    "app/verify/page.tsx": "fbd0e7e17a28bd529fa917d509de02c04b8c4c7f00cf6ca03aff9c993845ce48",
+    ".next/BUILD_ID": "be9ae6eb2ae671ddd5c9f3f8a285f6b5de250c8e8c48a6f1b627d9a81ef1a766",
+    ".next/static/chunks/1m_fdd3fugvv6.js": "ef883c20a3d79963b01cf66a8ffb77a45cc9625bc4c672ab3e369e9d67a4f6e1"
+  },
+  "status": "failed",
+  "scriptSha256": "9410a38fe5697e33b1d67c9b754e45d9a33ed17327d32b6a0490d7b7b2dd98a6"
+}

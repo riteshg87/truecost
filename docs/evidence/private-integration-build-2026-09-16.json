@@ -1,0 +1,63 @@
+{
+  "recordedAt": "2026-09-16T02:50:46.1550865Z",
+  "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+  "workingTree": "Authorized uncommitted TrueCost integration",
+  "build": {
+    "staticPages": 17,
+    "exitCode": 0,
+    "framework": "Next.js 16.3.4",
+    "buildId": "Fy3lhWuXWc1vX28Biuvum"
+  },
+  "typecheck": {
+    "exitCode": 0,
+    "command": "npm run typecheck"
+  },
+  "fullSuite": {
+    "status": "passed",
+    "command": "npm test -- --reporter=dot",
+    "tests": 372,
+    "files": 32,
+    "failures": 0,
+    "startedAt": "2026-09-16T02:49:05Z",
+    "note": "Current source including reconnect token timing, readable Account emails and muted contrast tokens. Focused private-session/provider/UI checks: 40/40."
+  },
+  "sourceHashes": {
+    "lib/auth/provider.tsx": "8818a52e96a4304b1132f150ec7c9d0f502e3570edff9bdb5299ad4c0dc0e26d",
+    "lib/auth/private-session.ts": "21894e2b07c97e40d20e1bcaadaa4d4b33ba118cddd9c99974f7b1f387ffb8cf",
+    "lib/auth/use-private-session.ts": "c21c847f0cc3216eaa3d23d381f9a03467ee5ff6081d416b6e1630e9aee75869",
+    "lib/loanStore.tsx": "f7858a1dc8fb6bcdd2b1263bbf79c5e87a5f9dc36b43d55c0efc9a5217df3d1c",
+    "lib/private-storage/storage.ts": "aba4a3c6b458334424e6d4a2db7eb38e07f8d20dc3e9f282bbfed768dd5bb3bb",
+    "lib/private-storage/sync.ts": "b0fb36742fdbdcbaa28c5e87ab48597a479bb545bfb046a7a548fa33fb8c77c6",
+    "lib/private-storage/transport.ts": "8797aa6304020aed320620888c7fc5a8a8f037ab8cda605b23238f08153b4d20",
+    "lib/private-storage/messages.ts": "03a5d17ef3da769fb066115d739f97a4d7332ceb8c69648fb9b906a9dc9656f8",
+    "lib/use-view-lifetime.ts": "3ad79d63a3a8b318e2195dfeb3e632c7b4dc7b67aaa70f3a16e00381ba0e1da0",
+    "components/RouteGuard.tsx": "c45874727566c6b9f21a6568b5214fb5fdb7154a7f9986bd0bcb62b9ac353bf7",
+    "app/account/page.tsx": "9fde7a20bed1ff73269e7980c2b176dfa1752f4975df8bb7e44b01136c0e9c6c",
+    "app/loan/page.tsx": "538718598a095a9f2f05dfa692d1bc11d2f029eb573b55bfdffe7cf9e9d323a8",
+    "app/loan/setup/page.tsx": "9038a0639e7bb5c58968aa38758abd8bf5cc2bdbece1ba585297e4bd8a761ff1",
+    "app/loan/rate/page.tsx": "8bc6e9f564087dd05db9b179e4e9b7200d1ced13338b4ee64631353c8aa3aff6",
+    "app/loan/transfer/page.tsx": "4b3685da8487635ec53ae29b8daf9e8fb23c07e5114b82d8495b005474cc91a8",
+    "app/prepay/page.tsx": "eca58d11b67b0dc16214071152fd1347744749c63327273c31555138637d4ef3",
+    "package.json": "b9d5f9691d355db6a3754a232f3b77fb7b420b0822b034c69e3cf7594aa05a81",
+    "package-lock.json": "7d58d2db819ed87e56e07869f83de0f78f84395dcd7f4343064f96b7fc20eb3a",
+    "app/globals.css": "63ece6d4eba4f88346d2afe2fe1000037748347f3d479c643b0101e3d5cd01d3",
+    "tests/private-session.test.tsx": "657340d6ae24d42eaedccbb7e783d69d9bf9bd1190d32e888912676534ed3627",
+    "tests/loan-provider.test.tsx": "807e2f37fccf9d2333be296cb48f84f2a1b74d8e82cdae8f4531584976e76645",
+    "tests/loan-ui.test.tsx": "89339d52afa7010955a8777ee944e151dfa190b4a708d5e533fa67a93ebcbdb2",
+    "components/LoanSyncStatus.tsx": "ea7d1a96d445b6344c1715915d04662e12e2ec3b0fc47030a8e3323dbee72438"
+  },
+  "limitations": [
+    "Global comparison privacy/intent integration, explicit legacy adoption, account lifecycle and release tasks remain open.",
+    "Real email delivery, full browser/assistive-technology matrix and broader shared-device checks remain open.",
+    "No deployment, commit or push."
+  ],
+  "browser": {
+    "status": "passed",
+    "checks": 56,
+    "errors": 0,
+    "cleanupErrors": 0,
+    "evidence": "clerk-browser-smoke-pre-comparison-2026-09-16T03-27-53-358Z.json",
+    "baseUrl": "http://localhost:4371",
+    "note": "Synthetic Clerk test-email OTP; real delivery and full cross-tab/account-switch matrix remain unverified."
+  }
+}

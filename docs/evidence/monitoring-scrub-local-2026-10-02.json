@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-02T20:57:20.000Z",
+  "status": "passed-local-boundary",
+  "command": "npx vitest run --maxWorkers=2 tests/monitoring-scrub.test.ts tests/monitoring-reporter.test.ts",
+  "tests": 4,
+  "typecheck": "passed",
+  "proves": [
+    "only release, environment, source, stable error code and opaque UUID fields survive scrubbing",
+    "messages, URLs, request bodies, Error objects and unknown fields are excluded",
+    "invalid values fall back to safe defaults",
+    "the reporter forwards scrubbed events to an optional sink and swallows sink failures",
+    "the route error boundary reports a generic stable code and keeps retry/navigation controls usable"
+  ],
+  "sourceHashes": {
+    "lib/monitoring/scrub.ts": "7321809c7ffca45b38a32433180e7679849bc8ff64e16632e6f21fc00a4abeae",
+    "lib/monitoring/reporter.ts": "346b63d264c5696ce2733b3af686039c7b9216f65e22c7dd6848b0c014f5ce2e",
+    "app/error.tsx": "72474bc3ee2ab06e3cfccbd56decbbcea9c26fb20b2593072b340bd28f0dfde4",
+    "tests/monitoring-scrub.test.ts": "0b400597bd657e35f66e6fdbcc0f61fba904a2b400af1c8781eb8725267c872d",
+    "tests/monitoring-reporter.test.ts": "894ac77c52ea9b114327f92ea8ffd17ba7d5ee89b5640e6e59aa87dc07e019c2"
+  },
+  "open": [
+    "Sentry project, operator alert delivery and provider configuration",
+    "synthetic alert routing and production scrubbing verification"
+  ],
+  "externalAction": false
+}

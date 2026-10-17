@@ -1,0 +1,79 @@
+{
+  "recordedAt": "2026-09-16T04:42:18.9678138+01:00",
+  "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+  "workingTree": "Authorized uncommitted TrueCost integration",
+  "build": {
+    "buildId": "rdBT1wGjLQ1OmSolKhP4p",
+    "framework": "Next.js 16.3.4",
+    "staticPages": 17,
+    "exitCode": 0
+  },
+  "fullSuite": {
+    "command": "npm test -- --reporter=dot",
+    "tests": 427,
+    "status": "passed",
+    "startedAt": "2026-09-16T03:36:09Z",
+    "files": 36,
+    "failures": 0
+  },
+  "typecheck": {
+    "command": "npm run typecheck",
+    "exitCode": 0
+  },
+  "guestBrowser": {
+    "checks": 11,
+    "evidence": "comparison-browser-after.json",
+    "status": "passed",
+    "errors": 0
+  },
+  "connectedBrowser": {
+    "status": "passed",
+    "checks": 61,
+    "errors": 0,
+    "cleanupErrors": 0,
+    "browser": {
+      "name": "Chrome",
+      "playwright": "1.62.1",
+      "engine": "152.0.7977.83"
+    },
+    "evidence": "comparison-auth-browser.json",
+    "scriptSha256": "ac305116e1ff4f5c069c6b5fe15671ccf7fbb57f2b0205a11a1b308a0fac1b1d",
+    "note": "Final-run cleanup passed; two earlier token-cleanup failures may have left synthetic comparison rows."
+  },
+  "sourceHashes": {
+    "lib/auth/provider.tsx": "b5001490bfeb397ecdd2de185bb1987e4e1e16e3f5f0f73be7379f0cdb695b5f",
+    "lib/auth/private-session.ts": "21894e2b07c97e40d20e1bcaadaa4d4b33ba118cddd9c99974f7b1f387ffb8cf",
+    "lib/auth/use-private-session.ts": "c21c847f0cc3216eaa3d23d381f9a03467ee5ff6081d416b6e1630e9aee75869",
+    "lib/store.tsx": "cd555312ae5ca879f22d85873cbec54eb911aa1097ab97d5c26b8c3bfa89cbf1",
+    "lib/contracts/comparison-draft.ts": "e215a4869a20f1a06f76d8d14e0f6714f9fc57927c1e2e4f646ca64ee9d51a5f",
+    "lib/contracts/snapshot.ts": "b92b46bf147ddb146ec778a78c31c9612c069e129a2d8e47bc11d2b444128980",
+    "lib/contracts/auth-intent.ts": "5db426e99d4a8cf0394b10b3f41b57b66eb03d1b538acf9e73e5a3dbe74b0183",
+    "lib/guest/handoff.ts": "c4bc0de6f148f0b8c5681fe9fd8f25daefa6f35a157b4083003bb96d237b2630",
+    "lib/guest/storage.ts": "6179cd86f97fbbb0b1a3b1dd695103cbb3491085b8b1d9919a39d1991e585b74",
+    "lib/comparison/private-workspace.ts": "c8adf6ea8317cf5af6860bd929fcf9cd4a0d81e920980a796467f3208835de89",
+    "lib/comparison/transport.ts": "555b6b7cba36895d703118e43af3a8497f915a34369a820219662cbb6fac29b8",
+    "lib/loanStore.tsx": "f7858a1dc8fb6bcdd2b1263bbf79c5e87a5f9dc36b43d55c0efc9a5217df3d1c",
+    "components/ComparisonStatus.tsx": "31cf4f847c01b56fc137b2153ce94b356935e17926f3d62dde202fbbd50935bd",
+    "components/CancelComparisonSignIn.tsx": "fbb585527623140896c2eb793f980d10d12f5bb6288d9b769187fd929f5f7a68",
+    "components/RouteGuard.tsx": "32b3acd87278f7d26235bbcfaeb480897b818f48e3ce1139c279ba3057c472d1",
+    "components/OfferGrid.tsx": "ff97e6783950c90b669e5be7f2936ce3a56843fc507193e37bbb3a77be37be6b",
+    "app/compare/page.tsx": "8764a8ada2b442481762ae6c7104c3183c9789cbeaabd8a573dee32f75b714f5",
+    "app/compare/results/page.tsx": "463e155beb03779a465b0bb7b75f5434754b902f8f60a1e36e44945a8935119b",
+    "app/signin/page.tsx": "90aa1163767b89fe557d5c41b32ee759f95c27efdb9da2d5ef8ba2ff35a171fe",
+    "app/verify/page.tsx": "ca942bf3ea99e7720b0f2d1e1b83d7e77f57347dd63ede3202047516bff5dd31",
+    "app/account/page.tsx": "2c7ef6888263b75f8b102b6e54ed5c3c9cc8d7102b442d735dcff25b25620dec",
+    "tests/compare-provider.test.tsx": "2f0300f60934f04e5600971a9dddcea73cf92696d70b40e50b9b9788c483401f",
+    "tests/comparison-private-workspace.test.ts": "c7993fc6f6f18f7b92bf63087b9eaa192d9903a13d218bfc9747fabbc0f20715",
+    "tests/comparison-transport.test.ts": "0e3636b0e49b9a0d4fecaadd589bf98fd38a4c8d1963b37c26c95d4850b7a6f5",
+    "tests/guest-handoff.test.ts": "6812be506b6fc24a969059914852a42ec81b2efa84f55b9e9d8aacb78ae2a7bf",
+    "tests/loan-ui.test.tsx": "63d5e21f82e4e1ee3c3bf5ce83d9abd08c6707ffc2a78b20d172eca3d70f7f19",
+    "lib/auth/__tests__/mounted.test.tsx": "4bb5dc7493c6210ec5b4795f9d83a4569b77fe56f6d783343f3779ddffbf871d",
+    ".next/BUILD_ID": "c8717d1546f50b832dc98f3c83ad4cee382958273fd1baba3573f8bafb8034ca"
+  },
+  "limitations": [
+    "History, PDF, full shared-device matrix, lifecycle and release work remain open.",
+    "Synthetic Clerk test OTP is not real email-delivery evidence.",
+    "Earlier failed connected runs may have left synthetic Convex records; see browser report.",
+    "No commit, push, production deployment or purchase."
+  ]
+}

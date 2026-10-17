@@ -1,0 +1,24 @@
+{
+  "evidenceType": "local-privacy-and-error-scrubbing",
+  "checkedAt": "2026-10-03T02:53:13.2762242+01:00",
+  "candidateBuildId": "ydMzVTyEiY_q6uNn7FXx1",
+  "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+  "command": "npx vitest run --maxWorkers=2 tests/sensitive-proof.test.ts tests/deletion-journal.test.ts tests/monitoring-scrub.test.ts tests/auth-provider-browser-clear.test.tsx",
+  "status": "passed",
+  "testFiles": 4,
+  "tests": 26,
+  "assertions": [
+    "sensitive proof and token fields are not accepted in analytics/deletion contracts",
+    "deletion journal allowlist excludes proof, token, email and private finance payloads",
+    "monitoring scrub keeps only stable release/environment/error/opaque identifiers",
+    "auth-provider browser-clear path preserves privacy-safe error and cleanup behavior"
+  ],
+  "evidenceBoundary": "Focused local privacy and scrubbing evidence only. Production alert delivery, provider retention/deletion, security review and release approval remain open.",
+  "externalActions": {
+    "commit": false,
+    "push": false,
+    "deployment": false,
+    "providerMutation": false,
+    "submission": false
+  }
+}

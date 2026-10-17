@@ -1,0 +1,54 @@
+{
+  "checkedAt": "2026-10-03T22:39:13.796Z",
+  "buildId": "UgDQFkp_iAa7PojgvmK1I",
+  "mode": "after",
+  "checks": [
+    {
+      "name": "guest comparison form opens",
+      "passed": true
+    },
+    {
+      "name": "guest form offers exactly two loans",
+      "passed": true
+    },
+    {
+      "name": "first result shows the two entered lenders",
+      "passed": true
+    },
+    {
+      "name": "result fits 390px viewport",
+      "passed": true
+    },
+    {
+      "name": "refresh preserves the identical stored result",
+      "passed": true
+    },
+    {
+      "name": "changed input requires sign-in without changing the first result",
+      "passed": true
+    },
+    {
+      "name": "sign-in reload retains the bounded return reference",
+      "passed": true
+    },
+    {
+      "name": "edited guest rate survives sign-in reload",
+      "passed": true
+    },
+    {
+      "name": "sign-in return fits 320px viewport",
+      "passed": true
+    },
+    {
+      "name": "cancelling and reloading restores the edited draft and preserves the first result",
+      "passed": true
+    },
+    {
+      "name": "no page errors",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "browser": "154.0.8037.59",
+  "buildHash": "27cc8a2d21c1494fe4dc1ed3c594495eba0cc7daf0c2a9bffc8b9cdf7a6f147c"
+}

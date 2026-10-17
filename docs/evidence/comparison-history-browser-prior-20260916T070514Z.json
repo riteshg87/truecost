@@ -1,0 +1,83 @@
+{
+  "checkedAt": "2026-09-16T07:05:14.237Z",
+  "buildId": "2ptyOcKPxF0W0l8fJL_3V",
+  "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+  "browser": {
+    "name": "Chrome",
+    "playwright": "1.62.1",
+    "engine": "152.0.7977.83"
+  },
+  "baseUrl": "http://localhost:38117",
+  "checks": [
+    {
+      "name": "reviewed build, Clerk issuer and Convex target match",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "short-lived Clerk testing token obtained without recording its value",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "a disposable member opened empty history",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "b disposable member opened empty history",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "member save appeared in list with the original lender inputs",
+      "passed": true,
+      "details": {
+        "resultId": "471dcad7-ae9a-4441-8151-993b50cf82ee"
+      }
+    },
+    {
+      "name": "a cleanup revoked sessions and deleted only its disposable identity",
+      "passed": true,
+      "details": {
+        "revoked": 1,
+        "deleted": true
+      }
+    },
+    {
+      "name": "b cleanup revoked sessions and deleted only its disposable identity",
+      "passed": true,
+      "details": {
+        "revoked": 1,
+        "deleted": true
+      }
+    }
+  ],
+  "errors": [
+    "history detail did not show the stored total repayment"
+  ],
+  "cleanupErrors": [],
+  "preservedIdentities": [],
+  "ownedRecords": [
+    {
+      "account": "a",
+      "comparisonId": "k179y7qc14a4ydwgv9wa7bnzbh8ehe30",
+      "resultId": "471dcad7-ae9a-4441-8151-993b50cf82ee"
+    }
+  ],
+  "status": "failed",
+  "limits": [
+    "Two-account cleanup and a second tab are browser checks; server ownership remains authoritative."
+  ],
+  "scriptSha256": "19fdcb351dec6aaefa72e92dd79a20c3704ece3a396562d2854fd05232a6aa38",
+  "sourceHashes": {
+    "lib/comparison/private-workspace.ts": "2ed6163c79df3063aada2d208e336c15794f2ce94e468e48683792772c092389",
+    "lib/comparison/history-transport.ts": "e73f2a57268d342172510aff563c6674331b5a4887efc0598ddbd5102d29e94a",
+    "lib/comparison/history-provider.tsx": "3ad11b1a25d6b73bc4fc60a2132ade56ecc6c0402ca1420eb530ce2b82333f4d",
+    "components/SavedComparisonView.tsx": "0878d8da2bcb2eb433bfc8017d7f848f579691be7fe9d14ec7b222708e0f5b5f",
+    "app/comparisons/page.tsx": "f8dcbb8ae80cba8b93e5812c50ca3bf9eb000fe8ac782fd811b3eec8a64d76fb",
+    "app/comparisons/[id]/page.tsx": "0292f18a4fa538d78ba7c63c1850467c1a9c5edfa40796ddc29660175ea0904f",
+    "scripts/check-comparison-history-browser.mjs": "19fdcb351dec6aaefa72e92dd79a20c3704ece3a396562d2854fd05232a6aa38",
+    ".next/BUILD_ID": "3e02f841b0bb6f701eddadb7f6647fdfae42c2d8a34a25b88dcb8528988ee4e6"
+  }
+}

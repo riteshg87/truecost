@@ -1,0 +1,30 @@
+{
+  "checkedAt": "2026-09-16T03:10:30.509Z",
+  "buildId": "Fy3lhWuXWc1vX28Biuvum",
+  "mode": "before",
+  "checks": [
+    {
+      "name": "guest comparison form opens",
+      "passed": true
+    },
+    {
+      "name": "baseline permits a third guest offer",
+      "passed": true
+    },
+    {
+      "name": "first result shows the two entered lenders",
+      "passed": true
+    },
+    {
+      "name": "result fits 390px viewport",
+      "passed": true
+    },
+    {
+      "name": "no page errors",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "browser": "152.0.7977.83",
+  "buildHash": "97cf25b8e7f00ac6333756cbc4a4a61e6771b68cd308422cf38289e293f184bb"
+}

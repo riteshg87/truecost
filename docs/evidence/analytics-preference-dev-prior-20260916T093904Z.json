@@ -1,0 +1,52 @@
+{
+  "checkedAt": "2026-09-16T08:37:31.209Z",
+  "status": "failed",
+  "buildId": "2ptyOcKPxF0W0l8fJL_3V",
+  "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+  "deployment": {
+    "environment": "development",
+    "deployment": "dev:dutiful-fly-37",
+    "convexUrl": "https://dutiful-fly-37.convex.cloud",
+    "clerkIssuer": "live-tarpon-2666.clerk.accounts.dev"
+  },
+  "browser": {
+    "name": "Chrome",
+    "playwright": "1.62.1",
+    "engine": "152.0.7977.83"
+  },
+  "baseUrl": "http://localhost:38119",
+  "checks": [
+    {
+      "name": "approved development target and reviewed build matched",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "short-lived Clerk testing token obtained without recording its value",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "a disposable member reached the authenticated route",
+      "passed": true,
+      "details": {}
+    }
+  ],
+  "errors": [
+    "verified Convex token was unavailable"
+  ],
+  "cleanupErrors": [],
+  "preservedIdentities": [],
+  "retainedSyntheticRows": [],
+  "limits": [
+    "Convex has no reviewed public preference/profile deletion operation; cleanup withdraws consent, deletes only the disposable Clerk users, and records retained Convex owner references.",
+    "No client token, secret, email, or raw provider error is written to evidence."
+  ],
+  "sourceHashes": {
+    "convex/analytics.ts": "c73fb67dec5dc922e47d7301753e4384e9aa7449e6ac0fa8410d46cf4381177d",
+    "convex/schema.ts": "3e95c39504dc302a501218762605e70eadbbbdc1474c4cb23f9d074e31b44a0e",
+    "convex/_generated/api.d.ts": "3c8467dc6a840c3f53a367bdea4da92ba9afdfa62839f573ada6af6e22bb9569",
+    ".next/BUILD_ID": "3e02f841b0bb6f701eddadb7f6647fdfae42c2d8a34a25b88dcb8528988ee4e6"
+  },
+  "scriptSha256": "c0324b47e92059178c6a290dcc878a552daa4543a797ae2a5eacb41022263937"
+}

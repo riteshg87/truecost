@@ -1,0 +1,16 @@
+{
+  "checkedOn": "2026-09-18",
+  "project": "TrueCost Development",
+  "projectId": 4064154,
+  "sourceRun": "member-analytics-browser-2026-09-17T17-14-58-817Z.json",
+  "method": "Native browser Mixpanel Events and observed member User Profile Activity Feed",
+  "observations": {
+    "sixNewestEventsPresent": true,
+    "memberRowsSharedOneCanonicalMemberId": true,
+    "guestRowsInitiallyDisplayedDevicePrefix": true,
+    "memberActivityFeedContainedAllSixGuestAndMemberEvents": true,
+    "events": ["comparison_started", "comparison_completed", "auth_completed", "comparison_completed", "auth_prompt_viewed", "comparison_started"],
+    "profilePropertiesAbsent": true
+  },
+  "limits": "Synthetic development run only. Raw identifiers are omitted. Event list ingestion and later profile-feed join were observed separately; mapping latency is not measured. No production or shared-device/account-switch acceptance is implied."
+}

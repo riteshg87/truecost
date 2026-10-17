@@ -1,0 +1,1175 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-04T05:07:20.000Z",
+  "candidate": {
+    "status": "NO-GO",
+    "decisionReason": "Release evidence is consolidated, but provider access, production configuration, recovery, human sign-off, media review and publication approval remain open.",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "dirtyWorktree": true,
+    "localBuildId": "ydMzVTyEiY_q6uNn7FXx1",
+    "offlineShellBuildId": "8ecaf70f4be9b1ec",
+    "localBuild": {
+      "command": "npm run build",
+      "status": "passed",
+      "generatedRoutes": 19,
+      "evidenceBoundary": "Current checkout build only; no deployment or publication."
+    }
+  },
+  "checks": {
+    "fullLocalBaseline": {
+      "evidence": "docs/evidence/local-baseline-2026-10-02.json",
+      "sourceBuildId": "HBKsiYtVfcMcoNQ26SNVk",
+      "tests": "1,061/1,061",
+      "testFiles": 109,
+      "typecheck": "passed",
+      "note": "This full baseline is tied to its recorded source build and is not relabelled as the current build."
+    },
+    "currentLanding": {
+      "evidence": "docs/evidence/landing-browser-current-2026-10-04.json",
+      "checkedAt": "2026-10-04T00:45:13.268Z",
+      "buildId": "1iwP4oc_H3NlGLD2I7W_j",
+      "status": "passed",
+      "evidenceBoundary": "Current-checkout read-only browser evidence for landing content, themes, keyboard paths and reduced-motion behavior; authenticated, installed-app, real-device and production gates remain open.",
+      "checks": 13,
+      "browser": {
+        "name": "Chrome",
+        "engine": "154.0.8037.59",
+        "playwright": "1.62.1"
+      },
+      "errors": 0,
+      "consoleErrors": 0,
+      "requestFailures": 0
+    },
+    "currentGuestComparison": {
+      "evidence": "docs/evidence/comparison-browser-after.json",
+      "checkedAt": "2026-10-03T00:29:00.948Z",
+      "buildId": "ydMzVTyEiY_q6uNn7FXx1",
+      "status": "passed",
+      "evidenceBoundary": "Current candidate guest browser evidence for ydMzVTyEiY_q6uNn7FXx1; scoped guest comparison and sign-in handoff only.",
+      "checks": 11,
+      "browser": "Chrome 154.0.8037.59",
+      "limitations": "Guest comparison and sign-in handoff only; authenticated provider, installed-app and real-device gates remain open."
+    },
+    "accountExportBrowser": {
+      "evidence": "docs/evidence/account-export-browser-current-2026-10-04.json",
+      "checkedAt": "2026-10-04T00:35:08.972Z",
+      "buildId": "1iwP4oc_H3NlGLD2I7W_j",
+      "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+      "status": "passed",
+      "checks": 14,
+      "browser": "Chrome 154.0.8037.59",
+      "errors": 0,
+      "cleanupErrors": 0,
+      "evidenceBoundary": "Current-checkout development-browser account-export, account-A/B isolation and signed-out approval evidence; Convex profiles, receipts, export-session metadata, provider deletion and retention remain open.",
+      "externalActions": {
+        "authorizedDisposableDevelopmentMutation": true,
+        "hostedSettingsChanged": false,
+        "productionChanged": false,
+        "commit": false,
+        "push": false,
+        "deployment": false,
+        "externalSubmission": false
+      }
+    },
+    "currentMvpBrowser": {
+      "evidence": "docs/evidence/clerk-browser-mvp-demo.json",
+      "checkedAt": "2026-10-02T23:10:32.773Z",
+      "buildId": "ydMzVTyEiY_q6uNn7FXx1",
+      "status": "passed",
+      "checks": 15,
+      "browser": "Chrome 154.0.8037.59",
+      "limitations": "Development Clerk/Convex demo flow only; production email delivery, reviewer access, Convex profile cleanup, final media review and submission approval remain open."
+    },
+    "currentRecoveryBrowser": {
+      "evidence": "docs/evidence/comparison-recovery-browser.json",
+      "checkedAt": "2026-10-02T22:48:00.376Z",
+      "buildId": "ydMzVTyEiY_q6uNn7FXx1",
+      "status": "passed",
+      "checks": 8,
+      "browser": "Chrome 154.0.8037.59",
+      "limitations": "Bounded retry and local recovery only; production recovery, provider deletion, retention and rollback remain open."
+    },
+    "hostedPerformance": {
+      "evidence": "docs/evidence/hosted-performance-sample-2026-10-02.json",
+      "status": "partial-evidence",
+      "checkedAt": "2026-10-03T00:43:29.396Z",
+      "samples": 36,
+      "target": "https://truecost-ebon.vercel.app/",
+      "aggregateMedians": {
+        "responseEndMs": 335.90000000596046,
+        "domContentLoadedMs": 372.5000000298023,
+        "loadEventEndMs": 522.5999999940395,
+        "lcpMs": 964,
+        "cls": 0,
+        "tbtMs": 0
+      },
+      "limitation": "Read-only hosted-development sample; no authenticated/provider/Mixpanel state, production approval, real-device, controlled-network or field evidence.",
+      "candidateBuildId": "ydMzVTyEiY_q6uNn7FXx1"
+    },
+    "routeGuardContract": {
+      "command": "npx vitest run --maxWorkers=2 lib/auth/__tests__/auth.test.tsx lib/auth/__tests__/auth.test.ts",
+      "status": "passed",
+      "tests": 21,
+      "note": "Guest result and member history fallbacks match the access contract."
+    },
+    "diffCheck": {
+      "command": "git diff --check",
+      "status": "passed"
+    },
+    "sourceMapCheck": {
+      "evidence": "docs/evidence/local-source-map-check-2026-10-03.json",
+      "checkedAt": "2026-10-03T00:27:35.208Z",
+      "buildId": "ydMzVTyEiY_q6uNn7FXx1",
+      "status": "passed",
+      "evidenceBoundary": "Current candidate local artifact evidence for ydMzVTyEiY_q6uNn7FXx1; hosted and production assets remain unverified.",
+      "publicMapFiles": [],
+      "staticMapFiles": [],
+      "sourceMappingURLFiles": [],
+      "limitation": "Internal .next/dev, .next/build and .next/server artifacts were excluded; no production asset or deployment check was performed."
+    },
+    "taskStatusRegister": {
+      "evidence": "docs/evidence/task-status-2026-10-02.json",
+      "checkedAt": "2026-10-04T04:21:45.963Z",
+      "tasks": 34,
+      "statusCounts": {
+        "complete": 1,
+        "partial": 24,
+        "pending": 8,
+        "deferred": 1
+      },
+      "releaseDecision": "NO-GO"
+    },
+    "mixpanelCandidateBoundary": {
+      "evidence": "docs/evidence/analytics-mixpanel-browser-2026-10-02T15-14-51-585Z.json",
+      "status": "not-applicable",
+      "candidateBuildId": "JK8YZ6fE1x2vWctEm0xJS",
+      "reason": "The exact release candidate is built with analytics disabled by design, so the enabled Mixpanel harness stopped at its consent control. Enabled development checks remain separate and are not relabelled as this candidate.",
+      "externalAction": false
+    },
+    "demoArtifacts": {
+      "evidence": "docs/evidence/demo-artifact-machine-check-2026-10-02.json",
+      "status": "passed-machine-checks",
+      "onePagerPages": 1,
+      "videoDurationSeconds": 180.68,
+      "videoOutputs": 2,
+      "fullDecode": true,
+      "humanReviewOpen": [
+        "full audio listening",
+        "caption readability at normal playback",
+        "reviewer access and final acceptance"
+      ],
+      "externalAction": false,
+      "onePagerVisualCheck": "passed-local-render"
+    },
+    "legacyDeviceAdoption": {
+      "evidence": "docs/evidence/legacy-device-adoption-browser.json",
+      "checkedAt": "2026-10-03T00:36:13.105Z",
+      "buildId": "ydMzVTyEiY_q6uNn7FXx1",
+      "status": "passed-development-browser",
+      "evidenceBoundary": "Current candidate development-browser evidence for ydMzVTyEiY_q6uNn7FXx1; installed-app adoption and broader lifecycle acceptance remain open.",
+      "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+      "checks": 15,
+      "browser": "Chrome 154.0.8037.59",
+      "cleanupErrors": 0,
+      "scope": "Disposable Clerk/Convex account-page flow; legacy seed was imported only after explicit choice, acknowledged server-side, removed from device after confirmation, and deleted from the account through Convex.",
+      "openGates": [
+        "full authenticated browser acceptance of the account-page choice",
+        "installed-app adoption and broader lifecycle matrix"
+      ],
+      "externalAction": false
+    },
+    "supabaseRetirement": {
+      "evidence": "docs/evidence/supabase-retirement-local-2026-10-02.json",
+      "status": "historical-passed-local",
+      "evidenceBoundary": "Historical development evidence from yAPHNfIW8scb2GyyGdBIo; not a current-candidate verification.",
+      "candidateBuildId": "yAPHNfIW8scb2GyyGdBIo",
+      "focusedTests": 27,
+      "fullTests": "1,055/1,055",
+      "typecheck": "passed",
+      "routes": 19,
+      "openGates": [
+        "full authenticated browser acceptance of the account-page choice",
+        "installed-app adoption and broader lifecycle matrix"
+      ],
+      "externalAction": false
+    },
+    "guestProviderOutageBrowser": {
+      "evidence": "docs/evidence/guest-provider-outage-browser.json",
+      "checkedAt": "2026-10-03T00:59:34.201Z",
+      "candidateBuildId": "ydMzVTyEiY_q6uNn7FXx1",
+      "status": "passed",
+      "checks": 5,
+      "blockedRequests": 8,
+      "errors": 0,
+      "requestFailures": 0,
+      "evidenceBoundary": "Current candidate guest outage browser evidence; guest comparison stayed usable and private routes stayed locked while provider requests were blocked in this context. Console resource failures are expected from the deliberate interception. Member persistence, production provider behavior and release gates remain open."
+    },
+    "analyticsPreferenceDev": {
+      "evidence": "docs/evidence/analytics-preference-dev-20261003T010425Z.json",
+      "checkedAt": "2026-10-03T01:04:25.98Z",
+      "candidateBuildId": "ydMzVTyEiY_q6uNn7FXx1",
+      "status": "passed",
+      "checks": 14,
+      "browser": "Chrome 154.0.8037.59",
+      "cleanupErrors": 0,
+      "retainedSyntheticRows": 2,
+      "evidenceBoundary": "Current candidate development preference and identity evidence; the reviewed Convex deletion operation is unavailable, so two synthetic preference rows remain recorded. Mixpanel ingestion, dashboard reconciliation, provider retention/deletion and production release gates remain open."
+    },
+    "mixpanelContractLocal": {
+      "evidence": "docs/evidence/mixpanel-contract-local-2026-10-03.json",
+      "checkedAt": "2026-10-03T03:06:45.0242707+01:00",
+      "candidateBuildId": "ydMzVTyEiY_q6uNn7FXx1",
+      "status": "passed-focused-local",
+      "testFiles": 5,
+      "tests": 53,
+      "evidenceBoundary": "Current checkout adapter, event, configuration, provider-consent and integration tests; no provider requests or external state changed."
+    },
+    "mixpanelContractLocalRerun": {
+      "evidence": "docs/evidence/mixpanel-contract-local-rerun-2026-10-04.json",
+      "checkedAt": "2026-10-04T00:18:56.6732978+01:00",
+      "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+      "candidateBuildId": "ydMzVTyEiY_q6uNn7FXx1",
+      "status": "passed-focused-local-rerun",
+      "testFiles": 5,
+      "tests": 53,
+      "evidenceBoundary": "Fresh current-checkout analytics contract rerun; no provider requests, Mixpanel ingestion, deployment or external state changed. Live ingestion, dashboard reconciliation, provider retention/deletion and production approval remain open."
+    },
+    "loanIntegrationBrowser": {
+      "evidence": "docs/evidence/clerk-browser-loan-20261003T011547Z.json",
+      "checkedAt": "2026-10-03T01:15:47.688Z",
+      "candidateBuildId": "ydMzVTyEiY_q6uNn7FXx1",
+      "status": "passed",
+      "checks": 56,
+      "browser": "Chrome 154.0.8037.59",
+      "errors": 0,
+      "cleanupErrors": 0,
+      "evidenceBoundary": "Current candidate development Clerk/Convex browser evidence for email OTP, loan save/reload, offline quote recovery, cold-offline privacy, responsive account/loan status, sign-out gating and owned cleanup. Production email, installed-app, real-device and provider-side gates remain open."
+    }
+  },
+  "openGates": [
+    "Mixpanel project access, live ingestion, dashboard reconciliation and provider retention/deletion",
+    "Production Vercel, Clerk, Convex, domain, monitoring and backup configuration",
+    "Recovery RPO/RTO, deletion replay and provider-side account deletion verification",
+    "Finance, privacy, security, accessibility and support owner sign-off",
+    "Chronicle PDF export retrieval and editor permissions",
+    "Runway guest navigation is observed; account access, credits, rights and approved exports remain open",
+    "Independent full video playback, reviewer access and submission approval",
+    "Installed-app service-worker upgrade and rollback plus broader device/accessibility matrix"
+  ],
+  "externalActions": {
+    "productionDeployment": false,
+    "providerMutation": false,
+    "commit": false,
+    "push": false,
+    "externalSubmission": false
+  },
+  "currentCandidateVerification": {
+    "checkedAt": "2026-10-02T22:51:01.1477798Z",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "buildId": "ydMzVTyEiY_q6uNn7FXx1",
+    "evidence": "docs/evidence/current-candidate-verification-2026-10-02.json",
+    "tests": {
+      "command": "npm test -- --maxWorkers=2",
+      "status": "passed",
+      "testFiles": 111,
+      "tests": 1059
+    },
+    "typecheck": {
+      "command": "npm run typecheck",
+      "status": "passed"
+    },
+    "build": {
+      "command": "npm run build",
+      "status": "passed",
+      "generatedRoutes": 19
+    },
+    "externalActions": {
+      "deployment": false,
+      "providerMutation": false,
+      "commit": false,
+      "push": false,
+      "externalSubmission": false
+    },
+    "releaseManifestPathAudit": {
+      "evidence": "docs/evidence/release-manifest-path-audit-2026-10-04-current.json",
+      "referencedPaths": 81,
+      "missingPaths": 0,
+      "checkedAt": "2026-10-04T05:07:20.000Z",
+      "status": "passed"
+    }
+  },
+  "currentBuildRerun": {
+    "evidence": "docs/evidence/current-build-rerun-2026-10-04-latest.json",
+    "checkedAt": "2026-10-04T04:40:55.1821532Z",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "candidateBuildId": "bm38SzfSfXwstgpYCARC4",
+    "status": "passed-local-build-rerun",
+    "generatedRoutes": 19,
+    "typecheck": "passed",
+    "build": "passed",
+    "evidenceBoundary": "Fresh current-checkout typecheck and production-build rerun; no deployment, provider mutation, commit, push or external submission.",
+    "externalActions": false
+  },
+  "fullSuiteRerun": {
+    "evidence": "docs/evidence/current-full-suite-rerun-2026-10-04-final.json",
+    "checkedAt": "2026-10-04T05:01:37.5198026Z",
+    "candidateBuildId": "bm38SzfSfXwstgpYCARC4",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "status": "passed",
+    "commands": {
+      "tests": "npm test -- --maxWorkers=2"
+    },
+    "testFiles": 112,
+    "tests": 1063,
+    "durationSeconds": 97.36,
+    "externalActions": {
+      "providerMutation": false,
+      "deployment": false,
+      "commit": false,
+      "push": false,
+      "externalSubmission": false
+    },
+    "evidenceBoundary": "Current checkout full unit, UI and Convex test suite after diagnostics instrumentation; hosted provider ingestion, production configuration, installed-app/device acceptance, human review and release approval remain open."
+  },
+  "taskRegisterFileAudit": {
+    "evidence": "docs/evidence/task-register-file-audit-2026-10-04-final34.json",
+    "checkedAt": "2026-10-04T05:07:20.000Z",
+    "tasks": 34,
+    "evidenceReferences": 187,
+    "missingTasks": 0,
+    "status": "passed"
+  },
+  "analyticsLocalEnvPreflight": {
+    "evidence": "docs/evidence/analytics-local-env-preflight-2026-10-03.json",
+    "checkedAt": "2026-10-03T00:13:26.8250643Z",
+    "status": "local-names-present-live-verification-open",
+    "valuesRead": false,
+    "networkContacted": false,
+    "externalActions": false
+  },
+  "offlineShellVerification": {
+    "checkedAt": "2026-10-02T14:57:30.0237602Z",
+    "command": "npm run build:offline",
+    "status": "passed",
+    "version": "8ecaf70f4be9b1ec",
+    "serviceWorkerVersion": "8ecaf70f4be9b1ec",
+    "manifest": "8ecaf70f4be9b1ec"
+  },
+  "serviceWorkerUpgrade": {
+    "evidence": "docs/evidence/service-worker-upgrade-browser.json",
+    "checkedAt": "2026-10-03T00:20:57.248Z",
+    "status": "passed",
+    "checks": 5,
+    "initialVersion": "8ecaf70f4be9b1ec",
+    "upgradedVersion": "8ecaf70f4be9b1ec-upgrade",
+    "scope": "Open browser tab with local service worker; installed-app upgrade and rollback remain unverified."
+  },
+  "serviceWorkerUpgradeLocalRerun": {
+    "evidence": "docs/evidence/service-worker-upgrade-browser-rerun-2026-10-04.json",
+    "checkedAt": "2026-10-03T23:27:33.106Z",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "candidateBuildId": "ydMzVTyEiY_q6uNn7FXx1",
+    "status": "passed-local-open-tab-rerun",
+    "checks": 5,
+    "scope": "Fresh open-tab upgrade and rollback with generated assets and unrelated-cache preservation; installed-app, device, provider and release gates remain open.",
+    "externalActions": false
+  },
+  "resultsTableBrowser": {
+    "evidence": "docs/evidence/results-table-browser-current-2026-10-04.json",
+    "checkedAt": "2026-10-04T00:45:47.58Z",
+    "status": "passed",
+    "checks": 7,
+    "browser": {
+      "name": "Chrome",
+      "engine": "154.0.8037.59",
+      "playwright": "1.62.1"
+    },
+    "buildId": "1iwP4oc_H3NlGLD2I7W_j",
+    "limitations": "Read-only guest two-offer table at 1280px and 320px with semantic headers, complete numeric cells, keyboard horizontal scrolling and no provider writes; full accessibility, authenticated, installed-app and real-device acceptance remain open.",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "sourceHashes": {
+      ".next/BUILD_ID": "2cd6c2934ec1e816120bac489686f3a01ff3db8082f14a4e9a5be8507eff570b",
+      "scripts/check-results-table-browser.mjs": "6ba9305d99b0599543433e7a90cc40c040fac58920abcbe9466e1a7bc64e5915",
+      "components/ResultsTable.tsx": "42e49e70b9d34104c155571f391b05b37b673a5162bc5dfe7c1791ba16f2895c",
+      "app/compare/results/page.tsx": "c6d69d60e53949b5d4d78546e964445f779a1217ec762c2b8081bb8179c679a5"
+    },
+    "harnessSourceSha256": "6ba9305d99b0599543433e7a90cc40c040fac58920abcbe9466e1a7bc64e5915"
+  },
+  "accessibilityResultsTableLocal": {
+    "evidence": "docs/evidence/accessibility-results-table-local-2026-10-03.json",
+    "checkedAt": "2026-10-03T02:44:14.0490927+01:00",
+    "candidateBuildId": "ydMzVTyEiY_q6uNn7FXx1",
+    "status": "passed-focused-semantic",
+    "command": "npx vitest run --maxWorkers=2 tests/results-table-accessibility.test.tsx",
+    "testFiles": 1,
+    "tests": 2,
+    "evidenceBoundary": "Focused jsdom semantic table evidence; full browser, screen-reader, contrast, zoom, forced-colors, device and installed-app acceptance remain open.",
+    "externalActions": false
+  },
+  "accessibilityResultsTableLocalRerun": {
+    "evidence": "docs/evidence/accessibility-results-table-local-2026-10-03-rerun.json",
+    "checkedAt": "2026-10-03T22:48:42Z",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "buildId": "ujIJXQDHA9Mwk2jE0jKnM",
+    "status": "passed-source-equivalent-local",
+    "focusedTests": "2/2",
+    "browserChecks": "7/7",
+    "evidenceBoundary": "Fresh local rerun after the two-offer 20rem minimum-width fix; this does not relabel the reviewed ydMz candidate or close the broader accessibility gate.",
+    "externalAction": false
+  },
+  "defaultTestVerification": {
+    "checkedAt": "2026-10-02T20:55:16.568Z",
+    "command": "npm test -- --maxWorkers=2",
+    "status": "historical-passed",
+    "testFiles": 111,
+    "tests": 1059,
+    "buildId": "2Bu3MZWREPtxsAbL9cmPp",
+    "note": "Historical 2Bu3 checkpoint after the explicit legacy-device adoption slice; the current ydMz verification is recorded in currentCandidateVerification."
+  },
+  "demoScriptTiming": {
+    "path": "docs/evidence/demo-script-timing-2026-10-02.json",
+    "checkedAt": "2026-10-02T19:11:54.715Z",
+    "status": "passed",
+    "script": "docs/demo/video-script.md",
+    "assemblyDurationSeconds": 180.683,
+    "captionCueCount": 11,
+    "limitation": "Script timing does not replace presenter rehearsal, full audio listening, reviewer acceptance, upload or submission approval."
+  },
+  "demoAssetRegister": {
+    "path": "docs/demo/runway-asset-register.md",
+    "status": "local-handoff-ready",
+    "openingGeneration": "pending",
+    "localProductCuts": [
+      "docs/evidence/demo-edits/truecost-hosted-development-16x9.mp4",
+      "docs/evidence/demo-edits/truecost-hosted-development-9x16.mp4"
+    ],
+    "externalAction": false,
+    "open": [
+      "Runway/Higgsfield access",
+      "zero-cost generation authorization",
+      "rights/export verification",
+      "full listening",
+      "reviewer playback",
+      "submission approval"
+    ]
+  },
+  "currentIntegratedBrowser": {
+    "evidence": "docs/evidence/comparison-auth-browser.json",
+    "checkedAt": "2026-10-04T00:03:32.497Z",
+    "buildId": "1iwP4oc_H3NlGLD2I7W_j",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "browser": "Chrome 154 / Playwright 1.62.1",
+    "status": "passed",
+    "checks": 32,
+    "errors": 0,
+    "cleanupErrors": 0,
+    "scope": "Development Clerk/Convex disposable comparison flow with two-account isolation, guest result, email OTP, authenticated save/list/get, third offer, offline queued save/reconnect acknowledgement, private sign-out clearing and owned cleanup. Production provider configuration, installed-app and reviewer gates remain open."
+  },
+  "currentLoanBrowser": {
+    "evidence": "docs/evidence/clerk-browser-loan-current-2026-10-04.json",
+    "checkedAt": "2026-10-04T00:06:27.592Z",
+    "buildId": "1iwP4oc_H3NlGLD2I7W_j",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "browser": "Chrome 154 / Playwright 1.62.1",
+    "status": "passed",
+    "checks": 56,
+    "errors": 0,
+    "cleanupErrors": 0,
+    "scope": "Development Clerk/Convex loan flow with email OTP, account binding, loan and transfer-quote save/reload, warm and cold offline recovery, responsive account and loan status, keyboard sign-out access, UI deletion and disposable cleanup. Production email delivery, provider retention/deletion, installed-app and release gates remain open."
+  },
+  "comparisonHistoryBrowser": {
+    "evidence": "docs/evidence/comparison-history-browser.json",
+    "checkedAt": "2026-10-04T03:37:08.773Z",
+    "buildId": "R-YV2Ykfq677oTDdfRFCj",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "status": "passed",
+    "checks": 24,
+    "browser": "Chrome 154.0.8037.59",
+    "cleanupErrors": 0,
+    "errors": 0,
+    "scope": "Current normal-build disposable two-account browser flow with desktop and 390px warm-offline PDF parity, queued deletion mirrored to a second same-account tab, warm/cold offline privacy locks, reconnect deletion, foreign read/delete rejection and 320px/390px history controls.",
+    "openGates": [
+      "Interrupted-save and installed-app/real-device acceptance remain open.",
+      "Provider-side deletion, retention and release approval remain open."
+    ],
+    "externalActions": {
+      "authorizedDisposableDevelopmentMutation": true,
+      "providerDataMutation": true,
+      "providerSettings": false,
+      "hostedSettings": false,
+      "production": false,
+      "deployment": false,
+      "commit": false,
+      "push": false,
+      "submission": false
+    },
+    "evidenceBoundary": "Current normal analytics-disabled R-YV2 development-browser history and offline evidence; the harness created and deleted disposable development provider data and identities, with no hosted, production, deployment, commit, push or submission action."
+  },
+  "comparisonHistoryDeleteProbe": {
+    "evidence": "docs/evidence/comparison-history-delete-probe-2026-10-02.json",
+    "candidateBuildId": "2Bu3MZWREPtxsAbL9cmPp",
+    "status": "passed-focused-browser-probe",
+    "evidenceBoundary": "Focused historical 2Bu3 probe; not a current-candidate verification.",
+    "scope": "One-account warm-offline deletion queue; local pending state rendered and persisted.",
+    "openGates": [
+      "Full two-account history/report run",
+      "Reconnect pump, interrupted save and installed-app/real-device acceptance"
+    ],
+    "externalAction": false
+  },
+  "historyLifecycleLocal": {
+    "evidence": "docs/evidence/history-lifecycle-local-2026-10-02.json",
+    "checkedAt": "2026-10-02T22:51:01.1477798Z",
+    "status": "passed-local-history-lifecycle",
+    "candidateBuildId": "ydMzVTyEiY_q6uNn7FXx1",
+    "tests": 41,
+    "testFiles": 3,
+    "openGates": [
+      "Installed-app and real-device offline acceptance",
+      "Provider-side deletion, retention and release approval"
+    ],
+    "externalAction": false
+  },
+  "comparisonHistoryDeleteTwoTabProbe": {
+    "evidence": "docs/evidence/comparison-history-delete-two-tab-probe-2026-10-02.json",
+    "candidateBuildId": "2Bu3MZWREPtxsAbL9cmPp",
+    "status": "passed-focused-browser-probe",
+    "evidenceBoundary": "Focused historical 2Bu3 probe; not a current-candidate verification.",
+    "scope": "Two same-account tabs reflected a queued warm-offline deletion.",
+    "openGates": [
+      "Full history/report flow and reconnect pump",
+      "Installed-app/real-device acceptance"
+    ],
+    "externalAction": false
+  },
+  "offlineBrowser": {
+    "evidence": "docs/evidence/offline-browser-smoke.json",
+    "checkedAt": "2026-10-03T00:19:47.574Z",
+    "status": "passed",
+    "checks": 13,
+    "browser": "154.0.8037.59",
+    "offlineShellBuildId": "8ecaf70f4be9b1ec",
+    "limitations": [
+      "Guest/public offline shell only; private installed-app and real-device acceptance remain open."
+    ]
+  },
+  "demoArtifacts": {
+    "evidence": "docs/evidence/demo-artifact-machine-check-2026-10-02.json",
+    "audioWaveformEvidence": "docs/evidence/demo-audio-waveform-2026-10-02.json",
+    "audioWaveformStatus": "passed-machine-checks",
+    "audioWaveformLimit": "Waveform analysis checks the narration source only; it does not replace full human playback, caption readability review or reviewer acceptance.",
+    "currentCandidateCapture": {
+      "evidence": "docs/evidence/demo-edits/demo-capture-current-ydMz-redaction.json",
+      "buildId": "ydMzVTyEiY_q6uNn7FXx1",
+      "status": "passed-local-redaction-review-required",
+      "rawShareable": false,
+      "fullPlayback": "open",
+      "externalAction": false
+    }
+  },
+  "demoArtifactLocalRerun": {
+    "evidence": "docs/evidence/demo-artifact-machine-check-2026-10-04.json",
+    "checkedAt": "2026-10-04T00:12:12.1189997+01:00",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "status": "passed-local-machine-and-visual-checks",
+    "onePagerPages": 1,
+    "onePagerVisualCheck": "passed-local-inspection",
+    "evidenceBoundary": "Local designed PDF and rendered PNG only; Chronicle export retrieval, editor permission, human media review and release approval remain open.",
+    "externalActions": false
+  },
+  "providerLifecycle": {
+    "evidence": "docs/evidence/provider-lifecycle-local-2026-10-02.json",
+    "checkedAt": "2026-10-02T22:51:01.1477798Z",
+    "candidateBuildId": "ydMzVTyEiY_q6uNn7FXx1",
+    "status": "passed-local-provider-lifecycle",
+    "tests": 70,
+    "testFiles": 4,
+    "openGates": [
+      "Live Mixpanel dashboard reconciliation",
+      "Provider-side retention and historical deletion",
+      "Production provider configuration and approval"
+    ],
+    "externalAction": false
+  },
+  "monitoringScrub": {
+    "evidence": "docs/evidence/monitoring-scrub-local-2026-10-02.json",
+    "checkedAt": "2026-10-02T20:57:20Z",
+    "status": "passed-local-boundary",
+    "tests": 4,
+    "openGates": [
+      "Sentry project and operator alert delivery",
+      "production scrubbing verification"
+    ],
+    "externalAction": false
+  },
+  "privacyScrubbingFocusedLocal": {
+    "evidence": "docs/evidence/privacy-scrubbing-local-2026-10-03.json",
+    "checkedAt": "2026-10-03T02:53:13.2762242+01:00",
+    "candidateBuildId": "ydMzVTyEiY_q6uNn7FXx1",
+    "status": "passed-focused-local",
+    "testFiles": 4,
+    "tests": 26,
+    "evidenceBoundary": "Focused local privacy and error-scrubbing evidence; production alert delivery, provider retention/deletion, security review and release approval remain open.",
+    "externalActions": false
+  },
+  "secretBoundaryStatic": {
+    "evidence": "docs/evidence/secret-boundary-static-2026-10-03.json",
+    "checkedAt": "2026-10-03T02:57:39.9850644+01:00",
+    "candidateBuildId": "ydMzVTyEiY_q6uNn7FXx1",
+    "status": "passed-static",
+    "serverOnlySecretReferences": 6,
+    "evidenceBoundary": "Static source boundary only; bundler output, deployment secrets, provider configuration, runtime headers and security owner review remain open.",
+    "externalActions": false
+  },
+  "secretBoundaryBuild": {
+    "evidence": "docs/evidence/secret-boundary-build-2026-10-03.json",
+    "checkedAt": "2026-10-03T02:14:20.254Z",
+    "candidateBuildId": "ydMzVTyEiY_q6uNn7FXx1",
+    "status": "passed-static-no-secret-values",
+    "clientBundleSecretValueHits": 0,
+    "serverBundleSecretValueHits": 0,
+    "dependencyNameReferences": "reported separately; no environment values matched",
+    "evidenceBoundary": "Current local .next output only; deployment settings, provider state, runtime headers and security owner review remain open.",
+    "externalActions": false
+  },
+  "secretBoundaryBuildRerun": {
+    "evidence": "docs/evidence/secret-boundary-build-rerun-2026-10-04.json",
+    "checkedAt": "2026-10-04T08:52:00+01:00",
+    "candidateBuildId": "llH6YCL2zRu1VEYvtRTd7",
+    "status": "passed-static-no-secret-values",
+    "clientBundleSecretValueHits": 0,
+    "serverBundleSecretValueHits": 0,
+    "evidenceBoundary": "Fresh source-equivalent local .next output only; deployment settings, provider state, runtime headers and security-owner review remain open.",
+    "externalActions": false
+  },
+  "currentRecoveryBrowser": {
+    "evidence": "docs/evidence/comparison-recovery-browser-current-2026-10-04.json",
+    "checkedAt": "2026-10-04T02:28:39.509Z",
+    "buildId": "1iwP4oc_H3NlGLD2I7W_j",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "status": "passed",
+    "checks": 8,
+    "cleanupErrors": 0,
+    "scope": "Source-equivalent local Chrome recovery evidence: bounded retry exhaustion, explicit same-request recovery, expired queued-save refusal and owned cleanup.",
+    "evidenceBoundary": "Current source-equivalent development-browser recovery evidence. The reviewed release candidate remains separately bound in the manifest; production recovery, provider retention/deletion and release approval remain open.",
+    "externalActions": {
+      "authorizedDisposableDevelopmentMutation": true,
+      "providerDataMutation": true,
+      "providerSettingsChanged": false,
+      "hostedSettingsChanged": false,
+      "productionChanged": false,
+      "deployment": false,
+      "commit": false,
+      "push": false,
+      "externalSubmission": false
+    }
+  },
+  "offerGridAccessibilityLocal": {
+    "evidence": "docs/evidence/offer-grid-browser-2026-10-04.json",
+    "checkedAt": "2026-10-03T23:05:12.793Z",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "buildId": "HEur139tQZdPYCKTBYF0c",
+    "status": "passed-source-equivalent-local",
+    "viewport": "320x760",
+    "checks": 10,
+    "scope": "Guest comparison input grid only; labelled keyboard scroll region, 20rem two-offer track, Arrow/Home/End movement and page containment passed. Broader accessibility, installed-app/device and release gates remain open.",
+    "externalActions": false
+  },
+  "offerGridThreeOfferLocal": {
+    "evidence": "docs/evidence/offer-grid-three-offer-local-2026-10-04.json",
+    "checkedAt": "2026-10-04T00:25:34+01:00",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "candidateBuildId": "ydMzVTyEiY_q6uNn7FXx1",
+    "status": "passed-local-three-offer-accessibility",
+    "focusedTests": "21/21",
+    "fullSuite": "1,061/1,061 across 111 files",
+    "evidenceBoundary": "Local three-offer keyboard-scroll regression evidence; installed-app, assistive-technology, device and release gates remain open.",
+    "externalActions": false
+  },
+  "hardNavigationDiagnostics": {
+    "evidence": "docs/evidence/hard-navigation-diagnostic-track-decision-current-2026-10-04.json",
+    "checkedAt": "2026-10-04T04:35:12.9457965Z",
+    "diagnosticBuildId": "I6LLUZppRvjau-wvpU4Xm",
+    "normalCandidateBuildId": "ydMzVTyEiY_q6uNn7FXx1",
+    "status": "diagnostic-variance-observed",
+    "interpretation": "The matched diagnostics pair records the caller decision and provider readiness. With zero settle, account A input and completion calls occur while the store is loading, so both comparison events are skipped; the provider reaches committed accepted after the calculation. With a two-second settle, both accounts reach committed accepted before input/calculation and both event pairs are queued. This supports an event-level readiness race as the current explanation, while leaving product acceptance and any alternate cause open. The extra marks are development-only User Timing diagnostics and do not buffer events, delay calculation, or change navigation.",
+    "externalActions": {
+      "authorizedDisposableDevelopmentMutations": true,
+      "providerDataMutations": true,
+      "providerSettings": false,
+      "hostedSettings": false,
+      "production": false,
+      "deployment": false,
+      "commit": false,
+      "push": false,
+      "submission": false,
+      "liveMixpanelIngestion": false
+    }
+  },
+  "hardNavigationCurrentCandidatePreflight": {
+    "evidence": "docs/evidence/hard-navigation-current-candidate-preflight-2026-10-04.json",
+    "checkedAt": "2026-10-04T08:37:41+01:00",
+    "candidateBuildId": "llH6YCL2zRu1VEYvtRTd7",
+    "status": "not-applicable-normal-candidate",
+    "reason": "The reviewed normal candidate has analytics disabled by design; enabled hard-navigation diagnostics require a temporary development build.",
+    "externalActions": false
+  },
+  "securityHeadersLocalRerun": {
+    "schemaVersion": 1,
+    "generatedAt": "2026-10-03T23:52:38.9665383Z",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "candidateBuildId": "1iwP4oc_H3NlGLD2I7W_j",
+    "scope": "Local production response-header policy and built-server verification",
+    "sourceFiles": [
+      "next.config.ts",
+      "tests/next-config-headers.test.ts"
+    ],
+    "policy": [
+      {
+        "key": "X-Content-Type-Options",
+        "value": "nosniff"
+      },
+      {
+        "key": "Referrer-Policy",
+        "value": "strict-origin-when-cross-origin"
+      },
+      {
+        "key": "Permissions-Policy",
+        "value": "camera=(), microphone=(), geolocation=(), browsing-topics=()"
+      }
+    ],
+    "localChecks": [
+      {
+        "command": "focused header test",
+        "result": "2 tests passed"
+      },
+      {
+        "command": "npm run typecheck",
+        "result": "passed"
+      },
+      {
+        "command": "npm run build",
+        "result": "passed; 19 routes"
+      },
+      {
+        "command": "next start -p 4318 plus HEAD requests",
+        "result": "4 routes returned 200; policy headers present; cache policy preserved"
+      }
+    ],
+    "caveats": [
+      "Local built-server evidence only; hosted Vercel response headers remain unverified.",
+      "No CSP, frame-ancestors or HSTS was added because Clerk, Convex, inline bootstrapping and provider integration need a deployment-specific review.",
+      "No deployment, provider mutation, commit, push or external submission occurred."
+    ],
+    "status": "partial-local-evidence"
+  },
+  "securityAbuseLimitsLocal": {
+    "evidence": "docs/evidence/security-abuse-limits-local-2026-10-04.json",
+    "checkedAt": "2026-10-04T00:18:04Z",
+    "candidateBuildId": "1iwP4oc_H3NlGLD2I7W_j",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "status": "passed-local-boundary",
+    "testFiles": 6,
+    "tests": 39,
+    "scope": "Local server-enforced comparison, feedback and export limits plus monitoring scrubbing and response-header contracts; operator alert receipt, hosted delivery and provider quotas remain open.",
+    "externalActions": false
+  },
+  "currentHostedBrowser": {
+    "evidence": "docs/evidence/clerk-browser-hosted-current-2026-10-04.json",
+    "checkedAt": "2026-10-04T00:24:29.344Z",
+    "deploymentId": "dpl_9eMQ8ct7qPuqoXndQWCWzpAHJmv7",
+    "origin": "https://truecost-ebon.vercel.app",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "browser": "Chrome 154.0.8037.59 / Playwright 1.62.1",
+    "status": "passed",
+    "checks": 12,
+    "errors": 0,
+    "cleanupErrors": 0,
+    "scope": "Authorized disposable development-data mutation against the hosted review: Clerk SDK load, invalid and accepted synthetic OTP handling, account provisioning, explicit sign-out and disposable cleanup. It does not prove current candidate parity, comparison save/history/PDF, production email delivery, provider reconciliation or release approval.",
+    "externalActions": true,
+    "authorizedDisposableDevelopmentMutation": true,
+    "hostedSettingsChanged": false,
+    "productionChanged": false
+  },
+  "providerLifecycleLocalCurrent": {
+    "evidence": "docs/evidence/provider-lifecycle-local-current-2026-10-04.json",
+    "checkedAt": "2026-10-04T00:32:20Z",
+    "candidateBuildId": "1iwP4oc_H3NlGLD2I7W_j",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "status": "passed-current-local-provider-lifecycle",
+    "testFiles": 4,
+    "tests": 70,
+    "scope": "Current-checkout local provider lifecycle coverage for mounted analytics account-switch fencing/disposal, durable provider deletion claim/retry/lease/poll transitions and signed-out cleanup retry safety. Live provider ingestion, dashboard reconciliation, retention/deletion and production approval remain open.",
+    "externalActions": false
+  },
+  "accountExportCurrent": {
+    "evidence": "docs/evidence/account-export-browser-current-2026-10-04.json",
+    "checkedAt": "2026-10-04T00:35:08.972Z",
+    "buildId": "1iwP4oc_H3NlGLD2I7W_j",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "status": "passed",
+    "checks": 14,
+    "browser": "Chrome 154.0.8037.59",
+    "errors": 0,
+    "cleanupErrors": 0,
+    "evidenceBoundary": "Current-checkout development-browser account-export, account-A/B isolation and signed-out approval evidence; Convex profiles, receipts, export-session metadata, provider deletion and retention remain open.",
+    "externalActions": {
+      "authorizedDisposableDevelopmentMutation": true,
+      "hostedSettingsChanged": false,
+      "productionChanged": false,
+      "commit": false,
+      "push": false,
+      "deployment": false,
+      "externalSubmission": false
+    }
+  },
+  "accountContractsLocal": {
+    "evidence": "docs/evidence/account-contracts-recent-auth-local-2026-10-04.json",
+    "checkedAt": "2026-10-04T01:41:26+01:00",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "candidateBuildId": "1iwP4oc_H3NlGLD2I7W_j",
+    "status": "passed-focused-local",
+    "testFiles": 5,
+    "tests": 45,
+    "evidenceBoundary": "Local receipt identity, recent-auth grant and deletion-recovery contracts plus account-export UI state; hosted recent-auth, provider receipts, retention and production acceptance remain open.",
+    "externalActions": {
+      "providerMutation": false,
+      "deployment": false,
+      "commit": false,
+      "push": false,
+      "externalSubmission": false
+    }
+  },
+  "serviceWorkerUpgradeLocalCurrent": {
+    "evidence": "docs/evidence/service-worker-upgrade-browser-current-2026-10-04.json",
+    "checkedAt": "2026-10-04T00:52:01.133Z",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "candidateBuildId": "1iwP4oc_H3NlGLD2I7W_j",
+    "status": "passed-local-open-tab-rerun",
+    "checks": 5,
+    "sourceHashes": {
+      "public/sw.js": "4d452cb09f5f0fa292ef452bf92024bcb1eb2d0d39d835ad4604dc782675f3db",
+      "scripts/check-service-worker-upgrade-browser.mjs": "0c58d0d71d95e831cabd0a359416cfe811bd319b33a53e3db05cbe9403150929",
+      "tests/fixtures/service-worker-harness.html": "43358f3d7fecbe90fcf0034057cfaa20e89c72a53c0e840909887c2b755706b5"
+    },
+    "harnessSourceSha256": "0c58d0d71d95e831cabd0a359416cfe811bd319b33a53e3db05cbe9403150929",
+    "scope": "Fresh open-tab upgrade and rollback with generated assets and unrelated-cache preservation; installed-app, device, provider and release gates remain open.",
+    "externalActions": false
+  },
+  "currentFullSuiteRerun": {
+    "evidence": "docs/evidence/current-full-suite-rerun-2026-10-04.json",
+    "checkedAt": "2026-10-04T00:57:11.2226899Z",
+    "candidateBuildId": "1iwP4oc_H3NlGLD2I7W_j",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "status": "passed",
+    "testFiles": 112,
+    "tests": 1063,
+    "command": "npm test -- --maxWorkers=2",
+    "externalActions": false,
+    "evidenceBoundary": "Current checkout full unit, UI, and Convex test suite; hosted provider ingestion, production configuration, installed-app and release approval gates remain open."
+  },
+  "currentMvpDemoBrowser": {
+    "evidence": "docs/evidence/clerk-browser-mvp-demo-current-2026-10-04.json",
+    "capture": "docs/evidence/demo-edits/demo-capture-current-1iwP4oc_H3NlGLD2I7W_j-redaction.json",
+    "checkedAt": "2026-10-04T01:04:26.92Z",
+    "candidateBuildId": "1iwP4oc_H3NlGLD2I7W_j",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "status": "passed",
+    "checks": 17,
+    "errors": 0,
+    "cleanupErrors": 0,
+    "rawCaptureDurationMs": 87982,
+    "redactedRehearsalDurationSeconds": 85.84,
+    "evidenceBoundary": "Current local MVP demo flow and redacted rehearsal capture; the 180-240 second final assembly, full playback/listening, reviewer access and production release gates remain open.",
+    "redactionScriptSha256": "b207782d3b701e227c7b3af68f63b807f140c7040ce161eabd74157097adfbec"
+  },
+  "currentDemoAssembly": {
+    "evidence": "docs/evidence/demo-edits/truecost-current-1iwP4oc_H3NlGLD2I7W_j-assembly.json",
+    "checkedAt": "2026-10-04T02:23:03.1368319+01:00",
+    "candidateBuildId": "1iwP4oc_H3NlGLD2I7W_j",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "status": "local-review-candidate",
+    "outputs": 2,
+    "durationSeconds": 180.68,
+    "decode": "passed",
+    "machineCheck": "docs/evidence/demo-assembly-machine-check-2026-10-04.json",
+    "humanReviewOpen": [
+      "full playback and listening",
+      "normal-playback caption readability",
+      "reviewer access and final acceptance"
+    ],
+    "externalActions": false
+  },
+  "currentHostedComparison": {
+    "evidence": "docs/evidence/clerk-browser-hosted-comparison-current-2026-10-04.json",
+    "checkedAt": "2026-10-04T01:58:47.554Z",
+    "buildId": "hosted deployment build not exposed by harness",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "status": "passed",
+    "checks": 15,
+    "cleanupErrors": 0,
+    "origin": "https://truecost-ebon.vercel.app",
+    "deploymentId": "dpl_9eMQ8ct7qPuqoXndQWCWzpAHJmv7",
+    "evidenceBoundary": "Approved development-hosted comparison/auth save/history/report/sign-out evidence. Run-owned comparison rows and sessions were cleared and the disposable Clerk identity was deleted; the run-created Convex profile may remain because the harness has no profile deletion or tombstone operation. Source-candidate parity, production email/provider reconciliation and release approval remain open."
+  },
+  "hostedDeploymentIdentity": {
+    "evidence": "docs/evidence/hosted-deployment-identity-current-2026-10-04.json",
+    "checkedAt": "2026-10-04T02:07:07.167Z",
+    "status": "passed-read-only-identity",
+    "origin": "https://truecost-ebon.vercel.app/",
+    "deploymentId": "dpl_9eMQ8ct7qPuqoXndQWCWzpAHJmv7",
+    "nextStaticNamespaces": [
+      "immutable"
+    ],
+    "evidenceBoundary": "Read-only hosted HTML deployment identity check. The HTML deployment identifier confirms which hosted deployment served the page; the immutable static namespace is recorded as an asset namespace, not relabelled as a source-candidate build ID. This does not prove source-candidate parity, runtime provider settings or production approval."
+  },
+  "chronicleShareBrowserCurrent": {
+    "evidence": "docs/evidence/chronicle-share-browser-current-2026-10-04.json",
+    "checkedAt": "2026-10-04T02:14:14.859Z",
+    "status": "passed",
+    "title": "TrueCost · Why this problem",
+    "url": "https://app.chroniclehq.com/share/2e1eec2b-7e34-4ba3-9b57-e5e7331314dd/38f0dc2a-0578-4fc3-a8a9-a7f2900d2bcd/0b10ce59-e0d6-412d-bc8c-8d1d3bafd853",
+    "checks": 3,
+    "evidenceBoundary": "Current signed-out share-view evidence only; Chronicle PDF export retrieval, editor permissions and submission approval remain open.",
+    "externalActions": {
+      "chronicle": false,
+      "login": false,
+      "sharing": false,
+      "upload": false,
+      "export": false,
+      "submission": false
+    }
+  },
+  "hostedSecurityHeadersCurrent": {
+    "evidence": "docs/evidence/hosted-security-headers-current-2026-10-04.json",
+    "checkedAt": "2026-10-04T02:17:16.641Z",
+    "status": "partial-hosted-development",
+    "origin": "https://truecost-ebon.vercel.app/",
+    "httpStatus": 200,
+    "expectedPolicyHeaders": [
+      "x-content-type-options",
+      "referrer-policy",
+      "permissions-policy"
+    ],
+    "missingExpectedHeaders": [
+      "x-content-type-options",
+      "referrer-policy",
+      "permissions-policy"
+    ],
+    "evidenceBoundary": "Read-only headers from the approved hosted development origin. This does not establish production headers, operator alerting, provider quotas, release switches or deployment approval.",
+    "externalActions": {
+      "hostedSettingsChanged": false,
+      "production": false,
+      "providerMutation": false,
+      "commit": false,
+      "push": false,
+      "submission": false
+    }
+  },
+  "chronicleEditorAccessProbeCurrent": {
+    "evidence": "docs/evidence/chronicle-editor-access-probe-current-2026-10-04.json",
+    "checkedAt": "2026-10-04T02:20:16.861Z",
+    "status": "editor-controls-unavailable",
+    "requestedUrl": "https://app.chroniclehq.com/2e1eec2b-7e34-4ba3-9b57-e5e7331314dd/document/38f0dc2a-0578-4fc3-a8a9-a7f2900d2bcd/0b10ce59-e0d6-412d-bc8c-8d1d3bafd853",
+    "finalUrl": "https://app.chroniclehq.com/share/2e1eec2b-7e34-4ba3-9b57-e5e7331314dd/38f0dc2a-0578-4fc3-a8a9-a7f2900d2bcd/0b10ce59-e0d6-412d-bc8c-8d1d3bafd853",
+    "checks": 3,
+    "evidenceBoundary": "Signed-out Chronicle editor-route probe only; the route redirected to the share view, so export retrieval and editor permissions remain unverified.",
+    "externalActions": {
+      "login": false,
+      "sharing": false,
+      "upload": false,
+      "export": false,
+      "submission": false
+    }
+  },
+  "sourceEquivalentRecoveryBrowser": {
+    "evidence": "docs/evidence/comparison-recovery-browser-current-2026-10-04.json",
+    "checkedAt": "2026-10-04T02:28:39.509Z",
+    "buildId": "1iwP4oc_H3NlGLD2I7W_j",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "status": "passed",
+    "checks": 8,
+    "cleanupErrors": 0,
+    "externalActions": {
+      "authorizedDisposableDevelopmentMutation": true,
+      "providerDataMutation": true,
+      "providerSettingsChanged": false,
+      "hostedSettingsChanged": false,
+      "productionChanged": false,
+      "deployment": false,
+      "commit": false,
+      "push": false,
+      "externalSubmission": false
+    }
+  },
+  "chronicleEditorAccessProbeRerun": {
+    "evidence": "docs/evidence/chronicle-editor-access-probe-current-rerun-2026-10-04.json",
+    "checkedAt": "2026-10-04T02:45:48.934Z",
+    "status": "editor-controls-unavailable",
+    "requestedUrl": "https://app.chroniclehq.com/2e1eec2b-7e34-4ba3-9b57-e5e7331314dd/document/38f0dc2a-0578-4fc3-a8a9-a7f2900d2bcd/0b10ce59-e0d6-412d-bc8c-8d1d3bafd853",
+    "finalUrl": "https://app.chroniclehq.com/share/2e1eec2b-7e34-4ba3-9b57-e5e7331314dd/38f0dc2a-0578-4fc3-a8a9-a7f2900d2bcd/0b10ce59-e0d6-412d-bc8c-8d1d3bafd853",
+    "evidenceBoundary": "Current signed-out Chronicle editor-route recheck only; authenticated editor access, PDF export retrieval and submission remain open.",
+    "externalActions": {
+      "login": false,
+      "sharing": false,
+      "upload": false,
+      "export": false,
+      "submission": false
+    }
+  },
+  "landingBrowserCurrentRerun": {
+    "evidence": "docs/evidence/landing-browser-current-rerun-2026-10-04.json",
+    "checkedAt": "2026-10-04T02:47:50.600Z",
+    "buildId": "1iwP4oc_H3NlGLD2I7W_j",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "status": "passed",
+    "checks": 13,
+    "errors": 0,
+    "consoleErrors": 0,
+    "requestFailures": 0,
+    "scope": "Current source-equivalent local Chrome landing evidence across desktop-light, 320px reduced-motion and 390px dark contexts.",
+    "evidenceBoundary": "Read-only local browser rerun only; full security, accessibility, authenticated, installed-app, real-device and production gates remain open.",
+    "externalActions": false
+  },
+  "resultsTableBrowserCurrentRerun": {
+    "evidence": "docs/evidence/results-table-browser-current-rerun-2026-10-04.json",
+    "checkedAt": "2026-10-04T02:56:23.471Z",
+    "buildId": "1iwP4oc_H3NlGLD2I7W_j",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "status": "passed",
+    "checks": 7,
+    "errors": 0,
+    "writeRequests": 0,
+    "scope": "Current source-equivalent local Chrome guest results-table evidence at 1280px and 320px.",
+    "evidenceBoundary": "Read-only local guest evidence only; authenticated, installed-app, real-device, provider and production acceptance remain open.",
+    "externalActions": false
+  },
+  "landingBrowserNormalBuildRerun": {
+    "evidence": "docs/evidence/landing-browser-normal-rerun-2026-10-04.json",
+    "checkedAt": "2026-10-04T03:02:21.632Z",
+    "buildId": "R-YV2Ykfq677oTDdfRFCj",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "status": "passed",
+    "checks": 13,
+    "errors": 0,
+    "consoleErrors": 0,
+    "requestFailures": 0,
+    "scope": "Current normal analytics-disabled source-equivalent local Chrome landing rerun across desktop-light, 320px reduced-motion and 390px dark contexts.",
+    "evidenceBoundary": "Read-only local browser evidence only; full security, accessibility, authenticated, installed-app, real-device and production gates remain open.",
+    "externalActions": false
+  },
+  "resultsTableBrowserNormalBuildRerun": {
+    "evidence": "docs/evidence/results-table-browser-normal-rerun-2026-10-04.json",
+    "checkedAt": "2026-10-04T03:02:53.961Z",
+    "buildId": "R-YV2Ykfq677oTDdfRFCj",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "status": "passed",
+    "checks": 7,
+    "errors": 0,
+    "writeRequests": 0,
+    "scope": "Current normal analytics-disabled source-equivalent local Chrome guest results-table rerun at 1280px and 320px.",
+    "evidenceBoundary": "Read-only local guest evidence only; authenticated, installed-app, real-device, provider and production acceptance remain open.",
+    "externalActions": false
+  },
+  "mixpanelBrowserInterceptedEnabledLocal": {
+    "evidence": "docs/evidence/analytics-mixpanel-browser-2026-10-04T03-00-26-605Z.json",
+    "checkedAt": "2026-10-04T03:00:26.605Z",
+    "buildId": "-L66mtneUM2GHq_Pbd9zp",
+    "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+    "status": "passed",
+    "mode": "intercept",
+    "checks": 6,
+    "errors": 0,
+    "interceptedRequests": 2,
+    "validEvents": 2,
+    "providerRequests": 0,
+    "scope": "Explicitly enabled development-only local build with guest consent contract and Mixpanel interception.",
+    "evidenceBoundary": "Provider requests were intercepted before leaving localhost; this does not prove live ingestion, dashboard reconciliation, retention/deletion or production configuration.",
+    "externalActions": false
+  },
+  "currentNormalDemoBrowser": {
+    "evidence": "docs/evidence/clerk-browser-mvp-demo.json",
+    "checkedAt": "2026-10-04T03:10:17.834Z",
+    "buildId": "R-YV2Ykfq677oTDdfRFCj",
+    "status": "passed",
+    "checks": 17,
+    "errors": 0,
+    "cleanupErrors": 0,
+    "rawVideoShareable": false,
+    "evidenceBoundary": "Current normal analytics-disabled local disposable MVP run. The harness made authorized disposable development mutations, including provider data creation and run-owned comparison cleanup; the Convex profile may remain because no deletion/tombstone operation exists. Provider settings, hosted settings, production, deployment, commit, push and submission were not touched.",
+    "externalActions": {
+      "authorizedDisposableDevelopmentMutation": true,
+      "providerDataMutation": true,
+      "providerSettings": false,
+      "hostedSettings": false,
+      "production": false,
+      "deployment": false,
+      "commit": false,
+      "push": false,
+      "submission": false
+    }
+  },
+  "currentNormalDemoAssembly": {
+    "evidence": "docs/evidence/demo-edits/truecost-current-R-YV2Ykfq677oTDdfRFCj-assembly.json",
+    "checkedAt": "2026-10-04T03:23:15.165Z",
+    "buildId": "R-YV2Ykfq677oTDdfRFCj",
+    "status": "local-review-candidate",
+    "durationSeconds": 180.68,
+    "outputs": 2,
+    "fullPlayback": "open",
+    "externalActions": false
+  },
+  "currentNormalDemoMachineCheck": {
+    "evidence": "docs/evidence/demo-assembly-machine-check-R-YV2Ykfq677oTDdfRFCj.json",
+    "checkedAt": "2026-10-04T03:22:04.590Z",
+    "buildId": "R-YV2Ykfq677oTDdfRFCj",
+    "status": "passed-local-machine-checks",
+    "outputs": 2,
+    "decodeExitCode": 0,
+    "blackSegmentsAtLeast250ms": 0,
+    "externalActions": false
+  },
+  "mixpanelDashboardAccessCurrent": {
+    "evidence": "docs/evidence/mixpanel-dashboard-access-current-2026-10-04.json",
+    "checkedAt": "2026-10-04T03:52:27.246Z",
+    "status": "access-required",
+    "requestedUrl": "https://mixpanel.com/project/4064154/view/4560599/app/home",
+    "finalUrl": "https://mixpanel.com/request_access?next=/project/4064154/view/4560599/app/home",
+    "title": "Request Access - Mixpanel",
+    "evidenceBoundary": "Read-only dashboard access probe in Chrome; live dashboard reconciliation remains unverified because this session lacks Mixpanel project access.",
+    "externalActions": {
+      "providerSettings": false,
+      "hostedSettings": false,
+      "production": false,
+      "deployment": false,
+      "commit": false,
+      "push": false,
+      "submission": false,
+      "requestAccess": false
+    }
+  },
+  "runwayAccessCurrent": {
+    "evidence": "docs/evidence/runway-access-current-2026-10-04.json",
+    "checkedAt": "2026-10-04T04:05:11.4284351Z",
+    "status": "guest-tools-visible",
+    "requestedUrl": "https://app.runwayml.com/",
+    "finalUrl": "https://app.runwayml.com/video-tools/teams/guest/ai-tools/generate",
+    "title": "Home | Runway AI",
+    "evidenceBoundary": "Read-only guest Runway navigation probe in Codex IAB; no generation, export, credit use, account mutation, rights confirmation or submission occurred.",
+    "externalActions": {
+      "generation": false,
+      "export": false,
+      "creditUse": false,
+      "accountMutation": false,
+      "submission": false
+    }
+  },
+  "masterGoalCompletionAudit": {
+    "evidence": "docs/evidence/master-goal-completion-audit-2026-10-04.json",
+    "checkedAt": "2026-10-04T04:17:50.825Z",
+    "status": "incomplete-open-gates",
+    "releaseDecision": "NO-GO",
+    "evidenceBoundary": "Requirement-level local audit; it records open external, human-review and approval dependencies without claiming completion.",
+    "externalActions": false
+  }
+}

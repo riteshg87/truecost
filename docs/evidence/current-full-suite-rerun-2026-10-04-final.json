@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-04T05:01:37.5198026Z",
+  "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+  "candidateBuildId": "bm38SzfSfXwstgpYCARC4",
+  "commands": {
+    "tests": "npm test -- --maxWorkers=2"
+  },
+  "testSuite": {
+    "status": "passed",
+    "exitCode": 0,
+    "testFiles": 112,
+    "tests": 1063,
+    "durationSeconds": 97.36
+  },
+  "sourceUnchanged": true,
+  "sourceHashes": {
+    ".next/BUILD_ID": "fd093aa05bb55ec90a5be2238f76d5d71b9b63845fda4cd930d21c345e92bb81",
+    "package.json": "69010fa6afc3011f13b217790032e7d2ca163ecaef9c03c484843414ffd45263",
+    "vitest.config.ts": "925ed41cdef086bd627f395629d26669672ea3f9462e5a52436e53222d3efbd6"
+  },
+  "notes": [
+    "The current checkout passed all 112 discovered test files and 1,063 tests after the analytics diagnostics instrumentation.",
+    "The expected JSDOM unsupported-navigation diagnostic was printed for two link tests; the command exited 0 with no test failures.",
+    "No provider mutation, deployment, commit, push or external submission occurred."
+  ],
+  "externalActions": {
+    "providerMutation": false,
+    "deployment": false,
+    "commit": false,
+    "push": false,
+    "externalSubmission": false
+  },
+  "evidenceBoundary": "Current checkout full unit, UI and Convex test suite; hosted provider ingestion, production configuration, installed-app/device acceptance, human review and release approval remain open."
+}

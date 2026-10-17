@@ -1,0 +1,25 @@
+{
+  "checkedAt": "2026-10-04T01:41:26+01:00",
+  "status": "passed-focused-local",
+  "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+  "candidateBuildId": "1iwP4oc_H3NlGLD2I7W_j",
+  "command": "npx vitest run --maxWorkers=2 tests/comparison-transport.test.ts tests/account-deletion-recovery.test.ts tests/privacy-grants.test.ts tests/account-export-ui.test.tsx tests/deletion-recovery.test.ts",
+  "testFiles": 5,
+  "tests": 45,
+  "errors": 0,
+  "sourceHashes": {
+    "tests/comparison-transport.test.ts": "0e3636b0e49b9a0d4fecaadd589bf98fd38a4c8d1963b37c26c95d4850b7a6f5",
+    "tests/account-deletion-recovery.test.ts": "b33eb94b49b1da6945b4f7008642822415cae5ad34e0210a7d7efe5fced7192f",
+    "tests/privacy-grants.test.ts": "f48e523a17d2b72c68f16db0871cdade7b4731642fcedf535df76f524ba18243",
+    "tests/account-export-ui.test.tsx": "c9ba9c011ec16ec9dac0a159c5ef0d76e215483977b7e78eb3aeba98fbe11680",
+    "tests/deletion-recovery.test.ts": "f005138b59032869da37c5d69f9170a3e7c325a0bb0c8f0348e629c4987cf482"
+  },
+  "scope": "Local receipt identity, recent-auth grant and deletion-recovery contracts plus account-export UI state. This does not establish hosted recent-auth, provider receipt, retention or production acceptance.",
+  "externalActions": {
+    "providerMutation": false,
+    "deployment": false,
+    "commit": false,
+    "push": false,
+    "externalSubmission": false
+  }
+}

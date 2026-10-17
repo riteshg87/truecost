@@ -2,7 +2,11 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import { FormError } from "@/components/mobile";
+import { LoanSyncStatus } from "@/components/LoanSyncStatus";
+import { privateWriteError } from "@/lib/private-storage/messages";
+import { useViewLifetime } from "@/lib/use-view-lifetime";
 import {
   Disclosure,
   Ledger,
@@ -28,14 +32,18 @@ import { useLoan } from "@/lib/loanStore";
  */
 export default function RateResetPage() {
   const router = useRouter();
+  const isCurrentView = useViewLifetime();
   const { loan, hydrated, markRateResolved, rateResolvedAt } = useLoan();
   const today = isoToday();
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
 
   const verdict = useMemo(() => (loan ? rateVerdict(loan, today) : null), [loan, today]);
 
   if (!hydrated) {
     return (
       <Screen back={{ href: "/loan", label: "Loan Health Monitor" }} title="Rate check">
+        <LoanSyncStatus />
         <div className="h-64 animate-pulse rounded-2xl border border-line bg-surface-2" />
       </Screen>
     );
@@ -43,6 +51,7 @@ export default function RateResetPage() {
   if (!loan || !verdict) {
     return (
       <Screen back={{ href: "/loan", label: "Loan Health Monitor" }} title="Rate check">
+        <LoanSyncStatus />
         <NoLoan />
       </Screen>
     );
@@ -52,6 +61,7 @@ export default function RateResetPage() {
   if (verdict.kind === "mclr") {
     return (
       <Screen back={{ href: "/loan", label: "Loan Health Monitor" }} title="Rate basis">
+        <LoanSyncStatus />
         <PageHead
           title="Moving off MCLR"
           sub="A conversion inside your own bank, not a transfer to another one."
@@ -86,14 +96,25 @@ export default function RateResetPage() {
 
   /* ---- Fixed: nothing to reset ------------------------------------------ */
   if (verdict.kind === "fixed" || verdict.kind === "unknown") {
+    const isTbill = loan.basis === "tbill";
+    const isUnknown = verdict.kind === "unknown";
     return (
       <Screen back={{ href: "/loan", label: "Loan Health Monitor" }} title="Rate check">
+        <LoanSyncStatus />
         <PageHead
-          title={verdict.kind === "fixed" ? "Fixed rate" : "Benchmark not tracked"}
+          title={
+            verdict.kind === "fixed"
+              ? "Fixed rate"
+              : isTbill
+                ? "Benchmark not tracked"
+                : "Rate details need confirming"
+          }
           sub={
             verdict.kind === "fixed"
               ? "Nothing to reset — but the exit is where it costs you."
-              : "We would rather say so than guess."
+              : isTbill
+                ? "We would rather say so than guess."
+                : verdict.unknownReason ?? "Confirm the rate details from your loan documents."
           }
         />
         <Disclosure>
@@ -106,10 +127,20 @@ export default function RateResetPage() {
             </>
           ) : (
             <>
-              T-bill linked loans follow a benchmark whose history we do not carry, so
-              we will not invent a figure for what your rate ought to be. Check the
-              published yield on your reset date against your sanction letter&apos;s
-              spread.
+              <span>
+                {verdict.unknownReason ??
+                  (isTbill
+                    ? "T-bill benchmark history is not available here."
+                    : "Confirm the rate details from your loan documents before checking the rate.")}
+              </span>
+              {isUnknown && !isTbill ? (
+                <Link
+                  href="/loan/setup"
+                  className="mt-2 inline-block font-semibold text-accent hover:underline"
+                >
+                  Add or confirm rate details →
+                </Link>
+              ) : null}
             </>
           )}
         </Disclosure>
@@ -129,6 +160,7 @@ export default function RateResetPage() {
 
   return (
     <Screen back={{ href: "/loan", label: "Loan Health Monitor" }} title="Rate check">
+      <LoanSyncStatus />
       <PageHead
         title={stale ? "Getting your rate reset" : "Your rate, checked"}
         sub="Every figure comes from what you entered and the published repo history — nothing hidden, nothing fetched."
@@ -173,14 +205,23 @@ export default function RateResetPage() {
               </Disclosure>
               <button
                 type="button"
-                onClick={() => {
-                  markRateResolved(today);
-                  router.push("/loan");
+                disabled={saving}
+                onClick={async () => {
+                  setSaving(true);
+                  setSaveError(null);
+                  try {
+                    const error = privateWriteError(await markRateResolved(new Date().toISOString()));
+                    if (!isCurrentView()) return;
+                    if (error) setSaveError(error);
+                    else router.push("/loan");
+                  } catch { setSaveError("The change could not be saved. Try again."); }
+                  finally { setSaving(false); }
                 }}
                 className="w-full rounded-xl border border-line px-4 py-3 text-[13.5px] font-medium text-ink transition hover:border-accent-line hover:text-accent"
               >
                 My statement already shows {formatPct(verdict.shouldBePct ?? 0)} — mark resolved
               </button>
+              <FormError>{saveError}</FormError>
             </>
           ) : (
             <Disclosure>

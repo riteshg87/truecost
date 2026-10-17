@@ -5,6 +5,11 @@ import { CompareProvider } from "@/lib/store";
 import { LoanProvider } from "@/lib/loanStore";
 import { THEME_INIT_SCRIPT } from "@/lib/theme";
 import { AuthProvider } from "@/lib/auth/provider";
+import { AnalyticsProvider } from "@/lib/analytics/provider";
+import { AccountDeletionProvider } from "@/lib/privacy/account-deletion-provider";
+import { PrivateBrowserClearProvider } from "@/lib/privacy/private-browser-clear-provider";
+import { serverClerkConfigured } from "@/lib/auth/server-config";
+import { authProviderConfigured } from "@/lib/auth/config";
 import { RouteGuard } from "@/components/RouteGuard";
 import "./globals.css";
 
@@ -14,7 +19,7 @@ const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"]
 export const metadata: Metadata = {
   title: "TrueCost — what a loan actually costs",
   description:
-    "Compare loan offers on effective APR and cost per lakh, with every fee, GST rupee and financed premium counted. Runs entirely on your device.",
+    "Compare loan offers on effective APR and cost per lakh, including fees, GST and financed insurance premiums. Loan calculations run on your device.",
   manifest: "/manifest.webmanifest",
   applicationName: "TrueCost",
   appleWebApp: { capable: true, title: "TrueCost", statusBarStyle: "default" },
@@ -45,12 +50,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
       </head>
       <body className="min-h-full">
-        <AuthProvider>
-          <CompareProvider>
-            <LoanProvider>
-              <RouteGuard>{children}</RouteGuard>
-            </LoanProvider>
-          </CompareProvider>
+        <AuthProvider serverConfigured={serverClerkConfigured}>
+          <AnalyticsProvider>
+            <PrivateBrowserClearProvider configured={serverClerkConfigured && authProviderConfigured}>
+              <AccountDeletionProvider>
+                <CompareProvider>
+                  <LoanProvider>
+                    <RouteGuard>{children}</RouteGuard>
+                  </LoanProvider>
+                </CompareProvider>
+              </AccountDeletionProvider>
+            </PrivateBrowserClearProvider>
+          </AnalyticsProvider>
         </AuthProvider>
         <ServiceWorker />
       </body>

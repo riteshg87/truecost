@@ -40,7 +40,7 @@ function amountInWords(value: number): string {
 interface Column {
   offer: Offer;
   index: number;
-  derived: Derived;
+  derived: Derived | null;
   issues: FieldIssue[];
   ready: boolean;
   set: (patch: Partial<Offer>) => void;
@@ -145,7 +145,7 @@ function ResultRow({
 /* -------------------------------------------------------------------------- */
 
 export function OfferGrid() {
-  const { offers, updateOffer, removeOffer } = useCompare();
+  const { offers, updateOffer, removeOffer, member } = useCompare();
 
   const columns = useMemo<Column[]>(
     () =>
@@ -154,21 +154,21 @@ export function OfferGrid() {
         return {
           offer,
           index,
-          derived: computeOffer(offer),
+          derived: member ? computeOffer(offer) : null,
           issues,
           ready: issues.every((issue) => issue.level !== "error"),
           set: (patch: Partial<Offer>) => updateOffer(offer.id, patch),
         };
       }),
-    [offers, updateOffer],
+    [offers, updateOffer, member],
   );
 
   /* --- Ranking. Only offers with no blocking error can win anything, and raw
      totals stop meaning much once amounts or tenures diverge. */
-  const ranked = columns.filter((column) => column.ready);
+  const ranked = columns.filter((column) => member && column.ready);
   const strict =
     new Set(ranked.map((c) => c.offer.amount)).size > 1 ||
-    new Set(ranked.map((c) => c.derived.tenureMonths)).size > 1;
+    new Set(ranked.map((c) => c.derived!.tenureMonths)).size > 1;
 
   const bestBy = (
     value: (column: Column) => number | null,
@@ -192,12 +192,12 @@ export function OfferGrid() {
     return ties.length > 1 ? null : bestId;
   };
 
-  const bestApr = bestBy((c) => c.derived.effectiveAprPct);
-  const bestEmi = strict ? null : bestBy((c) => c.derived.emi);
-  const bestPerLakh = bestBy((c) => c.derived.costPerLakh);
-  const bestTotal = strict ? null : bestBy((c) => c.derived.totalCostOfBorrowing);
-  const bestRate = bestBy((c) => c.derived.effectiveReducingRatePct);
-  const bestFee = bestBy((c) => c.derived.upfrontFees);
+  const bestApr = bestBy((c) => c.derived!.effectiveAprPct);
+  const bestEmi = strict ? null : bestBy((c) => c.derived!.emi);
+  const bestPerLakh = bestBy((c) => c.derived!.costPerLakh);
+  const bestTotal = strict ? null : bestBy((c) => c.derived!.totalCostOfBorrowing);
+  const bestRate = bestBy((c) => c.derived!.effectiveReducingRatePct);
+  const bestFee = bestBy((c) => c.derived!.upfrontFees);
 
   const anyRateTypeOpen = offers.some(
     (offer) => !LOAN_TYPES[offer.loanType].rateTypeLocked,
@@ -209,13 +209,27 @@ export function OfferGrid() {
   const cols = `4.75rem repeat(${offers.length}, minmax(6.25rem, 1fr))`;
 
   return (
-    <div className="overflow-x-auto rounded-2xl border border-line bg-surface shadow-[var(--shadow-card)]">
+    <div
+      role="region"
+      aria-label="Loan comparison fields. Scroll horizontally to view all offers."
+      tabIndex={0}
+      onKeyDown={(event) => {
+        if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+          event.preventDefault();
+          event.currentTarget.scrollLeft += event.key === "ArrowRight" ? 48 : -48;
+        } else if (event.key === "Home" || event.key === "End") {
+          event.preventDefault();
+          event.currentTarget.scrollLeft = event.key === "End" ? event.currentTarget.scrollWidth : 0;
+        }
+      }}
+      className="w-full min-w-0 overflow-x-auto rounded-2xl border border-line bg-surface shadow-[var(--shadow-card)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+    >
       <div
         className="px-3 py-3"
         style={
           {
             "--cols": cols,
-            minWidth: offers.length > 2 ? "30rem" : undefined,
+            minWidth: offers.length > 2 ? "30rem" : "20rem",
           } as React.CSSProperties
         }
       >
@@ -448,8 +462,8 @@ export function OfferGrid() {
           </Row>
         </details>
 
-        {/* Running verdict ---------------------------------------------- */}
-        <div className="mt-3 rounded-xl border border-accent-line bg-accent-soft px-3 py-2.5">
+        {/* Member previews must not bypass the guest recalculation gate. */}
+        {member ? <div className="mt-3 rounded-xl border border-accent-line bg-accent-soft px-3 py-2.5">
           <div className="flex items-baseline justify-between gap-2">
             <p className="text-[9.5px] font-bold uppercase tracking-[0.1em] text-accent">
               As you type
@@ -463,27 +477,27 @@ export function OfferGrid() {
             label="Effective APR"
             columns={columns}
             winner={bestApr}
-            render={(c) => formatPct(c.derived.effectiveAprPct)}
+            render={(c) => formatPct(c.derived!.effectiveAprPct)}
           />
           <ResultRow
             label="Monthly EMI"
             columns={columns}
             winner={bestEmi}
             muted={strict}
-            render={(c) => formatINR(c.derived.emi)}
+            render={(c) => formatINR(c.derived!.emi)}
           />
           <ResultRow
             label="Cost per lakh"
             columns={columns}
             winner={bestPerLakh}
-            render={(c) => formatINR(c.derived.costPerLakh)}
+            render={(c) => formatINR(c.derived!.costPerLakh)}
           />
           <ResultRow
             label="Total cost"
             columns={columns}
             winner={bestTotal}
             muted={strict}
-            render={(c) => formatCompactINR(c.derived.totalCostOfBorrowing)}
+            render={(c) => formatCompactINR(c.derived!.totalCostOfBorrowing)}
           />
 
           {/* The one line that justifies the whole screen. */}
@@ -497,7 +511,7 @@ export function OfferGrid() {
               The winner charges more upfront and still costs less over the tenure.
             </p>
           ) : null}
-        </div>
+        </div> : null}
       </div>
     </div>
   );

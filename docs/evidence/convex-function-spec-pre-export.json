@@ -1,0 +1,2375 @@
+{
+  "url": "https://dutiful-fly-37.convex.cloud",
+  "functions": [
+    {
+      "args": {
+        "type": "object",
+        "value": {
+          "expectedSubject": {
+            "fieldType": {
+              "type": "string"
+            },
+            "optional": false
+          },
+          "sessionMarker": {
+            "fieldType": {
+              "type": "string"
+            },
+            "optional": false
+          }
+        }
+      },
+      "functionType": "Query",
+      "identifier": "users.js:currentUser",
+      "returns": {
+        "type": "union",
+        "value": [
+          {
+            "type": "object",
+            "value": {
+              "_creationTime": {
+                "fieldType": {
+                  "type": "number"
+                },
+                "optional": false
+              },
+              "_id": {
+                "fieldType": {
+                  "tableName": "users",
+                  "type": "id"
+                },
+                "optional": false
+              },
+              "createdAt": {
+                "fieldType": {
+                  "type": "number"
+                },
+                "optional": false
+              },
+              "status": {
+                "fieldType": {
+                  "type": "union",
+                  "value": [
+                    {
+                      "type": "literal",
+                      "value": "active"
+                    },
+                    {
+                      "type": "literal",
+                      "value": "deleting"
+                    },
+                    {
+                      "type": "literal",
+                      "value": "deleted"
+                    }
+                  ]
+                },
+                "optional": false
+              },
+              "updatedAt": {
+                "fieldType": {
+                  "type": "number"
+                },
+                "optional": false
+              }
+            }
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "visibility": {
+        "kind": "public"
+      }
+    },
+    {
+      "args": {
+        "type": "object",
+        "value": {}
+      },
+      "functionType": "Mutation",
+      "identifier": "users.js:ensureCurrentUser",
+      "returns": {
+        "type": "object",
+        "value": {
+          "_creationTime": {
+            "fieldType": {
+              "type": "number"
+            },
+            "optional": false
+          },
+          "_id": {
+            "fieldType": {
+              "tableName": "users",
+              "type": "id"
+            },
+            "optional": false
+          },
+          "createdAt": {
+            "fieldType": {
+              "type": "number"
+            },
+            "optional": false
+          },
+          "status": {
+            "fieldType": {
+              "type": "union",
+              "value": [
+                {
+                  "type": "literal",
+                  "value": "active"
+                },
+                {
+                  "type": "literal",
+                  "value": "deleting"
+                },
+                {
+                  "type": "literal",
+                  "value": "deleted"
+                }
+              ]
+            },
+            "optional": false
+          },
+          "updatedAt": {
+            "fieldType": {
+              "type": "number"
+            },
+            "optional": false
+          }
+        }
+      },
+      "visibility": {
+        "kind": "public"
+      }
+    },
+    {
+      "args": {
+        "type": "object",
+        "value": {}
+      },
+      "functionType": "Query",
+      "identifier": "savedLoans.js:currentLoan",
+      "returns": {
+        "type": "object",
+        "value": {
+          "payload": {
+            "fieldType": {
+              "type": "union",
+              "value": [
+                {
+                  "type": "object",
+                  "value": {
+                    "bufferMonths": {
+                      "fieldType": {
+                        "type": "number"
+                      },
+                      "optional": false
+                    },
+                    "loan": {
+                      "fieldType": {
+                        "type": "object",
+                        "value": {
+                          "basis": {
+                            "fieldType": {
+                              "type": "union",
+                              "value": [
+                                {
+                                  "type": "literal",
+                                  "value": "repo"
+                                },
+                                {
+                                  "type": "literal",
+                                  "value": "tbill"
+                                },
+                                {
+                                  "type": "literal",
+                                  "value": "mclr"
+                                },
+                                {
+                                  "type": "literal",
+                                  "value": "fixed"
+                                }
+                              ]
+                            },
+                            "optional": false
+                          },
+                          "cycle": {
+                            "fieldType": {
+                              "type": "union",
+                              "value": [
+                                {
+                                  "type": "literal",
+                                  "value": "monthly"
+                                },
+                                {
+                                  "type": "literal",
+                                  "value": "quarterly"
+                                },
+                                {
+                                  "type": "literal",
+                                  "value": "half"
+                                }
+                              ]
+                            },
+                            "optional": false
+                          },
+                          "lastReset": {
+                            "fieldType": {
+                              "type": "string"
+                            },
+                            "optional": false
+                          },
+                          "lastResetProvenance": {
+                            "fieldType": {
+                              "type": "union",
+                              "value": [
+                                {
+                                  "type": "literal",
+                                  "value": "confirmed"
+                                },
+                                {
+                                  "type": "literal",
+                                  "value": "unknown"
+                                },
+                                {
+                                  "type": "literal",
+                                  "value": "legacy"
+                                }
+                              ]
+                            },
+                            "optional": true
+                          },
+                          "lender": {
+                            "fieldType": {
+                              "type": "string"
+                            },
+                            "optional": false
+                          },
+                          "monthsLeft": {
+                            "fieldType": {
+                              "type": "number"
+                            },
+                            "optional": false
+                          },
+                          "original": {
+                            "fieldType": {
+                              "type": "number"
+                            },
+                            "optional": false
+                          },
+                          "outstanding": {
+                            "fieldType": {
+                              "type": "number"
+                            },
+                            "optional": false
+                          },
+                          "ratePct": {
+                            "fieldType": {
+                              "type": "number"
+                            },
+                            "optional": false
+                          },
+                          "spreadPct": {
+                            "fieldType": {
+                              "type": "union",
+                              "value": [
+                                {
+                                  "type": "number"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            },
+                            "optional": false
+                          },
+                          "spreadProvenance": {
+                            "fieldType": {
+                              "type": "union",
+                              "value": [
+                                {
+                                  "type": "literal",
+                                  "value": "confirmed"
+                                },
+                                {
+                                  "type": "literal",
+                                  "value": "unknown"
+                                },
+                                {
+                                  "type": "literal",
+                                  "value": "legacy"
+                                }
+                              ]
+                            },
+                            "optional": true
+                          }
+                        }
+                      },
+                      "optional": false
+                    },
+                    "quote": {
+                      "fieldType": {
+                        "type": "object",
+                        "value": {
+                          "feePct": {
+                            "fieldType": {
+                              "type": "number"
+                            },
+                            "optional": false
+                          },
+                          "keepTenure": {
+                            "fieldType": {
+                              "type": "boolean"
+                            },
+                            "optional": false
+                          },
+                          "legalCharges": {
+                            "fieldType": {
+                              "type": "number"
+                            },
+                            "optional": false
+                          },
+                          "newRatePct": {
+                            "fieldType": {
+                              "type": "number"
+                            },
+                            "optional": false
+                          },
+                          "newTenureMonths": {
+                            "fieldType": {
+                              "type": "number"
+                            },
+                            "optional": false
+                          }
+                        }
+                      },
+                      "optional": false
+                    },
+                    "rateResolvedAt": {
+                      "fieldType": {
+                        "type": "union",
+                        "value": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "optional": false
+                    },
+                    "surplus": {
+                      "fieldType": {
+                        "type": "number"
+                      },
+                      "optional": false
+                    }
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "optional": false
+          },
+          "revision": {
+            "fieldType": {
+              "type": "number"
+            },
+            "optional": false
+          },
+          "updatedAt": {
+            "fieldType": {
+              "type": "union",
+              "value": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "optional": false
+          }
+        }
+      },
+      "visibility": {
+        "kind": "public"
+      }
+    },
+    {
+      "args": {
+        "type": "object",
+        "value": {
+          "createdAt": {
+            "fieldType": {
+              "type": "string"
+            },
+            "optional": false
+          },
+          "expectedRevision": {
+            "fieldType": {
+              "type": "number"
+            },
+            "optional": false
+          },
+          "payload": {
+            "fieldType": {
+              "type": "object",
+              "value": {
+                "bufferMonths": {
+                  "fieldType": {
+                    "type": "number"
+                  },
+                  "optional": false
+                },
+                "loan": {
+                  "fieldType": {
+                    "type": "object",
+                    "value": {
+                      "basis": {
+                        "fieldType": {
+                          "type": "union",
+                          "value": [
+                            {
+                              "type": "literal",
+                              "value": "repo"
+                            },
+                            {
+                              "type": "literal",
+                              "value": "tbill"
+                            },
+                            {
+                              "type": "literal",
+                              "value": "mclr"
+                            },
+                            {
+                              "type": "literal",
+                              "value": "fixed"
+                            }
+                          ]
+                        },
+                        "optional": false
+                      },
+                      "cycle": {
+                        "fieldType": {
+                          "type": "union",
+                          "value": [
+                            {
+                              "type": "literal",
+                              "value": "monthly"
+                            },
+                            {
+                              "type": "literal",
+                              "value": "quarterly"
+                            },
+                            {
+                              "type": "literal",
+                              "value": "half"
+                            }
+                          ]
+                        },
+                        "optional": false
+                      },
+                      "lastReset": {
+                        "fieldType": {
+                          "type": "string"
+                        },
+                        "optional": false
+                      },
+                      "lastResetProvenance": {
+                        "fieldType": {
+                          "type": "union",
+                          "value": [
+                            {
+                              "type": "literal",
+                              "value": "confirmed"
+                            },
+                            {
+                              "type": "literal",
+                              "value": "unknown"
+                            },
+                            {
+                              "type": "literal",
+                              "value": "legacy"
+                            }
+                          ]
+                        },
+                        "optional": true
+                      },
+                      "lender": {
+                        "fieldType": {
+                          "type": "string"
+                        },
+                        "optional": false
+                      },
+                      "monthsLeft": {
+                        "fieldType": {
+                          "type": "number"
+                        },
+                        "optional": false
+                      },
+                      "original": {
+                        "fieldType": {
+                          "type": "number"
+                        },
+                        "optional": false
+                      },
+                      "outstanding": {
+                        "fieldType": {
+                          "type": "number"
+                        },
+                        "optional": false
+                      },
+                      "ratePct": {
+                        "fieldType": {
+                          "type": "number"
+                        },
+                        "optional": false
+                      },
+                      "spreadPct": {
+                        "fieldType": {
+                          "type": "union",
+                          "value": [
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "optional": false
+                      },
+                      "spreadProvenance": {
+                        "fieldType": {
+                          "type": "union",
+                          "value": [
+                            {
+                              "type": "literal",
+                              "value": "confirmed"
+                            },
+                            {
+                              "type": "literal",
+                              "value": "unknown"
+                            },
+                            {
+                              "type": "literal",
+                              "value": "legacy"
+                            }
+                          ]
+                        },
+                        "optional": true
+                      }
+                    }
+                  },
+                  "optional": false
+                },
+                "quote": {
+                  "fieldType": {
+                    "type": "object",
+                    "value": {
+                      "feePct": {
+                        "fieldType": {
+                          "type": "number"
+                        },
+                        "optional": false
+                      },
+                      "keepTenure": {
+                        "fieldType": {
+                          "type": "boolean"
+                        },
+                        "optional": false
+                      },
+                      "legalCharges": {
+                        "fieldType": {
+                          "type": "number"
+                        },
+                        "optional": false
+                      },
+                      "newRatePct": {
+                        "fieldType": {
+                          "type": "number"
+                        },
+                        "optional": false
+                      },
+                      "newTenureMonths": {
+                        "fieldType": {
+                          "type": "number"
+                        },
+                        "optional": false
+                      }
+                    }
+                  },
+                  "optional": false
+                },
+                "rateResolvedAt": {
+                  "fieldType": {
+                    "type": "union",
+                    "value": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "optional": false
+                },
+                "surplus": {
+                  "fieldType": {
+                    "type": "number"
+                  },
+                  "optional": false
+                }
+              }
+            },
+            "optional": false
+          },
+          "requestId": {
+            "fieldType": {
+              "type": "string"
+            },
+            "optional": false
+          }
+        }
+      },
+      "functionType": "Mutation",
+      "identifier": "savedLoans.js:saveLoan",
+      "returns": {
+        "type": "union",
+        "value": [
+          {
+            "type": "object",
+            "value": {
+              "requestId": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "revision": {
+                "fieldType": {
+                  "type": "number"
+                },
+                "optional": false
+              },
+              "status": {
+                "fieldType": {
+                  "type": "union",
+                  "value": [
+                    {
+                      "type": "literal",
+                      "value": "saved"
+                    },
+                    {
+                      "type": "literal",
+                      "value": "replayed"
+                    },
+                    {
+                      "type": "literal",
+                      "value": "deleted"
+                    }
+                  ]
+                },
+                "optional": false
+              }
+            }
+          },
+          {
+            "type": "object",
+            "value": {
+              "code": {
+                "fieldType": {
+                  "type": "literal",
+                  "value": "revision_conflict"
+                },
+                "optional": false
+              },
+              "currentRevision": {
+                "fieldType": {
+                  "type": "number"
+                },
+                "optional": false
+              },
+              "status": {
+                "fieldType": {
+                  "type": "literal",
+                  "value": "conflict"
+                },
+                "optional": false
+              }
+            }
+          },
+          {
+            "type": "object",
+            "value": {
+              "code": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "message": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "status": {
+                "fieldType": {
+                  "type": "literal",
+                  "value": "error"
+                },
+                "optional": false
+              }
+            }
+          }
+        ]
+      },
+      "visibility": {
+        "kind": "public"
+      }
+    },
+    {
+      "args": {
+        "type": "object",
+        "value": {
+          "createdAt": {
+            "fieldType": {
+              "type": "string"
+            },
+            "optional": false
+          },
+          "expectedRevision": {
+            "fieldType": {
+              "type": "number"
+            },
+            "optional": false
+          },
+          "requestId": {
+            "fieldType": {
+              "type": "string"
+            },
+            "optional": false
+          }
+        }
+      },
+      "functionType": "Mutation",
+      "identifier": "savedLoans.js:deleteLoan",
+      "returns": {
+        "type": "union",
+        "value": [
+          {
+            "type": "object",
+            "value": {
+              "requestId": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "revision": {
+                "fieldType": {
+                  "type": "number"
+                },
+                "optional": false
+              },
+              "status": {
+                "fieldType": {
+                  "type": "union",
+                  "value": [
+                    {
+                      "type": "literal",
+                      "value": "saved"
+                    },
+                    {
+                      "type": "literal",
+                      "value": "replayed"
+                    },
+                    {
+                      "type": "literal",
+                      "value": "deleted"
+                    }
+                  ]
+                },
+                "optional": false
+              }
+            }
+          },
+          {
+            "type": "object",
+            "value": {
+              "code": {
+                "fieldType": {
+                  "type": "literal",
+                  "value": "revision_conflict"
+                },
+                "optional": false
+              },
+              "currentRevision": {
+                "fieldType": {
+                  "type": "number"
+                },
+                "optional": false
+              },
+              "status": {
+                "fieldType": {
+                  "type": "literal",
+                  "value": "conflict"
+                },
+                "optional": false
+              }
+            }
+          },
+          {
+            "type": "object",
+            "value": {
+              "code": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "message": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "status": {
+                "fieldType": {
+                  "type": "literal",
+                  "value": "error"
+                },
+                "optional": false
+              }
+            }
+          }
+        ]
+      },
+      "visibility": {
+        "kind": "public"
+      }
+    },
+    {
+      "args": {
+        "type": "object",
+        "value": {
+          "createdAt": {
+            "fieldType": {
+              "type": "string"
+            },
+            "optional": false
+          },
+          "requestId": {
+            "fieldType": {
+              "type": "string"
+            },
+            "optional": false
+          },
+          "snapshot": {
+            "fieldType": {
+              "type": "string"
+            },
+            "optional": false
+          },
+          "source": {
+            "fieldType": {
+              "type": "union",
+              "value": [
+                {
+                  "type": "literal",
+                  "value": "guest"
+                },
+                {
+                  "type": "literal",
+                  "value": "member"
+                }
+              ]
+            },
+            "optional": false
+          },
+          "title": {
+            "fieldType": {
+              "type": "union",
+              "value": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "optional": false
+          }
+        }
+      },
+      "functionType": "Mutation",
+      "identifier": "comparisons.js:saveComparison",
+      "returns": {
+        "type": "union",
+        "value": [
+          {
+            "type": "object",
+            "value": {
+              "comparisonId": {
+                "fieldType": {
+                  "tableName": "comparisons",
+                  "type": "id"
+                },
+                "optional": false
+              },
+              "requestId": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "resultId": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "serverHash": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "status": {
+                "fieldType": {
+                  "type": "union",
+                  "value": [
+                    {
+                      "type": "literal",
+                      "value": "saved"
+                    },
+                    {
+                      "type": "literal",
+                      "value": "replayed"
+                    }
+                  ]
+                },
+                "optional": false
+              }
+            }
+          },
+          {
+            "type": "object",
+            "value": {
+              "code": {
+                "fieldType": {
+                  "type": "literal",
+                  "value": "deleted"
+                },
+                "optional": false
+              },
+              "message": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "requestId": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "resultId": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "status": {
+                "fieldType": {
+                  "type": "literal",
+                  "value": "blocked"
+                },
+                "optional": false
+              }
+            }
+          },
+          {
+            "type": "object",
+            "value": {
+              "code": {
+                "fieldType": {
+                  "type": "union",
+                  "value": [
+                    {
+                      "type": "literal",
+                      "value": "request_reuse"
+                    },
+                    {
+                      "type": "literal",
+                      "value": "result_conflict"
+                    }
+                  ]
+                },
+                "optional": false
+              },
+              "message": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "status": {
+                "fieldType": {
+                  "type": "literal",
+                  "value": "error"
+                },
+                "optional": false
+              }
+            }
+          },
+          {
+            "type": "object",
+            "value": {
+              "code": {
+                "fieldType": {
+                  "type": "literal",
+                  "value": "rate_limited"
+                },
+                "optional": false
+              },
+              "message": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "retryAfterMs": {
+                "fieldType": {
+                  "type": "number"
+                },
+                "optional": false
+              },
+              "status": {
+                "fieldType": {
+                  "type": "literal",
+                  "value": "limited"
+                },
+                "optional": false
+              }
+            }
+          },
+          {
+            "type": "object",
+            "value": {
+              "code": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "message": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "status": {
+                "fieldType": {
+                  "type": "literal",
+                  "value": "error"
+                },
+                "optional": false
+              }
+            }
+          }
+        ]
+      },
+      "visibility": {
+        "kind": "public"
+      }
+    },
+    {
+      "args": {
+        "type": "object",
+        "value": {
+          "comparisonId": {
+            "fieldType": {
+              "tableName": "comparisons",
+              "type": "id"
+            },
+            "optional": false
+          }
+        }
+      },
+      "functionType": "Query",
+      "identifier": "comparisons.js:getComparison",
+      "returns": {
+        "type": "union",
+        "value": [
+          {
+            "type": "object",
+            "value": {
+              "_creationTime": {
+                "fieldType": {
+                  "type": "number"
+                },
+                "optional": false
+              },
+              "_id": {
+                "fieldType": {
+                  "tableName": "comparisons",
+                  "type": "id"
+                },
+                "optional": false
+              },
+              "calculationVersion": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "createdAt": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "resultId": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "snapshot": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "source": {
+                "fieldType": {
+                  "type": "union",
+                  "value": [
+                    {
+                      "type": "literal",
+                      "value": "guest"
+                    },
+                    {
+                      "type": "literal",
+                      "value": "member"
+                    }
+                  ]
+                },
+                "optional": false
+              },
+              "title": {
+                "fieldType": {
+                  "type": "union",
+                  "value": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "optional": false
+              }
+            }
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "visibility": {
+        "kind": "public"
+      }
+    },
+    {
+      "args": {
+        "type": "object",
+        "value": {
+          "paginationOpts": {
+            "fieldType": {
+              "type": "object",
+              "value": {
+                "cursor": {
+                  "fieldType": {
+                    "type": "union",
+                    "value": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "optional": false
+                },
+                "endCursor": {
+                  "fieldType": {
+                    "type": "union",
+                    "value": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "optional": true
+                },
+                "id": {
+                  "fieldType": {
+                    "type": "number"
+                  },
+                  "optional": true
+                },
+                "maximumBytesRead": {
+                  "fieldType": {
+                    "type": "number"
+                  },
+                  "optional": true
+                },
+                "maximumRowsRead": {
+                  "fieldType": {
+                    "type": "number"
+                  },
+                  "optional": true
+                },
+                "numItems": {
+                  "fieldType": {
+                    "type": "number"
+                  },
+                  "optional": false
+                }
+              }
+            },
+            "optional": false
+          }
+        }
+      },
+      "functionType": "Query",
+      "identifier": "comparisons.js:listComparisons",
+      "returns": {
+        "type": "union",
+        "value": [
+          {
+            "type": "object",
+            "value": {
+              "result": {
+                "fieldType": {
+                  "type": "object",
+                  "value": {
+                    "continueCursor": {
+                      "fieldType": {
+                        "type": "string"
+                      },
+                      "optional": false
+                    },
+                    "isDone": {
+                      "fieldType": {
+                        "type": "boolean"
+                      },
+                      "optional": false
+                    },
+                    "page": {
+                      "fieldType": {
+                        "type": "array",
+                        "value": {
+                          "type": "object",
+                          "value": {
+                            "_creationTime": {
+                              "fieldType": {
+                                "type": "number"
+                              },
+                              "optional": false
+                            },
+                            "_id": {
+                              "fieldType": {
+                                "tableName": "comparisons",
+                                "type": "id"
+                              },
+                              "optional": false
+                            },
+                            "calculationVersion": {
+                              "fieldType": {
+                                "type": "string"
+                              },
+                              "optional": false
+                            },
+                            "createdAt": {
+                              "fieldType": {
+                                "type": "string"
+                              },
+                              "optional": false
+                            },
+                            "resultId": {
+                              "fieldType": {
+                                "type": "string"
+                              },
+                              "optional": false
+                            },
+                            "snapshot": {
+                              "fieldType": {
+                                "type": "string"
+                              },
+                              "optional": false
+                            },
+                            "source": {
+                              "fieldType": {
+                                "type": "union",
+                                "value": [
+                                  {
+                                    "type": "literal",
+                                    "value": "guest"
+                                  },
+                                  {
+                                    "type": "literal",
+                                    "value": "member"
+                                  }
+                                ]
+                              },
+                              "optional": false
+                            },
+                            "title": {
+                              "fieldType": {
+                                "type": "union",
+                                "value": [
+                                  {
+                                    "type": "string"
+                                  },
+                                  {
+                                    "type": "null"
+                                  }
+                                ]
+                              },
+                              "optional": false
+                            }
+                          }
+                        }
+                      },
+                      "optional": false
+                    },
+                    "pageStatus": {
+                      "fieldType": {
+                        "type": "union",
+                        "value": [
+                          {
+                            "type": "literal",
+                            "value": "SplitRecommended"
+                          },
+                          {
+                            "type": "literal",
+                            "value": "SplitRequired"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "optional": true
+                    },
+                    "splitCursor": {
+                      "fieldType": {
+                        "type": "union",
+                        "value": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "optional": true
+                    }
+                  }
+                },
+                "optional": false
+              },
+              "status": {
+                "fieldType": {
+                  "type": "literal",
+                  "value": "ok"
+                },
+                "optional": false
+              }
+            }
+          },
+          {
+            "type": "object",
+            "value": {
+              "code": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "message": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "status": {
+                "fieldType": {
+                  "type": "literal",
+                  "value": "error"
+                },
+                "optional": false
+              }
+            }
+          }
+        ]
+      },
+      "visibility": {
+        "kind": "public"
+      }
+    },
+    {
+      "args": {
+        "type": "object",
+        "value": {
+          "createdAt": {
+            "fieldType": {
+              "type": "string"
+            },
+            "optional": false
+          },
+          "requestId": {
+            "fieldType": {
+              "type": "string"
+            },
+            "optional": false
+          },
+          "resultId": {
+            "fieldType": {
+              "type": "string"
+            },
+            "optional": false
+          }
+        }
+      },
+      "functionType": "Mutation",
+      "identifier": "comparisons.js:deleteComparison",
+      "returns": {
+        "type": "union",
+        "value": [
+          {
+            "type": "object",
+            "value": {
+              "comparisonId": {
+                "fieldType": {
+                  "type": "union",
+                  "value": [
+                    {
+                      "tableName": "comparisons",
+                      "type": "id"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "optional": false
+              },
+              "requestId": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "resultId": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "serverHash": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "status": {
+                "fieldType": {
+                  "type": "union",
+                  "value": [
+                    {
+                      "type": "literal",
+                      "value": "deleted"
+                    },
+                    {
+                      "type": "literal",
+                      "value": "replayed"
+                    }
+                  ]
+                },
+                "optional": false
+              }
+            }
+          },
+          {
+            "type": "object",
+            "value": {
+              "code": {
+                "fieldType": {
+                  "type": "union",
+                  "value": [
+                    {
+                      "type": "literal",
+                      "value": "request_reuse"
+                    },
+                    {
+                      "type": "literal",
+                      "value": "result_conflict"
+                    }
+                  ]
+                },
+                "optional": false
+              },
+              "message": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "status": {
+                "fieldType": {
+                  "type": "literal",
+                  "value": "error"
+                },
+                "optional": false
+              }
+            }
+          },
+          {
+            "type": "object",
+            "value": {
+              "code": {
+                "fieldType": {
+                  "type": "literal",
+                  "value": "rate_limited"
+                },
+                "optional": false
+              },
+              "message": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "retryAfterMs": {
+                "fieldType": {
+                  "type": "number"
+                },
+                "optional": false
+              },
+              "status": {
+                "fieldType": {
+                  "type": "literal",
+                  "value": "limited"
+                },
+                "optional": false
+              }
+            }
+          },
+          {
+            "type": "object",
+            "value": {
+              "code": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "message": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "status": {
+                "fieldType": {
+                  "type": "literal",
+                  "value": "error"
+                },
+                "optional": false
+              }
+            }
+          }
+        ]
+      },
+      "visibility": {
+        "kind": "public"
+      }
+    },
+    {
+      "args": {
+        "type": "object",
+        "value": {}
+      },
+      "functionType": "Query",
+      "identifier": "analytics.js:getPreference",
+      "returns": {
+        "type": "object",
+        "value": {
+          "analyticsAccountId": {
+            "fieldType": {
+              "type": "union",
+              "value": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "optional": false
+          },
+          "consent": {
+            "fieldType": {
+              "type": "union",
+              "value": [
+                {
+                  "type": "literal",
+                  "value": "unknown"
+                },
+                {
+                  "type": "literal",
+                  "value": "declined"
+                },
+                {
+                  "type": "literal",
+                  "value": "accepted"
+                }
+              ]
+            },
+            "optional": false
+          },
+          "policyVersion": {
+            "fieldType": {
+              "type": "string"
+            },
+            "optional": false
+          },
+          "revision": {
+            "fieldType": {
+              "type": "number"
+            },
+            "optional": false
+          },
+          "sendPermission": {
+            "fieldType": {
+              "type": "boolean"
+            },
+            "optional": false
+          }
+        }
+      },
+      "visibility": {
+        "kind": "public"
+      }
+    },
+    {
+      "args": {
+        "type": "object",
+        "value": {
+          "consent": {
+            "fieldType": {
+              "type": "union",
+              "value": [
+                {
+                  "type": "literal",
+                  "value": "declined"
+                },
+                {
+                  "type": "literal",
+                  "value": "accepted"
+                }
+              ]
+            },
+            "optional": false
+          },
+          "expectedRevision": {
+            "fieldType": {
+              "type": "number"
+            },
+            "optional": false
+          },
+          "policyVersion": {
+            "fieldType": {
+              "type": "literal",
+              "value": "v1"
+            },
+            "optional": false
+          }
+        }
+      },
+      "functionType": "Mutation",
+      "identifier": "analytics.js:setPreference",
+      "returns": {
+        "type": "object",
+        "value": {
+          "analyticsAccountId": {
+            "fieldType": {
+              "type": "union",
+              "value": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "optional": false
+          },
+          "consent": {
+            "fieldType": {
+              "type": "union",
+              "value": [
+                {
+                  "type": "literal",
+                  "value": "unknown"
+                },
+                {
+                  "type": "literal",
+                  "value": "declined"
+                },
+                {
+                  "type": "literal",
+                  "value": "accepted"
+                }
+              ]
+            },
+            "optional": false
+          },
+          "policyVersion": {
+            "fieldType": {
+              "type": "string"
+            },
+            "optional": false
+          },
+          "revision": {
+            "fieldType": {
+              "type": "number"
+            },
+            "optional": false
+          },
+          "sendPermission": {
+            "fieldType": {
+              "type": "boolean"
+            },
+            "optional": false
+          }
+        }
+      },
+      "visibility": {
+        "kind": "public"
+      }
+    },
+    {
+      "args": {
+        "type": "object",
+        "value": {
+          "contextId": {
+            "fieldType": {
+              "type": "string"
+            },
+            "optional": false
+          },
+          "contextVersion": {
+            "fieldType": {
+              "type": "string"
+            },
+            "optional": false
+          },
+          "feature": {
+            "fieldType": {
+              "type": "union",
+              "value": [
+                {
+                  "type": "literal",
+                  "value": "comparison"
+                },
+                {
+                  "type": "literal",
+                  "value": "loan_health"
+                }
+              ]
+            },
+            "optional": false
+          }
+        }
+      },
+      "functionType": "Query",
+      "identifier": "feedback.js:getFeedbackStatus",
+      "returns": {
+        "type": "object",
+        "value": {
+          "contextId": {
+            "fieldType": {
+              "type": "string"
+            },
+            "optional": false
+          },
+          "contextVersion": {
+            "fieldType": {
+              "type": "string"
+            },
+            "optional": false
+          },
+          "feature": {
+            "fieldType": {
+              "type": "union",
+              "value": [
+                {
+                  "type": "literal",
+                  "value": "comparison"
+                },
+                {
+                  "type": "literal",
+                  "value": "loan_health"
+                }
+              ]
+            },
+            "optional": false
+          },
+          "status": {
+            "fieldType": {
+              "type": "union",
+              "value": [
+                {
+                  "type": "literal",
+                  "value": "available"
+                },
+                {
+                  "type": "literal",
+                  "value": "submitted"
+                },
+                {
+                  "type": "literal",
+                  "value": "dismissed"
+                }
+              ]
+            },
+            "optional": false
+          }
+        }
+      },
+      "visibility": {
+        "kind": "public"
+      }
+    },
+    {
+      "args": {
+        "type": "object",
+        "value": {
+          "answer": {
+            "fieldType": {
+              "type": "union",
+              "value": [
+                {
+                  "type": "literal",
+                  "value": "yes"
+                },
+                {
+                  "type": "literal",
+                  "value": "no"
+                }
+              ]
+            },
+            "optional": false
+          },
+          "comment": {
+            "fieldType": {
+              "type": "union",
+              "value": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "optional": true
+          },
+          "contextId": {
+            "fieldType": {
+              "type": "string"
+            },
+            "optional": false
+          },
+          "contextVersion": {
+            "fieldType": {
+              "type": "string"
+            },
+            "optional": false
+          },
+          "feature": {
+            "fieldType": {
+              "type": "union",
+              "value": [
+                {
+                  "type": "literal",
+                  "value": "comparison"
+                },
+                {
+                  "type": "literal",
+                  "value": "loan_health"
+                }
+              ]
+            },
+            "optional": false
+          },
+          "requestId": {
+            "fieldType": {
+              "type": "string"
+            },
+            "optional": false
+          }
+        }
+      },
+      "functionType": "Mutation",
+      "identifier": "feedback.js:submitFeedback",
+      "returns": {
+        "type": "union",
+        "value": [
+          {
+            "type": "object",
+            "value": {
+              "contextId": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "contextVersion": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "feature": {
+                "fieldType": {
+                  "type": "union",
+                  "value": [
+                    {
+                      "type": "literal",
+                      "value": "comparison"
+                    },
+                    {
+                      "type": "literal",
+                      "value": "loan_health"
+                    }
+                  ]
+                },
+                "optional": false
+              },
+              "requestId": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "status": {
+                "fieldType": {
+                  "type": "union",
+                  "value": [
+                    {
+                      "type": "literal",
+                      "value": "submitted"
+                    },
+                    {
+                      "type": "literal",
+                      "value": "replayed"
+                    }
+                  ]
+                },
+                "optional": false
+              }
+            }
+          },
+          {
+            "type": "object",
+            "value": {
+              "contextId": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "contextVersion": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "feature": {
+                "fieldType": {
+                  "type": "union",
+                  "value": [
+                    {
+                      "type": "literal",
+                      "value": "comparison"
+                    },
+                    {
+                      "type": "literal",
+                      "value": "loan_health"
+                    }
+                  ]
+                },
+                "optional": false
+              },
+              "requestId": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "status": {
+                "fieldType": {
+                  "type": "union",
+                  "value": [
+                    {
+                      "type": "literal",
+                      "value": "dismissed"
+                    },
+                    {
+                      "type": "literal",
+                      "value": "replayed"
+                    }
+                  ]
+                },
+                "optional": false
+              }
+            }
+          },
+          {
+            "type": "object",
+            "value": {
+              "code": {
+                "fieldType": {
+                  "type": "literal",
+                  "value": "rate_limited"
+                },
+                "optional": false
+              },
+              "message": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "retryAfterMs": {
+                "fieldType": {
+                  "type": "number"
+                },
+                "optional": false
+              },
+              "status": {
+                "fieldType": {
+                  "type": "literal",
+                  "value": "limited"
+                },
+                "optional": false
+              }
+            }
+          },
+          {
+            "type": "object",
+            "value": {
+              "code": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "message": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "status": {
+                "fieldType": {
+                  "type": "literal",
+                  "value": "error"
+                },
+                "optional": false
+              }
+            }
+          }
+        ]
+      },
+      "visibility": {
+        "kind": "public"
+      }
+    },
+    {
+      "args": {
+        "type": "object",
+        "value": {
+          "contextId": {
+            "fieldType": {
+              "type": "string"
+            },
+            "optional": false
+          },
+          "contextVersion": {
+            "fieldType": {
+              "type": "string"
+            },
+            "optional": false
+          },
+          "feature": {
+            "fieldType": {
+              "type": "union",
+              "value": [
+                {
+                  "type": "literal",
+                  "value": "comparison"
+                },
+                {
+                  "type": "literal",
+                  "value": "loan_health"
+                }
+              ]
+            },
+            "optional": false
+          },
+          "requestId": {
+            "fieldType": {
+              "type": "string"
+            },
+            "optional": false
+          }
+        }
+      },
+      "functionType": "Mutation",
+      "identifier": "feedback.js:dismissFeedback",
+      "returns": {
+        "type": "union",
+        "value": [
+          {
+            "type": "object",
+            "value": {
+              "contextId": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "contextVersion": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "feature": {
+                "fieldType": {
+                  "type": "union",
+                  "value": [
+                    {
+                      "type": "literal",
+                      "value": "comparison"
+                    },
+                    {
+                      "type": "literal",
+                      "value": "loan_health"
+                    }
+                  ]
+                },
+                "optional": false
+              },
+              "requestId": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "status": {
+                "fieldType": {
+                  "type": "union",
+                  "value": [
+                    {
+                      "type": "literal",
+                      "value": "submitted"
+                    },
+                    {
+                      "type": "literal",
+                      "value": "replayed"
+                    }
+                  ]
+                },
+                "optional": false
+              }
+            }
+          },
+          {
+            "type": "object",
+            "value": {
+              "contextId": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "contextVersion": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "feature": {
+                "fieldType": {
+                  "type": "union",
+                  "value": [
+                    {
+                      "type": "literal",
+                      "value": "comparison"
+                    },
+                    {
+                      "type": "literal",
+                      "value": "loan_health"
+                    }
+                  ]
+                },
+                "optional": false
+              },
+              "requestId": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "status": {
+                "fieldType": {
+                  "type": "union",
+                  "value": [
+                    {
+                      "type": "literal",
+                      "value": "dismissed"
+                    },
+                    {
+                      "type": "literal",
+                      "value": "replayed"
+                    }
+                  ]
+                },
+                "optional": false
+              }
+            }
+          },
+          {
+            "type": "object",
+            "value": {
+              "code": {
+                "fieldType": {
+                  "type": "literal",
+                  "value": "rate_limited"
+                },
+                "optional": false
+              },
+              "message": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "retryAfterMs": {
+                "fieldType": {
+                  "type": "number"
+                },
+                "optional": false
+              },
+              "status": {
+                "fieldType": {
+                  "type": "literal",
+                  "value": "limited"
+                },
+                "optional": false
+              }
+            }
+          },
+          {
+            "type": "object",
+            "value": {
+              "code": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "message": {
+                "fieldType": {
+                  "type": "string"
+                },
+                "optional": false
+              },
+              "status": {
+                "fieldType": {
+                  "type": "literal",
+                  "value": "error"
+                },
+                "optional": false
+              }
+            }
+          }
+        ]
+      },
+      "visibility": {
+        "kind": "public"
+      }
+    },
+    {
+      "args": {
+        "type": "object",
+        "value": {}
+      },
+      "functionType": "Mutation",
+      "identifier": "retention.js:purgeExpiredFeedback",
+      "returns": {
+        "type": "object",
+        "value": {
+          "continuationScheduled": {
+            "fieldType": {
+              "type": "boolean"
+            },
+            "optional": false
+          },
+          "dismissalsDeleted": {
+            "fieldType": {
+              "type": "number"
+            },
+            "optional": false
+          },
+          "feedbackDeleted": {
+            "fieldType": {
+              "type": "number"
+            },
+            "optional": false
+          }
+        }
+      },
+      "visibility": {
+        "kind": "internal"
+      }
+    }
+  ]
+}

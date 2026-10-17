@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-04T00:18:04Z",
+  "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+  "candidateBuildId": "1iwP4oc_H3NlGLD2I7W_j",
+  "command": "npx vitest run --maxWorkers=2 tests/convex-comparisons.test.ts tests/convex-feedback.test.ts tests/convex-account-export.test.ts tests/monitoring-scrub.test.ts tests/monitoring-reporter.test.ts tests/next-config-headers.test.ts",
+  "status": "passed-local-boundary",
+  "testFiles": 6,
+  "tests": 39,
+  "coverage": [
+    "comparison server quota and bounded deletion limits",
+    "feedback size and rate limits",
+    "export issuance and churn limits",
+    "monitoring scrubbing and sink-failure isolation",
+    "response header policy"
+  ],
+  "sourceHashes": {
+    "convex/comparisons.ts": "094c85f305983941951c34ff26e9283ecb38538eccdae6a8a40e976e66ff034a",
+    "convex/feedback.ts": "1ab024fcb5f234f5559e925b5a43f87ce7abcba0d0e135f54e980d7806dedc45",
+    "convex/accountExports.ts": "81f08a838bc57f2dbbb7f266a269ec1e7e4569e395d057ff70b25d3a7393d485",
+    "tests/convex-comparisons.test.ts": "e563fe04d632d8606734dd67b5859d4fc4b325e5a234a1de16336006439968ff",
+    "tests/convex-feedback.test.ts": "046339cb232c512986f117268fba4512674530f131e14acaf513c0560c87038f",
+    "tests/convex-account-export.test.ts": "747fef7bfce447a31a4c4cce0ea233815dffb028a353b76711439524e4d39f1e",
+    "lib/monitoring/scrub.ts": "7321809c7ffca45b38a32433180e7679849bc8ff64e16632e6f21fc00a4abeae",
+    "lib/monitoring/reporter.ts": "346b63d264c5696ce2733b3af686039c7b9216f65e22c7dd6848b0c014f5ce2e",
+    "tests/monitoring-scrub.test.ts": "0b400597bd657e35f66e6fdbcc0f61fba904a2b400af1c8781eb8725267c872d",
+    "tests/monitoring-reporter.test.ts": "894ac77c52ea9b114327f92ea8ffd17ba7d5ee89b5640e6e59aa87dc07e019c2",
+    "next.config.ts": "c2a8e88600abbbb5f3f0367ba45f84aaf4d7ded4b90dd215d4643234b26fc00b",
+    "tests/next-config-headers.test.ts": "85d56997bd5b72ba110057bf2f28fa9369c7184f9739c90e760ce6c7db54bb7d"
+  },
+  "open": [
+    "operator alert delivery and synthetic alert receipt",
+    "hosted header delivery and deployment configuration",
+    "provider production quotas and release approval"
+  ],
+  "externalAction": false
+}

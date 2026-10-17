@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-03T22:48:42.000Z",
+  "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+  "buildId": "ujIJXQDHA9Mwk2jE0jKnM",
+  "status": "passed",
+  "commands": {
+    "typecheck": "npm run typecheck",
+    "tests": "npm test -- --maxWorkers=2",
+    "build": "npm run build"
+  },
+  "tests": {
+    "testFiles": 111,
+    "passed": 1059
+  },
+  "build": {
+    "generatedRoutes": 19,
+    "offlineShellBuildId": "8ecaf70f4be9b1ec"
+  },
+  "relationship": "Fresh source-equivalent local rebuild after the results-table narrow-viewport keyboard-scroll fix. The release manifest remains bound to ydMzVTyEiY_q6uNn7FXx1; prior browser evidence is not relabelled to this transient build.",
+  "externalActions": false
+}

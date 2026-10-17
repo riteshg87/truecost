@@ -5,10 +5,10 @@ import {
   rateVerdict,
   transferResult,
 } from "../analyse";
-import { monthsBetween, repoOn } from "../repo";
+import { addCalendarMonths, isResetOverdue, monthsBetween, repoOn } from "../repo";
 import type { LoanRecord, TransferQuote } from "../types";
 
-const TODAY = "2026-09-14";
+const TODAY = "2025-12-05";
 
 function loan(partial: Partial<LoanRecord> = {}): LoanRecord {
   return {
@@ -18,8 +18,10 @@ function loan(partial: Partial<LoanRecord> = {}): LoanRecord {
     ratePct: 8.5,
     basis: "repo",
     spreadPct: 2.75,
+    spreadProvenance: "confirmed",
     cycle: "quarterly",
-    lastReset: "2025-09-01",
+    lastReset: "2025-06-06",
+    lastResetProvenance: "confirmed",
     monthsLeft: 214,
     ...partial,
   };
@@ -37,10 +39,30 @@ function quote(partial: Partial<TransferQuote> = {}): TransferQuote {
 }
 
 describe("benchmark feed", () => {
-  it("reads the rate in force on a date, not the latest one", () => {
-    expect(repoOn("2025-09-01")).toBe(5.75);
-    expect(repoOn("2026-09-14")).toBe(5.25);
-    expect(repoOn("2024-01-01")).toBe(6.5);
+  it("returns only exact observed dates until continuous coverage is sourced", () => {
+    expect(repoOn("2023-02-08")).toBe(6.5);
+    expect(repoOn("2025-06-06")).toBe(5.5);
+    expect(repoOn("2025-12-05")).toBe(5.25);
+    expect(repoOn("2025-09-01")).toBeNull();
+    expect(repoOn("2026-09-14")).toBeNull();
+  });
+
+  it("does not infer a rate between isolated observations", () => {
+    expect(repoOn("2025-06-05")).toBeNull();
+    expect(repoOn("2025-06-06")).toBe(5.5);
+    expect(repoOn("2025-06-07")).toBeNull();
+    expect(repoOn("2025-12-04")).toBeNull();
+    expect(repoOn("2025-12-05")).toBe(5.25);
+  });
+
+  it("does not promote inherited history rows to verified observations", () => {
+    expect(repoOn("2025-02-07")).toBeNull();
+    expect(repoOn("2025-04-09")).toBeNull();
+  });
+
+  it("rejects malformed benchmark dates rather than silently selecting a rate", () => {
+    expect(() => repoOn("2025-02-30")).toThrow(RangeError);
+    expect(() => repoOn("not-a-date")).toThrow(RangeError);
   });
 
   it("counts whole months between dates", () => {
@@ -54,7 +76,7 @@ describe("rate verdict", () => {
   it("flags a rate the benchmark has left behind", () => {
     const v = rateVerdict(loan(), TODAY);
     expect(v.kind).toBe("stale");
-    expect(v.repoThen).toBe(5.75);
+    expect(v.repoThen).toBe(5.5);
     expect(v.repoNow).toBe(5.25);
     expect(v.shouldBePct).toBeCloseTo(8.0, 6);
     expect(v.gapPct).toBeCloseTo(0.5, 6);
@@ -93,14 +115,74 @@ describe("rate verdict", () => {
   });
 
   it("knows a reset is overdue from the loan's own cycle", () => {
-    expect(rateVerdict(loan({ lastReset: "2026-08-01" }), TODAY).resetOverdue).toBe(false);
-    expect(rateVerdict(loan({ lastReset: "2025-01-01" }), TODAY).resetOverdue).toBe(true);
+    expect(rateVerdict(loan({ lastReset: "2025-12-05" }), TODAY).resetOverdue).toBe(false);
+    expect(rateVerdict(loan({ lastReset: "2025-06-06" }), TODAY).resetOverdue).toBe(true);
+  });
+
+  it("does not turn an unconfirmed spread into a contractual gap", () => {
+    const v = rateVerdict(loan({ spreadProvenance: "unknown", lastResetProvenance: "confirmed" }), TODAY);
+    expect(v.kind).toBe("unknown");
+    expect(v.gapPct).toBeNull();
+    expect(v.shouldBePct).toBeNull();
+    expect(v.emi).toBeGreaterThan(38000);
+  });
+
+  it("keeps an explicitly confirmed zero spread distinct from an unknown spread", () => {
+    const v = rateVerdict(loan({ spreadPct: 0, spreadProvenance: "confirmed" }), TODAY);
+    expect(v.kind).toBe("stale");
+    expect(v.shouldBePct).toBe(5.25);
+    expect(v.gapPct).toBeCloseTo(3.25, 6);
+  });
+
+  it("does not treat a legacy reset date as evidence of a contractual reset", () => {
+    const v = rateVerdict(loan({ spreadProvenance: "confirmed", lastResetProvenance: "legacy" }), TODAY);
+    expect(v.kind).toBe("unknown");
+    expect(v.gapPct).toBeNull();
+    expect(v.unknownReason).toMatch(/reset date/i);
+  });
+
+  it("keeps exact anniversaries due but not overdue until the following day", () => {
+    expect(isResetOverdue("2026-06-15", "2026-09-14", 3)).toBe(false);
+    expect(isResetOverdue("2026-06-15", "2026-09-15", 3)).toBe(false);
+    expect(isResetOverdue("2026-06-15", "2026-09-16", 3)).toBe(true);
+  });
+
+  it("preserves an unknown verdict for malformed, uncovered or future reset dates", () => {
+    const uncovered = rateVerdict(loan(), "2026-09-14");
+    expect(uncovered.kind).toBe("unknown");
+    expect(uncovered.unknownReason).toMatch(/observations do not cover/i);
+    expect(uncovered.emi).toBeGreaterThan(38000);
+    expect(rateVerdict(loan({ lastReset: "2026-02-30" }), "2026-09-14").kind).toBe("unknown");
+    expect(rateVerdict(loan({ lastReset: "2026-10-01" }), "2026-09-14").kind).toBe("unknown");
+    expect(rateVerdict(loan(), "not-a-date").kind).toBe("unknown");
   });
 
   it("derives an EMI the record itself implies", () => {
     const v = rateVerdict(loan(), TODAY);
     expect(v.emi).toBeGreaterThan(38000);
     expect(v.emi).toBeLessThan(39500);
+  });
+});
+
+describe("reset calendar anniversaries", () => {
+  it("clamps monthly January anniversaries to February month end", () => {
+    expect(addCalendarMonths("2026-01-31", 1)).toBe("2026-02-28");
+    expect(isResetOverdue("2026-01-31", "2026-02-28", 1)).toBe(false);
+    expect(isResetOverdue("2026-01-31", "2026-03-01", 1)).toBe(true);
+  });
+
+  it("keeps a leap-year February 29 anniversary exact", () => {
+    expect(addCalendarMonths("2028-01-31", 1)).toBe("2028-02-29");
+    expect(isResetOverdue("2028-01-31", "2028-02-29", 1)).toBe(false);
+    expect(isResetOverdue("2028-01-31", "2028-03-01", 1)).toBe(true);
+  });
+
+  it("clamps quarterly and half-year month ends deliberately", () => {
+    expect(addCalendarMonths("2026-11-30", 3)).toBe("2027-02-28");
+    expect(isResetOverdue("2026-11-30", "2027-02-28", 3)).toBe(false);
+    expect(isResetOverdue("2026-11-30", "2027-03-01", 3)).toBe(true);
+    expect(addCalendarMonths("2026-08-31", 6)).toBe("2027-02-28");
+    expect(isResetOverdue("2026-08-31", "2027-02-28", 6)).toBe(false);
   });
 });
 

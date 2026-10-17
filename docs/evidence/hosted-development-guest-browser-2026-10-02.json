@@ -1,0 +1,28 @@
+{
+  "kind": "read-only hosted development browser check",
+  "checkedAt": "2026-10-02T14:00:00.000Z",
+  "browser": "Codex In-app Browser",
+  "target": "https://truecost-ebon.vercel.app/",
+  "observed": {
+    "landingTitle": "TrueCost — what a loan actually costs",
+    "guestEntry": "https://truecost-ebon.vercel.app/home",
+    "comparisonRoute": "https://truecost-ebon.vercel.app/compare",
+    "resultRoute": "https://truecost-ebon.vercel.app/compare/results",
+    "resultHeading": "Results",
+    "guestStatus": "Your first two-offer comparison is free. Sign in to save it or compare again.",
+    "offerLabels": ["Review Offer A", "Review Offer B"],
+    "visibleMetrics": ["Effective APR", "Cost per lakh", "Monthly EMI", "Total cost of borrowing"]
+  },
+  "checks": [
+    "Landing page rendered signed out.",
+    "Guest entry reached /home.",
+    "Compare Loan Offers reached /compare.",
+    "Default synthetic offers reached the Results route.",
+    "Results showed guest action gates for save, new comparison and report download."
+  ],
+  "limitations": [
+    "No sign-in, provider write, analytics request, download or external mutation was performed.",
+    "This is development review evidence, not production readiness or reviewer-access proof.",
+    "Financial values were observed in the public synthetic guest flow and are not lender quotes."
+  ]
+}

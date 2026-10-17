@@ -1,0 +1,293 @@
+{
+  "checkedAt": "2026-09-16T02:35:22.853Z",
+  "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+  "browser": {
+    "name": "Chrome",
+    "playwright": "1.62.1",
+    "engine": "152.0.7977.83"
+  },
+  "baseUrl": "http://localhost:4361",
+  "checks": [
+    {
+      "name": "development Clerk key configuration is present and environment-matched",
+      "passed": true,
+      "details": {
+        "environment": "test",
+        "issuer": "live-tarpon-2666.clerk.accounts.dev",
+        "convexTarget": "https://dutiful-fly-37.convex.cloud"
+      }
+    },
+    {
+      "name": "short-lived Clerk testing token obtained without recording its value",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "a Clerk SDK loaded before user interaction",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "a invalid OTP stays on verification with a safe error",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "a test OTP activates the development session and reaches home",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "a account page is bound to the current synthetic identity",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "a sign out requires explicit confirmation",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "a sign out returns to an unauthenticated route",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "a cleanup revoked only newly-created sessions",
+      "passed": true,
+      "details": {
+        "count": 0
+      }
+    },
+    {
+      "name": "b Clerk SDK loaded before user interaction",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "b invalid OTP stays on verification with a safe error",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "b test OTP activates the development session and reaches home",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "b account page is bound to the current synthetic identity",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "b sign out requires explicit confirmation",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "b sign out returns to an unauthenticated route",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "b cleanup revoked only newly-created sessions",
+      "passed": true,
+      "details": {
+        "count": 0
+      }
+    },
+    {
+      "name": "A and B use fresh browser contexts with isolated account pages",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup signup Clerk SDK loaded before user interaction",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup invalid signup OTP stays on verification with a safe error",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup signUpIfMissing transfer and test OTP reach home",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup newly created account is visible after backend provisioning",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup confirms the loan is saved to the account",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup saved the fixed-basis synthetic loan inputs",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup after loan reload confirms the loan is saved to the account",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup reload preserves the saved loan record",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup after quote save confirms the loan is saved to the account",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup after quote reload confirms the loan is saved to the account",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup explicit transfer quote save survives reload",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup account-status before responsive capture confirms the loan is saved to the account",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup account-status status fits a 390px viewport",
+      "passed": true,
+      "details": {
+        "width": 390,
+        "sizes": {
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "new-signup account-status status fits a 320px viewport",
+      "passed": true,
+      "details": {
+        "width": 320,
+        "sizes": {
+          "viewport": 320,
+          "document": 320,
+          "body": 320
+        }
+      }
+    },
+    {
+      "name": "new-signup loan-status before responsive capture confirms the loan is saved to the account",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup loan-status status fits a 390px viewport",
+      "passed": true,
+      "details": {
+        "width": 390,
+        "sizes": {
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "new-signup loan-status status fits a 320px viewport",
+      "passed": true,
+      "details": {
+        "width": 320,
+        "sizes": {
+          "viewport": 320,
+          "document": 320,
+          "body": 320
+        }
+      }
+    },
+    {
+      "name": "new-signup before signout warning confirms the loan is saved to the account",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup signout warning can be cancelled while the loan remains visible",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup cleanup deleted the synthetic loan through the account UI",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup account projection shows no loan after UI deletion",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup sign out requires explicit confirmation",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup signup sign out returns to an unauthenticated route",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup private loan data is absent after confirmed sign out",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "new-signup cleanup revoked only newly-created sessions",
+      "passed": true,
+      "details": {
+        "count": 0
+      }
+    },
+    {
+      "name": "new-signup cleanup handled only the disposable signup identity",
+      "passed": true,
+      "details": {
+        "deleted": true,
+        "convexProfile": "may remain; Clerk deletion does not remove Convex profiles, and this harness has no Convex deletion or tombstone operation"
+      }
+    },
+    {
+      "name": "new signup used a unique reserved test address and UI-only creation path",
+      "passed": true,
+      "details": {}
+    }
+  ],
+  "errors": [],
+  "cleanupErrors": [],
+  "diagnostics": [],
+  "suppressedWarnings": 0,
+  "cleanup": "browser contexts closed and only the owned Next process was stopped",
+  "options": {
+    "loanCheckEnabled": true
+  },
+  "sourceHashes": {
+    "lib/auth/provider.tsx": "8818a52e96a4304b1132f150ec7c9d0f502e3570edff9bdb5299ad4c0dc0e26d",
+    "lib/auth/config.ts": "792adc4a78d5aabd90ff45b90a0279ed58848c5c6e15faa64e56540f1a065d4a",
+    "lib/auth/server-config.ts": "412485734d7ebb133f45633e1f935eb356559c4c6d835a55e078ebad11157337",
+    "lib/auth/requests.ts": "eea6a3f12b36ee3ac654a316e434cfd89b6afe640bc1f76ef25c06989cd2edf1",
+    "app/signin/page.tsx": "25e7ff7cca06cd7dbad259ca4743b23a8ef292f9961d7ce1342ced372cff36a6",
+    "app/verify/page.tsx": "fbd0e7e17a28bd529fa917d509de02c04b8c4c7f00cf6ca03aff9c993845ce48",
+    ".next/BUILD_ID": "e4c2b7bf4ee451dbfc1ce688a50a0b67cb805646729c5a556208f519e8ad4378",
+    ".next/static/chunks/1m_fdd3fugvv6.js": "ef883c20a3d79963b01cf66a8ffb77a45cc9625bc4c672ab3e369e9d67a4f6e1"
+  },
+  "status": "passed",
+  "scriptSha256": "c00e7a5a9b457ea8d46c88757a52abf5ce8644703da638cfc0e8b06c137c6458"
+}

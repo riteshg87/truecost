@@ -1,0 +1,20 @@
+{
+  "checkedAt": "2026-09-16T15:11:46.099586+00:00",
+  "method": "Windows Resolve-DnsName -DnsOnly; no DNS mutation",
+  "domain": "trucost.com",
+  "nameservers": [
+    "a12-67.akam.net",
+    "a1-134.akam.net",
+    "a7-64.akam.net",
+    "a18-67.akam.net",
+    "a5-66.akam.net",
+    "a14-64.akam.net"
+  ],
+  "soaPrimary": "nsuse01.spglobal.com",
+  "soaAdministrator": "hostmaster.spglobal.com",
+  "mx": "No MX answer; SOA returned",
+  "app.trucost.com": "NXDOMAIN",
+  "accounts.trucost.com": "NXDOMAIN",
+  "primarySource": "https://www.spglobal.com/marketintelligence/en/documents/the-socioeconomic-and-environmental-impact-of-large-scale-diamond-mining_dpa_02-may-2019.pdf",
+  "verdict": "Conflict requires correction or evidence of actual authorized dashboard; no ownership or working-mail claim independently verified."
+}

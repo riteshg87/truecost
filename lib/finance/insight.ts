@@ -17,7 +17,7 @@ import type { Offer } from "./types";
  * and the APRs really do meet.
  */
 
-/** Below this the two are the same loan priced two ways. */
+/** Editorial threshold for similar APRs; it does not establish equal rupee costs. */
 export const TOO_CLOSE_APR_GAP = 0.05;
 
 export type GapDriver = "rate" | "charges" | "both" | "unclear";

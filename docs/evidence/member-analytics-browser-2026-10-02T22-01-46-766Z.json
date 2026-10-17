@@ -1,0 +1,299 @@
+{
+  "checkedAt": "2026-10-02T22:01:46.766Z",
+  "status": "failed",
+  "mode": "intercept",
+  "scenario": "same-browser-account-switch",
+  "navigation": {
+    "hardNavigation": true,
+    "settleMs": 2000
+  },
+  "baseUrl": "http://localhost:3480",
+  "buildId": "zXmb7WujtdoPzCdjgq39W",
+  "issuer": "live-tarpon-2666.clerk.accounts.dev",
+  "convexTarget": "https://dutiful-fly-37.convex.cloud",
+  "mixpanelToken": "matched-approved-sha256",
+  "harnessSourceSha256": "180ce856ca6a11ae9aca7053c10ffcb209149e50a65edf9db40d2e72ab438181",
+  "timing": {
+    "clock": "node-date-ms",
+    "startedAt": 1790978506767,
+    "markers": [
+      {
+        "name": "analytics_preference_query_started",
+        "phase": "account A authentication",
+        "elapsedMs": 14268
+      },
+      {
+        "name": "analytics_preference_query_completed",
+        "phase": "account A authentication",
+        "elapsedMs": 14458,
+        "requestDurationMs": 190
+      },
+      {
+        "name": "account_a_accept_click",
+        "phase": "account A analytics consent",
+        "elapsedMs": 15033
+      },
+      {
+        "name": "analytics_preference_query_started",
+        "phase": "account A analytics consent",
+        "elapsedMs": 18973
+      },
+      {
+        "name": "analytics_preference_query_completed",
+        "phase": "account A analytics consent",
+        "elapsedMs": 19206,
+        "requestDurationMs": 233
+      },
+      {
+        "name": "analytics_preference_query_started",
+        "phase": "account A analytics consent",
+        "elapsedMs": 19596
+      },
+      {
+        "name": "account_a_analytics_on_observed",
+        "phase": "account A analytics consent",
+        "elapsedMs": 19598
+      },
+      {
+        "name": "account_a_hard_navigation_start",
+        "phase": "account A comparison",
+        "elapsedMs": 19598,
+        "settleMs": 2000
+      },
+      {
+        "name": "account_a_domcontentloaded",
+        "phase": "account A comparison",
+        "elapsedMs": 20164
+      },
+      {
+        "name": "account_a_settle_complete",
+        "phase": "account A comparison",
+        "elapsedMs": 22230,
+        "settleMs": 2000
+      },
+      {
+        "name": "account_a_inputs_filled",
+        "phase": "account A comparison",
+        "elapsedMs": 23927
+      },
+      {
+        "name": "account_a_click_attempt",
+        "phase": "account A comparison",
+        "elapsedMs": 23982
+      },
+      {
+        "name": "analytics_preference_query_started",
+        "phase": "account A comparison",
+        "elapsedMs": 24247
+      },
+      {
+        "name": "account_a_calculation_click",
+        "phase": "account A comparison",
+        "elapsedMs": 24248
+      },
+      {
+        "name": "analytics_preference_query_completed",
+        "phase": "account A comparison",
+        "elapsedMs": 24566,
+        "requestDurationMs": 319
+      }
+    ],
+    "events": [],
+    "consentQueries": [
+      {
+        "status": "started",
+        "elapsedMs": 14268
+      },
+      {
+        "status": "completed",
+        "elapsedMs": 14458,
+        "requestDurationMs": 190
+      },
+      {
+        "status": "started",
+        "elapsedMs": 18973
+      },
+      {
+        "status": "completed",
+        "elapsedMs": 19206,
+        "requestDurationMs": 233
+      },
+      {
+        "status": "started",
+        "elapsedMs": 19596
+      },
+      {
+        "status": "started",
+        "elapsedMs": 24247
+      },
+      {
+        "status": "completed",
+        "elapsedMs": 24566,
+        "requestDurationMs": 319
+      }
+    ],
+    "providerMarks": [
+      {
+        "label": "account_a_before_inputs",
+        "marks": []
+      },
+      {
+        "label": "account_a_after_calculation_click",
+        "marks": [
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 3729
+          },
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 3792
+          },
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 3869
+          },
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 3914
+          },
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 4110
+          },
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 4138
+          },
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 4264
+          },
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 4310
+          },
+          {
+            "name": "truecost.harness.account_a_inputs_filled",
+            "documentElapsedMs": 4351
+          },
+          {
+            "name": "truecost.harness.calculation_click",
+            "documentElapsedMs": 4507
+          }
+        ]
+      },
+      {
+        "label": "failure_after_error",
+        "marks": [
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 3729
+          },
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 3792
+          },
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 3869
+          },
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 3914
+          },
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 4110
+          },
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 4138
+          },
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 4264
+          },
+          {
+            "name": "truecost.harness.input_dispatch",
+            "documentElapsedMs": 4310
+          },
+          {
+            "name": "truecost.harness.account_a_inputs_filled",
+            "documentElapsedMs": 4351
+          },
+          {
+            "name": "truecost.harness.calculation_click",
+            "documentElapsedMs": 4507
+          }
+        ]
+      }
+    ]
+  },
+  "events": [],
+  "checks": [
+    {
+      "name": "account A disposable member reached the authenticated route",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "account A was created from a verified synthetic baseline and its cleanup client was captured",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "account A explicitly accepted analytics",
+      "passed": true,
+      "details": {}
+    }
+  ],
+  "errors": [
+    "account A comparison: Error: timed out waiting for account A comparison events"
+  ],
+  "cleanupErrors": [],
+  "preservedIdentities": [],
+  "cleanup": {
+    "status": "run-owned comparisons checked; disposable Clerk cleanup completed",
+    "feedbackResidual": "No feedback is submitted in the account-switch scenario.",
+    "analyticsResidual": "Convex profiles and analytics preferences may remain; Mixpanel requests are intercepted locally and not ingested.",
+    "accounts": [
+      {
+        "label": "account A",
+        "comparisonsDeleted": 0,
+        "remaining": 0
+      }
+    ],
+    "clerkUsers": [
+      {
+        "label": "account A",
+        "revoked": 1,
+        "deleted": true
+      },
+      {
+        "label": "account B",
+        "revoked": 0,
+        "deleted": false
+      }
+    ]
+  },
+  "browser": {
+    "name": "Chrome",
+    "playwright": "1.62.1",
+    "engine": "154.0.8037.59"
+  },
+  "diagnostics": {
+    "feedbackRegions": 1,
+    "feedbackHeadings": 1,
+    "alertCount": 1,
+    "consent": {
+      "pathname": "/compare/results",
+      "on": false,
+      "off": false,
+      "preferenceReadFailed": false,
+      "memberCleanupFailed": false,
+      "logoutResetFailed": false,
+      "acceptButton": 0
+    }
+  },
+  "output": "C:\\Users\\RajeshShinde\\OneDrive - Electracom Projects (UK) Ltd\\Documents\\ChatGPT\\truecost\\docs\\evidence\\member-analytics-browser-2026-10-02T22-01-46-766Z.json"
+}

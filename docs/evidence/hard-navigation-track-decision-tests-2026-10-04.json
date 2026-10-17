@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-04T04:43:34.5026420Z",
+  "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+  "focusedTests": {
+    "command": "npx vitest run --maxWorkers=2 tests/analytics-provider.test.tsx tests/analytics-integration.test.tsx tests/analytics-controller.test.ts tests/compare-provider.test.tsx tests/analytics-auth-save-integration.test.tsx tests/feedback-analytics.test.tsx",
+    "testFiles": 6,
+    "tests": 97,
+    "status": "passed"
+  },
+  "typecheck": {
+    "command": "npm run typecheck",
+    "status": "passed"
+  },
+  "build": {
+    "command": "npm run build",
+    "buildId": "bm38SzfSfXwstgpYCARC4",
+    "generatedRoutes": 19,
+    "status": "passed"
+  },
+  "scope": "Development-only diagnostics marks around consent readiness; no analytics behavior change.",
+  "externalActions": {
+    "providerSettings": false,
+    "production": false,
+    "deployment": false,
+    "commit": false,
+    "push": false,
+    "submission": false
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-03T23:05:12.793Z",
+  "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+  "buildId": "HEur139tQZdPYCKTBYF0c",
+  "status": "passed",
+  "commands": {
+    "typecheck": "npm run typecheck",
+    "focusedTests": "npx vitest run --maxWorkers=2 tests/compare-provider.test.tsx",
+    "tests": "npm test -- --maxWorkers=2",
+    "build": "npm run build",
+    "browser": "temporary Playwright probe against npm start -p 3337"
+  },
+  "tests": {
+    "testFiles": 111,
+    "passed": 1060,
+    "focusedFileTests": "20/20"
+  },
+  "build": {
+    "generatedRoutes": 19,
+    "offlineShellBuildId": "8ecaf70f4be9b1ec"
+  },
+  "browser": {
+    "evidence": "docs/evidence/offer-grid-browser-2026-10-04.json",
+    "checks": "10/10",
+    "viewport": "320x760",
+    "errors": 0
+  },
+  "relationship": "Fresh source-equivalent local rebuild after adding a labelled, keyboard-scrollable OfferGrid region and explicit two-offer content width. The reviewed release manifest remains bound to ydMzVTyEiY_q6uNn7FXx1; prior browser evidence is not relabelled to this transient build.",
+  "externalActions": false
+}

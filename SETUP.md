@@ -1,58 +1,36 @@
-# Connecting sign-in and sync
+# Connecting sign-in and private storage
 
-The app runs without any of this — the comparison works, and a guest never
-touches a server. These steps turn on accounts and make a saved loan follow
-someone to a new phone.
+The guest comparison works without provider credentials. Member routes use the
+approved development Clerk application for email OTP and the approved Convex
+deployment for account-owned data.
 
-## 1. Create the Supabase project
+## Development environment
 
-<https://supabase.com/dashboard> → **New project**. Free tier is enough.
+Copy `.env.example` to `.env.local` and fill the existing development values:
 
-## 2. Create the table
-
-SQL Editor → paste `supabase/schema.sql` → **Run**.
-
-It creates one table and four row-level policies. The policies are the real
-access boundary: without them every signed-in user could read every loan.
-
-## 3. Turn on the sign-in methods
-
-Authentication → **Providers**.
-
-- **Email** — works immediately, no cost. Under Email, enable *Email OTP*
-  (not magic link) so the six-digit code flow matches the app.
-- **Phone** — needs an SMS gateway (Twilio, MessageBird or Vonage) configured
-  in the same screen. Expect roughly ₹0.15–0.25 per SMS in India, and KYC on
-  the gateway before Indian numbers will deliver.
-
-**Suggested order:** ship with email only. It works the day you turn it on, and
-the app already accepts either — a number simply fails with a clear message
-until the gateway is live.
-
-## 4. Give the app its keys
-
-Project Settings → **API**, then in Vercel → Settings → Environment Variables:
-
-| Name | Value |
+| Name | Scope |
 |---|---|
-| `NEXT_PUBLIC_SUPABASE_URL` | Project URL |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | `anon` / publishable key |
+| `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | Browser Clerk key |
+| `CLERK_SECRET_KEY` | Server and Convex administration |
+| `NEXT_PUBLIC_CONVEX_URL` | Browser Convex cloud URL |
+| `CLERK_JWT_ISSUER_DOMAIN` | Convex Clerk issuer |
 
-Both are public by design — the anon key is meant to ship in a browser, and the
-row-level policies are what actually protect the data. **Never** put the
-`service_role` key here; it bypasses every policy above.
+Keep secret values out of source control. Do not use production identities or
+real borrower data in local checks.
 
-Add them to Production, Preview and Development, then redeploy.
+## Sign-in
 
-## 5. Check it
+Clerk email OTP is the only supported authentication method. Phone and SMS
+authentication are deferred. The app keeps comparison intent through sign-in,
+then writes private records through the account-bound Convex transport.
 
-- `/signin` should stop showing "Sign-in isn't connected yet"
-- Sign in, save a loan, sign out, sign back in — the loan should return
-- In Supabase → Table Editor → `loans`, you should see exactly one row, yours
+## Verify the local flow
 
-## What is stored
+1. Run `npm run dev` with the development values loaded.
+2. Compare two offers as a guest.
+3. Sign in with a disposable Clerk email code.
+4. Save, reload, sign out, and confirm the private record is unavailable.
+5. Use the browser verification scripts and evidence plans in `docs/` for
+   authenticated, offline, deletion, and account-switch checks.
 
-Balance, rate, term, spread, reset date, lender name as typed, and the surplus
-and buffer figures. Nothing else — no statements, no lender connection, no
-credit data. Deleting the loan in the app deletes the row; deleting the account
-cascades to it.
+The old Supabase modules, schema, and dependencies are intentionally absent.

@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-02T18:33:30Z",
+  "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+  "candidateBuildId": "yAPHNfIW8scb2GyyGdBIo",
+  "status": "passed-local",
+  "scope": "retire the unused Supabase account and loan-sync scaffolding after the Clerk and Convex path became authoritative",
+  "removed": [
+    "lib/auth/client.ts",
+    "lib/auth/demo.ts",
+    "lib/auth/__tests__/demo.test.ts",
+    "lib/sync/loanSync.ts",
+    "lib/sync/__tests__/loanSync.test.ts",
+    "supabase/schema.sql",
+    "@supabase/ssr",
+    "@supabase/supabase-js"
+  ],
+  "checks": {
+    "focusedAdoption": {
+      "command": "npx vitest run tests/legacy-device-loan-adoption.test.tsx tests/legacy-device-loan.test.ts tests/loan-provider.test.tsx --maxWorkers=2",
+      "status": "passed",
+      "testFiles": 3,
+      "tests": 27
+    },
+    "fullSuite": {
+      "command": "npm test -- --maxWorkers=2",
+      "status": "passed",
+      "testFiles": 109,
+      "tests": 1055
+    },
+    "typecheck": {
+      "command": "npm run typecheck",
+      "status": "passed"
+    },
+    "productionBuild": {
+      "command": "npm run build",
+      "status": "passed",
+      "routes": 19
+    },
+    "sourceScan": {
+      "command": "rg -n -i supabase --glob '!docs/**' --glob '!package-lock.json' --glob '!node_modules/**' --glob '!AGENTS.md' --glob '!README.md' --glob '!SETUP.md' .",
+      "status": "passed",
+      "remainingSourceMatches": 0,
+      "note": "Historical instructions and README/SETUP retirement notes are intentionally excluded from this source scan."
+    }
+  },
+  "openGates": [
+    "authenticated browser evidence of the server-acknowledged removal path",
+    "full authenticated browser acceptance of the new account-page choice"
+  ],
+  "externalActions": {
+    "providerMutation": false,
+    "productionDeployment": false,
+    "commit": false,
+    "push": false,
+    "externalSubmission": false
+  }
+}

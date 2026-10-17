@@ -1,0 +1,40 @@
+{
+  "checkedAt": "2026-10-04T03:22:04.590Z",
+  "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+  "buildId": "R-YV2Ykfq677oTDdfRFCj",
+  "verificationCommand": "Bundled FFmpeg null decode plus blackdetect=d:0.25 and silencedetect=noise=-50dB:d=0.5",
+  "status": "passed-local-machine-checks",
+  "outputs": [
+    {
+      "path": "docs/evidence/demo-edits/truecost-current-R-YV2Ykfq677oTDdfRFCj-16x9.mp4",
+      "sha256": "612d39b9c7878b364619ade4e574e6fa632a2b99624ae0ad4444256583859003",
+      "dimensions": "1600x900",
+      "durationSeconds": 180.68,
+      "video": "H.264, 25 fps",
+      "audio": "AAC LC, mono, 22050 Hz",
+      "decodeExitCode": 0,
+      "blackSegmentsAtLeast250ms": 0,
+      "silenceStartEvents": 38,
+      "silenceEndEvents": 38
+    },
+    {
+      "path": "docs/evidence/demo-edits/truecost-current-R-YV2Ykfq677oTDdfRFCj-9x16.mp4",
+      "sha256": "54c3e6d6ac96a472b0a9a036cf2532b5516fcb7bb891abd0c28b376c99c37ab1",
+      "dimensions": "720x1280",
+      "durationSeconds": 180.68,
+      "video": "H.264, 25 fps",
+      "audio": "AAC LC, mono, 22050 Hz",
+      "decodeExitCode": 0,
+      "blackSegmentsAtLeast250ms": 0,
+      "silenceStartEvents": 38,
+      "silenceEndEvents": 38
+    }
+  ],
+  "evidenceBoundary": "Automated local media checks only. Silence markers are narration pauses and do not replace full human listening, caption readability, reviewer access or final acceptance.",
+  "externalActions": {
+    "chronicle": false,
+    "runway": false,
+    "upload": false,
+    "submission": false
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "observedAt": "2026-09-15T23:45:25.763Z",
+  "context": "Same local production build; changed listen hostname from numeric loopback to localhost. Anonymous HTTP checks, no OTP or signed-in browser proof.",
+  "offlineVersion": "866554693d4f5dc5",
+  "results": [
+    {
+      "path": "/sw.js",
+      "status": 200,
+      "cacheControl": "no-cache, no-store, must-revalidate",
+      "contentType": "application/javascript; charset=UTF-8",
+      "hasLocation": false
+    },
+    {
+      "path": "/offline/index.html",
+      "status": 200,
+      "cacheControl": "no-cache, no-store, must-revalidate",
+      "contentType": "text/html; charset=UTF-8",
+      "hasLocation": false
+    },
+    {
+      "path": "/offline/assets/calculator.d82f6c7ca2a2fd6c.css",
+      "status": 200,
+      "cacheControl": "public, max-age=31536000, immutable",
+      "contentType": "text/css; charset=UTF-8",
+      "hasLocation": false
+    },
+    {
+      "path": "/offline/assets/calculator.9c60a1d4bf49b19e.js",
+      "status": 200,
+      "cacheControl": "public, max-age=31536000, immutable",
+      "contentType": "application/javascript; charset=UTF-8",
+      "hasLocation": false
+    },
+    {
+      "path": "/offline/manifest.json",
+      "status": 200,
+      "cacheControl": "no-cache, no-store, must-revalidate",
+      "contentType": "application/json; charset=UTF-8",
+      "hasLocation": false
+    },
+    {
+      "path": "/signin",
+      "status": 200,
+      "cacheControl": "s-maxage=31536000",
+      "contentType": "text/html; charset=utf-8",
+      "hasLocation": false
+    },
+    {
+      "path": "/account",
+      "status": 200,
+      "cacheControl": "s-maxage=31536000",
+      "contentType": "text/html; charset=utf-8",
+      "hasLocation": false
+    },
+    {
+      "path": "/compare",
+      "status": 200,
+      "cacheControl": "s-maxage=31536000",
+      "contentType": "text/html; charset=utf-8",
+      "hasLocation": false
+    }
+  ]
+}

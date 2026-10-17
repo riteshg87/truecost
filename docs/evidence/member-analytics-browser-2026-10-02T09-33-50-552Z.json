@@ -1,0 +1,207 @@
+{
+  "checkedAt": "2026-10-02T09:33:50.552Z",
+  "status": "failed",
+  "mode": "intercept",
+  "scenario": "same-browser-account-switch-with-pending-analytics",
+  "navigation": {
+    "hardNavigation": false,
+    "settleMs": 0
+  },
+  "baseUrl": "http://localhost:3359",
+  "buildId": "wABL4wbCIK_WI-WhFi7EN",
+  "issuer": "live-tarpon-2666.clerk.accounts.dev",
+  "convexTarget": "https://dutiful-fly-37.convex.cloud",
+  "mixpanelToken": "matched-approved-sha256",
+  "harnessSourceSha256": "715088930ac2d41077ee6b9c8ff7fd83e11fa2a2ed7a88ac0036e1773f1abc59",
+  "timing": {
+    "clock": "node-date-ms",
+    "startedAt": 1790933630553,
+    "markers": [
+      {
+        "name": "account_a_accept_click",
+        "elapsedMs": 19934
+      },
+      {
+        "name": "account_a_analytics_on_observed",
+        "elapsedMs": 22361
+      },
+      {
+        "name": "account_a_inputs_filled",
+        "elapsedMs": 26622
+      },
+      {
+        "name": "account_a_calculation_click",
+        "elapsedMs": 26622
+      }
+    ],
+    "events": [
+      {
+        "event": "comparison_started",
+        "phase": "account A comparison",
+        "elapsedMs": 28419
+      },
+      {
+        "event": "comparison_started",
+        "phase": "account A comparison",
+        "elapsedMs": 39446
+      },
+      {
+        "event": "comparison_completed",
+        "phase": "account A comparison",
+        "elapsedMs": 39561
+      }
+    ]
+  },
+  "events": [
+    {
+      "event": "comparison_started",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "$user_id",
+        "auth_state",
+        "distinct_id",
+        "draft_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "release",
+        "route_name",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "held-before-account-transition",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": true,
+        "deviceIdPresent": true
+      },
+      "auth_state": "member"
+    },
+    {
+      "event": "comparison_started",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "$user_id",
+        "auth_state",
+        "distinct_id",
+        "draft_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "release",
+        "route_name",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "held-before-account-transition",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": true,
+        "deviceIdPresent": true
+      },
+      "auth_state": "member"
+    },
+    {
+      "event": "comparison_completed",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "$user_id",
+        "auth_state",
+        "calculation_version",
+        "distinct_id",
+        "draft_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "offer_count",
+        "release",
+        "result_id",
+        "route_name",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "local-1",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": true,
+        "deviceIdPresent": true
+      },
+      "auth_state": "member"
+    }
+  ],
+  "checks": [
+    {
+      "name": "account A disposable member reached the authenticated route",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "account A was created from a verified synthetic baseline and its cleanup client was captured",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "account A explicitly accepted analytics",
+      "passed": true,
+      "details": {}
+    }
+  ],
+  "errors": [
+    "account A comparison: AssertionError: account A emitted an unexpected event multiset"
+  ],
+  "cleanupErrors": [],
+  "preservedIdentities": [],
+  "cleanup": {
+    "status": "run-owned comparisons checked; disposable Clerk cleanup completed",
+    "feedbackResidual": "No feedback is submitted in the account-switch scenario.",
+    "analyticsResidual": "Convex profiles and analytics preferences may remain; Mixpanel requests are intercepted locally and not ingested.",
+    "accounts": [
+      {
+        "label": "account A",
+        "comparisonsDeleted": 0,
+        "remaining": 0
+      }
+    ],
+    "clerkUsers": [
+      {
+        "label": "account A",
+        "revoked": 1,
+        "deleted": true
+      },
+      {
+        "label": "account B",
+        "revoked": 0,
+        "deleted": false
+      }
+    ]
+  },
+  "browser": {
+    "name": "Chrome",
+    "playwright": "1.62.1",
+    "engine": "154.0.8037.59"
+  },
+  "diagnostics": {
+    "feedbackRegions": 1,
+    "feedbackHeadings": 1,
+    "alertCount": 1,
+    "consent": {
+      "pathname": "/compare/results",
+      "on": false,
+      "off": false,
+      "preferenceReadFailed": false,
+      "memberCleanupFailed": false,
+      "logoutResetFailed": false,
+      "acceptButton": 0
+    }
+  },
+  "output": "C:\\Users\\RajeshShinde\\OneDrive - Electracom Projects (UK) Ltd\\Documents\\ChatGPT\\truecost\\docs\\evidence\\member-analytics-browser-2026-10-02T09-33-50-552Z.json"
+}

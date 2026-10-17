@@ -1,0 +1,79 @@
+{
+  "checkedAt": "2026-09-17T15:54:30.118Z",
+  "status": "passed",
+  "projectId": "4064154",
+  "region": "US",
+  "endpoint": "https://api-js.mixpanel.com/track",
+  "query": {
+    "ip": 0,
+    "verbose": 1,
+    "strict": 1
+  },
+  "token": "matched-approved-sha256",
+  "timeoutMs": 10000,
+  "maxRequests": 2,
+  "cases": [
+    {
+      "label": "equal_ids",
+      "release": "identity-probe-equal",
+      "idRelationship": "equal",
+      "occurredAt": "2026-09-17T15:54:30.119Z",
+      "identityHashes": {
+        "distinctIdSha256": "b4451963287ea0419bab367cc91871f9298873e2eddc6c588e4be521d72aa959",
+        "deviceIdSha256": "b4451963287ea0419bab367cc91871f9298873e2eddc6c588e4be521d72aa959",
+        "userIdSha256": "b4451963287ea0419bab367cc91871f9298873e2eddc6c588e4be521d72aa959"
+      },
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "$user_id",
+        "auth_state",
+        "distinct_id",
+        "draft_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "release",
+        "route_name",
+        "time",
+        "token"
+      ],
+      "status": "accepted",
+      "responseCode": 200,
+      "error": null
+    },
+    {
+      "label": "distinct_ids",
+      "release": "identity-probe-distinct",
+      "idRelationship": "distinct",
+      "occurredAt": "2026-09-17T15:54:30.120Z",
+      "identityHashes": {
+        "distinctIdSha256": "65f3881f68d2d8411b84f67f57a36cfd62dccd0877f5d3b36fcd154da5f6004f",
+        "deviceIdSha256": "d3668c12d4d3feace6eba11f5e9eb0eaf09f63b9030aa951b42e0ae293035d05",
+        "userIdSha256": "65f3881f68d2d8411b84f67f57a36cfd62dccd0877f5d3b36fcd154da5f6004f"
+      },
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "$user_id",
+        "auth_state",
+        "distinct_id",
+        "draft_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "release",
+        "route_name",
+        "time",
+        "token"
+      ],
+      "status": "accepted",
+      "responseCode": 200,
+      "error": null
+    }
+  ],
+  "errors": [],
+  "output": "C:\\Users\\RajeshShinde\\OneDrive - Electracom Projects (UK) Ltd\\Documents\\ChatGPT\\truecost\\docs\\evidence\\mixpanel-identity-probe-2026-09-17T15-54-30-118Z.json"
+}

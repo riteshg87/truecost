@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-04T04:35:12.9457965Z",
+  "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+  "diagnosticBuildId": "I6LLUZppRvjau-wvpU4Xm",
+  "harness": "scripts/check-member-analytics.mjs",
+  "harnessSha256": "180ce856ca6a11ae9aca7053c10ffcb209149e50a65edf9db40d2e72ab438181",
+  "instrumentation": {
+    "providerSource": "lib/analytics/provider.tsx",
+    "providerSourceSha256": "069359C0864A42B933EA7C7195080C7DE844BEA15601ACF17E8CC07E590B6647",
+    "storeSource": "lib/store.tsx",
+    "storeSourceSha256": "5B726579CFDCE5C8038C3706360F4079C60B57D4E9A00B7FBE071342A5D894D3",
+    "diagnosticHelper": "lib/analytics/preference-transport.ts",
+    "diagnosticHelperSha256": "92EEB10F49B8A629F851D31F87FCD8F5284A1A51D6202558B4B6AFCE4DDB3243",
+    "verificationEvidence": "docs/evidence/hard-navigation-track-decision-tests-2026-10-04.json"
+  },
+  "mode": "intercept",
+  "runs": [
+    {
+      "label": "zero-settle-track-decision",
+      "evidence": "docs/evidence/member-analytics-browser-2026-10-04T04-32-42-091Z.json",
+      "settleMs": 0,
+      "status": "failed",
+      "checks": 3,
+      "eventCount": 0,
+      "accountA": {
+        "inputsFilledElapsedMs": 11474,
+        "calculationClickElapsedMs": 11518,
+        "events": [],
+        "trackDecision": "comparison_input_skipped_not_ready and comparison_completed_skipped_not_ready",
+        "providerAcceptedAtFailure": 2602
+      },
+      "accountB": {
+        "events": []
+      },
+      "failure": [
+        "account A comparison: Error: timed out waiting for account A comparison events"
+      ]
+    },
+    {
+      "label": "two-second-settle-track-decision",
+      "evidence": "docs/evidence/member-analytics-browser-2026-10-04T04-34-00-917Z.json",
+      "settleMs": 2000,
+      "status": "passed",
+      "checks": 13,
+      "eventCount": 4,
+      "accountA": {
+        "inputsFilledElapsedMs": 12568,
+        "calculationClickElapsedMs": 12610,
+        "events": [
+          "comparison_started",
+          "comparison_completed"
+        ],
+        "providerAcceptedBeforeInputs": true,
+        "trackDecision": "track.invoked and track.queued"
+      },
+      "accountB": {
+        "inputsFilledElapsedMs": 33584,
+        "calculationClickElapsedMs": 33622,
+        "events": [
+          "comparison_started",
+          "comparison_completed"
+        ],
+        "providerAcceptedBeforeInputs": true,
+        "trackDecision": "track.invoked and track.queued"
+      },
+      "failure": []
+    }
+  ],
+  "interpretation": "The matched diagnostics pair records the caller decision and provider readiness. With zero settle, account A input and completion calls occur while the store is loading, so both comparison events are skipped; the provider reaches committed accepted after the calculation. With a two-second settle, both accounts reach committed accepted before input/calculation and both event pairs are queued. This supports an event-level readiness race as the current explanation, while leaving product acceptance and any alternate cause open. The extra marks are development-only User Timing diagnostics and do not buffer events, delay calculation, or change navigation.",
+  "constraintsHonored": [
+    "No unconsented event was buffered",
+    "No calculation was delayed",
+    "No navigation workaround was introduced",
+    "Mixpanel transport was intercepted locally",
+    "Disposable Clerk identities were deleted and no provider settings changed"
+  ],
+  "openGates": [
+    "Hard-navigation acceptance and root-cause/product decision",
+    "Live Mixpanel ingestion and dashboard reconciliation",
+    "Production provider configuration and release approval"
+  ],
+  "externalActions": {
+    "authorizedDisposableDevelopmentMutations": true,
+    "providerDataMutations": true,
+    "providerSettings": false,
+    "hostedSettings": false,
+    "production": false,
+    "deployment": false,
+    "commit": false,
+    "push": false,
+    "submission": false,
+    "liveMixpanelIngestion": false
+  }
+}

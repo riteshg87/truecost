@@ -1,0 +1,75 @@
+{
+  "checkedAt": "2026-10-02T09:21:11.250Z",
+  "status": "failed",
+  "mode": "intercept",
+  "scenario": "same-browser-account-switch-with-pending-analytics",
+  "navigation": {
+    "hardNavigation": false,
+    "settleMs": 0
+  },
+  "baseUrl": "http://localhost:3354",
+  "buildId": "EyRnDtwfiS7VYAu7-AaQJ",
+  "issuer": "live-tarpon-2666.clerk.accounts.dev",
+  "convexTarget": "https://dutiful-fly-37.convex.cloud",
+  "mixpanelToken": "matched-approved-sha256",
+  "harnessSourceSha256": "99dbb5aaa5e0786f74c5e13ce19a8f9dd53bb2b8b8605ba2c2d3df63218dee88",
+  "timing": {
+    "clock": "node-date-ms",
+    "startedAt": 1790932871251,
+    "markers": [],
+    "events": []
+  },
+  "events": [],
+  "checks": [
+    {
+      "name": "account A disposable member reached the authenticated route",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "account A was created from a verified synthetic baseline and its cleanup client was captured",
+      "passed": true,
+      "details": {}
+    }
+  ],
+  "errors": [
+    "account A analytics consent: TimeoutError: locator.click: Timeout 30000ms exceeded."
+  ],
+  "cleanupErrors": [],
+  "preservedIdentities": [],
+  "cleanup": {
+    "status": "run-owned comparisons checked; disposable Clerk cleanup completed",
+    "feedbackResidual": "No feedback is submitted in the account-switch scenario.",
+    "analyticsResidual": "Convex profiles and analytics preferences may remain; Mixpanel requests are intercepted locally and not ingested.",
+    "accounts": [
+      {
+        "label": "account A",
+        "comparisonsDeleted": 0,
+        "remaining": 0
+      }
+    ],
+    "clerkUsers": [
+      {
+        "label": "account A",
+        "revoked": 1,
+        "deleted": true
+      },
+      {
+        "label": "account B",
+        "revoked": 0,
+        "deleted": false
+      }
+    ]
+  },
+  "browser": {
+    "name": "Chrome",
+    "playwright": "1.62.1",
+    "engine": "154.0.8037.59"
+  },
+  "diagnostics": {
+    "feedbackRegions": 0,
+    "feedbackHeadings": 0,
+    "alertCount": 1
+  },
+  "output": "C:\\Users\\RajeshShinde\\OneDrive - Electracom Projects (UK) Ltd\\Documents\\ChatGPT\\truecost\\docs\\evidence\\member-analytics-browser-2026-10-02T09-21-11-250Z.json"
+}

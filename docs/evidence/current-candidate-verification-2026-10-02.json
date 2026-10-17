@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-02T22:51:01.1477798Z",
+  "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+  "candidateBuildId": "ydMzVTyEiY_q6uNn7FXx1",
+  "status": "passed",
+  "commands": {
+    "tests": "npm test -- --maxWorkers=2",
+    "typecheck": "npm run typecheck",
+    "build": "npm run build"
+  },
+  "tests": {
+    "status": "passed",
+    "testFiles": 111,
+    "passed": 1059
+  },
+  "typecheck": {
+    "status": "passed"
+  },
+  "build": {
+    "status": "passed",
+    "generatedRoutes": 19,
+    "offlineShellBuildId": "8ecaf70f4be9b1ec"
+  },
+  "limitation": "Current dirty checkout only; no deployment, provider mutation, commit, push or external submission."
+}
+

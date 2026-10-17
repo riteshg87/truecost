@@ -1,0 +1,37 @@
+{
+  "checkedAt": "2026-10-02T10:37:10.217Z",
+  "status": "failed",
+  "mode": "intercept",
+  "scenario": "same-browser-account-switch-with-offline-analytics-transport",
+  "navigation": {
+    "hardNavigation": false,
+    "settleMs": 0
+  },
+  "baseUrl": "http://localhost:4367",
+  "buildId": "r2-pg6buNZ5ovwGJZnVou",
+  "issuer": "live-tarpon-2666.clerk.accounts.dev",
+  "convexTarget": "https://dutiful-fly-37.convex.cloud",
+  "mixpanelToken": "matched-approved-sha256",
+  "harnessSourceSha256": "bc35df7a1befe68719b7ea6a5e4d90696db4fdc289c6edf1957961d54b3d418b",
+  "timing": {
+    "clock": "node-date-ms",
+    "startedAt": 1790937430218,
+    "markers": [],
+    "events": [],
+    "consentQueries": []
+  },
+  "events": [],
+  "checks": [],
+  "errors": [
+    "setup: Error: timed out waiting for approved Next server"
+  ],
+  "cleanupErrors": [],
+  "preservedIdentities": [],
+  "cleanup": {
+    "status": "run-owned comparisons checked; disposable Clerk cleanup completed",
+    "feedbackResidual": "not inspected",
+    "analyticsResidual": "not inspected",
+    "clerkUsers": []
+  },
+  "output": "C:\\Users\\RajeshShinde\\OneDrive - Electracom Projects (UK) Ltd\\Documents\\ChatGPT\\truecost\\docs\\evidence\\member-analytics-browser-2026-10-02T10-37-10-217Z.json"
+}

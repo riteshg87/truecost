@@ -1,0 +1,60 @@
+{
+  "capturedAt": "2026-09-16T00:35:24.701Z",
+  "deployment": "dev:dutiful-fly-37",
+  "checks": [
+    {
+      "name": "Only approved development target and Clerk test keys selected",
+      "pass": true
+    },
+    {
+      "name": "Anonymous list denied",
+      "pass": true
+    },
+    {
+      "name": "Anonymous save denied",
+      "pass": true
+    },
+    {
+      "name": "Anonymous delete denied",
+      "pass": true
+    },
+    {
+      "name": "Selected exactly one existing reserved synthetic user",
+      "pass": true
+    },
+    {
+      "name": "Test token bound to expected Clerk issuer and Convex audience",
+      "pass": true
+    },
+    {
+      "name": "Selected exactly one existing reserved synthetic user",
+      "pass": true
+    },
+    {
+      "name": "Test token bound to expected Clerk issuer and Convex audience",
+      "pass": true
+    }
+  ],
+  "sourceHashes": {
+    "convex/comparisons.ts": "67313652e1671d92d0b2a4475003adad0eaf99e90ec581bd4e124ef002027916",
+    "convex/schema.ts": "bb52f5b5a055e3f84067ac7f72ee7d97dd05cabe6bdf00185e2e6956b402214b",
+    "lib/contracts/snapshot.ts": "b92b46bf147ddb146ec778a78c31c9612c069e129a2d8e47bc11d2b444128980",
+    "package-lock.json": "f523ff250a6a6a04da52aa37e6ccde1c578e47e3f06108369e85ca1ef365b074"
+  },
+  "limitations": [
+    "Synthetic development identities only; no real email delivery or private UI proof."
+  ],
+  "cleanup": [
+    {
+      "action": "Revoke this run temporary session",
+      "pass": true
+    },
+    {
+      "action": "Revoke this run temporary session",
+      "pass": true
+    }
+  ],
+  "failure": "Provider invocation or test setup failed before the next assertion",
+  "finishedAt": "2026-09-16T00:35:27.446Z",
+  "pass": false
+}

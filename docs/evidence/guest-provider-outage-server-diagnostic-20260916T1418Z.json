@@ -1,0 +1,27 @@
+{
+  "status": "failed_before_browser",
+  "checkedAt": "2026-09-16T14:18:00Z",
+  "buildId": "3x3t7SpGPeuXk7NVZWKhm",
+  "port": 3221,
+  "serverBind": "127.0.0.1",
+  "startupOutput": [
+    "Next.js 16.3.4",
+    "Local: http://127.0.0.1:3221",
+    "Network: http://127.0.0.1:3221",
+    "Ready in 813ms",
+    "Running next.config.ts took 125ms"
+  ],
+  "httpProbe": {
+    "url": "http://127.0.0.1:3221/",
+    "result": "timeout after 5 seconds"
+  },
+  "browserStarted": false,
+  "providerRequestsObserved": 0,
+  "screenshots": [],
+  "diagnosis": "Next reported ready, but the root response did not return within the bounded local probe. This is infrastructure/readiness evidence, not a guest outage pass or an application failure.",
+  "relatedAttempts": [
+    "guest-provider-outage-browser-attempt-20260916T131633Z.json",
+    "guest-provider-outage-browser-attempt-20260916T131740Z.json"
+  ],
+  "cleanup": "The diagnostic process started on the owned port was stopped after the probe."
+}

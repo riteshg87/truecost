@@ -1,0 +1,29 @@
+{
+  "recordedAt": "2026-09-16T01:36:33.7798854Z",
+  "revision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+  "workingTree": "dirty local production candidate; uncommitted implementation",
+  "command": "npx vitest run tests/private-sync.test.ts tests/private-storage.test.ts tests/private-transport.test.ts",
+  "observedRunLocal": "2026-09-16 02:29:21 Europe/London",
+  "result": {
+    "passed": 61,
+    "controller": 23,
+    "failed": 0,
+    "files": 3,
+    "transport": 16,
+    "storage": 22
+  },
+  "sourceHashes": {
+    "lib/private-storage/storage.ts": "aba4a3c6b458334424e6d4a2db7eb38e07f8d20dc3e9f282bbfed768dd5bb3bb",
+    "lib/private-storage/sync.ts": "b0fb36742fdbdcbaa28c5e87ab48597a479bb545bfb046a7a548fa33fb8c77c6",
+    "lib/private-storage/transport.ts": "8797aa6304020aed320620888c7fc5a8a8f037ab8cda605b23238f08153b4d20",
+    "lib/private-storage/types.ts": "8124fd4abf990d89ed3b850374c6f14a3da09185b0dfee26e1ecbc8f7e244c1d",
+    "tests/private-storage.test.ts": "6d21250697b87061ca35e9b07c9df5b3d7c626c179f991248311c0f635d6efaf",
+    "tests/private-sync.test.ts": "6339dfc65227846493d16aa452e4b45b0851a5257b992d09716c89a411763b7b",
+    "tests/private-transport.test.ts": "1d5c278b78e30db64ae319b22aad3ad69d3af4979119fb9acbba1c4853128c72"
+  },
+  "limits": [
+    "Controlled IndexedDB and transport boundaries; no integrated private browser proof.",
+    "Full application checkpoint remains separate.",
+    "No production publish, commits or pushes."
+  ]
+}

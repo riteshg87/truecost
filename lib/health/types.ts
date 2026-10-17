@@ -13,6 +13,9 @@ export type RateBasis = "repo" | "tbill" | "mclr" | "fixed";
 /** How often the lender is obliged to re-price an external-benchmark loan. */
 export type ResetCycle = "monthly" | "quarterly" | "half";
 
+/** Whether a rate input came from the borrower's contract or an old record. */
+export type LoanInputProvenance = "confirmed" | "unknown" | "legacy";
+
 export interface LoanRecord {
   lender: string;
   /** Sanctioned principal, kept so progress means something. */
@@ -21,10 +24,14 @@ export interface LoanRecord {
   ratePct: number;
   basis: RateBasis;
   /** Margin over the benchmark, fixed for the life of the loan. */
-  spreadPct: number;
+  spreadPct: number | null;
+  /** Missing on old records, which are treated as legacy by the parser. */
+  spreadProvenance?: LoanInputProvenance;
   cycle: ResetCycle;
   /** ISO date of the last re-pricing, from the statement. */
   lastReset: string;
+  /** Missing on old records, which are treated as legacy by the parser. */
+  lastResetProvenance?: LoanInputProvenance;
   monthsLeft: number;
 }
 
@@ -46,6 +53,8 @@ export interface RateVerdict {
   monthlyExcess: number | null;
   /** True once a reset is overdue by the loan's own cycle. */
   resetOverdue: boolean;
+  /** What the borrower must confirm when the benchmark verdict is unknown. */
+  unknownReason: string | null;
 }
 
 export interface TransferQuote {

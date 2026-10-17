@@ -1,0 +1,8 @@
+{
+  "capturedAt": "2026-09-15T23:06:14.088Z",
+  "environment": "Node VM executing actual generated public/sw.js, synthetic caches only",
+  "expected": "PUBLIC:/offline/index.html",
+  "observed": "UNRELATED-CACHE-CANARY",
+  "pass": false,
+  "finding": "Global caches.match selects unrelated same-path content ahead of the public shell."
+}

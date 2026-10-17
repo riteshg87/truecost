@@ -16,7 +16,7 @@ import { useAuth } from "@/lib/auth/provider";
  */
 export default function HomePage() {
   const router = useRouter();
-  const { viewer, ready, account, gating, demoMode } = useAuth();
+  const { viewer, ready, account, gating, configured, unavailableReason, retryProvisioning } = useAuth();
 
   useEffect(() => {
     if (ready && viewer === "anonymous") router.replace("/");
@@ -131,11 +131,18 @@ export default function HomePage() {
           </div>
         ) : null}
 
-        {demoMode ? (
-          <p className="mt-6 text-[11.5px] leading-relaxed text-ink-3">
-            Sign-in is running on a demo stand-in — the code appears on screen and
-            no email is sent. It becomes real the moment the provider is connected.
-          </p>
+        {unavailableReason ? (
+          <div className="mt-6 rounded-xl border border-warn-line bg-warn-soft px-4 py-3 text-[11.5px] leading-relaxed text-warn">
+            <p>{unavailableReason}</p>
+            <div className="mt-2 flex flex-wrap items-center gap-3">
+              {configured ? (
+                <button type="button" onClick={retryProvisioning} className="inline-flex min-h-11 items-center px-2 font-semibold text-accent">
+                  Retry account setup
+                </button>
+              ) : null}
+              <Link href="/signin" className="inline-flex min-h-11 items-center px-2 font-semibold text-accent">Sign in again</Link>
+            </div>
+          </div>
         ) : null}
       </Page>
     </Screen>

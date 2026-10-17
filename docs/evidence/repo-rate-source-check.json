@@ -1,0 +1,30 @@
+{
+  "checkedOn": "2026-09-16",
+  "sources": [
+    {
+      "url": "https://www.rbi.org.in/",
+      "observedClaim": "Current Rates / Policy Rates lists Policy Repo Rate as 5.25%.",
+      "scope": "Point observation when checked; the nearby September 15 timestamp labels exchange rates, not a repo-rate effective date."
+    },
+    {
+      "url": "https://www.rbi.org.in/scripts/BS_CircularIndexDisplay.aspx?Id=12854",
+      "observedClaim": "RBI/2025-26/42, dated June 6, 2025, reduces the policy repo rate from 6.00% to 5.50% with immediate effect.",
+      "scope": "Primary-source support for the previously corrected June 2025 entry."
+    },
+    {
+      "url": "https://rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=55178",
+      "observedClaim": "RBI's February 8, 2023 MPC resolution increases the policy repo rate to 6.50% with immediate effect.",
+      "scope": "Read in the search-indexed primary-source text on September 16, 2026; direct page opening failed. This establishes the stated change, not every subsequent unchanged interval."
+    },
+    {
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=61749",
+      "observedClaim": "RBI's December 5, 2025 MPC resolution sets the policy repo rate at 5.25%; press release 2025-2026/1633.",
+      "scope": "Directly opened official publication. This supports the December entry; it does not prove an unchanged rate through September 2026."
+    }
+  ],
+  "limitations": [
+    "This check did not verify every inherited historical effective date or a continuous interval of unchanged rates.",
+    "FIN-BUG-03 still needs explicit supported date ranges, a freshness policy and safe unknown states in the app.",
+    "No calculation or policy-rate source file was changed during this check. Human methodology review remains open."
+  ]
+}

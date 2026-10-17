@@ -1,0 +1,135 @@
+{
+  "checkedAt": "2026-10-02T21:15:55.298Z",
+  "buildId": "2Bu3MZWREPtxsAbL9cmPp",
+  "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+  "browser": {
+    "name": "Chrome",
+    "playwright": "1.62.1",
+    "engine": "154.0.8037.59"
+  },
+  "baseUrl": "http://localhost:3473",
+  "checks": [
+    {
+      "name": "reviewed build, Clerk issuer and Convex target match",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "short-lived Clerk testing token obtained without recording its value",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "a disposable member opened empty history",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "b disposable member opened empty history",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "member save appeared in list with the original lender inputs",
+      "passed": true,
+      "details": {
+        "resultId": "c67c9d90-911f-4bd0-9e4c-51dc5e07e619"
+      }
+    },
+    {
+      "name": "history detail rendered the stored snapshot without changing lenders or figures",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "desktop: saved report downloaded through a fresh click with stored lender and EMI/repayment parity",
+      "passed": true,
+      "details": {
+        "generationMs": 2145,
+        "pages": 2,
+        "bytes": 32897,
+        "sha256": "6479947b65b439327bb7ba780477a1dcae51dce50442c0f311972b11064dd178",
+        "limit": "Chrome browser sample; viewport emulation is not a physical phone or mobile performance percentile."
+      }
+    },
+    {
+      "name": "390px-warm-offline: saved report downloaded through a fresh click with stored lender and EMI/repayment parity",
+      "passed": true,
+      "details": {
+        "generationMs": 319,
+        "pages": 2,
+        "bytes": 32922,
+        "sha256": "e2ba4e0a05d151aba484651bb744c00bacb01dd60c02bfd54a5e1a99f879c2a3",
+        "limit": "Chrome browser sample; viewport emulation is not a physical phone or mobile performance percentile."
+      }
+    },
+    {
+      "name": "390px warm offline report control stays inside the viewport",
+      "passed": true,
+      "details": {
+        "limit": "Uses a verified open document and assets previously loaded online. Cold private reload must remain locked."
+      }
+    },
+    {
+      "name": "opening history left the active comparison draft unchanged",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "deletion confirmation can be cancelled without hiding the saved result",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "b cleanup revoked sessions and deleted only its disposable identity",
+      "passed": true,
+      "details": {
+        "revoked": 1,
+        "deleted": true
+      }
+    }
+  ],
+  "errors": [
+    "locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('History bank A').first() to be visible\u001b[22m\n"
+  ],
+  "cleanupErrors": [
+    "a: verified Convex token was unavailable"
+  ],
+  "preservedIdentities": [
+    {
+      "account": "a",
+      "userId": "user_3K9hbacPk3AehoakD2Ww7o7lf8u",
+      "ownedRecords": [
+        {
+          "comparisonId": "k17f44zqemkwvw33ades9g25qx8fhvjg",
+          "resultId": "c67c9d90-911f-4bd0-9e4c-51dc5e07e619"
+        }
+      ],
+      "reason": "cleanup failed; identity retained"
+    }
+  ],
+  "ownedRecords": [
+    {
+      "account": "a",
+      "comparisonId": "k17f44zqemkwvw33ades9g25qx8fhvjg",
+      "resultId": "c67c9d90-911f-4bd0-9e4c-51dc5e07e619"
+    }
+  ],
+  "status": "failed",
+  "limits": [
+    "Two-account cleanup and a second tab are browser checks; server ownership remains authoritative.",
+    "Narrow captures use 320px and 390px CSS viewports. Full-page screenshots can stitch sticky headers repeatedly, so viewport captures are the visual reference."
+  ],
+  "scriptSha256": "065bbd232cf9e84e8156b41c9e424684f5e945a562137dfd2780cef2e7ad53e0",
+  "sourceHashes": {
+    "lib/comparison/private-workspace.ts": "f252887844c2dd8ada7ea4785ad4cc7b08572e76a22c1fb5471bdfa974bb62a6",
+    "lib/comparison/history-transport.ts": "e73f2a57268d342172510aff563c6674331b5a4887efc0598ddbd5102d29e94a",
+    "lib/comparison/history-provider.tsx": "3ad11b1a25d6b73bc4fc60a2132ade56ecc6c0402ca1420eb530ce2b82333f4d",
+    "components/SavedComparisonView.tsx": "0878d8da2bcb2eb433bfc8017d7f848f579691be7fe9d14ec7b222708e0f5b5f",
+    "app/comparisons/page.tsx": "f8dcbb8ae80cba8b93e5812c50ca3bf9eb000fe8ac782fd811b3eec8a64d76fb",
+    "app/comparisons/[id]/page.tsx": "c89932ac954ea2512a50711be574d7b4e308e592587580f8c066696bcf4de870",
+    "scripts/check-comparison-history-browser.mjs": "065bbd232cf9e84e8156b41c9e424684f5e945a562137dfd2780cef2e7ad53e0",
+    "scripts/check-report-download.mjs": "a2f1fba7f26e091ebed8b4dd1d76bada620765421aabdff12df5ef40103af70e",
+    ".next/BUILD_ID": "31f7ea19b979c7538ca4131ecbc2d48bda3cd1f80214c476fd75de749d1540c5"
+  }
+}

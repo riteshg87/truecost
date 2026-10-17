@@ -3,6 +3,7 @@
 import type { Comparison, RankedOffer } from "@/lib/finance/comparison";
 import { labelFor, monthsLabel } from "@/lib/finance/comparison";
 import { formatCompactINR, formatINR, formatPct } from "@/lib/finance/format";
+import { useId } from "react";
 
 type Direction = "lower" | "higher";
 
@@ -97,76 +98,103 @@ function bestIndexFor(rows: RankedOffer[], metric: MetricSpec): number | null {
 
 export function ResultsTable({ comparison }: { comparison: Comparison }) {
   const { rows, basis } = comparison;
-  const columns = `minmax(7.5rem,1.1fr) repeat(${rows.length}, minmax(5.5rem, 1fr))`;
+  const tableId = useId().replace(/:/g, "");
 
   return (
-    <div className="overflow-x-auto rounded-2xl border border-line bg-surface shadow-[var(--shadow-card)]">
-      <div className="min-w-full" style={{ minWidth: rows.length > 2 ? "30rem" : undefined }}>
-        {/* Column heads */}
-        <div
-          className="grid items-end gap-x-2 border-b border-line px-3 py-3"
-          style={{ gridTemplateColumns: columns }}
-        >
-          <span className="text-[11px] font-medium uppercase tracking-wide text-ink-3">
-            Metric
-          </span>
-          {rows.map((row, index) => (
-            <div key={row.offer.id} className="text-right">
-              {row.isBest ? (
-                <span className="mb-1 inline-block rounded-full bg-accent px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-accent-ink">
-                  Best
-                </span>
-              ) : null}
-              <p className="truncate text-[13px] font-semibold text-ink">
-                {labelFor(row.offer, index)}
-              </p>
-              <p className="truncate text-[11px] text-ink-3">
-                {formatPct(row.derived.effectiveReducingRatePct, 2)} ·{" "}
-                {monthsLabel(row.derived.tenureMonths)}
-              </p>
-            </div>
+    <div
+      role="region"
+      aria-label="Loan comparison results. Scroll horizontally to view all offers."
+      tabIndex={0}
+      className="w-full min-w-0 overflow-x-auto rounded-2xl border border-line bg-surface shadow-[var(--shadow-card)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+    >
+      <table
+        className="min-w-full table-auto border-collapse"
+        style={{ minWidth: rows.length > 2 ? "30rem" : "20rem" }}
+      >
+        <caption className="sr-only">
+          Loan comparison results. Scroll horizontally within this region to view all offers.
+        </caption>
+        <colgroup>
+          <col style={{ width: `${(1.1 / (rows.length + 1.1)) * 100}%` }} />
+          {rows.map((row) => (
+            <col key={row.offer.id} style={{ width: `${(1 / (rows.length + 1.1)) * 100}%` }} />
           ))}
-        </div>
-
-        {/* Metric rows */}
-        {METRICS.map((metric) => {
-          const muted = basis.strict && metric.comparableOnlyOnEqualTerms;
-          const winner = muted ? null : bestIndexFor(rows, metric);
-
-          return (
-            <div
-              key={metric.key}
-              className="grid items-center gap-x-2 border-b border-line px-3 py-2.5 last:border-b-0"
-              style={{ gridTemplateColumns: columns }}
+        </colgroup>
+        <thead>
+          <tr className="items-end border-b border-line px-3 py-3">
+            <th
+              scope="col"
+              id={`${tableId}-metric-column`}
+              className="px-3 py-3 text-left text-[11px] font-medium uppercase tracking-wide text-ink-3"
             >
-              <div>
-                <p className={`text-[12.5px] font-medium ${muted ? "text-ink-3" : "text-ink-2"}`}>
-                  {metric.label}
-                </p>
-                {muted ? (
-                  <p className="text-[10.5px] leading-tight text-ink-3">not comparable</p>
-                ) : metric.sub ? (
-                  <p className="text-[10.5px] leading-tight text-ink-3">{metric.sub}</p>
-                ) : null}
-              </div>
-              {rows.map((row, index) => (
-                <p
+              Metric
+            </th>
+            {rows.map((row, index) => {
+              const offerId = `${tableId}-offer-${index}`;
+              return (
+                <th
                   key={row.offer.id}
-                  className={`tnum text-right text-[14px] tabular-nums ${
-                    muted
-                      ? "font-normal text-ink-3"
-                      : winner === index
-                        ? "font-bold text-accent"
-                        : "font-medium text-ink"
-                  }`}
+                  scope="col"
+                  id={offerId}
+                  className="max-w-0 px-3 py-3 text-right align-bottom"
                 >
-                  {metric.render(row)}
-                </p>
-              ))}
-            </div>
-          );
-        })}
-      </div>
+                  {row.isBest ? (
+                    <span className="mb-1 inline-block rounded-full bg-accent px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-accent-ink">
+                      Best
+                    </span>
+                  ) : null}
+                  <p className="break-words text-[13px] font-semibold text-ink">
+                    {labelFor(row.offer, index)}
+                  </p>
+                  <p className="whitespace-nowrap text-[11px] text-ink-3">
+                    {formatPct(row.derived.effectiveReducingRatePct, 2)} ·{" "}
+                    {monthsLabel(row.derived.tenureMonths)}
+                  </p>
+                </th>
+              );
+            })}
+          </tr>
+        </thead>
+        <tbody>
+          {METRICS.map((metric) => {
+            const muted = basis.strict && metric.comparableOnlyOnEqualTerms;
+            const winner = muted ? null : bestIndexFor(rows, metric);
+            const metricId = `${tableId}-metric-${metric.key}`;
+
+            return (
+              <tr key={metric.key} className="border-b border-line last:border-b-0">
+                <th
+                  scope="row"
+                  id={metricId}
+                  className={`px-3 py-2.5 text-left align-middle text-[12.5px] font-medium ${muted ? "text-ink-3" : "text-ink-2"}`}
+                >
+                  <span>{metric.label}</span>
+                  {muted ? (
+                    <span className="block text-[10.5px] leading-tight text-ink-3">not comparable</span>
+                  ) : metric.sub ? (
+                    <span className="block text-[10.5px] leading-tight text-ink-3">{metric.sub}</span>
+                  ) : null}
+                </th>
+                {rows.map((row, index) => (
+                  <td
+                    key={row.offer.id}
+                    headers={`${metricId} ${tableId}-offer-${index}`}
+                    className={`whitespace-nowrap px-3 py-2.5 text-right align-middle tnum text-[14px] tabular-nums ${
+                      muted
+                        ? "font-normal text-ink-3"
+                        : winner === index
+                          ? "font-bold text-accent"
+                          : "font-medium text-ink"
+                    }`}
+                  >
+                    <span className="block whitespace-nowrap">{metric.render(row)}</span>
+                  </td>
+                ))}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 }

@@ -1,0 +1,36 @@
+{
+  "kind": "local-redacted-rehearsal",
+  "buildId": "ydMzVTyEiY_q6uNn7FXx1",
+  "source": "C:\\Users\\RajeshShinde\\OneDrive - Electracom Projects (UK) Ltd\\Documents\\ChatGPT\\truecost\\docs\\evidence\\demo-raw\\2026-10-02T23-10-32-773Z\\page@324fffb08a882b634a42d4f616635746.webm",
+  "sourceSha256": "1c5b4d261d1e41afa22d4df01877eed0234ba5483c07785d4cfb3bc6e0d7fd8a",
+  "durationSeconds": 119.56,
+  "fps": 25.0,
+  "sourceResolution": [
+    1280,
+    900
+  ],
+  "redaction": {
+    "intervalsSeconds": [
+      [
+        26.0,
+        44.0
+      ]
+    ],
+    "maskedFrameCount": 451,
+    "method": "opaque local mask over auth transition"
+  },
+  "outputs": [
+    {
+      "path": "C:\\Users\\RajeshShinde\\OneDrive - Electracom Projects (UK) Ltd\\Documents\\ChatGPT\\truecost\\docs\\evidence\\demo-edits\\demo-capture-current-ydMz-redacted-base.webm",
+      "sha256": "e786f37d935ba15e90e4998069c4b514ebd220828ab9d8e2b3013fe0bc0dd04e",
+      "label": "base 1280x900 rehearsal"
+    }
+  ],
+  "review": {
+    "raw": false,
+    "shareable": "review-required",
+    "sampledFramesSeconds": [10, 35, 65, 90],
+    "sampledFrameReview": "Auth mask is visible at 35 seconds; sampled result, verification and detail frames remain readable.",
+    "fullPlayback": "open"
+  }
+}

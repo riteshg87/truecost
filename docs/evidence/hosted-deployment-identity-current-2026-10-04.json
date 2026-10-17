@@ -1,0 +1,12 @@
+{
+  "checkedAt": "2026-10-04T02:07:07.167Z",
+  "url": "https://truecost-ebon.vercel.app/",
+  "status": 200,
+  "finalUrl": "https://truecost-ebon.vercel.app/",
+  "htmlSha256": "18a6d40da889e852d972e6395adba718be8b0861b41cc55037f55147f3a98e9b",
+  "deploymentId": "dpl_9eMQ8ct7qPuqoXndQWCWzpAHJmv7",
+  "nextStaticNamespaces": [
+    "immutable"
+  ],
+  "evidenceBoundary": "Read-only hosted HTML deployment identity check. The HTML deployment identifier confirms which hosted deployment served the page; the immutable static namespace is recorded as an asset namespace, not relabelled as a source-candidate build ID. This does not prove source-candidate parity, runtime provider settings or production approval."
+}

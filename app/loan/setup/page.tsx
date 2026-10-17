@@ -3,28 +3,37 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { PageHead, Screen } from "@/components/health";
+import { FormError } from "@/components/mobile";
+import { LoanSyncStatus } from "@/components/LoanSyncStatus";
+import { privateWriteError } from "@/lib/private-storage/messages";
+import { useViewLifetime } from "@/lib/use-view-lifetime";
 import { DecimalInput, Field, MoneyInput, Segmented, TextInput } from "@/components/inputs";
-import { isoToday } from "@/lib/health/repo";
 import type { LoanRecord, RateBasis, ResetCycle } from "@/lib/health/types";
 import { blankLoan, useLoan } from "@/lib/loanStore";
 
 /**
- * Set once, kept on the device.
+ * Stage one complete loan update for the verified account's private outbox.
  *
- * Only five things are genuinely required — balance, rate, term, basis and the
- * last reset. The spread and the sanction figures sharpen the verdict but a
- * loan record that refuses to save without a sanction letter to hand is a
- * record nobody creates.
+ * Balance, rate, term and basis keep the record useful. Spread and reset
+ * details sharpen the verdict when they are confirmed from loan documents.
  */
 export default function LoanSetupPage() {
   const router = useRouter();
-  const { loan, surplus, bufferMonths, hydrated, saveLoan, setSurplus, setBufferMonths, clearAll } =
+  const isCurrentView = useViewLifetime();
+  const { loan, surplus, bufferMonths, hydrated, saveLoan } =
     useLoan();
 
-  const [draft, setDraft] = useState<LoanRecord>(blankLoan);
+  const [draft, setDraft] = useState<LoanRecord>(() => ({
+    ...blankLoan(),
+    spreadPct: null,
+    spreadProvenance: "unknown",
+    lastResetProvenance: "unknown",
+  }));
   const [spare, setSpare] = useState(0);
   const [buffer, setBuffer] = useState(0);
   const [loaded, setLoaded] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!hydrated || loaded) return;
@@ -39,35 +48,42 @@ export default function LoanSetupPage() {
   const ready =
     draft.outstanding > 0 && draft.ratePct > 0 && draft.monthsLeft > 0;
 
-  // Not knowing the spread is the common case — it is on the sanction letter,
-  // which nobody has to hand. Infer it rather than block on it.
-  const inferredSpread =
-    draft.spreadPct > 0 ? draft.spreadPct : Math.max(0, draft.ratePct - 5.75);
-
-  const save = () => {
-    saveLoan({
-      ...draft,
-      lender: draft.lender.trim(),
-      original: Math.max(draft.original, draft.outstanding),
-      spreadPct: inferredSpread,
-      lastReset: draft.lastReset || isoToday(),
-    });
-    setSurplus(spare);
-    setBufferMonths(buffer);
-    router.push("/loan");
+  const save = async () => {
+    if (!ready || !hydrated || saving) return;
+    setSaving(true);
+    setSaveError(null);
+    try {
+      const result = await saveLoan({
+        ...draft,
+        lender: draft.lender.trim(),
+        original: Math.max(draft.original, draft.outstanding),
+        spreadPct: draft.spreadPct,
+        spreadProvenance: draft.spreadProvenance ?? (draft.spreadPct === null ? "unknown" : "legacy"),
+        lastReset: draft.lastReset,
+        lastResetProvenance: draft.lastResetProvenance ?? (draft.lastReset ? "legacy" : "unknown"),
+      }, { surplus: spare, bufferMonths: buffer });
+      if (!isCurrentView()) return;
+      const error = privateWriteError(result);
+      if (error) setSaveError(error);
+      else router.push("/loan");
+    } catch {
+      setSaveError("Your loan could not be saved. Keep this form open and try again.");
+    } finally { setSaving(false); }
   };
 
   return (
     <Screen back={{ href: "/loan", label: "Loan Health Monitor" }} title="Your loan">
       <PageHead
         title="Your loan"
-        sub="Set this once. It is saved to your account, so the next phone greets you with a verdict rather than a blank form."
+        sub="Add your loan details. Once the save is confirmed, you can open them on another device."
       />
+      <LoanSyncStatus />
 
       <div className="grid gap-3.5 sm:grid-cols-2">
         <div className="sm:col-span-2">
-          <Field label="Lender" hint="For your own reference — we never contact them.">
+          <Field label="Lender" htmlFor="lender" hint="For your own reference. We never contact them.">
             <TextInput
+              id="lender"
               value={draft.lender}
               onChange={(lender) => set({ lender })}
               placeholder="HDFC Bank"
@@ -142,31 +158,50 @@ export default function LoanSetupPage() {
             <Field
               label="Your spread over the benchmark"
               hint={
-                draft.spreadPct > 0
-                  ? "From your sanction letter. Fixed for the life of the loan."
-                  : `Leave it blank and we infer ${inferredSpread.toFixed(2)}% from your rate and the repo.`
+                draft.spreadProvenance === "confirmed"
+                  ? "Confirmed from your loan documents."
+                  : draft.spreadProvenance === "legacy" && draft.spreadPct !== null
+                    ? "Saved from an older record. Re-enter this value to confirm it from your sanction letter."
+                    : "Optional. Leave it blank until you can confirm it from your sanction letter."
               }
               htmlFor="spread"
             >
-              <DecimalInput
-                id="spread"
-                suffix="%"
-                value={draft.spreadPct}
-                onChange={(spreadPct) => set({ spreadPct })}
-                placeholder={inferredSpread.toFixed(2)}
-              />
+              <div className="relative">
+                <input
+                  id="spread"
+                  type="number"
+                  min="-100"
+                  max="100"
+                  step="0.01"
+                  value={draft.spreadPct ?? ""}
+                  onChange={(event) => {
+                    const value = event.target.value;
+                    set({
+                      spreadPct: value === "" ? null : Number(value),
+                      spreadProvenance: value === "" ? "unknown" : "confirmed",
+                    });
+                  }}
+                  placeholder="e.g. 2.75"
+                  className="w-full rounded-xl border border-line bg-surface-2 px-3.5 py-3 pr-12 text-[16px] font-medium text-ink outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/25"
+                />
+                <span className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-[15px] font-medium text-ink-3">%</span>
+              </div>
             </Field>
 
             <Field
               label="Last reset date"
-              hint="The date your rate last changed, from a statement."
+              hint={
+                draft.lastResetProvenance === "legacy"
+                  ? "Saved from an older record. Re-enter this date to confirm it from a statement."
+                  : "Optional. Enter the date your rate last changed, from a statement."
+              }
               htmlFor="reset"
             >
               <input
                 id="reset"
                 type="date"
                 value={draft.lastReset}
-                onChange={(event) => set({ lastReset: event.target.value })}
+                onChange={(event) => set({ lastReset: event.target.value, lastResetProvenance: event.target.value ? "confirmed" : "unknown" })}
                 className="w-full rounded-xl border border-line bg-surface-2 px-3.5 py-3 text-[16px] font-medium text-ink outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/25"
               />
             </Field>
@@ -222,31 +257,26 @@ export default function LoanSetupPage() {
 
       <button
         type="button"
-        disabled={!ready}
+        disabled={!ready || !hydrated || saving}
         onClick={save}
         className="mt-5 w-full rounded-xl bg-accent px-4 py-3.5 text-[15px] font-semibold text-accent-ink transition disabled:cursor-not-allowed disabled:bg-surface-inset disabled:text-ink-3"
       >
-        {ready ? "Save loan on this device" : "Balance, rate and term needed"}
+        {saving ? "Preparing save…" : ready ? "Save loan" : "Balance, rate and term needed"}
       </button>
+      <FormError>{saveError}</FormError>
 
       <p className="mt-3 text-[11.5px] leading-relaxed text-ink-3">
-        Stored on this device and against your account. Deleting it below removes
-        both copies — there is no third one, and we keep nothing after it.
+        Changes are queued privately on this browser. The save status confirms
+        when your account has received them.
       </p>
 
       {loan ? (
         <button
           type="button"
-          onClick={() => {
-            clearAll();
-            setDraft(blankLoan());
-            setSpare(0);
-            setBuffer(0);
-            router.push("/");
-          }}
+          onClick={() => router.push("/account")}
           className="mt-4 w-full rounded-xl border border-line px-4 py-3 text-[13.5px] font-medium text-ink-3 transition hover:border-danger/50 hover:text-danger"
         >
-          Delete this loan from the device
+          Manage or delete this loan
         </button>
       ) : null}
     </Screen>

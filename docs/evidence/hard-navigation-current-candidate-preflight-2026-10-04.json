@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-04T08:37:41.000+01:00",
+  "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+  "candidateBuildId": "llH6YCL2zRu1VEYvtRTd7",
+  "status": "not-applicable-normal-candidate",
+  "analyticsConfig": {
+    "environment": "development",
+    "enabled": false,
+    "tokenValueRead": false
+  },
+  "harness": {
+    "script": "scripts/check-member-analytics.mjs",
+    "mode": "intercept",
+    "navigation": "hard-navigation-zero-settle",
+    "attemptEvidence": "docs/evidence/member-analytics-browser-2026-10-03T23-37-41-240Z.json",
+    "checksBeforePreflightStop": 2,
+    "providerRequests": 0,
+    "mixpanelRequests": 0
+  },
+  "interpretation": "The reviewed normal candidate has NEXT_PUBLIC_ANALYTICS_ENABLED=false by design, so its account page renders no analytics-consent control. The enabled hard-navigation harness therefore cannot run against this candidate. Existing enabled-build timing probes remain the diagnostic evidence; no product behavior change is authorized by this preflight.",
+  "evidenceBoundary": "Configuration and harness preflight only; no provider request, Mixpanel ingestion, deployment, provider mutation, commit, push or external submission.",
+  "externalActions": {
+    "providerMutation": false,
+    "deployment": false,
+    "commit": false,
+    "push": false,
+    "externalSubmission": false
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "checkedAt": "2026-10-02T20:15:36.198755Z",
+  "pdf": {
+    "path": "docs/demo/truecost-one-pager-designed.pdf",
+    "pageCount": 1,
+    "textCharacters": 951,
+    "renderable": true,
+    "requiredTerms": [
+      "TrueCost",
+      "borrower",
+      "Compare",
+      "Public release pending"
+    ],
+    "hasRequiredTerms": true,
+    "note": "The copy names the shipped actions directly and does not use the literal acronym MVP.",
+    "visualInspection": {
+      "image": "docs/demo/truecost-one-pager-designed.png",
+      "status": "passed",
+      "observed": "One-page composition rendered with readable text, intact margins and no visibly clipped content."
+    }
+  },
+  "videos": [
+    {
+      "path": "docs/evidence/demo-edits/truecost-hosted-development-16x9.mp4",
+      "opened": true,
+      "width": 1920,
+      "height": 1080,
+      "fps": 25,
+      "frameCount": 4517,
+      "decodedFrames": 4517,
+      "durationSeconds": 180.68,
+      "sampleFrames": [
+        {
+          "frame": 0,
+          "meanLuma": 149.42,
+          "blackFraction": 0.0036
+        },
+        {
+          "frame": 2258,
+          "meanLuma": 148.53,
+          "blackFraction": 0.0065
+        },
+        {
+          "frame": 4516,
+          "meanLuma": 149.8,
+          "blackFraction": 0.0083
+        }
+      ],
+      "fullDecode": true
+    },
+    {
+      "path": "docs/evidence/demo-edits/truecost-hosted-development-9x16.mp4",
+      "opened": true,
+      "width": 1080,
+      "height": 1920,
+      "fps": 25,
+      "frameCount": 4517,
+      "decodedFrames": 4517,
+      "durationSeconds": 180.68,
+      "sampleFrames": [
+        {
+          "frame": 0,
+          "meanLuma": 119.66,
+          "blackFraction": 0.0068
+        },
+        {
+          "frame": 2258,
+          "meanLuma": 119.79,
+          "blackFraction": 0.0115
+        },
+        {
+          "frame": 4516,
+          "meanLuma": 121.25,
+          "blackFraction": 0.0149
+        }
+      ],
+      "fullDecode": true
+    }
+  ],
+  "humanReviewOpen": [
+    "full audio listening",
+    "caption readability at normal playback",
+    "reviewer access and final acceptance"
+  ],
+  "status": "passed-machine-checks",
+  "audioWaveformCheck": {
+    "evidence": "docs/evidence/demo-audio-waveform-2026-10-02.json",
+    "status": "passed-machine-checks",
+    "durationSeconds": 180.683,
+    "longestNearSilenceSeconds": 1.4,
+    "nearSilenceFraction": 0.2612,
+    "limitation": "Waveform analysis checks the narration source only; it does not replace full human playback, caption readability review or reviewer acceptance."
+  }
+}

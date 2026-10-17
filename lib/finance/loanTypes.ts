@@ -178,7 +178,7 @@ export function isLoanTypeEnabled(id: LoanTypeId): boolean {
  */
 export const FORECLOSURE_NOTE: Record<RateStructure, string> = {
   floating:
-    "RBI bars foreclosure and prepayment charges on floating-rate home loans to individual borrowers, so you can prepay any amount for free. The rate can reset, though — every figure here assumes it never does.",
+    "These estimates assume the entered rate stays unchanged. Floating rates can reset. Check the lender's sanction letter or Key Facts Statement for the prepayment terms that apply to your loan.",
   fixed:
-    "Fixed-rate home loans are outside that protection and typically charge 2-4% of the outstanding to close early, often with a lock-in. Your EMI is certain; your exit is not free.",
+    "These estimates assume the entered fixed rate applies for the full term. Early repayment charges and any lock-in depend on the loan terms. Check the lender's sanction letter or Key Facts Statement.",
 };

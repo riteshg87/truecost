@@ -1,0 +1,434 @@
+{
+  "date": "2026-09-15",
+  "revision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2 plus auth/backend/document working changes; finance files unchanged",
+  "tolerances": {
+    "moneyRupees": 0.01,
+    "aprPercentagePoints": 0.01
+  },
+  "result": "PASS",
+  "cases": [
+    {
+      "case": "fee_free",
+      "checks": {
+        "emi": {
+          "expected": "43391.1616682766927252240879253862381459271295963477623958103",
+          "actual": 43391.161668276705,
+          "absoluteDifference": 1.4551915228366852e-11,
+          "pass": true
+        },
+        "totalRepayment": {
+          "expected": "10413878.8003864062540537811020926971550225111031234629749945",
+          "actual": 10413878.80038641,
+          "absoluteDifference": 3.725290298461914e-9,
+          "pass": true
+        },
+        "totalInterest": {
+          "expected": "5413878.8003864062540537811020926971550225111031234629749945",
+          "actual": 5413878.80038641,
+          "absoluteDifference": 3.725290298461914e-9,
+          "pass": true
+        },
+        "upfrontFees": {
+          "expected": "0.00",
+          "actual": 0,
+          "absoluteDifference": 0,
+          "pass": true
+        },
+        "cashInHand": {
+          "expected": "5000000.00",
+          "actual": 5000000,
+          "absoluteDifference": 0,
+          "pass": true
+        },
+        "totalCostOfBorrowing": {
+          "expected": "5413878.8003864062540537811020926971550225111031234629749945",
+          "actual": 5413878.80038641,
+          "absoluteDifference": 3.725290298461914e-9,
+          "pass": true
+        },
+        "effectiveAprPct": {
+          "expected": "8.50000000000000000000000000000000000000000000000000000000200",
+          "actual": 8.500000000000059,
+          "absoluteDifference": 5.861977570020827e-14,
+          "pass": true
+        }
+      }
+    },
+    {
+      "case": "percent_fee",
+      "checks": {
+        "emi": {
+          "expected": "43391.1616682766927252240879253862381459271295963477623958103",
+          "actual": 43391.161668276705,
+          "absoluteDifference": 1.4551915228366852e-11,
+          "pass": true
+        },
+        "totalRepayment": {
+          "expected": "10413878.8003864062540537811020926971550225111031234629749945",
+          "actual": 10413878.80038641,
+          "absoluteDifference": 3.725290298461914e-9,
+          "pass": true
+        },
+        "totalInterest": {
+          "expected": "5413878.8003864062540537811020926971550225111031234629749945",
+          "actual": 5413878.80038641,
+          "absoluteDifference": 3.725290298461914e-9,
+          "pass": true
+        },
+        "upfrontFees": {
+          "expected": "29500.000",
+          "actual": 29500,
+          "absoluteDifference": 0,
+          "pass": true
+        },
+        "cashInHand": {
+          "expected": "4970500.000",
+          "actual": 4970500,
+          "absoluteDifference": 0,
+          "pass": true
+        },
+        "totalCostOfBorrowing": {
+          "expected": "5443378.8003864062540537811020926971550225111031234629749945",
+          "actual": 5443378.80038641,
+          "absoluteDifference": 3.725290298461914e-9,
+          "pass": true
+        },
+        "effectiveAprPct": {
+          "expected": "8.58126987187187696233679419303390556335954870680350874541800",
+          "actual": 8.581269871871815,
+          "absoluteDifference": 6.217248937900877e-14,
+          "pass": true
+        }
+      }
+    },
+    {
+      "case": "flat_fee",
+      "checks": {
+        "emi": {
+          "expected": "43391.1616682766927252240879253862381459271295963477623958103",
+          "actual": 43391.161668276705,
+          "absoluteDifference": 1.4551915228366852e-11,
+          "pass": true
+        },
+        "totalRepayment": {
+          "expected": "10413878.8003864062540537811020926971550225111031234629749945",
+          "actual": 10413878.80038641,
+          "absoluteDifference": 3.725290298461914e-9,
+          "pass": true
+        },
+        "totalInterest": {
+          "expected": "5413878.8003864062540537811020926971550225111031234629749945",
+          "actual": 5413878.80038641,
+          "absoluteDifference": 3.725290298461914e-9,
+          "pass": true
+        },
+        "upfrontFees": {
+          "expected": "28600.00",
+          "actual": 28600,
+          "absoluteDifference": 0,
+          "pass": true
+        },
+        "cashInHand": {
+          "expected": "4971400.00",
+          "actual": 4971400,
+          "absoluteDifference": 0,
+          "pass": true
+        },
+        "totalCostOfBorrowing": {
+          "expected": "5442478.8003864062540537811020926971550225111031234629749945",
+          "actual": 5442478.80038641,
+          "absoluteDifference": 3.725290298461914e-9,
+          "pass": true
+        },
+        "effectiveAprPct": {
+          "expected": "8.57877939404792764918393781564580065250740143625554518100200",
+          "actual": 8.578779394047878,
+          "absoluteDifference": 4.973799150320701e-14,
+          "pass": true
+        }
+      }
+    },
+    {
+      "case": "financed_premium",
+      "checks": {
+        "emi": {
+          "expected": "44953.2434883346536633321550907001427191805062618162818420595",
+          "actual": 44953.243488334665,
+          "absoluteDifference": 1.4551915228366852e-11,
+          "pass": true
+        },
+        "totalRepayment": {
+          "expected": "10788778.4372003168791997172217680342526033215028359076420943",
+          "actual": 10788778.437200319,
+          "absoluteDifference": 1.862645149230957e-9,
+          "pass": true
+        },
+        "totalInterest": {
+          "expected": "5608778.4372003168791997172217680342526033215028359076420943",
+          "actual": 5608778.437200319,
+          "absoluteDifference": 1.862645149230957e-9,
+          "pass": true
+        },
+        "upfrontFees": {
+          "expected": "59000.00",
+          "actual": 59000,
+          "absoluteDifference": 0,
+          "pass": true
+        },
+        "cashInHand": {
+          "expected": "4941000.00",
+          "actual": 4941000,
+          "absoluteDifference": 0,
+          "pass": true
+        },
+        "totalCostOfBorrowing": {
+          "expected": "5847778.4372003168791997172217680342526033215028359076420943",
+          "actual": 5847778.437200319,
+          "absoluteDifference": 1.862645149230957e-9,
+          "pass": true
+        },
+        "effectiveAprPct": {
+          "expected": "9.15626697680189501875500883184855160308303180131317341521800",
+          "actual": 9.156266976801813,
+          "absoluteDifference": 8.171241461241152e-14,
+          "pass": true
+        }
+      }
+    },
+    {
+      "case": "upfront_premium",
+      "checks": {
+        "emi": {
+          "expected": "43391.1616682766927252240879253862381459271295963477623958103",
+          "actual": 43391.161668276705,
+          "absoluteDifference": 1.4551915228366852e-11,
+          "pass": true
+        },
+        "totalRepayment": {
+          "expected": "10413878.8003864062540537811020926971550225111031234629749945",
+          "actual": 10413878.80038641,
+          "absoluteDifference": 3.725290298461914e-9,
+          "pass": true
+        },
+        "totalInterest": {
+          "expected": "5413878.8003864062540537811020926971550225111031234629749945",
+          "actual": 5413878.80038641,
+          "absoluteDifference": 3.725290298461914e-9,
+          "pass": true
+        },
+        "upfrontFees": {
+          "expected": "59000.00",
+          "actual": 59000,
+          "absoluteDifference": 0,
+          "pass": true
+        },
+        "cashInHand": {
+          "expected": "4761000.00",
+          "actual": 4761000,
+          "absoluteDifference": 0,
+          "pass": true
+        },
+        "totalCostOfBorrowing": {
+          "expected": "5652878.8003864062540537811020926971550225111031234629749945",
+          "actual": 5652878.80038641,
+          "absoluteDifference": 3.725290298461914e-9,
+          "pass": true
+        },
+        "effectiveAprPct": {
+          "expected": "9.18081500930408925582487873901350095290814490444150671455400",
+          "actual": 9.180815009304197,
+          "absoluteDifference": 1.0835776720341528e-13,
+          "pass": true
+        }
+      }
+    },
+    {
+      "case": "zero_interest",
+      "checks": {
+        "emi": {
+          "expected": "10000",
+          "actual": 10000,
+          "absoluteDifference": 0,
+          "pass": true
+        },
+        "totalRepayment": {
+          "expected": "120000",
+          "actual": 120000,
+          "absoluteDifference": 0,
+          "pass": true
+        },
+        "totalInterest": {
+          "expected": "0",
+          "actual": 0,
+          "absoluteDifference": 0,
+          "pass": true
+        },
+        "upfrontFees": {
+          "expected": "0.00",
+          "actual": 0,
+          "absoluteDifference": 0,
+          "pass": true
+        },
+        "cashInHand": {
+          "expected": "120000.00",
+          "actual": 120000,
+          "absoluteDifference": 0,
+          "pass": true
+        },
+        "totalCostOfBorrowing": {
+          "expected": "0.00",
+          "actual": 0,
+          "absoluteDifference": 0,
+          "pass": true
+        },
+        "effectiveAprPct": {
+          "expected": "-5.40000117141873220354526928779091293129860944861348892824042E-57",
+          "actual": -4.628840802069752e-14,
+          "absoluteDifference": 4.628840802069752e-14,
+          "pass": true
+        }
+      }
+    },
+    {
+      "case": "one_month",
+      "checks": {
+        "emi": {
+          "expected": "101000.000000000000000000000000000000000000000000000000000000",
+          "actual": 100999.99999999991,
+          "absoluteDifference": 8.731149137020111e-11,
+          "pass": true
+        },
+        "totalRepayment": {
+          "expected": "101000.000000000000000000000000000000000000000000000000000000",
+          "actual": 100999.99999999991,
+          "absoluteDifference": 8.731149137020111e-11,
+          "pass": true
+        },
+        "totalInterest": {
+          "expected": "1000.000000000000000000000000000000000000000000000000000000",
+          "actual": 999.9999999999127,
+          "absoluteDifference": 8.731149137020111e-11,
+          "pass": true
+        },
+        "upfrontFees": {
+          "expected": "0.00",
+          "actual": 0,
+          "absoluteDifference": 0,
+          "pass": true
+        },
+        "cashInHand": {
+          "expected": "100000.00",
+          "actual": 100000,
+          "absoluteDifference": 0,
+          "pass": true
+        },
+        "totalCostOfBorrowing": {
+          "expected": "1000.000000000000000000000000000000000000000000000000000000",
+          "actual": 999.9999999999127,
+          "absoluteDifference": 8.731149137020111e-11,
+          "pass": true
+        },
+        "effectiveAprPct": {
+          "expected": "11.9999999999999999999999999999999999999999999999999999999940",
+          "actual": 12,
+          "absoluteDifference": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "case": "flat_rate_math",
+      "checks": {
+        "emi": {
+          "expected": "13750.000000000000000000000000000000000000000000000000000000",
+          "actual": 13749.999999999998,
+          "absoluteDifference": 1.8189894035458565e-12,
+          "pass": true
+        },
+        "totalRepayment": {
+          "expected": "660000.000000000000000000000000000000000000000000000000000000",
+          "actual": 659999.9999999999,
+          "absoluteDifference": 1.1641532182693481e-10,
+          "pass": true
+        },
+        "totalInterest": {
+          "expected": "160000.000000000000000000000000000000000000000000000000000000",
+          "actual": 159999.99999999988,
+          "absoluteDifference": 1.1641532182693481e-10,
+          "pass": true
+        },
+        "upfrontFees": {
+          "expected": "0.00",
+          "actual": 0,
+          "absoluteDifference": 0,
+          "pass": true
+        },
+        "cashInHand": {
+          "expected": "500000.00",
+          "actual": 500000,
+          "absoluteDifference": 0,
+          "pass": true
+        },
+        "totalCostOfBorrowing": {
+          "expected": "160000.000000000000000000000000000000000000000000000000000000",
+          "actual": 159999.99999999988,
+          "absoluteDifference": 1.1641532182693481e-10,
+          "pass": true
+        },
+        "effectiveAprPct": {
+          "expected": "14.3452901338290651588204430083322225488658197416152714847580",
+          "actual": 14.34529013382901,
+          "absoluteDifference": 5.5067062021407764e-14,
+          "pass": true
+        }
+      }
+    },
+    {
+      "case": "invalid_net_cash",
+      "checks": {
+        "emi": {
+          "expected": "8.67823233365533854504481758507724762918542591926955247916207",
+          "actual": 8.678232333655341,
+          "absoluteDifference": 1.7763568394002505e-15,
+          "pass": true
+        },
+        "totalRepayment": {
+          "expected": "2082.77576007728125081075622041853943100450222062469259499890",
+          "actual": 2082.775760077282,
+          "absoluteDifference": 9.094947017729282e-13,
+          "pass": true
+        },
+        "totalInterest": {
+          "expected": "1082.77576007728125081075622041853943100450222062469259499890",
+          "actual": 1082.775760077282,
+          "absoluteDifference": 6.821210263296962e-13,
+          "pass": true
+        },
+        "upfrontFees": {
+          "expected": "2360.00",
+          "actual": 2360,
+          "absoluteDifference": 0,
+          "pass": true
+        },
+        "cashInHand": {
+          "expected": "-1360.00",
+          "actual": -1360,
+          "absoluteDifference": 0,
+          "pass": true
+        },
+        "totalCostOfBorrowing": {
+          "expected": "3442.77576007728125081075622041853943100450222062469259499890",
+          "actual": 3442.775760077282,
+          "absoluteDifference": 9.094947017729282e-13,
+          "pass": true
+        },
+        "effectiveAprPct": {
+          "expected": null,
+          "actual": null,
+          "absoluteDifference": 0,
+          "pass": true
+        }
+      }
+    }
+  ]
+}

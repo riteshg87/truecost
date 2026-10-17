@@ -1,0 +1,127 @@
+{
+  "checkedAt": "2026-09-17T16:41:15.909Z",
+  "status": "failed",
+  "mode": "intercept",
+  "scenario": "consented-guest-to-member",
+  "baseUrl": "http://localhost:3341",
+  "buildId": "_7nJhRG7ldqpKyYUV0ha7",
+  "issuer": "live-tarpon-2666.clerk.accounts.dev",
+  "convexTarget": "https://dutiful-fly-37.convex.cloud",
+  "mixpanelToken": "matched-approved-sha256",
+  "harnessSourceSha256": "5fd0af74447f570b3e4f72300261670c78388767fedf8fe9e06fd6232aba67bc",
+  "events": [
+    {
+      "event": "comparison_started",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "auth_state",
+        "distinct_id",
+        "draft_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "release",
+        "route_name",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "local-1",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": false,
+        "deviceIdPresent": true
+      }
+    },
+    {
+      "event": "comparison_completed",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "auth_state",
+        "calculation_version",
+        "distinct_id",
+        "draft_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "offer_count",
+        "release",
+        "result_id",
+        "route_name",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "local-1",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": false,
+        "deviceIdPresent": true
+      }
+    },
+    {
+      "event": "auth_prompt_viewed",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "action",
+        "auth_state",
+        "distinct_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "release",
+        "result_id",
+        "route_name",
+        "session_id",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "local-1",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": false,
+        "deviceIdPresent": true
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "guest analytics was explicitly accepted before comparison",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "consented guest comparison emitted the expected start and completion events",
+      "passed": true,
+      "details": {
+        "guestEventsBeforeGate": 2
+      }
+    }
+  ],
+  "errors": [
+    "navigate from compare to home: TimeoutError: locator.click: Timeout 30000ms exceeded."
+  ],
+  "cleanup": {
+    "status": "owned comparisons deleted",
+    "feedbackResidual": "feedback rows may remain; no feedback deletion mutation is exposed by this harness",
+    "clerkUser": "new synthetic user and sessions deleted"
+  },
+  "browser": {
+    "name": "Chrome",
+    "playwright": "1.62.1",
+    "engine": "153.0.8010.47"
+  },
+  "diagnostics": {
+    "feedbackRegions": 0,
+    "feedbackHeadings": 0,
+    "alertCount": 1
+  },
+  "output": "C:\\Users\\RajeshShinde\\OneDrive - Electracom Projects (UK) Ltd\\Documents\\ChatGPT\\truecost\\docs\\evidence\\member-analytics-browser-2026-09-17T16-41-15-909Z.json"
+}

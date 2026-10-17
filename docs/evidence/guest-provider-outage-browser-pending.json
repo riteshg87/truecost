@@ -1,0 +1,29 @@
+{
+  "status": "pending",
+  "checkedAt": "20260916T131526Z",
+  "reason": "Prepared only; browser run awaits root authorization of an explicitly reviewed build.",
+  "script": "scripts/check-guest-provider-outage.mjs",
+  "requiredEnvironment": [
+    "TRUECOST_GUEST_OUTAGE_BUILD_ID",
+    "TRUECOST_GUEST_OUTAGE_PORT"
+  ],
+  "sourceHashes": {
+    "lib/auth/provider.tsx": "4d1d1ab6571f44a88fe48cad06e157d6379577feddee065536a52968ca52b709",
+    "components/RouteGuard.tsx": "fc9db43eb2bda221a5f5395b70f875a5f02670d5dbc47cc8e05b7ff88827673e",
+    "lib/store.tsx": "c1316496ee14f9474c2b25b6d69debf18113cdecaa9fbcff79ca01158fd849d9",
+    "app/page.tsx": "274a8e29620fb69b6147c8bb627fc901ef4633924d71cce66d1034867cf4f0b9",
+    "components/landing/LandingPage.tsx": "89353cef3d7aea135bce38401464e39d8994b1917987a43a4194274be040b49d",
+    "app/compare/page.tsx": "623f674e9354aa11937a224c11b75ba9d3054a5183c09a35ed3b960811fe29b5",
+    "scripts/check-guest-provider-outage.mjs": "6a6551d4c36bf27195feaa4ea6977c28fad9e03c33545e4214444d7e0bc6086e"
+  },
+  "scope": [
+    "Fresh browser context with immediate guest comparison action while Clerk and Convex requests are blocked locally.",
+    "Two synthetic offers: Guest bank A and Guest bank B, ₹10,00,000, rates 8.5% and 8.9%.",
+    "/loan and /account remain locked while auth services are unavailable."
+  ],
+  "limits": [
+    "No credentials, tokens, provider settings, external writes, or app source changes are used by the harness.",
+    "Build/source parity requires review of the recorded build ID and source hashes.",
+    "No result has been claimed because the authorized build run has not occurred."
+  ]
+}

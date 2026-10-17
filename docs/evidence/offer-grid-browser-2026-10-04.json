@@ -1,0 +1,69 @@
+{
+  "checkedAt": "2026-10-03T23:05:12.793Z",
+  "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+  "buildId": "HEur139tQZdPYCKTBYF0c",
+  "viewport": {
+    "width": 320,
+    "height": 760
+  },
+  "checks": [
+    {
+      "name": "comparison fields expose a labelled focusable region",
+      "passed": true,
+      "scrollWidth": 320,
+      "clientWidth": 278,
+      "tabIndex": 0
+    },
+    {
+      "name": "two-offer comparison keeps an explicit 20rem content track",
+      "passed": true,
+      "style": "--cols: 4.75rem repeat(2, minmax(6.25rem, 1fr)); min-width: 20rem;"
+    },
+    {
+      "name": "320px viewport exposes horizontal offer overflow",
+      "passed": true,
+      "scrollWidth": 320,
+      "clientWidth": 278,
+      "tabIndex": 0
+    },
+    {
+      "name": "horizontal offer overflow stays inside the page viewport",
+      "passed": true
+    },
+    {
+      "name": "keyboard focus lands on the comparison region",
+      "passed": true
+    },
+    {
+      "name": "ArrowRight advances the comparison region",
+      "passed": true,
+      "start": 0,
+      "right": 42
+    },
+    {
+      "name": "ArrowLeft moves back through the comparison region",
+      "passed": true
+    },
+    {
+      "name": "End reaches the final offer columns",
+      "passed": true,
+      "scrollLeft": 42,
+      "max": 42
+    },
+    {
+      "name": "Home returns to the first offer columns",
+      "passed": true
+    },
+    {
+      "name": "no page errors",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "externalActions": {
+    "writes": false,
+    "deploy": false,
+    "commit": false,
+    "publish": false
+  }
+}

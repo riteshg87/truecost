@@ -116,8 +116,9 @@ export function recommendPrepay(input: PrepayInput): PrepayRecommendation {
   const bestPrepay: "tenure" | "emi" =
     wealth.tenure >= wealth.emi ? "tenure" : "emi";
   const emiRouteEndsRicher = wealth.emi > wealth.tenure;
+  const investWinsByWealth = wealth.invest > wealth[bestPrepay];
   const bestByWealth: "tenure" | "emi" | "invest" =
-    wealth[bestPrepay] >= wealth.invest ? bestPrepay : "invest";
+    investWinsByWealth ? "invest" : bestPrepay;
   const wealthGapVsInvest = wealth[bestPrepay] - wealth.invest;
 
   /* --- Did the fee decide it? --------------------------------------------- */
@@ -144,6 +145,15 @@ export function recommendPrepay(input: PrepayInput): PrepayRecommendation {
   let verdict: Verdict;
   if (liquidityBlocked) {
     verdict = "build-buffer";
+  } else if (feeDecisive && investWinsByWealth && advantagePct >= requiredPremiumPct) {
+    // Fees are part of the initial cash budget. When they reverse the
+    // terminal-wealth winner, the rate-only spread must not hide that result,
+    // provided the expected return still clears the risk margin.
+    verdict = "invest";
+  } else if (feeDecisive && investWinsByWealth) {
+    // The fee can make projected wealth favour investing while the return is
+    // still too close to a guaranteed saving to call it a clear win.
+    verdict = "line-ball";
   } else if (advantagePct >= requiredPremiumPct) {
     verdict = "invest";
   } else if (advantagePct <= 0) {

@@ -1,0 +1,14 @@
+{
+  "checkedAt": "2026-09-16",
+  "target": "https://dutiful-fly-37.convex.cloud",
+  "readOnlyCommand": "npx convex function-spec --deployment-name dutiful-fly-37",
+  "activeFunctions": [
+    "users.js:currentUser",
+    "users.js:ensureCurrentUser",
+    "savedLoans.js:currentLoan",
+    "savedLoans.js:saveLoan",
+    "savedLoans.js:deleteLoan"
+  ],
+  "comparisonFunctionsActive": false,
+  "cliObservation": "Installed codegen calls startComponentsPushAndCodegen for analysis and does not invoke finishPush. Active function metadata still matches the preceding users/savedLoans implementation."
+}

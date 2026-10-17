@@ -1,0 +1,142 @@
+{
+  "capturedAt": "2026-09-15T23:11:06.441Z",
+  "deployment": "dev:dutiful-fly-37",
+  "environment": "Real Clerk development session tokens and real Convex HTTP functions; synthetic named accounts only",
+  "checks": [
+    {
+      "name": "Development target and test Clerk credential selected",
+      "pass": true
+    },
+    {
+      "name": "Anonymous read denied",
+      "pass": true
+    },
+    {
+      "name": "Anonymous write denied",
+      "pass": true
+    },
+    {
+      "name": "Anonymous delete denied",
+      "pass": true
+    },
+    {
+      "name": "Only existing synthetic account A selected",
+      "pass": true
+    },
+    {
+      "name": "Account A token has expected issuer and audience",
+      "pass": true
+    },
+    {
+      "name": "Account A verified safe profile",
+      "pass": true
+    },
+    {
+      "name": "Only existing synthetic account B selected",
+      "pass": true
+    },
+    {
+      "name": "Account B token has expected issuer and audience",
+      "pass": true
+    },
+    {
+      "name": "Account B verified safe profile",
+      "pass": true
+    },
+    {
+      "name": "Two distinct owned profiles",
+      "pass": true
+    },
+    {
+      "name": "Client subject inconsistent with verified identity denied",
+      "pass": true
+    },
+    {
+      "name": "A starts without a saved loan",
+      "pass": true
+    },
+    {
+      "name": "B starts without a saved loan",
+      "pass": true
+    },
+    {
+      "name": "Concurrent retries acknowledge one revision",
+      "pass": true
+    },
+    {
+      "name": "Same request UUID is isolated by owner",
+      "pass": true
+    },
+    {
+      "name": "Each account reads only its synthetic loan",
+      "pass": true
+    },
+    {
+      "name": "Saved-loan read excludes database owner and record IDs",
+      "pass": true
+    },
+    {
+      "name": "Forged owner read rejected",
+      "pass": true
+    },
+    {
+      "name": "Forged owner write rejected",
+      "pass": true
+    },
+    {
+      "name": "Forged owner deletion rejected",
+      "pass": true
+    },
+    {
+      "name": "Changed payload cannot reuse request identity",
+      "pass": true
+    },
+    {
+      "name": "Stale revision rejected",
+      "pass": true
+    },
+    {
+      "name": "Delete advances revision",
+      "pass": true
+    },
+    {
+      "name": "Old acknowledged save can replay its original receipt",
+      "pass": true
+    },
+    {
+      "name": "Old acknowledged save does not resurrect deleted loan",
+      "pass": true
+    },
+    {
+      "name": "Delayed unacknowledged save cannot cross deletion revision",
+      "pass": true
+    },
+    {
+      "name": "Deleting A leaves B intact",
+      "pass": true
+    }
+  ],
+  "sessionsRevoked": 2,
+  "cleanup": [
+    {
+      "account": "A",
+      "loanPayloadRemoved": true,
+      "revision": 2
+    },
+    {
+      "account": "B",
+      "loanPayloadRemoved": true,
+      "revision": 2
+    }
+  ],
+  "complete": true,
+  "remaining": "Only existing synthetic users/profiles and opaque operation receipts/deletion tombstones are retained. No browser OTP or email-delivery verification is claimed.",
+  "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2 with reviewed local backend changes",
+  "sourceSha256": {
+    "convex/users.ts": "094f577a452a44dd9a62f13a08c75d218907720bcdcf149fd4bf54c17624d249",
+    "convex/savedLoans.ts": "46819df6d18505a02e8b787438842f6b9dc130e8042a924b6fabbf4847888f1a",
+    "convex/schema.ts": "119c086930c3f992a1d875636d55231ede6f27ac684237d27c05ecc3e73054ea",
+    "convex/auth.config.ts": "957cc569fbb53a912a237fa6aa2c4b14b736c1d521ae993cd4d06ff74098fe90",
+    "lib/contracts/saved-loan.ts": "bd546ad61de6400b323aab05f184c3333ea105989aae24ee3e23b04f8a503b62"
+  }
+}

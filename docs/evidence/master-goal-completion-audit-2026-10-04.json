@@ -1,0 +1,110 @@
+{
+  "checkedAt": "2026-10-04T05:07:20Z",
+  "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+  "releaseDecision": "NO-GO",
+  "scope": "Requirement-level audit of the TrueCost master goal and its named production and Demo Day deliverables.",
+  "checks": [
+    {
+      "id": "candidate-local-verification",
+      "requirement": "Produce an evidence-backed production-release candidate with typecheck, tests and production build.",
+      "status": "passed-local",
+      "evidence": [
+        "docs/evidence/current-full-suite-rerun-2026-10-04.json",
+        "docs/evidence/current-full-suite-rerun-2026-10-04-final.json",
+        "docs/evidence/current-build-rerun-2026-10-04-latest.json"
+      ],
+      "boundary": "Local checkout only; production configuration, deployment approval and release sign-off remain open."
+    },
+    {
+      "id": "clerk-convex-development",
+      "requirement": "Verify Clerk email OTP and fresh Convex comparison, history, report, offline and account flows.",
+      "status": "passed-development-slice",
+      "evidence": [
+        "docs/evidence/clerk-browser-loan-current-2026-10-04.json",
+        "docs/evidence/clerk-browser-hosted-comparison-current-2026-10-04.json",
+        "docs/evidence/comparison-history-browser.json",
+        "docs/evidence/account-export-browser-current-2026-10-04.json"
+      ],
+      "boundary": "Development resources and disposable data only; production email delivery, provider retention/deletion and installed-app/device acceptance remain open."
+    },
+    {
+      "id": "mixpanel-contract",
+      "requirement": "Implement consented Mixpanel events, identity transitions, payload restrictions and fail-closed behavior.",
+      "status": "passed-local-contract",
+      "evidence": [
+        "docs/evidence/mixpanel-contract-local-rerun-2026-10-04.json",
+        "docs/evidence/analytics-mixpanel-browser-2026-10-04T03-00-26-605Z.json",
+        "docs/evidence/provider-lifecycle-local-current-2026-10-04.json"
+      ],
+      "boundary": "The enabled browser run intercepted requests before they left localhost; live ingestion, dashboard reconciliation and provider retention/deletion are unverified."
+    },
+    {
+      "id": "hard-navigation-consent",
+      "requirement": "Measure consent readiness against input and calculation timing before changing behavior.",
+      "status": "diagnostic-open",
+      "evidence": [
+        "docs/evidence/hard-navigation-diagnostic-repeat-2026-10-02.json",
+        "docs/evidence/hard-navigation-diagnostic-track-decision-current-2026-10-04.json",
+        "docs/analytics-acceptance.md"
+      ],
+      "boundary": "The caller-decision marks show input and completion skipped while the store was loading in the zero-settle run, while the two-second run queued both account pairs after accepted context. The diagnostics isolate readiness variance without buffering unconsented events, delaying calculations or using a navigation workaround; product acceptance remains open."
+    },
+    {
+      "id": "chronicle-one-pager",
+      "requirement": "Deliver exactly one readable Chronicle-supported one-page PDF and verify the actual export.",
+      "status": "local-artifact-ready-export-open",
+      "evidence": [
+        "docs/demo/truecost-one-pager-designed.pdf",
+        "docs/evidence/demo-artifact-machine-check-2026-10-04.json",
+        "docs/evidence/chronicle-editor-access-probe-current-rerun-2026-10-04.json"
+      ],
+      "boundary": "The local PDF is one page and visually inspected; authenticated Chronicle editor access and export retrieval remain unverified."
+    },
+    {
+      "id": "runway-supporting-assets",
+      "requirement": "Verify Runway access, rights, credits and approved exports before generating supporting clips.",
+      "status": "guest-navigation-only",
+      "evidence": [
+        "docs/evidence/runway-access-current-2026-10-04.json",
+        "docs/demo/runway-brief.md",
+        "docs/demo/runway-asset-register.md"
+      ],
+      "boundary": "Guest tool navigation was observed read-only. No generation, export or credit use occurred; account access, rights and approved exports remain open."
+    },
+    {
+      "id": "real-product-demo",
+      "requirement": "Deliver and verify a 180–240 second real-product pitch/demo with readable captions and audio.",
+      "status": "machine-checked-human-review-open",
+      "evidence": [
+        "docs/evidence/clerk-browser-mvp-demo.json",
+        "docs/evidence/demo-edits/truecost-current-R-YV2Ykfq677oTDdfRFCj-assembly.json",
+        "docs/evidence/demo-assembly-machine-check-R-YV2Ykfq677oTDdfRFCj.json"
+      ],
+      "boundary": "Both local masters are 180.68 seconds and decode cleanly with no long black segments; full playback/listening, normal-playback caption review and reviewer acceptance remain open."
+    },
+    {
+      "id": "release-and-submission",
+      "requirement": "Validate the demonstrated public URL, production configuration, rollback/recovery, approvals and submission readiness.",
+      "status": "open",
+      "evidence": [
+        "docs/evidence/release-candidate-manifest-2026-10-02.json",
+        "docs/launch-checklist.md",
+        "docs/demo-day.md"
+      ],
+      "boundary": "Production provider configuration, recovery and deletion replay, owner sign-off, public candidate parity, reviewer access and submission approval are not verified."
+    }
+  ],
+  "summary": {
+    "passedLocalOrDevelopmentSlices": 3,
+    "openOrUnverifiedRequirements": 5,
+    "externalActions": {
+      "providerSettings": false,
+      "production": false,
+      "deployment": false,
+      "commit": false,
+      "push": false,
+      "submission": false,
+      "creditUse": false
+    }
+  }
+}

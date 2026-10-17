@@ -1,0 +1,144 @@
+{
+  "checkedAt": "2026-10-02T14:30:38.000Z",
+  "scope": "current dirty TrueCost checkout",
+  "sourceRevision": "b9e53c0",
+  "buildId": "HBKsiYtVfcMcoNQ26SNVk",
+  "analyticsEnabled": false,
+  "offlineShellBuildId": "8ecaf70f4be9b1ec",
+  "checks": {
+    "vitest": {
+      "command": "npm test -- --maxWorkers=2",
+      "status": "passed",
+      "testFiles": 109,
+      "tests": 1061,
+      "checkedAt": "2026-10-02T15:03:29.000Z"
+    },
+    "typecheck": {
+      "command": "npm run typecheck",
+      "status": "passed"
+    },
+    "productionBuild": {
+      "command": "npm run build",
+      "status": "passed",
+      "routes": 19
+    },
+    "guestOfflineBrowser": {
+      "command": "TRUECOST_PLAYWRIGHT_MODULE=<bundled> npm exec --yes -- node scripts/check-offline-browser.mjs",
+      "status": "passed",
+      "checkedAt": "2026-10-02T12:35:00.949Z",
+      "checks": 13,
+      "browser": "Chrome 154.0.8037.59",
+      "evidence": "docs/evidence/offline-browser-smoke.json"
+    },
+    "connectedMvpBrowser": {
+      "command": "TRUECOST_MVP_DEMO_CHECK=1 TRUECOST_BROWSER_COMPARISON_CHECK=1 node scripts/check-clerk-browser.mjs",
+      "status": "passed",
+      "checkedAt": "2026-10-02T12:36:40.214Z",
+      "checks": 15,
+      "browser": "Chrome 154.0.8037.59",
+      "buildId": "HBKsiYtVfcMcoNQ26SNVk",
+      "evidence": "docs/evidence/clerk-browser-mvp-demo.json",
+      "limits": [
+        "Development Clerk and Convex resources only.",
+        "The harness reports a possible minimal Convex profile residual because it has no reviewed Convex deletion operation."
+      ]
+    },
+    "diffCheck": {
+      "command": "git diff --check",
+      "status": "passed"
+    },
+    "connectedFullBrowser": {
+      "command": "TRUECOST_BROWSER_COMPARISON_CHECK=1 TRUECOST_BROWSER_LOAN_CHECK=1 node scripts/check-clerk-browser.mjs",
+      "status": "passed",
+      "checkedAt": "2026-10-02T12:48:55.332Z",
+      "checks": 61,
+      "browser": "Chrome 154.0.8037.59",
+      "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+      "evidence": "docs/evidence/comparison-auth-browser.json",
+      "limits": [
+        "Development Clerk and Convex resources only.",
+        "The harness reports a possible minimal Convex profile residual because it has no reviewed Convex deletion operation."
+      ],
+      "buildId": "HBKsiYtVfcMcoNQ26SNVk"
+    },
+    "historyBrowser": {
+      "command": "TRUECOST_HISTORY_EXPECTED_BUILD_ID=HBKsiYtVfcMcoNQ26SNVk TRUECOST_CHECK_REPORTS=1 node scripts/check-comparison-history-browser.mjs",
+      "status": "passed",
+      "checkedAt": "2026-10-02T12:57:46.143Z",
+      "checks": 24,
+      "browser": "Chrome 154.0.8037.59",
+      "buildId": "HBKsiYtVfcMcoNQ26SNVk",
+      "evidence": "docs/evidence/comparison-history-browser.json",
+      "limits": [
+        "Two-account cleanup and a second tab are browser checks; server ownership remains authoritative.",
+        "Narrow captures use 320px and 390px CSS viewports."
+      ]
+    },
+    "guestProviderOutageBrowser": {
+      "command": "TRUECOST_GUEST_OUTAGE_BUILD_ID=HBKsiYtVfcMcoNQ26SNVk TRUECOST_GUEST_OUTAGE_PORT=3351 node scripts/check-guest-provider-outage.mjs",
+      "status": "passed",
+      "checkedAt": "2026-10-02T13:13:42.085Z",
+      "checks": 5,
+      "browser": "Chrome 154.0.8037.59",
+      "buildId": "HBKsiYtVfcMcoNQ26SNVk",
+      "evidence": "docs/evidence/guest-provider-outage-browser.json",
+      "limits": [
+        "Provider blocking is scoped to this Playwright context; it does not change Clerk, Convex or deployment settings.",
+        "This covers guest comparison and private-route locking during a provider outage, not member persistence or production behavior."
+      ]
+    },
+    "comparisonRecoveryBrowser": {
+      "command": "temporary copied recovery harness with current build assertion and one-second Reset settle (copy deleted after run)",
+      "status": "passed",
+      "checkedAt": "2026-10-02T13:24:06.696Z",
+      "checks": 8,
+      "browser": "Chrome 154.0.8037.59",
+      "buildId": "HBKsiYtVfcMcoNQ26SNVk",
+      "evidence": "docs/evidence/comparison-recovery-browser.json",
+      "limits": [
+        "The one-second Reset settle exists only in the disposable harness copy; product behavior was unchanged.",
+        "Development Clerk and Convex resources only; provider-side retention and production approval remain open."
+      ]
+    },
+    "pwaAccessibilityFocused": {
+      "command": "npx vitest run --maxWorkers=2 tests/service-worker.test.ts tests/service-worker-controller.test.ts tests/results-table-accessibility.test.tsx",
+      "status": "passed",
+      "checkedAt": "2026-10-02T14:30:38.000Z",
+      "testFiles": 3,
+      "tests": 10,
+      "limits": [
+        "Focused unit and DOM coverage only; the full browser/device accessibility and installed-app upgrade matrices remain open."
+      ]
+    },
+    "pwaUpgradeBrowser": {
+      "command": "node scripts/check-service-worker-upgrade-browser.mjs",
+      "status": "passed",
+      "checkedAt": "2026-10-02T13:42:12.059Z",
+      "checks": 3,
+      "browser": "Chrome 154.0.8037.59",
+      "offlineShellBuildId": "8ecaf70f4be9b1ec",
+      "evidence": "docs/evidence/service-worker-upgrade-browser.json",
+      "limits": [
+        "Open-tab service-worker upgrade only; installed-app upgrade and rollback remain open.",
+        "The local harness serves the generated worker at N+1 and does not alter product or deployment configuration."
+      ]
+    },
+    "chronicleShareBrowser": {
+      "command": "signed-out Chrome share view via CUA",
+      "status": "passed",
+      "checkedAt": "2026-10-02T14:02:00.000Z",
+      "checks": 2,
+      "browser": "Chrome 154.0.8037.59",
+      "evidence": "docs/evidence/chronicle-share-browser.json",
+      "limits": [
+        "Signed-out share view only; Chronicle PDF export and editor permissions remain open.",
+        "No login, sharing change, upload, export click or submission occurred."
+      ]
+    }
+  },
+  "limits": [
+    "This is local checkout evidence; it does not prove production deployment or approval.",
+    "Mixpanel provider ingestion and dashboard reconciliation remain unverified.",
+    "Account deletion, provider-side deletion and retention acceptance remain open."
+  ]
+}

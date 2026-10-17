@@ -1,0 +1,444 @@
+{
+  "checkedAt": "2026-10-02T19:23:15.428Z",
+  "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+  "browser": {
+    "name": "Chrome",
+    "playwright": "1.62.1",
+    "engine": "154.0.8037.59"
+  },
+  "baseUrl": "http://localhost:3459",
+  "checks": [
+    {
+      "name": "development Clerk key configuration is present and environment-matched",
+      "passed": true,
+      "details": {
+        "environment": "test",
+        "issuer": "live-tarpon-2666.clerk.accounts.dev",
+        "convexTarget": "https://dutiful-fly-37.convex.cloud"
+      }
+    },
+    {
+      "name": "short-lived Clerk testing token obtained without recording its value",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "a Clerk SDK loaded before user interaction",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "a invalid OTP stays on verification with a safe error",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "a test OTP activates the development session and reaches home",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "a account page is bound to the current synthetic identity",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "a sign out requires explicit confirmation",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "a sign out returns to an unauthenticated route",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "a cleanup revoked only newly-created sessions",
+      "passed": true,
+      "details": {
+        "count": 0
+      }
+    },
+    {
+      "name": "b Clerk SDK loaded before user interaction",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "b invalid OTP stays on verification with a safe error",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "b test OTP activates the development session and reaches home",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "b account page is bound to the current synthetic identity",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "b sign out requires explicit confirmation",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "b sign out returns to an unauthenticated route",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "b cleanup revoked only newly-created sessions",
+      "passed": true,
+      "details": {
+        "count": 0
+      }
+    },
+    {
+      "name": "A and B use fresh browser contexts with isolated account pages",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "comparison-auth guest Clerk SDK loaded before user interaction",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "comparison-auth guest calculation produced the two-offer result before authentication",
+      "passed": true,
+      "details": {
+        "screenshot": "C:\\Users\\RajeshShinde\\OneDrive - Electracom Projects (UK) Ltd\\Documents\\ChatGPT\\truecost\\docs\\evidence\\comparison-auth-comparison-auth-guest-result.png"
+      }
+    },
+    {
+      "name": "comparison-auth save action preserved a bounded auth request and return destination",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "comparison-auth invalid OTP stayed on verification with a safe error",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "comparison-auth OTP restored the same immutable comparison and received a save acknowledgement",
+      "passed": true,
+      "details": {
+        "screenshot": "C:\\Users\\RajeshShinde\\OneDrive - Electracom Projects (UK) Ltd\\Documents\\ChatGPT\\truecost\\docs\\evidence\\comparison-auth-comparison-auth-member-result.png"
+      }
+    },
+    {
+      "name": "comparison-auth authenticated Convex list/get returned the saved comparison without recalculation",
+      "passed": true,
+      "details": {
+        "count": 1
+      }
+    },
+    {
+      "name": "comparison-auth member reload retained the exact comparison result",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "comparison-auth verified member comparison capacity for a third offer",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "comparison-auth offline member save queued without claiming server acknowledgement",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "comparison-auth reconnect acknowledged the staged offline comparison save",
+      "passed": true,
+      "details": {
+        "count": 2
+      }
+    },
+    {
+      "name": "comparison-auth authenticated Convex delete removed only this run's comparisons",
+      "passed": true,
+      "details": {
+        "count": 2
+      }
+    },
+    {
+      "name": "comparison-auth confirms the loan is saved to the account",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "comparison-auth saved the fixed-basis synthetic loan inputs",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "comparison-auth after loan reload confirms the loan is saved to the account",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "comparison-auth reload preserves the saved loan record",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "comparison-auth after quote save confirms the loan is saved to the account",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "comparison-auth after quote reload confirms the loan is saved to the account",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "comparison-auth explicit transfer quote save survives reload",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "comparison-auth offline quote edit queues without claiming an account acknowledgement",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "comparison-auth after offline reconnect confirms the loan is saved to the account",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "comparison-auth after offline quote reload confirms the loan is saved to the account",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "comparison-auth reconnect acknowledges and preserves the queued quote after reload",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "comparison-auth cold offline reload keeps the private lender out of the public fallback",
+      "passed": true,
+      "details": {
+        "publicFallback": true,
+        "navigationError": false
+      }
+    },
+    {
+      "name": "comparison-auth after cold reconnect confirms the loan is saved to the account",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "comparison-auth reconnect restores the saved record after cold offline reload",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "comparison-auth before account responsive capture confirms the loan is saved to the account",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "comparison-auth account-status before responsive capture confirms the loan is saved to the account",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "comparison-auth full account email remains readable at 390px",
+      "passed": true,
+      "details": {
+        "width": 390,
+        "emailVisibility": {
+          "visibleText": true,
+          "withinViewport": true,
+          "textOverflow": "clip",
+          "whiteSpace": "normal",
+          "overflowWrap": "anywhere"
+        }
+      }
+    },
+    {
+      "name": "comparison-auth account-status status fits a 390px viewport",
+      "passed": true,
+      "details": {
+        "width": 390,
+        "sizes": {
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        "emailVisibility": {
+          "visibleText": true,
+          "withinViewport": true,
+          "textOverflow": "clip",
+          "whiteSpace": "normal",
+          "overflowWrap": "anywhere"
+        }
+      }
+    },
+    {
+      "name": "comparison-auth full account email remains readable at 320px",
+      "passed": true,
+      "details": {
+        "width": 320,
+        "emailVisibility": {
+          "visibleText": true,
+          "withinViewport": true,
+          "textOverflow": "clip",
+          "whiteSpace": "normal",
+          "overflowWrap": "anywhere"
+        }
+      }
+    },
+    {
+      "name": "comparison-auth account-status status fits a 320px viewport",
+      "passed": true,
+      "details": {
+        "width": 320,
+        "sizes": {
+          "viewport": 320,
+          "document": 320,
+          "body": 320
+        },
+        "emailVisibility": {
+          "visibleText": true,
+          "withinViewport": true,
+          "textOverflow": "clip",
+          "whiteSpace": "normal",
+          "overflowWrap": "anywhere"
+        }
+      }
+    },
+    {
+      "name": "comparison-auth loan-status before responsive capture confirms the loan is saved to the account",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "comparison-auth loan-status status fits a 390px viewport",
+      "passed": true,
+      "details": {
+        "width": 390,
+        "sizes": {
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        "emailVisibility": null
+      }
+    },
+    {
+      "name": "comparison-auth loan-status status fits a 320px viewport",
+      "passed": true,
+      "details": {
+        "width": 320,
+        "sizes": {
+          "viewport": 320,
+          "document": 320,
+          "body": 320
+        },
+        "emailVisibility": null
+      }
+    },
+    {
+      "name": "comparison-auth before keyboard focus check confirms the loan is saved to the account",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "comparison-auth keyboard Tab reaches Account sign out",
+      "passed": true,
+      "details": {
+        "focused": true
+      }
+    },
+    {
+      "name": "comparison-auth before signout warning confirms the loan is saved to the account",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "comparison-auth signout warning can be cancelled while the loan remains visible",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "comparison-auth cleanup deleted the synthetic loan through the account UI",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "comparison-auth account projection shows no loan after UI deletion",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "comparison-auth confirmed signout removed private comparison UI access",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "comparison-auth cleanup revoked only newly-created sessions",
+      "passed": true,
+      "details": {
+        "count": 0
+      }
+    },
+    {
+      "name": "comparison-auth cleanup handled only the disposable signup identity",
+      "passed": true,
+      "details": {
+        "deleted": true,
+        "convexProfile": "may remain; Clerk deletion does not remove Convex profiles, and this harness has no Convex deletion or tombstone operation"
+      }
+    },
+    {
+      "name": "comparison auth used a unique reserved test address and UI-only creation path",
+      "passed": true,
+      "details": {}
+    }
+  ],
+  "errors": [],
+  "cleanupErrors": [],
+  "diagnostics": [],
+  "suppressedWarnings": 0,
+  "cleanup": "browser contexts closed and only the owned Next process was stopped",
+  "options": {
+    "loanCheckEnabled": true,
+    "comparisonCheckEnabled": true,
+    "mvpDemoEnabled": false,
+    "mvpRecordVideoEnabled": false,
+    "hostedReviewEnabled": false
+  },
+  "sourceHashes": {
+    "lib/auth/provider.tsx": "bfc2fa31b7171dc1e2c3332bdbb70f9bc311f9997e4ddace4a2128548a685726",
+    "lib/auth/config.ts": "792adc4a78d5aabd90ff45b90a0279ed58848c5c6e15faa64e56540f1a065d4a",
+    "lib/auth/server-config.ts": "412485734d7ebb133f45633e1f935eb356559c4c6d835a55e078ebad11157337",
+    "lib/auth/requests.ts": "b545c53b9b0763e8109a12fc0bbdbebb12fbd1afc739c20c2a15d4656b005236",
+    "app/signin/page.tsx": "90aa1163767b89fe557d5c41b32ee759f95c27efdb9da2d5ef8ba2ff35a171fe",
+    "app/verify/page.tsx": "ca942bf3ea99e7720b0f2d1e1b83d7e77f57347dd63ede3202047516bff5dd31",
+    "lib/store.tsx": "b51ed0d96f8bbdb4f1913eab86e3a9f0479286555e1d15cc689f870136d3dc9b",
+    "lib/guest/handoff.ts": "c4bc0de6f148f0b8c5681fe9fd8f25daefa6f35a157b4083003bb96d237b2630",
+    "lib/contracts/auth-intent.ts": "5db426e99d4a8cf0394b10b3f41b57b66eb03d1b538acf9e73e5a3dbe74b0183",
+    "lib/contracts/snapshot.ts": "b92b46bf147ddb146ec778a78c31c9612c069e129a2d8e47bc11d2b444128980",
+    "components/ComparisonStatus.tsx": "1e675fedb72bd7bcf3c05cc930aaf920ae91e985f09ce5e88305447d70219279",
+    "components/OfferGrid.tsx": "ff97e6783950c90b669e5be7f2936ce3a56843fc507193e37bbb3a77be37be6b",
+    "app/compare/page.tsx": "623f674e9354aa11937a224c11b75ba9d3054a5183c09a35ed3b960811fe29b5",
+    "app/compare/results/page.tsx": "c6d69d60e53949b5d4d78546e964445f779a1217ec762c2b8081bb8179c679a5",
+    "convex/comparisons.ts": "094c85f305983941951c34ff26e9283ecb38538eccdae6a8a40e976e66ff034a",
+    ".next/BUILD_ID": "35b0f8391a97754ba169c99c1487fcdeb40b0717d5649c72dc1339b5c9fedc69",
+    ".next/static/chunks/0bph5ur06nr98.js": "7b0e87eb1539bc4a6d3b18ed529f5d17abd21075eb21e964fb87f31e3f1ca906",
+    ".next/static/chunks/1u3tx-581rtyz.js": "ad823b5c106cfdb85a197fdcc34670dd568b149208e965709eb8f9d5bfcf3ae9",
+    ".next/static/chunks/2qk9owczl6gp1.js": "b5f1b829b59961e3d60115e8bbd363c9f50f451b51faf3e30c787e7575994ad1",
+    ".next/static/chunks/2slud_6yil0jt.js": "c952a64a2efbaa9d5344e52135174e485e808f3b7430811cb7a360234f2c28dd",
+    ".next/static/chunks/41xtmtw16fljx.js": "cfc546f3234eda580c5f4d38256d343746fa4f0d80b1769eb0c14c4b6e94eb0d"
+  },
+  "status": "passed",
+  "scriptSha256": "19ff74e99ac6cd118959df986d0ad876dc4d3255fda64e0adbb7fc0520da78b3"
+}

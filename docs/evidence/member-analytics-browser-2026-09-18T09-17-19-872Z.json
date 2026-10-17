@@ -1,0 +1,294 @@
+{
+  "checkedAt": "2026-09-18T09:17:19.872Z",
+  "status": "passed",
+  "mode": "intercept",
+  "scenario": "consented-guest-to-member",
+  "baseUrl": "http://localhost:3341",
+  "buildId": "LQxx6bL8bDMTcotNllltl",
+  "issuer": "live-tarpon-2666.clerk.accounts.dev",
+  "convexTarget": "https://dutiful-fly-37.convex.cloud",
+  "mixpanelToken": "matched-approved-sha256",
+  "harnessSourceSha256": "a4c50b827ffe6621c75f3e9adf5614f34737ae302a6d002772a7d62efa9e7a09",
+  "events": [
+    {
+      "event": "comparison_started",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "auth_state",
+        "distinct_id",
+        "draft_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "release",
+        "route_name",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "local-1",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": false,
+        "deviceIdPresent": true
+      },
+      "auth_state": "guest"
+    },
+    {
+      "event": "comparison_completed",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "auth_state",
+        "calculation_version",
+        "distinct_id",
+        "draft_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "offer_count",
+        "release",
+        "result_id",
+        "route_name",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "local-1",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": false,
+        "deviceIdPresent": true
+      },
+      "auth_state": "guest"
+    },
+    {
+      "event": "auth_prompt_viewed",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "action",
+        "auth_state",
+        "distinct_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "release",
+        "result_id",
+        "route_name",
+        "session_id",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "local-1",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": false,
+        "deviceIdPresent": true
+      },
+      "auth_state": "guest",
+      "action": "save"
+    },
+    {
+      "event": "auth_completed",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "$user_id",
+        "action",
+        "auth_state",
+        "distinct_id",
+        "environment",
+        "event_version",
+        "feature",
+        "flow_id",
+        "method",
+        "occurred_at",
+        "release",
+        "route_name",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "local-1",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": true,
+        "deviceIdPresent": true
+      },
+      "auth_state": "member",
+      "action": "save",
+      "method": "email"
+    },
+    {
+      "event": "comparison_started",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "$user_id",
+        "auth_state",
+        "distinct_id",
+        "draft_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "release",
+        "route_name",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "local-1",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": true,
+        "deviceIdPresent": true
+      },
+      "auth_state": "member"
+    },
+    {
+      "event": "comparison_completed",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "$user_id",
+        "auth_state",
+        "calculation_version",
+        "distinct_id",
+        "draft_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "offer_count",
+        "release",
+        "result_id",
+        "route_name",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "local-1",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": true,
+        "deviceIdPresent": true
+      },
+      "auth_state": "member"
+    }
+  ],
+  "checks": [
+    {
+      "name": "guest analytics was explicitly accepted before comparison",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "consented guest comparison emitted the expected start and completion events",
+      "passed": true,
+      "details": {
+        "guestEventsBeforeGate": 2
+      }
+    },
+    {
+      "name": "member analytics was explicitly accepted via in-app navigation",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "synthetic Clerk OTP restored the consented guest result",
+      "passed": true,
+      "details": {
+        "savedRows": 1
+      }
+    },
+    {
+      "name": "consented guest activity joined the verified member identity",
+      "passed": true,
+      "details": {
+        "eventCount": 6,
+        "guestEventCount": 3,
+        "memberEventCount": 3,
+        "guestDevicePreserved": true,
+        "memberUserDiffersFromGuest": true,
+        "memberIdentityConsistent": true,
+        "memberDistinctEqualsUser": true,
+        "memberDeviceIdsPresent": true,
+        "memberDeviceDifferentFromUser": true,
+        "guestDeviceStable": true,
+        "guestIdentityAnonymous": true,
+        "memberDeviceStable": true,
+        "deviceIdentityCount": 1
+      }
+    },
+    {
+      "name": "guest gate auth flow correlated through member acceptance",
+      "passed": true,
+      "details": {
+        "promptResultMatched": true,
+        "action": "save",
+        "method": "email"
+      }
+    },
+    {
+      "name": "consented guest join emitted exact event counts and identity stages",
+      "passed": true,
+      "details": {
+        "eventCount": 6,
+        "eventCounts": {
+          "comparison_started": 2,
+          "comparison_completed": 2,
+          "auth_prompt_viewed": 1,
+          "auth_completed": 1
+        },
+        "guestDevicePreserved": true,
+        "memberDeviceStable": true
+      }
+    },
+    {
+      "name": "run-owned Convex comparisons were deleted before sign out",
+      "passed": true,
+      "details": {
+        "deleted": 1
+      }
+    },
+    {
+      "name": "no Mixpanel event was sent after explicit analytics withdrawal",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "no Mixpanel event was sent after confirmed sign out",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "guest result reopened and gated recalculation stayed analytics-silent after hard reload",
+      "passed": true,
+      "details": {
+        "resultsReopened": true,
+        "recalculationGated": true,
+        "reconsentAttempted": false,
+        "newEventsWithoutReconsent": 0
+      }
+    }
+  ],
+  "errors": [],
+  "cleanup": {
+    "status": "owned comparisons deleted",
+    "feedbackResidual": "feedback rows may remain; no feedback deletion mutation is exposed by this harness",
+    "clerkUser": "new synthetic user and sessions deleted"
+  },
+  "browser": {
+    "name": "Chrome",
+    "playwright": "1.62.1",
+    "engine": "153.0.8010.47"
+  },
+  "output": "C:\\Users\\RajeshShinde\\OneDrive - Electracom Projects (UK) Ltd\\Documents\\ChatGPT\\truecost\\docs\\evidence\\member-analytics-browser-2026-09-18T09-17-19-872Z.json"
+}

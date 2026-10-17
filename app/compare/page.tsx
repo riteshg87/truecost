@@ -7,13 +7,17 @@ import { LOAN_TYPES, LOAN_TYPE_ORDER } from "@/lib/finance/loanTypes";
 import { allOffersReady, errorsFor } from "@/lib/finance/validate";
 import { useCompare } from "@/lib/store";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { ComparisonStatus } from "@/components/ComparisonStatus";
+import { useViewLifetime } from "@/lib/use-view-lifetime";
+import { AnalyticsConsent } from "@/components/AnalyticsConsent";
 
 export default function ComparePage() {
   const router = useRouter();
-  const { offers, loanType, setLoanType, addOffer, canAdd, reset, hydrated } =
+  const isCurrentView = useViewLifetime();
+  const { offers, loanType, setLoanType, addOffer, canAdd, reset, hydrated, calculate, busy, member } =
     useCompare();
 
-  const ready = allOffersReady(offers);
+  const ready = hydrated && allOffersReady(offers);
   const missing = offers.reduce((count, offer) => count + errorsFor(offer).length, 0);
   const config = LOAN_TYPES[loanType];
 
@@ -34,7 +38,10 @@ export default function ComparePage() {
           <div className="-mr-1 flex items-center gap-1">
             <button
               type="button"
-              onClick={reset}
+              disabled={busy || !hydrated}
+              onClick={() => void reset().then((result) => {
+                if (isCurrentView() && result.kind === "ok" && result.href) router.push(result.href);
+              })}
               className="rounded-lg px-1 py-1 text-[14px] font-medium text-ink-3 transition hover:text-ink"
             >
               Reset
@@ -45,6 +52,8 @@ export default function ComparePage() {
       </header>
 
       <main className="flex flex-1 flex-col gap-5 px-5 pb-40 pt-5">
+        <ComparisonStatus />
+        {!member ? <AnalyticsConsent /> : null}
         {/* Product ------------------------------------------------------- */}
         <section>
           <h2 className="mb-2.5 text-[13px] font-medium text-ink-2">
@@ -94,10 +103,7 @@ export default function ComparePage() {
         {hydrated ? (
           <OfferGrid />
         ) : (
-          <div
-            aria-hidden
-            className="h-[460px] animate-pulse rounded-2xl border border-line bg-surface-2"
-          />
+          <p role="status" className="py-6 text-sm text-ink-2">Opening your comparison…</p>
         )}
 
         {canAdd ? (
@@ -110,7 +116,7 @@ export default function ComparePage() {
           </button>
         ) : (
           <p className="text-center text-[12px] text-ink-3">
-            Three offers is the limit — beyond that nobody actually compares, they guess.
+            {member ? "Compare up to three offers at a time." : "Guests can compare two offers. Sign in after your first result to compare again."}
           </p>
         )}
       </main>
@@ -120,11 +126,13 @@ export default function ComparePage() {
         <div className="mx-auto w-full max-w-xl px-5 pb-[max(1rem,env(safe-area-inset-bottom))] pt-3 lg:max-w-3xl">
           <button
             type="button"
-            disabled={!ready}
-            onClick={() => router.push("/compare/results")}
+            disabled={!ready || busy}
+            onClick={() => void calculate().then((result) => {
+              if (isCurrentView() && result.kind === "ok" && result.href) router.push(result.href);
+            })}
             className="w-full rounded-xl bg-accent px-4 py-3.5 text-[15px] font-semibold text-accent-ink transition disabled:cursor-not-allowed disabled:bg-surface-inset disabled:text-ink-3"
           >
-            {ready ? "See the full breakdown" : `${missing} field${missing === 1 ? "" : "s"} still needed`}
+            {busy ? "Working…" : ready ? "See the full breakdown" : `${missing} field${missing === 1 ? "" : "s"} still needed`}
           </button>
           <p className="mt-2 text-center text-[11px] text-ink-3">
             {ready

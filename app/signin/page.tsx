@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import {
   AppBar,
   FormError,
@@ -13,22 +13,28 @@ import {
 import { useAuth } from "@/lib/auth/provider";
 import { safeNext } from "@/lib/auth/access";
 import { parseIdentifier } from "@/lib/auth/identifier";
+import { CancelComparisonSignIn } from "@/components/CancelComparisonSignIn";
 
 /**
  * One field for both.
  *
- * Asking someone to choose "email or mobile" before typing is a tap that earns
- * nothing — what they type already says which it is. Register and sign in are
+ * Asking someone to choose an identifier before typing is a tap that earns
+ * nothing — the email field already says which it is. Register and sign in are
  * the same door too: a first code creates the account, a later one opens it.
  */
 function SignInForm() {
   const router = useRouter();
   const params = useSearchParams();
-  const { sendCode, demoMode, viewer, ready } = useAuth();
+  const { sendCode, cancelVerification, continueAsGuest, unavailableReason, viewer, ready } = useAuth();
 
   const [raw, setRaw] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const leavingForVerify = useRef(false);
+
+  useEffect(() => () => {
+    if (!leavingForVerify.current) cancelVerification();
+  }, [cancelVerification]);
 
   const next = safeNext(params.get("next"));
 
@@ -37,6 +43,7 @@ function SignInForm() {
   }, [ready, viewer, router, next]);
 
   const submit = async () => {
+    if (busy) return;
     setError(null);
     const parsed = parseIdentifier(raw);
     if (!parsed.ok) {
@@ -45,14 +52,15 @@ function SignInForm() {
     }
 
     setBusy(true);
-    const result = await sendCode(parsed.id);
+    const result = await sendCode(parsed.id, next);
     setBusy(false);
 
     if (!result.ok) {
       setError(result.error ?? "Could not send the code.");
       return;
     }
-    const q = new URLSearchParams({ value: parsed.id.value, next });
+    leavingForVerify.current = true;
+    const q = new URLSearchParams({ next });
     router.push(`/verify?${q.toString()}`);
   };
 
@@ -74,7 +82,11 @@ function SignInForm() {
             void submit();
           }}
         >
+          <label htmlFor="signin-email" className="text-[13px] font-medium text-ink-2">
+            Email address
+          </label>
           <input
+            id="signin-email"
             autoFocus
             type="email"
             inputMode="email"
@@ -91,26 +103,37 @@ function SignInForm() {
 
           <FormError>{error}</FormError>
 
-          {demoMode ? (
+          <div id="clerk-captcha" aria-label="Security check" />
+
+          {unavailableReason ? (
             <div className="rounded-xl border border-warn-line bg-warn-soft px-3.5 py-3 text-[12.5px] leading-relaxed text-warn">
-              <span className="font-semibold">Demo sign-in.</span> No email is sent
-              yet — the code appears on the next screen. Any address works.
+              {unavailableReason}
             </div>
           ) : null}
 
-          <PrimaryButton type="submit" busy={busy}>
-            {demoMode ? "Get a code" : "Send code"}
+          <PrimaryButton type="submit" busy={busy} disabled={!ready || Boolean(unavailableReason)}>
+            Send code
           </PrimaryButton>
         </form>
+        <CancelComparisonSignIn next={next} />
 
         <div className="mt-5">
           <Hint>
-            An account is what lets the Loan Health Monitor save your loan. The
-            comparison needs no account —{" "}
-            <a href="/home" className="underline">
+            Sign in to save comparisons and use Loan health. Your first comparison
+            is available as a guest.{" "}
+            {!new URL(next, "https://truecost.invalid").searchParams.has("requestId") ? <>
+            <a
+              href="/home"
+              className="underline"
+              onClick={(event) => {
+                event.preventDefault();
+                continueAsGuest();
+                router.replace("/home");
+              }}
+            >
               carry on as a guest
-            </a>{" "}
-            for that.
+            </a>.
+            </> : null}
           </Hint>
         </div>
       </Page>

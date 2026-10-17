@@ -1,0 +1,60 @@
+{
+  "checkedAt": "2026-09-16T13:28:44.884Z",
+  "reference": "https://truecost-lac.vercel.app/",
+  "sourceRevision": "not compared to local checkout",
+  "browser": {
+    "name": "Chrome",
+    "engine": "152.0.7977.83"
+  },
+  "landing": {
+    "httpStatus": 200,
+    "title": "TrueCost — what a loan actually costs",
+    "url": "https://truecost-lac.vercel.app/",
+    "headings": [
+      "Know what your loan really costs."
+    ],
+    "actions": [
+      {
+        "text": "◐",
+        "href": null
+      },
+      {
+        "text": "Continue with email",
+        "href": "https://truecost-lac.vercel.app/signin"
+      },
+      {
+        "text": "Try it as a guest",
+        "href": null
+      }
+    ],
+    "visibleVersionText": [],
+    "selectedAction": {
+      "text": "Try it as a guest",
+      "role": "button"
+    }
+  },
+  "comparison": {
+    "afterGuestActionUrl": "https://truecost-lac.vercel.app/home",
+    "selectedHomeAction": "Compare Loan Offers",
+    "comparePath": "/compare",
+    "resultPath": "/compare/results",
+    "resultHeading": [
+      "Results",
+      "Public reference A is the cheaper borrowing.",
+      "Offer by offer"
+    ],
+    "syntheticLendersVisible": [
+      "Public reference A",
+      "Public reference B"
+    ],
+    "resultContainsEffectiveApr": true,
+    "resultExcerpt": "RECOMMENDATION Public reference A is the cheaper borrowing. 8.50% effective APR against 8.90% — a gap of 0.40 percentage points once fees, GST and any bundled premium are counted. Over 10 years that is ₹25,794 you keep. WHAT IS DRIVING THE GAP This one is the rate itself: 0.40 of the 0.40 points is interest, and charges barely move it. Fee-haggling will not rescue the more expensive offer. What to ask for. Charges alone cannot close this — Public reference B would need 0.40 percentage points off the rate to match Public reference A. That is a repricing, not a discount, so it is the harder ask. RBI bars foreclosure and prepayment charges on floating-rate home loans to individual borrowers, so you can prepay any amount for free. The rate can reset, though — every figure here assumes it never does. METRIC BEST Public reference A 8.50% · 10 years Public reference B 8.90% · 10 years Effective APR all fees included 8.50% 8.90% Cost per lakh borrowed ₹48,783 ₹51,362 Monthly EMI ₹12,399 ₹12,614 Total cost of borrowing interest + every fee ₹4.88 L ₹5.14 L Total interest ₹4.88 L ₹5.14 L Money in hand after upfront charges ₹10.00 L ₹10.00 L Offer by offer 1 Public reference A Home · ₹10.00 L "
+  },
+  "errors": [],
+  "pageErrors": [],
+  "screenshots": [
+    "C:\\Users\\RajeshShinde\\OneDrive - Electracom Projects (UK) Ltd\\Documents\\ChatGPT\\truecost\\docs\\evidence\\public-reference-submission-check-landing.png",
+    "C:\\Users\\RajeshShinde\\OneDrive - Electracom Projects (UK) Ltd\\Documents\\ChatGPT\\truecost\\docs\\evidence\\public-reference-submission-check-result.png"
+  ],
+  "status": "passed"
+}

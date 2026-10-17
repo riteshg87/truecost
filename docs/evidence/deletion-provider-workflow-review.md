@@ -1,0 +1,9 @@
+# Durable provider deletion: local review
+
+17 September 2026. Root reviewed accountDeletionProviders.ts, its schema and purge transition, minimal owner status, and recovery tests in the dirty TrueCost checkout. Root independently ran the application deletion, provider orchestration, status and transport suites: 42 tests passed across four files.
+
+The workflow stores a create-in-flight state before contacting Mixpanel. An interrupted create becomes ambiguous manual review rather than a duplicate POST. Accepted tracking IDs are retained for explicit status polling. Retry delays increase within a cap; pending polling moves from one minute to five minutes and then one hour. A pending response after the modeled thirty-day deadline needs attention, not a success label. Clerk follows confirmed analytics cleanup or the explicit null-identifier branch. Expired attempts stop before HTTP and late results cannot overwrite a newer token. Public status exposes only lifecycle state, needsAttention and timestamps.
+
+Evidence covers mocked transport and Convex scheduler/transaction behavior. It does not verify real provider credentials, deletion of an analytics identity cluster, a deployed scheduler interruption, production residency, manual reconciliation, webhooks or external recovery-ledger replay. Users and minimal job records stay blocked/retained pending the recovery retention policy. The explicit null analytics branch depends on the request's copied preference state; it is not proof about historical data outside this application's tracked identity.
+
+No live provider deletion or deployment occurred. Full account deletion remains incomplete. A concurrent cross-tab signal TypeScript finding was returned to that file's worker; these focused tests are not a final whole-project typecheck verdict.

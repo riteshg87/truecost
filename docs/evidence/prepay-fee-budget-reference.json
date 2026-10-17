@@ -1,0 +1,123 @@
+{
+  "status": "Independent expected values only; not implementation verification",
+  "decision": "DEC-013: surplus plus applicable fee is common initial budget",
+  "method": "60-digit Decimal, explicit end-of-month loan-payment and investment cash ledgers; zero tax; no legal fee eligibility claim",
+  "cases": [
+    {
+      "case": "zero_interest_fee",
+      "input": {
+        "outstanding": "120000",
+        "ratePct": "0",
+        "remainingMonths": 3,
+        "surplus": "30000",
+        "applicableFee": "3000",
+        "expectedReturnPct": "0",
+        "taxSlabPct": 0
+      },
+      "initialCashBudget": "33000",
+      "regularEmi": "40000",
+      "baselineIdleCash": "33000",
+      "paths": {
+        "tenure": {
+          "terminalWealth": "30000",
+          "loanOutflowIncludingUpfrontAndFee": "123000",
+          "endingDebt": "0"
+        },
+        "emi": {
+          "terminalWealth": "30000",
+          "loanOutflowIncludingUpfrontAndFee": "123000",
+          "endingDebt": "0"
+        }
+      },
+      "investTerminalWealth": "33000",
+      "bestPrepayMinusInvest": "-3000"
+    },
+    {
+      "case": "fixed_loan_fee",
+      "input": {
+        "outstanding": "1000000",
+        "ratePct": "10.0000000000000000000000000000000000000000000000000000000000",
+        "remainingMonths": 24,
+        "surplus": "100000",
+        "applicableFee": "15000",
+        "expectedReturnPct": "8.00000000000000000000000000000000000000000000000000000000000",
+        "taxSlabPct": 0
+      },
+      "initialCashBudget": "115000",
+      "regularEmi": "46144.9263375165034528545226471195029375816552996339451755027",
+      "baselineIdleCash": "115000",
+      "paths": {
+        "tenure": {
+          "terminalWealth": "121865.194756545184988727495613100589906182223108823877348350",
+          "loanOutflowIncludingUpfrontAndFee": "1101307.03834894552711187247951914659827631668837081330780063",
+          "endingDebt": "0"
+        },
+        "emi": {
+          "terminalWealth": "119668.513125494710146102173317582397534537825713888573226366",
+          "loanOutflowIncludingUpfrontAndFee": "1111730.40889035647458165768917778126345176375447209321579041",
+          "endingDebt": "0"
+        }
+      },
+      "investTerminalWealth": "134882.112150710823621677338230061458911748238262254996372129",
+      "bestPrepayMinusInvest": "-13016.917394165638632949842616960869005566015153431119023779"
+    },
+    {
+      "case": "fixed_loan_no_fee",
+      "input": {
+        "outstanding": "1000000",
+        "ratePct": "10.0000000000000000000000000000000000000000000000000000000000",
+        "remainingMonths": 24,
+        "surplus": "100000",
+        "applicableFee": "0",
+        "expectedReturnPct": "8.00000000000000000000000000000000000000000000000000000000000",
+        "taxSlabPct": 0
+      },
+      "initialCashBudget": "100000",
+      "regularEmi": "46144.9263375165034528545226471195029375816552996339451755027",
+      "baselineIdleCash": "100000",
+      "paths": {
+        "tenure": {
+          "terminalWealth": "121865.194756545184988727495613100589906182223108823877348350",
+          "loanOutflowIncludingUpfrontAndFee": "1086307.03834894552711187247951914659827631668837081330780063",
+          "endingDebt": "0"
+        },
+        "emi": {
+          "terminalWealth": "119668.513125494710146102173317582397534537825713888573226366",
+          "loanOutflowIncludingUpfrontAndFee": "1096730.40889035647458165768917778126345176375447209321579041",
+          "endingDebt": "0"
+        }
+      },
+      "investTerminalWealth": "117288.793174531150975371598460923007749346294141091301193156",
+      "bestPrepayMinusInvest": "4576.401582014034013355897152177582156835928967732576155194"
+    },
+    {
+      "case": "foreclosure_excess",
+      "input": {
+        "outstanding": "100000",
+        "ratePct": "10.0000000000000000000000000000000000000000000000000000000000",
+        "remainingMonths": 12,
+        "surplus": "120000",
+        "applicableFee": "5000",
+        "expectedReturnPct": "6.000",
+        "taxSlabPct": 0
+      },
+      "initialCashBudget": "125000",
+      "regularEmi": "8791.58872300095888382649588230961468373145058066060679185317",
+      "baselineIdleCash": "125000",
+      "paths": {
+        "tenure": {
+          "terminalWealth": "129682.747286751822349035506819653955531428318579066031625101",
+          "loanOutflowIncludingUpfrontAndFee": "105000.000000000000000000000000000000000000000000000000000000",
+          "endingDebt": "0"
+        },
+        "emi": {
+          "terminalWealth": "129682.747286751822349035506819653955531428318579066031625101",
+          "loanOutflowIncludingUpfrontAndFee": "105000",
+          "endingDebt": "0"
+        }
+      },
+      "investTerminalWealth": "132709.726483062446098713452178955078125000",
+      "bestPrepayMinusInvest": "-3026.979196310623749677945359301122593571681420933968374899"
+    }
+  ]
+}

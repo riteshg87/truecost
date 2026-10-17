@@ -1,0 +1,101 @@
+{
+  "checkedAt": "2026-09-16T06:28:08.596Z",
+  "buildId": "PcMbNRf0rAUZoMCH2rUlV",
+  "sourceRevision": "b9e53c00219f778294a904e9b3175a9bb5bb26c2",
+  "browser": {
+    "name": "Chrome",
+    "playwright": "1.62.1",
+    "engine": "152.0.7977.83"
+  },
+  "baseUrl": "http://localhost:4179",
+  "checks": [
+    {
+      "name": "approved development Clerk and Convex target match the recovery build",
+      "passed": true,
+      "details": {
+        "issuer": "live-tarpon-2666.clerk.accounts.dev",
+        "convexTarget": "https://dutiful-fly-37.convex.cloud",
+        "buildId": "PcMbNRf0rAUZoMCH2rUlV"
+      }
+    },
+    {
+      "name": "short-lived Clerk testing token obtained without recording its value",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "guest result mounted with the complete synthetic two-offer comparison",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "mounted member result reached paused after exactly eight intercepted transient failures",
+      "passed": true,
+      "details": {
+        "attempts": 8,
+        "resultId": "83116ea6-f601-4dc7-a2dc-46b1b5e3ab61",
+        "requestId": "8d561e85-f633-45a6-b660-7da5d43c9fed"
+      }
+    },
+    {
+      "name": "explicit recovery saved one matching Convex record with stable request and snapshot identity",
+      "passed": true,
+      "details": {
+        "resultId": "83116ea6-f601-4dc7-a2dc-46b1b5e3ab61",
+        "requestId": "8d561e85-f633-45a6-b660-7da5d43c9fed"
+      }
+    },
+    {
+      "name": "expired queued save stayed local, surfaced honest unknown-acknowledgement copy, and offered no blind retry",
+      "passed": true,
+      "details": {
+        "resultId": "d09ba697-19a2-4a8b-98b0-4ee9bfbe93c9"
+      }
+    },
+    {
+      "name": "cleanup deleted only this run's acknowledged comparison record",
+      "passed": true,
+      "details": {
+        "deleted": [
+          "83116ea6-f601-4dc7-a2dc-46b1b5e3ab61"
+        ]
+      }
+    },
+    {
+      "name": "cleanup revoked new sessions and deleted only the owned disposable identity",
+      "passed": true,
+      "details": {
+        "revoked": 1,
+        "deleted": false,
+        "reason": "pre-existing user was never eligible for deletion"
+      }
+    }
+  ],
+  "errors": [],
+  "diagnostics": [],
+  "cleanupErrors": [],
+  "preservedIdentity": null,
+  "ownedRecords": [
+    {
+      "resultId": "83116ea6-f601-4dc7-a2dc-46b1b5e3ab61",
+      "comparisonId": "k173ecn350jk4nv4mfwh9sx3xs8eh35t",
+      "requestId": "8d561e85-f633-45a6-b660-7da5d43c9fed"
+    }
+  ],
+  "faultInjection": {
+    "type": "Playwright route interception of saveComparison only",
+    "attempts": 8,
+    "response": "synthetic rate_limited result with retryAfterMs=0",
+    "purpose": "Exercise bounded local retry exhaustion without changing provider data"
+  },
+  "status": "passed",
+  "scriptSha256": "811108ff6f30fdcbbf645b413514a7d4642d0e809457fd81ada631dd61db38b9",
+  "sourceHashes": {
+    "lib/comparison/private-workspace.ts": "557c85cd2917d0f6a692e460a5dce8efd05162c5b64a37e637be5a7d52c74734",
+    "lib/comparison/transport.ts": "555b6b7cba36895d703118e43af3a8497f915a34369a820219662cbb6fac29b8",
+    "lib/store.tsx": "bbb7b783e651eb3a32aa4193648dde1af8b262efb3f8383dd2a8cecd69a3c08f",
+    "components/ComparisonStatus.tsx": "0bb404b6cf0d432c0f19c03c889de52508329da291e9bb6e76ffcc5fe080df19",
+    "scripts/check-comparison-recovery-browser.mjs": "811108ff6f30fdcbbf645b413514a7d4642d0e809457fd81ada631dd61db38b9",
+    ".next/BUILD_ID": "a501775486dbc44dfdaa2d441f10dc037042314a5f61a8e6667ff7efcbc7b2a2"
+  }
+}

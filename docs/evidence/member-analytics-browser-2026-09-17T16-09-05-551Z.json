@@ -1,0 +1,349 @@
+{
+  "checkedAt": "2026-09-17T16:09:05.551Z",
+  "status": "failed",
+  "mode": "live",
+  "baseUrl": "http://localhost:3341",
+  "buildId": "WYUufvWqH9Q6HoWNK__v_",
+  "issuer": "live-tarpon-2666.clerk.accounts.dev",
+  "convexTarget": "https://dutiful-fly-37.convex.cloud",
+  "mixpanelToken": "matched-approved-sha256",
+  "harnessSourceSha256": "8b4470229bdc0305ab488475184f03da98b42f16bf2432303af0fae8b5a106ad",
+  "events": [
+    {
+      "event": "comparison_started",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "$user_id",
+        "auth_state",
+        "distinct_id",
+        "draft_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "release",
+        "route_name",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "http-ack",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": true,
+        "deviceIdPresent": true
+      },
+      "httpStatus": 200
+    },
+    {
+      "event": "comparison_completed",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "$user_id",
+        "auth_state",
+        "calculation_version",
+        "distinct_id",
+        "draft_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "offer_count",
+        "release",
+        "result_id",
+        "route_name",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "http-ack",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": true,
+        "deviceIdPresent": true
+      },
+      "httpStatus": 200
+    },
+    {
+      "event": "comparison_save_status",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "$user_id",
+        "auth_state",
+        "distinct_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "release",
+        "request_id",
+        "route_name",
+        "stage",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "http-ack",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": true,
+        "deviceIdPresent": true
+      },
+      "stage": "attempted",
+      "httpStatus": 200
+    },
+    {
+      "event": "comparison_save_status",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "$user_id",
+        "auth_state",
+        "distinct_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "release",
+        "request_id",
+        "route_name",
+        "stage",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "http-ack",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": true,
+        "deviceIdPresent": true
+      },
+      "stage": "queued",
+      "httpStatus": 200
+    },
+    {
+      "event": "comparison_saved",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "$user_id",
+        "auth_state",
+        "distinct_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "path",
+        "release",
+        "request_id",
+        "route_name",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "http-ack",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": true,
+        "deviceIdPresent": true
+      },
+      "path": "queued",
+      "httpStatus": 200
+    },
+    {
+      "event": "feedback_submitted",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "$user_id",
+        "answer",
+        "auth_state",
+        "context_version",
+        "distinct_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "release",
+        "result_id",
+        "route_name",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "http-ack",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": true,
+        "deviceIdPresent": true
+      },
+      "httpStatus": 200
+    },
+    {
+      "event": "report_generation_status",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "$user_id",
+        "auth_state",
+        "distinct_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "release",
+        "request_id",
+        "route_name",
+        "source",
+        "stage",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "http-ack",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": true,
+        "deviceIdPresent": true
+      },
+      "stage": "requested",
+      "source": "saved",
+      "httpStatus": 200
+    },
+    {
+      "event": "report_generation_status",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "$user_id",
+        "auth_state",
+        "distinct_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "release",
+        "request_id",
+        "route_name",
+        "source",
+        "stage",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "http-ack",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": true,
+        "deviceIdPresent": true
+      },
+      "stage": "generated",
+      "source": "saved",
+      "httpStatus": 200
+    },
+    {
+      "event": "report_download_initiated",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "$user_id",
+        "auth_state",
+        "distinct_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "release",
+        "request_id",
+        "route_name",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "http-ack",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": true,
+        "deviceIdPresent": true
+      },
+      "httpStatus": 200
+    }
+  ],
+  "checks": [
+    {
+      "name": "guest comparison completed before authentication and consent",
+      "passed": true,
+      "details": {
+        "memberEventsBeforeConsent": 0
+      }
+    },
+    {
+      "name": "synthetic Clerk OTP restored the guest result and member save",
+      "passed": true,
+      "details": {
+        "savedRows": 1
+      }
+    },
+    {
+      "name": "member analytics was explicitly accepted after authentication",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "member-analytics-2026-09-17T16-09-05-551Z: saved report downloaded through a fresh click with stored lender and EMI/repayment parity",
+      "passed": true,
+      "details": {
+        "generationMs": 1381,
+        "pages": 2,
+        "bytes": 32862,
+        "sha256": "4ce267806becdca8258954f567428d21eda037710bd01d711ec7bd78c220053a",
+        "limit": "Chrome browser sample; viewport emulation is not a physical phone or mobile performance percentile."
+      }
+    },
+    {
+      "name": "member save, saved history, PDF generation/download, and acknowledged feedback completed",
+      "passed": true,
+      "details": {
+        "eventNames": [
+          "comparison_started",
+          "comparison_completed",
+          "comparison_save_status",
+          "comparison_save_status",
+          "comparison_saved",
+          "feedback_submitted",
+          "report_generation_status",
+          "report_generation_status",
+          "report_download_initiated"
+        ],
+        "pdf": "%PDF-"
+      }
+    },
+    {
+      "name": "saved comparison history opened the synthetic member record",
+      "passed": true,
+      "details": {}
+    }
+  ],
+  "errors": [
+    "saved history and PDF: AssertionError: member identity changed between analytics events"
+  ],
+  "cleanup": {
+    "status": "owned comparisons deleted",
+    "feedbackResidual": "feedback rows may remain; no feedback deletion mutation is exposed by this harness",
+    "clerkUser": "new synthetic user and sessions deleted"
+  },
+  "browser": {
+    "name": "Chrome",
+    "playwright": "1.62.1",
+    "engine": "153.0.8010.47"
+  },
+  "diagnostics": {
+    "feedbackRegions": 0,
+    "feedbackHeadings": 0,
+    "alertCount": 1
+  },
+  "output": "C:\\Users\\RajeshShinde\\OneDrive - Electracom Projects (UK) Ltd\\Documents\\ChatGPT\\truecost\\docs\\evidence\\member-analytics-browser-2026-09-17T16-09-05-551Z.json"
+}

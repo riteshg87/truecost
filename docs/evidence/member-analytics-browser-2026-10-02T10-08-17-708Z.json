@@ -1,0 +1,397 @@
+{
+  "checkedAt": "2026-10-02T10:08:17.708Z",
+  "status": "failed",
+  "mode": "intercept",
+  "scenario": "same-browser-second-tab-account-switch-with-pending-analytics",
+  "navigation": {
+    "hardNavigation": false,
+    "settleMs": 0
+  },
+  "baseUrl": "http://localhost:3367",
+  "buildId": "ixZzRSloataoxhJS76W4Z",
+  "issuer": "live-tarpon-2666.clerk.accounts.dev",
+  "convexTarget": "https://dutiful-fly-37.convex.cloud",
+  "mixpanelToken": "matched-approved-sha256",
+  "harnessSourceSha256": "0c2e4ca0e7eae30bc783f71a5bdd3b8010ae9a8032a979b4259135bb35973137",
+  "timing": {
+    "clock": "node-date-ms",
+    "startedAt": 1790935697709,
+    "markers": [
+      {
+        "name": "account_a_accept_click",
+        "phase": "account A analytics consent",
+        "elapsedMs": 7951
+      },
+      {
+        "name": "analytics_preference_query_started",
+        "phase": "account A analytics consent",
+        "elapsedMs": 10045
+      },
+      {
+        "name": "analytics_preference_query_completed",
+        "phase": "account A analytics consent",
+        "elapsedMs": 10182,
+        "requestDurationMs": 137
+      },
+      {
+        "name": "analytics_preference_query_started",
+        "phase": "account A analytics consent",
+        "elapsedMs": 10498
+      },
+      {
+        "name": "account_a_analytics_on_observed",
+        "phase": "account A analytics consent",
+        "elapsedMs": 10577
+      },
+      {
+        "name": "analytics_preference_query_completed",
+        "phase": "account A comparison",
+        "elapsedMs": 10628,
+        "requestDurationMs": 130
+      },
+      {
+        "name": "account_a_inputs_filled",
+        "phase": "account A comparison",
+        "elapsedMs": 11126
+      },
+      {
+        "name": "account_a_calculation_click",
+        "phase": "account A comparison",
+        "elapsedMs": 11126
+      },
+      {
+        "name": "analytics_preference_query_started",
+        "phase": "account A confirmed sign out",
+        "elapsedMs": 12976
+      },
+      {
+        "name": "analytics_preference_query_completed",
+        "phase": "account A confirmed sign out",
+        "elapsedMs": 13081,
+        "requestDurationMs": 105
+      },
+      {
+        "name": "analytics_preference_query_started",
+        "phase": "account A confirmed sign out",
+        "elapsedMs": 13580
+      },
+      {
+        "name": "analytics_preference_query_completed",
+        "phase": "account A confirmed sign out",
+        "elapsedMs": 13726,
+        "requestDurationMs": 146
+      },
+      {
+        "name": "analytics_preference_query_started",
+        "phase": "account B authentication",
+        "elapsedMs": 25407
+      },
+      {
+        "name": "analytics_preference_query_completed",
+        "phase": "account B authentication",
+        "elapsedMs": 25521,
+        "requestDurationMs": 114
+      },
+      {
+        "name": "analytics_preference_query_started",
+        "phase": "account B authentication",
+        "elapsedMs": 31233
+      },
+      {
+        "name": "analytics_preference_query_completed",
+        "phase": "account B authentication",
+        "elapsedMs": 31353,
+        "requestDurationMs": 120
+      },
+      {
+        "name": "analytics_preference_query_started",
+        "phase": "account B unknown comparison",
+        "elapsedMs": 34315
+      },
+      {
+        "name": "analytics_preference_query_completed",
+        "phase": "account B unknown comparison",
+        "elapsedMs": 34537,
+        "requestDurationMs": 222
+      },
+      {
+        "name": "account_b_accept_click",
+        "phase": "account B analytics consent",
+        "elapsedMs": 39906
+      },
+      {
+        "name": "analytics_preference_query_started",
+        "phase": "account B analytics consent",
+        "elapsedMs": 72953
+      },
+      {
+        "name": "analytics_preference_query_completed",
+        "phase": "account B analytics consent",
+        "elapsedMs": 87517,
+        "requestDurationMs": 14564
+      }
+    ],
+    "events": [
+      {
+        "event": "comparison_started",
+        "phase": "account A comparison",
+        "elapsedMs": 11016
+      },
+      {
+        "event": "comparison_completed",
+        "phase": "account A comparison",
+        "elapsedMs": 11186
+      }
+    ],
+    "consentQueries": [
+      {
+        "status": "started",
+        "elapsedMs": 10045
+      },
+      {
+        "status": "completed",
+        "elapsedMs": 10182,
+        "requestDurationMs": 137
+      },
+      {
+        "status": "started",
+        "elapsedMs": 10498
+      },
+      {
+        "status": "completed",
+        "elapsedMs": 10628,
+        "requestDurationMs": 130
+      },
+      {
+        "status": "started",
+        "elapsedMs": 12976
+      },
+      {
+        "status": "completed",
+        "elapsedMs": 13081,
+        "requestDurationMs": 105
+      },
+      {
+        "status": "started",
+        "elapsedMs": 13580
+      },
+      {
+        "status": "completed",
+        "elapsedMs": 13726,
+        "requestDurationMs": 146
+      },
+      {
+        "status": "started",
+        "elapsedMs": 25407
+      },
+      {
+        "status": "completed",
+        "elapsedMs": 25521,
+        "requestDurationMs": 114
+      },
+      {
+        "status": "started",
+        "elapsedMs": 31233
+      },
+      {
+        "status": "completed",
+        "elapsedMs": 31353,
+        "requestDurationMs": 120
+      },
+      {
+        "status": "started",
+        "elapsedMs": 34315
+      },
+      {
+        "status": "completed",
+        "elapsedMs": 34537,
+        "requestDurationMs": 222
+      },
+      {
+        "status": "started",
+        "elapsedMs": 72953
+      },
+      {
+        "status": "completed",
+        "elapsedMs": 87517,
+        "requestDurationMs": 14564
+      }
+    ]
+  },
+  "events": [
+    {
+      "event": "comparison_started",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "$user_id",
+        "auth_state",
+        "distinct_id",
+        "draft_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "release",
+        "route_name",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "local-1",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": true,
+        "deviceIdPresent": true
+      },
+      "auth_state": "member"
+    },
+    {
+      "event": "comparison_completed",
+      "propertyKeys": [
+        "$device_id",
+        "$insert_id",
+        "$user_id",
+        "auth_state",
+        "calculation_version",
+        "distinct_id",
+        "draft_id",
+        "environment",
+        "event_version",
+        "feature",
+        "occurred_at",
+        "offer_count",
+        "release",
+        "result_id",
+        "route_name",
+        "time",
+        "token"
+      ],
+      "acknowledgement": "held-before-account-transition",
+      "valid": true,
+      "identity": {
+        "distinctIdPresent": true,
+        "userIdPresent": true,
+        "deviceIdPresent": true
+      },
+      "auth_state": "member"
+    }
+  ],
+  "checks": [
+    {
+      "name": "account A disposable member reached the authenticated route",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "account A was created from a verified synthetic baseline and its cleanup client was captured",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "account A explicitly accepted analytics",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "account A emitted acknowledged member comparison events",
+      "passed": true,
+      "details": {
+        "eventCount": 2,
+        "userIdentityStable": true,
+        "deviceIdentityStable": true
+      }
+    },
+    {
+      "name": "second tab observed account A before the auth transition",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "second-tab sign out propagated to the mounted account A tab",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "account A completion stayed held until confirmed sign out while the app remained mounted",
+      "passed": true,
+      "details": {
+        "heldEvents": 1,
+        "deliveredBeforeTransition": 1
+      }
+    },
+    {
+      "name": "confirmed account A sign out emitted no analytics",
+      "passed": true,
+      "details": {
+        "secondTab": true
+      }
+    },
+    {
+      "name": "account B disposable member reached the authenticated route",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "account B reached the same browser with a fresh verified identity and cleanup client",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "account B began with unknown analytics consent after account A sign out",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "account B unknown preference kept the comparison usable and analytics-silent",
+      "passed": true,
+      "details": {
+        "eventsBeforeOptIn": 0
+      }
+    }
+  ],
+  "errors": [
+    "account B analytics consent: TimeoutError: locator.click: Timeout 30000ms exceeded."
+  ],
+  "cleanupErrors": [
+    "account B comparison cleanup failed: Error: {\"code\":\"Unauthenticated\",\"message\":\"Could not verify OIDC token claim. Check that the token signature is valid and the token hasn't expired.\"}"
+  ],
+  "preservedIdentities": [],
+  "cleanup": {
+    "status": "no authenticated Convex cleanup client was available",
+    "feedbackResidual": "No feedback is submitted in the account-switch scenario.",
+    "analyticsResidual": "Convex profiles and analytics preferences may remain; Mixpanel requests are intercepted locally and not ingested.",
+    "clerkUsers": [
+      {
+        "label": "account A",
+        "revoked": 0,
+        "deleted": true
+      },
+      {
+        "label": "account B",
+        "revoked": 1,
+        "deleted": true
+      }
+    ]
+  },
+  "browser": {
+    "name": "Chrome",
+    "playwright": "1.62.1",
+    "engine": "154.0.8037.59"
+  },
+  "diagnostics": {
+    "feedbackRegions": 0,
+    "feedbackHeadings": 0,
+    "alertCount": 2,
+    "consent": {
+      "pathname": "/account",
+      "on": false,
+      "off": false,
+      "preferenceReadFailed": true,
+      "memberCleanupFailed": false,
+      "logoutResetFailed": false,
+      "acceptButton": 1
+    }
+  },
+  "output": "C:\\Users\\RajeshShinde\\OneDrive - Electracom Projects (UK) Ltd\\Documents\\ChatGPT\\truecost\\docs\\evidence\\member-analytics-browser-2026-10-02T10-08-17-708Z.json"
+}

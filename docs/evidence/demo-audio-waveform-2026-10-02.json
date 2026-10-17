@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-02T20:15:36.198755Z",
+  "path": "docs/evidence/demo-edits/truecost-narration-hosted-development-en-gb-george.wav",
+  "format": {
+    "channels": 1,
+    "sampleRate": 22050,
+    "sampleWidthBits": 16,
+    "frames": 3984068
+  },
+  "durationSeconds": 180.683,
+  "waveform": {
+    "windowSeconds": 0.1,
+    "peakSample": 25435.0,
+    "medianRms": 2560.2,
+    "p05Rms": 0.0,
+    "p95Rms": 5409.7,
+    "nearSilenceThresholdSample": 254.3,
+    "nearSilenceFraction": 0.2612,
+    "longestNearSilenceSeconds": 1.4,
+    "leadingNearSilenceSeconds": 0.1,
+    "trailingNearSilenceSeconds": 0.7
+  },
+  "status": "passed-machine-checks",
+  "limits": [
+    "Waveform analysis checks the narration source only; it does not replace full human playback, caption readability review or reviewer acceptance."
+  ]
+}

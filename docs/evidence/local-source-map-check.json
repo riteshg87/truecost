@@ -1,0 +1,10 @@
+{
+  "checkedAt": "2026-09-16T17:38:47.4638309Z",
+  "buildId": "Xu6azB_QdWTX4AHRLAw1h",
+  "environment": "local production build; development provider configuration",
+  "assetPath": "/_next/static/chunks/1nz7lmnnub82h.js",
+  "assetStatus": 200,
+  "adjacentMapStatus": 404,
+  "publicSourceMapFileCount": 0,
+  "scope": "Local artifact and one HTTP negative probe; hosted deployment unchanged"
+}

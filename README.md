@@ -1,9 +1,23 @@
 # TrueCost
 
-A personal finance app for working out what a financial product actually costs
-you. Mobile-first PWA, everything computed and stored on the device.
+A finance PWA for comparing the cost of loan offers in India. Calculations run
+in the browser. This checkout is being prepared for a commercial pilot using
+Clerk email codes and Convex account storage.
 
-**Flow 1 — True cost comparison** is built. Flow 2 (insurance) is not started.
+The comparison, Loan health and prepayment screens already exist. The Clerk
+provider, owned saved-loan backend and public offline calculator have local
+verification; the saved-loan backend also has two-account development-provider
+evidence. Account-bound client storage, history, reports, feedback, Mixpanel and
+release checks are still in progress. The old Supabase synchronization path has
+been removed; Clerk and Convex are the only account and private-storage path.
+Missing auth configuration leaves guest access available; demo codes cannot
+grant membership.
+
+The separate insurance flow is deferred. Loan-linked insurance premiums remain
+part of the comparison. See the [roadmap](docs/product-roadmap.md) for current
+task status and [financial findings](docs/finance-review-findings.md) for open
+calculation concerns. The reference deployment does not include these unpushed
+working changes.
 
 ## Why it isn't a calculator
 
@@ -28,10 +42,19 @@ offers is cheaper", which is a different and much easier question to get wrong:
 ```bash
 npm install
 npm run dev        # http://localhost:3000
-npm run build && npm run start
-npm test           # 32 tests over the finance layer
+npm run build
+npm start -- --hostname localhost
+npm test
 npm run typecheck
 ```
+
+The production build generates the public offline assets first. For a local
+production check, use the `localhost` listen hostname: binding this Next.js
+version with `--hostname 127.0.0.1` caused middleware self-proxy failures.
+The same build returned successful sign-in, account and comparison pages after
+switching the listen hostname; it remained bound to loopback on this machine.
+See [runtime evidence](docs/evidence/local-production-headers-localhost.json)
+and the related [Next.js issue](https://github.com/vercel/next.js/issues/94745).
 
 ## Layout
 
@@ -50,16 +73,16 @@ app/              Landing, /compare, /compare/results
 lib/store.tsx     State + localStorage persistence
 ```
 
-The finance layer is pure and framework-free. Every claim the UI makes is
-covered by a test in `__tests__/scenarios.test.ts`; run with
+The finance layer is pure and framework-free. Worked calculation scenarios are
+covered by tests in `__tests__/scenarios.test.ts`; run with
 `npx vitest run --reporter=verbose --disable-console-intercept` to see the
 worked examples printed.
 
 ## Deliberate limits
 
-- **No prepayment modelling.** Marked optional in the spec and deferred. The
-  types carry no prepay field yet; adding one means a second cash-flow builder,
-  not a change to the solver.
+- **Prepayment modelling uses explicit assumptions.** The prepayment flow
+  compares tenure and EMI paths with fees, liquidity and post-tax investment
+  returns. It does not model floating-rate resets or lender-specific schedules.
 - **Fixed rates assumed.** No floating-rate reset is modelled, so a repo-linked
   home loan is priced at today's rate for the whole tenure.
 - **Product type is per offer** (in each card's extras drawer) with a top-level
@@ -68,5 +91,6 @@ worked examples printed.
 - **Regulatory and tax notes are general**, phrased to prompt a check against
   the sanction letter rather than to be relied on.
 
-Not financial advice. No product recommendations, no commissions, nothing
-leaves the device.
+Financial-methodology and production privacy reviews remain release gates.
+Development account actions contact Clerk and Convex; do not assume every
+screen stores data only on this device. See the [launch checklist](docs/launch-checklist.md).
