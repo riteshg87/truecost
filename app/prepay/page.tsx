@@ -12,6 +12,8 @@ import type { AssetClass, PrepayInput } from "@/lib/prepay/types";
 import { useLoan } from "@/lib/loanStore";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
+const STORAGE_KEY = "truecost.prepay.v1";
+
 function blank(): PrepayInput {
   return {
     loanType: "home",
@@ -50,26 +52,43 @@ export default function PrepayPage() {
   const { loan, surplus, bufferMonths, hydrated: loanReady } = useLoan();
 
   useEffect(() => {
-    if (!loanReady || hydrated) return;
+    if (!loanReady) return;
+    let stored: PrepayInput | null = null;
+    try {
+      const raw = window.localStorage.getItem(STORAGE_KEY);
+      if (raw) stored = { ...blank(), ...(JSON.parse(raw) as PrepayInput) };
+    } catch {
+      // A stale or unreadable blob is not worth a white screen.
+    }
 
     // The loan record is the source of truth for the loan itself. Someone who
     // has already told us their balance and rate once should not be asked for
     // it again on the way to a decision about it.
     if (loan && loan.outstanding > 0) {
       setInput({
-        ...blank(),
+        ...(stored ?? blank()),
         outstanding: loan.outstanding,
         ratePct: loan.ratePct,
         rateStructure: loan.basis === "fixed" ? "fixed" : "floating",
         remainingMonths: loan.monthsLeft,
-        surplus,
-        liquidityMonthsAfter: bufferMonths > 0 ? bufferMonths : null,
+        surplus: stored?.surplus || surplus,
+        liquidityMonthsAfter:
+          stored?.liquidityMonthsAfter ?? (bufferMonths > 0 ? bufferMonths : null),
       });
+    } else if (stored) {
+      setInput(stored);
     }
     setHydrated(true);
-  }, [loanReady, hydrated, loan, surplus, bufferMonths]);
-  // This scenario is session-only. Legacy device data stays untouched for
-  // explicit import; it cannot silently attach to the next signed-in account.
+  }, [loanReady, loan, surplus, bufferMonths]);
+
+  useEffect(() => {
+    if (!hydrated) return;
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(input));
+    } catch {
+      // Private mode. The session still works entirely in memory.
+    }
+  }, [input, hydrated]);
 
   const set = (patch: Partial<PrepayInput>) =>
     setInput((prev) => ({ ...prev, ...patch }));
@@ -436,7 +455,6 @@ function Results({
 }) {
   const s = rec.scenarios;
   const partPayment = s.path === "part-payment";
-  const initialCashBudget = Math.max(0, input.surplus) + s.fee;
 
   return (
     <div className="flex flex-col gap-4">
@@ -456,7 +474,7 @@ function Results({
               [monthsLabel(s.noPrepay.months), "left to run"],
               // Cash that is neither deployed nor invested simply sits, which is
               // what makes this the baseline the other three are measured against.
-              [formatCompactINR(initialCashBudget), s.fee > 0 ? "starting cash held aside (surplus + fee)" : "surplus still idle"],
+              [formatCompactINR(input.surplus), "surplus still idle"],
             ]}
           />
 
@@ -510,8 +528,8 @@ function Results({
           Prepaying costs <strong>{formatINR(s.fee)}</strong> in charges before it
           saves a rupee.{" "}
           {rec.feeDecisive
-            ? <>Including that charge in the shared starting budget leaves investing ahead by{" "}<strong>{formatCompactINR(Math.max(0, -rec.wealthGapVsInvest))}</strong> at the horizon; without it, prepaying would end ahead.</>
-            : "It is counted in every figure above, including the same starting surplus plus charge in the investing baseline."}
+            ? "That charge is what tips this to investing — without it, prepaying would end ahead."
+            : "It is counted in every figure above."}
         </Notice>
       ) : null}
 
@@ -562,9 +580,7 @@ function Verdict({
       ? `Investing wins, on these numbers.`
       : rec.verdict === "prepay"
         ? `Prepaying wins, and it wins for certain.`
-        : rec.feeDecisive
-          ? `Fees favour investing; weigh the risk.`
-          : `Close enough that certainty should decide it.`;
+        : `Close enough that certainty should decide it.`;
 
   return (
     <section className="rounded-2xl border border-accent-line bg-accent-soft px-5 py-5">
@@ -580,7 +596,7 @@ function Verdict({
         <span className="tnum font-semibold text-ink">
           {formatPct(rec.postTaxLoanCostPct)}
         </span>{" "}
-        after tax. The {asset} projected return is{" "}
+        after tax. The {asset} really returns{" "}
         <span className="tnum font-semibold text-ink">
           {formatPct(rec.postTaxReturnPct)}
         </span>{" "}
@@ -591,35 +607,32 @@ function Verdict({
 
       {rec.verdict === "line-ball" ? (
         <p className="mt-2.5 rounded-xl bg-surface/70 px-3 py-2.5 text-[13px] leading-relaxed text-ink-2">
-          {rec.feeDecisive ? (
-            <>The charge shifts projected terminal wealth toward investing by{" "}
-              <span className="tnum font-semibold text-ink">{formatCompactINR(Math.max(0, -rec.wealthGapVsInvest))}</span>{" "}
-              at the horizon. The expected return does not clear the{" "}
-              <span className="tnum font-semibold text-ink">{rec.requiredPremiumPct.toFixed(2)}</span>-point risk margin, so certainty should decide it.</>
-          ) : (
-            <>Investing is ahead by only{" "}
-              <span className="tnum font-semibold text-ink">{rec.advantagePct.toFixed(2)}</span>{" "}
-              points, inside the{" "}
-              <span className="tnum font-semibold text-ink">{rec.requiredPremiumPct.toFixed(2)}</span>{" "}
-              this asset should clear before its risk is worth taking. A sure{" "}
-              {formatPct(rec.postTaxLoanCostPct)} is the better trade unless you hold strong views.</>
-          )}
+          Investing is ahead by only{" "}
+          <span className="tnum font-semibold text-ink">
+            {rec.advantagePct.toFixed(2)}
+          </span>{" "}
+          points, inside the{" "}
+          <span className="tnum font-semibold text-ink">
+            {rec.requiredPremiumPct.toFixed(2)}
+          </span>{" "}
+          this asset should clear before its risk is worth taking. A sure{" "}
+          {formatPct(rec.postTaxLoanCostPct)} is the better trade unless you hold
+          strong views.
         </p>
       ) : (
         <p className="mt-2.5 rounded-xl bg-surface/70 px-3 py-2.5 text-[13px] leading-relaxed text-ink-2">
-              {rec.verdict === "invest" ? (
-            rec.feeDecisive ? (
-              <>Including the charge in the shared starting budget leaves investing ahead by{" "}
-                <span className="tnum font-semibold text-ink">{formatCompactINR(Math.max(0, -rec.wealthGapVsInvest))}</span>{" "}
-                at the horizon, and its expected return clears the{" "}
-                <span className="tnum font-semibold text-ink">{rec.requiredPremiumPct.toFixed(2)}</span>-point risk margin.</>
-            ) : (
-              <>It clears the loan by{" "}
-                <span className="tnum font-semibold text-ink">{rec.advantagePct.toFixed(2)}</span>{" "}
-                points, past the{" "}
-                <span className="tnum font-semibold text-ink">{rec.requiredPremiumPct.toFixed(2)}</span>{" "}
-                this asset should clear to pay for its risk.</>
-            )
+          {rec.verdict === "invest" ? (
+            <>
+              It clears the loan by{" "}
+              <span className="tnum font-semibold text-ink">
+                {rec.advantagePct.toFixed(2)}
+              </span>{" "}
+              points, past the{" "}
+              <span className="tnum font-semibold text-ink">
+                {rec.requiredPremiumPct.toFixed(2)}
+              </span>{" "}
+              this asset should clear to pay for its risk.
+            </>
           ) : (
             <>
               The {asset} would have to return{" "}

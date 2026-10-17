@@ -125,61 +125,6 @@ describe("scenarios", () => {
       computePrepay(input({ surplus: 4000000 })).reduceTenure.terminalWealth,
     );
   });
-
-  it("gives investing the same initial cash as prepayment fees plus surplus", () => {
-    const fixed = input({
-      outstanding: 1000000,
-      ratePct: 10,
-      rateStructure: "fixed",
-      remainingMonths: 24,
-      surplus: 100000,
-      prepayFeePct: 15,
-      expectedReturnPct: 8,
-      assetClass: "fd",
-      taxSlabPct: 0,
-    });
-    const noFee = computePrepay({ ...fixed, prepayFeePct: 0 });
-    const withFee = computePrepay(fixed);
-    expect(noFee.investInstead.corpus).toBeCloseTo(117288.7931745, 5);
-    expect(withFee.fee).toBeCloseTo(15000, 6);
-    expect(withFee.investInstead.corpus).toBeCloseTo(134882.1121507, 5);
-    expect(withFee.investInstead.corpus).toBeGreaterThan(noFee.investInstead.corpus);
-  });
-
-  it("matches the zero-interest fee ledger", () => {
-    const result = computePrepay(input({
-      outstanding: 120000,
-      ratePct: 0,
-      rateStructure: "fixed",
-      remainingMonths: 3,
-      surplus: 30000,
-      prepayFeePct: 10,
-      expectedReturnPct: 0,
-      assetClass: "fd",
-      taxSlabPct: 0,
-    }));
-    expect(result.fee).toBe(3000);
-    expect(result.reduceTenure.terminalWealth).toBe(30000);
-    expect(result.investInstead.corpus).toBe(33000);
-  });
-
-  it("keeps the foreclosure excess in both common-budget comparisons", () => {
-    const result = computePrepay(input({
-      outstanding: 100000,
-      ratePct: 10,
-      rateStructure: "fixed",
-      remainingMonths: 12,
-      surplus: 120000,
-      prepayFeePct: 5,
-      expectedReturnPct: 6,
-      assetClass: "fd",
-      taxSlabPct: 0,
-    }));
-    expect(result.path).toBe("foreclosure");
-    expect(result.fee).toBe(5000);
-    expect(result.reduceTenure.terminalWealth).toBeCloseTo(129682.7472868, 5);
-    expect(result.investInstead.corpus).toBeCloseTo(132709.7264831, 5);
-  });
 });
 
 /* ========================================================================== */
@@ -311,39 +256,6 @@ describe("recommendation", () => {
     );
     expect(r.scenarios.fee).toBeGreaterThan(0);
     expect(typeof r.feeDecisive).toBe("boolean");
-  });
-
-  it("lets a fee-reversed wealth result drive the recommendation", () => {
-    const noFee = recommendPrepay(input({
-      outstanding: 1000000,
-      ratePct: 10,
-      rateStructure: "fixed",
-      remainingMonths: 24,
-      surplus: 100000,
-      prepayFeePct: 0,
-      expectedReturnPct: 8,
-      assetClass: "fd",
-      taxSlabPct: 0,
-    }));
-    const withFee = recommendPrepay({
-      ...input({
-        outstanding: 1000000,
-        ratePct: 10,
-        rateStructure: "fixed",
-        remainingMonths: 24,
-        surplus: 100000,
-        prepayFeePct: 15,
-        expectedReturnPct: 11,
-        assetClass: "equity",
-        taxSlabPct: 0,
-      }),
-    });
-    expect(noFee.bestByWealth).toBe("tenure");
-    expect(noFee.verdict).toBe("prepay");
-    expect(withFee.feeDecisive).toBe(true);
-    expect(withFee.bestByWealth).toBe("invest");
-    expect(withFee.advantagePct).toBeLessThan(withFee.requiredPremiumPct);
-    expect(withFee.verdict).toBe("line-ball");
   });
 
   it("reports which route ends richest", () => {

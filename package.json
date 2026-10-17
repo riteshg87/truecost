@@ -4,8 +4,6 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build:offline": "node scripts/build-offline.mjs",
-    "prebuild": "node scripts/build-offline.mjs",
     "build": "next build",
     "start": "next start",
     "test": "vitest run",
@@ -13,27 +11,17 @@
     "typecheck": "next typegen && tsc --noEmit"
   },
   "dependencies": {
-    "@clerk/nextjs": "7.9.4",
-    "@react-pdf/renderer": "4.9.0",
-    "convex": "1.45.0",
-    "mixpanel-browser": "2.83.0",
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.116.0",
     "next": "16.3.4",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
   "devDependencies": {
-    "@clerk/testing": "2.2.36",
-    "@playwright/test": "1.62.1",
     "@tailwindcss/postcss": "^4",
-    "@testing-library/react": "16.3.3",
     "@types/node": "^24.13.4",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "convex-test": "0.0.58",
-    "esbuild": "0.27.0",
-    "fake-indexeddb": "6.2.5",
-    "jsdom": "26.1.0",
-    "pdfjs-dist": "5.4.149",
     "tailwindcss": "^4",
     "typescript": "^5",
     "vitest": "^5.0.0"

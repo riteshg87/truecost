@@ -1,8 +1,10 @@
 /**
  * Email, and only email.
  *
- * The first release uses email verification so delivery works in the India
- * pilot without another provider channel or phone-number setup.
+ * Mobile OTP needs an SMS gateway with KYC and a per-message cost before an
+ * Indian number will ever receive anything. Email works the day it is switched
+ * on, so the product asks for the one that can actually deliver rather than
+ * offering a choice where half of it silently fails.
  */
 
 export type ChannelKind = "email";

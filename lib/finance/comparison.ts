@@ -136,7 +136,7 @@ export function compareOffers(offers: Offer[]): Comparison {
       level: "caution",
       code: "rate-structures-differ",
       message:
-        "One offer is fixed and one is floating. These APRs assume both run to term at the entered rates. Floating rates can change, and early repayment terms may differ. Check each lender's sanction letter or Key Facts Statement.",
+        "One of these is fixed and one is floating. The APRs below assume both run to term, so they say nothing about the difference that matters most: a floating home loan can be prepaid or closed for free, and a fixed one usually cannot.",
     });
   } else if (priced.length > 0 && priced[0].offer.loanType === "home") {
     notices.push({

@@ -3,8 +3,6 @@
 import Link from "next/link";
 import { useMemo } from "react";
 import { Card, NoLoan, Screen, Verdict } from "@/components/health";
-import { LoanSyncStatus } from "@/components/LoanSyncStatus";
-import { MemberLoanHealthFeedback } from "@/components/MemberLoanHealthFeedback";
 import { monthsLabel } from "@/lib/finance/comparison";
 import { formatCompactINR, formatINR, formatPct } from "@/lib/finance/format";
 import { prepaySnapshot, rateVerdict, transferResult } from "@/lib/health/analyse";
@@ -38,7 +36,6 @@ export default function LoanHealthPage() {
   if (!hydrated) {
     return (
       <Screen title="Loan Health Monitor">
-        <LoanSyncStatus />
         <div className="h-72 animate-pulse rounded-2xl border border-line bg-surface-2" />
       </Screen>
     );
@@ -47,7 +44,6 @@ export default function LoanHealthPage() {
   if (!loan || !verdict || !prepay) {
     return (
       <Screen title="Loan Health Monitor">
-        <LoanSyncStatus />
         <NoLoan />
       </Screen>
     );
@@ -58,8 +54,7 @@ export default function LoanHealthPage() {
   const paidPct = loan.original > 0 ? (paid / loan.original) * 100 : 0;
 
   return (
-    <Screen title="Loan Health Monitor">
-      <LoanSyncStatus />
+    <Screen title="Loan Health Monitor" eyebrow="Synced">
       {/* The loan itself, so every figure below has its source in view. */}
       <section className="mb-4 rounded-2xl border border-line bg-surface px-4 py-3.5 shadow-[var(--shadow-card)]">
         <div className="flex items-center justify-between gap-3">
@@ -187,7 +182,6 @@ export default function LoanHealthPage() {
         . Benchmark figures are the published RBI repo rate; the rate your lender
         actually applied is on your statement.
       </p>
-      <MemberLoanHealthFeedback />
     </Screen>
   );
 }
@@ -231,21 +225,13 @@ function RateCard({
   }
 
   if (verdict.kind === "unknown") {
-    const isTbill = loan.basis === "tbill";
     return (
-      <Verdict
-        tone="neutral"
-        label="Rate check"
-        title={isTbill ? "Benchmark not tracked." : "Rate details need confirming."}
-        action={isTbill ? undefined : { href: "/loan/setup", label: "Add or confirm rate details" }}
-      >
+      <Verdict tone="neutral" label="Rate check" title="We can't track this benchmark.">
         <p>
-          {verdict.unknownReason ??
-            (isTbill
-              ? "T-bill benchmark history is not available here."
-              : "Confirm the rate details from your loan documents before checking the rate.")}
+          T-bill linked loans follow a benchmark we don&apos;t carry a history for, so
+          we won&apos;t guess at what your rate should be. Everything else on this
+          screen still works.
         </p>
-        <p>Everything else on this screen still works.</p>
       </Verdict>
     );
   }

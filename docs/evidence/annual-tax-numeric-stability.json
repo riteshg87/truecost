@@ -1,9 +1,0 @@
-{
-  "checkedAt": "2026-09-17T13:56:39.065Z",
-  "sourceSha256": "2377272976f563f709b198dff35353c5af0d4f0fd5676cc256b76208526b17dd",
-  "seed": 1731,
-  "checked": 10000,
-  "failureCount": 0,
-  "failures": [],
-  "scope": "Synthetic valid-input numerical stability only; not a tax-law oracle or financial approval."
-}

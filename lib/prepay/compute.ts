@@ -58,12 +58,11 @@ function runOff(principal: number, monthlyRate: number, emi: number) {
   let months = 0;
   let interest = 0;
   let paid = 0;
-  let finalPayment = 0;
 
-  if (principal <= 0) return { months: 0, interest: 0, paid: 0, finalPayment: 0, clears: true };
+  if (principal <= 0) return { months: 0, interest: 0, paid: 0, clears: true };
   // An instalment that never covers the interest leaves the balance growing.
   if (emi <= principal * monthlyRate) {
-    return { months: MAX_MONTHS, interest: NaN, paid: NaN, finalPayment: NaN, clears: false };
+    return { months: MAX_MONTHS, interest: NaN, paid: NaN, clears: false };
   }
 
   while (balance > 0.005 && months < MAX_MONTHS) {
@@ -72,11 +71,10 @@ function runOff(principal: number, monthlyRate: number, emi: number) {
     balance = balance + charge - payment;
     interest += charge;
     paid += payment;
-    finalPayment = payment;
     months += 1;
   }
 
-  return { months, interest, paid, finalPayment, clears: balance <= 0.005 };
+  return { months, interest, paid, clears: balance <= 0.005 };
 }
 
 /** Future value of a monthly contribution compounded at a monthly rate. */
@@ -127,13 +125,6 @@ export function computePrepay(input: PrepayInput): PrepayScenarios {
   const shortened = runOff(balanceAfter, monthlyRate, emi);
   const tenureMonths = shortened.clears ? shortened.months : horizonMonths;
   const monthsSaved = Math.max(0, horizonMonths - tenureMonths);
-  // The final instalment can be smaller than the regular EMI. Its remainder
-  // is available at the payoff month and compounds for the remaining horizon.
-  // A month-zero foreclosure is excluded because its future EMIs are already
-  // represented by the series below.
-  const finalPaymentRemainder = shortened.clears && shortened.months > 0
-    ? Math.max(0, emi - shortened.finalPayment) * Math.pow(1 + investMonthly, monthsSaved)
-    : 0;
 
   // Once the loan clears, the instalment is free to invest until the original
   // end date. Any surplus beyond the balance was never needed and compounds
@@ -147,7 +138,6 @@ export function computePrepay(input: PrepayInput): PrepayScenarios {
     totalOutflow: applied + fee + (shortened.clears ? shortened.paid : emi * horizonMonths),
     terminalWealth:
       futureValueOfSeries(emi, investMonthly, monthsSaved) +
-      finalPaymentRemainder +
       excess * Math.pow(1 + investMonthly, horizonMonths),
   };
 
@@ -168,11 +158,8 @@ export function computePrepay(input: PrepayInput): PrepayScenarios {
       excess * Math.pow(1 + investMonthly, horizonMonths),
   };
 
-  /* --- 4. Keep the loan, invest the common initial cash budget ------------- */
-  // A prepayment spends the surplus on principal and the applicable fee. The
-  // fair investing baseline receives that same surplus plus fee as cash.
-  const initialCashBudget = Math.max(0, input.surplus) + fee;
-  const corpus = initialCashBudget * Math.pow(1 + investMonthly, horizonMonths);
+  /* --- 4. Keep the loan, invest the surplus -------------------------------- */
+  const corpus = Math.max(0, input.surplus) * Math.pow(1 + investMonthly, horizonMonths);
   const investInstead = {
     corpus,
     postTaxReturnPct: netReturnPct,

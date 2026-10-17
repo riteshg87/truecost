@@ -1,5 +1,5 @@
 import { emiFor } from "../finance/core";
-import { isRepoDateCovered, isResetOverdue, isValidIsoDate, isoToday, repoOn } from "./repo";
+import { isoToday, monthsBetween, repoOn } from "./repo";
 import type {
   LoanRecord,
   RateVerdict,
@@ -38,7 +38,6 @@ export function rateVerdict(loan: LoanRecord, today: string = isoToday()): RateV
     gapPct: null,
     monthlyExcess: null,
     resetOverdue: false,
-    unknownReason: null,
   };
 
   // A fixed loan does not track anything, so there is nothing to be late.
@@ -54,47 +53,16 @@ export function rateVerdict(loan: LoanRecord, today: string = isoToday()): RateV
 
   // T-bill linked loans follow a benchmark we do not carry a history for.
   if (loan.basis === "tbill") {
-    return { ...base, kind: "unknown", tone: "neutral", unknownReason: "T-bill benchmark history is not available here." };
-  }
-
-  if (loan.spreadPct === null || loan.spreadProvenance !== "confirmed") {
-    return { ...base, kind: "unknown", tone: "neutral", unknownReason: "Confirm the contractual spread from your sanction letter before checking the rate." };
-  }
-
-  if (loan.lastResetProvenance !== "confirmed") {
-    return { ...base, kind: "unknown", tone: "neutral", unknownReason: "Confirm the last reset date from a statement before checking whether the rate is behind." };
-  }
-
-  // A malformed or future reset date cannot establish either benchmark side
-  // of the comparison. Keep the existing unknown surface instead of guessing
-  // from the latest static entry or showing a false reset warning.
-  if (!isValidIsoDate(loan.lastReset) || !isValidIsoDate(today) || today < loan.lastReset) {
-    return { ...base, kind: "unknown", tone: "neutral", unknownReason: "Add a valid past reset date from your statement before checking the rate." };
-  }
-
-  if (!isRepoDateCovered(loan.lastReset) || !isRepoDateCovered(today)) {
-    return {
-      ...base,
-      kind: "unknown",
-      tone: "neutral",
-      unknownReason: "The available repo-rate observations do not cover one or both dates. Confirm dated RBI sources before checking the rate.",
-    };
+    return { ...base, kind: "unknown", tone: "neutral" };
   }
 
   const repoThen = repoOn(loan.lastReset);
   const repoNow = repoOn(today);
-  if (repoThen === null || repoNow === null) {
-    return {
-      ...base,
-      kind: "unknown",
-      tone: "neutral",
-      unknownReason: "The available repo-rate observations do not cover one or both dates. Confirm dated RBI sources before checking the rate.",
-    };
-  }
   const shouldBePct = repoNow + loan.spreadPct;
   const gapPct = loan.ratePct - shouldBePct;
 
-  const resetOverdue = isResetOverdue(loan.lastReset, today, CYCLE_MONTHS[loan.cycle]) ?? false;
+  const sinceReset = monthsBetween(loan.lastReset, today);
+  const resetOverdue = sinceReset > CYCLE_MONTHS[loan.cycle];
 
   if (gapPct <= RATE_EPSILON) {
     return {

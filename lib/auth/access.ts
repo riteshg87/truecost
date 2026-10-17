@@ -2,7 +2,7 @@
  * Who may open what.
  *
  * Kept as plain data and pure functions, deliberately away from React and away
- * from a provider. An access rule that can only be exercised by clicking through
+ * from Supabase. An access rule that can only be exercised by clicking through
  * a signed-in browser is a rule nobody tests, and this is the one part of the
  * app where being wrong is a privacy incident rather than a wrong number.
  */
@@ -58,9 +58,13 @@ export function featureById(id: FeatureId): FeatureDef | undefined {
 }
 
 /**
- * Kept as a compatibility parameter while provider configuration is rolled
- * out. Private routes stay closed in every mode; comparison is deliberately
- * available to a chosen guest.
+ * Whether sign-in requirements are being enforced at all.
+ *
+ * They are not, until there is somewhere to sign in to. Locking a feature
+ * behind a door that has not been built yet is a dead end: the person taps
+ * "Sign in to use", reaches a screen that says sign-in is not connected, and
+ * has learned only that the app is broken. So the gate turns itself on when
+ * the provider is configured, and until then everything that is built is open.
  */
 export type Gating = "enforced" | "open";
 
@@ -70,9 +74,9 @@ export function canOpen(
   feature: FeatureDef,
   gating: Gating = "enforced",
 ): boolean {
-  void gating;
   if (!feature.available) return false;
   if (viewer === "anonymous") return false;
+  if (gating === "open") return true;
   if (feature.requires === "anyone" || feature.requires === "guest") return true;
   return viewer === "member";
 }
@@ -90,7 +94,6 @@ export function lockReason(
 
 /** Routes a guest may reach. Everything else needs an account. */
 const GUEST_ROUTES = ["/home", "/compare", "/account"];
-const SAFE_NEXT_ROUTES = ["/", "/home", "/compare", "/comparisons", "/loan", "/prepay", "/account"];
 
 /**
  * Whether a path is open to the viewer.
@@ -103,9 +106,8 @@ export function canVisit(
   pathname: string,
   gating: Gating = "enforced",
 ): boolean {
-  void gating;
   if (viewer === "anonymous") return false;
-  if (viewer === "member") return true;
+  if (viewer === "member" || gating === "open") return true;
   return GUEST_ROUTES.some(
     (route) => pathname === route || pathname.startsWith(`${route}/`),
   );
@@ -124,42 +126,7 @@ export function redirectFor(
 
 /** Guard a "next" parameter so a crafted link cannot bounce someone off-site. */
 export function safeNext(next: string | null | undefined): string {
-  if (!next || next.length > 512) return "/home";
-  if (/[\u0000-\u001f\u007f\\]/.test(next)) return "/home";
+  if (!next) return "/home";
   if (!next.startsWith("/") || next.startsWith("//")) return "/home";
-
-  // Decode once to catch encoded slashes, backslashes, and nested redirects.
-  let decoded: string;
-  try {
-    decoded = decodeURIComponent(next);
-  } catch {
-    return "/home";
-  }
-  if (decoded !== next || /[\u0000-\u001f\u007f\\]/.test(decoded)) return "/home";
-
-  try {
-    const url = new URL(next, "https://truecost.invalid");
-    if (url.origin !== "https://truecost.invalid") return "/home";
-    if (url.pathname === "/signin" || url.pathname === "/verify") return "/home";
-    if (!SAFE_NEXT_ROUTES.some((route) => url.pathname === route || (route !== "/" && url.pathname.startsWith(`${route}/`)))) return "/home";
-    const allowed = new Set([
-      "action",
-      "requestId",
-    ]);
-    for (const [key, value] of url.searchParams) {
-      if (!allowed.has(key) || !value || value.length > 128 || /[\u0000-\u001f\u007f\\]/.test(value)) {
-        return "/home";
-      }
-      if (key === "action" && ![
-        "save",
-        "download",
-        "new_comparison",
-        "recalculate_existing_draft",
-      ].includes(value)) return "/home";
-      if (key === "requestId" && !/^[A-Za-z0-9_-]{12,128}$/.test(value)) return "/home";
-    }
-    return `${url.pathname}${url.search}`;
-  } catch {
-    return "/home";
-  }
+  return next;
 }
